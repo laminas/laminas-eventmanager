@@ -89,6 +89,8 @@ interface EventInterface
     /**
      * Has this event indicated event propagation should stop?
      *
+     * @deprecated Implement StoppableEventInterface instead, to make your
+     *     application forwards-compatible with PSR-14 and zend-eventmanager v4.
      * @return bool
      */
     public function propagationIsStopped();
