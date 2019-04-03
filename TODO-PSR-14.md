@@ -10,9 +10,9 @@
   - [x] Modify `EventManager` internals to use the PSR-14 method if available
   - [ ] Mark `StoppableEventInterface` as deprecated
 - [ ] Listener provider implementation
-  - [ ] Create a `ListenerProvider` subnamespace
-  - [ ] Create a `ListenerProviderInterface` shim
-  - [ ] Create a `PrioritizedListenerProvider` interface extending the
+  - [x] Create a `ListenerProvider` subnamespace
+  - [x] Create a `ListenerProviderInterface` shim
+  - [x] Create a `PrioritizedListenerProvider` interface extending the
       `ListenerProviderInterface` and defining a
       `getListenersForEventByPriority($event, array $identifiers = []) : array<int, callable[]>` method.
   - [ ] Create a `PrioritizedListenerAttachmentInterface`, defining:
@@ -59,7 +59,7 @@
   - [ ] Create a `PrioritizedListenerProvider` instance in the `EventManger`
     constructor, and have the various `attach()`, `detach()`, etc. methods
     proxy to it.
-  - [ ] When triggering listeners, create a `PrioritizedAggregateListenerProvider` 
+  - [ ] When triggering listeners, create a `PrioritizedAggregateListenerProvider`
     with the composed `PrioritizedListenerProvider` and `SharedListenerProvider` /
     `PrioritizedIdentifierListenerProvider` implementations, in that order.
   - [ ] Replace logic of `triggerListeners()` to just call
