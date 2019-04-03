@@ -8,6 +8,8 @@
 
 namespace Laminas\EventManager\ListenerProvider;
 
+use Laminas\EventManager\Exception\InvalidArgumentException;
+
 class PrioritizedListenerProvider implements
     PrioritizedListenerAttachmentInterface,
     PrioritizedListenerProviderInterface
@@ -48,9 +50,18 @@ class PrioritizedListenerProvider implements
     /**
      * {@inheritDoc}
      * @param  string[] $identifiers Ignored in this implementation.
+     * @throws InvalidArgumentException For non-object $event types.
      */
-    public function getListenersForEventByPriority(object $event, array $identifiers = []): iterable
+    public function getListenersForEventByPriority($event, array $identifiers = []): iterable
     {
+        if (! is_object($event)) {
+            throw new InvalidArgumentException(sprintf(
+                '%s expects the $event argument to be an object; received %s',
+                __METHOD__,
+                gettype($event)
+            ));
+        }
+
         $identifiers = is_callable([$event, 'getName'])
             ? [$event->getName()]
             : [];
@@ -63,7 +74,9 @@ class PrioritizedListenerProvider implements
             }
 
             foreach ($this->events[$name] as $priority => $listOfListeners) {
-                $prioritizedListeners[$priority][] = $listOfListeners[0];
+                $prioritizedListeners[$priority] = isset($prioritizedListeners[$priority])
+                    ? array_merge($prioritizedListeners[$priority], $listOfListeners[0])
+                    : $listOfListeners[0];
             }
         }
 
@@ -148,15 +161,8 @@ class PrioritizedListenerProvider implements
     private function iterateByPriority(array $prioritizedListeners): iterable
     {
         krsort($prioritizedListeners);
-        foreach ($prioritizedListeners as $listenerSets) {
-            yield from $this->iterateListenerSets($listenerSets);
-        }
-    }
-
-    private function iterateListenerSets(iterable $listenerSets): iterable
-    {
-        foreach ($listenerSets as $listOfListeners) {
-            yield from $listOfListeners;
+        foreach ($prioritizedListeners as $listeners) {
+            yield from $listeners;
         }
     }
 }
