@@ -15,13 +15,16 @@
   - [x] Create a `PrioritizedListenerProvider` interface extending the
       `ListenerProviderInterface` and defining a
       `getListenersForEventByPriority($event, array $identifiers = []) : array<int, callable[]>` method.
-  - [ ] Create a `PrioritizedListenerAttachmentInterface`, defining:
-    - [ ] `attach($event, callable $listener, $priority = 1)` (where `$event`
+  - [x] Create a `PrioritizedListenerAttachmentInterface`, defining:
+    - [x] `attach($event, callable $listener, $priority = 1)` (where `$event`
       can be an object or string name)
-    - [ ] `detach(callable $listener, $event = null, $force = false)` (where `$event`
+    - [x] `detach(callable $listener, $event = null, $force = false)` (where `$event`
       can be an object or string name and `$force` is boolean)
-    - [ ] `attachWildcardListener(callable $listener, $priority = 1)`
+    - [x] `attachWildcardListener(callable $listener, $priority = 1)`
       (`attach('*', $listener, $priority)` will proxy to this method)
+    - [x] `detachWildcardListener(callable $listener, $force = false)`
+      (`detach($listener, '*', $force)` will proxy to this method)
+    - [x] `clearListeners($event)`
   - [ ] Create a `PrioritizedListenerProvider` implementation of the above based
     on the internals of `EventManager`
     - [ ] attachment/detachment
