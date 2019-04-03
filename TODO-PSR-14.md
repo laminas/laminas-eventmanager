@@ -25,15 +25,15 @@
     - [x] `detachWildcardListener(callable $listener, $force = false)`
       (`detach($listener, '*', $force)` will proxy to this method)
     - [x] `clearListeners($event)`
-  - [ ] Create a `PrioritizedListenerProvider` implementation of the above based
+  - [x] Create a `PrioritizedListenerProvider` implementation of the above based
     on the internals of `EventManager`
-    - [ ] attachment/detachment
-    - [ ] getListenersForEvent should take into account event name if an EventInterface
-    - [ ] getListenersForEvent should also pull wildcard listeners
-    - [ ] getListenersForEvent should accept an optional second argument, an
+    - [x] attachment/detachment
+    - [x] getListenersForEvent should take into account event name if an EventInterface
+    - [x] getListenersForEvent should also pull wildcard listeners
+    - [x] getListenersForEvent should accept an optional second argument, an
       array of identifiers. This method will return all listeners in prioritized
       order.
-    - [ ] implement `getListenersForEventByPriority`
+    - [x] implement `getListenersForEventByPriority`
   - [ ] Create a `PrioritizedIdentifierListenerProvider` that implements
       both the `PrioritizedListenerProvider` interface and the
       `SharedEventManagerInterface`
