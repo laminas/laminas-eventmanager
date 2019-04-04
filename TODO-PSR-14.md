@@ -46,9 +46,9 @@
       `getListenersForEventByPriority()` method of each, returning the
       aggregated listeners in priority order.
   - [x] Make `SharedEventManager` an extension of `PrioritizedIdentifierListenerProvider`
-  - [ ] Create `ListenerSubscriberInterface`
-    - [ ] `attach(PrioritizedListenerAttachmentInterface $provider, $priority = 1)`
-    - [ ] `detach(PrioritizedListenerAttachmentInterface $provider)`
+  - [x] Create `ListenerSubscriberInterface`
+    - [x] `attach(PrioritizedListenerAttachmentInterface $provider, $priority = 1)`
+    - [x] `detach(PrioritizedListenerAttachmentInterface $provider)`
   - [ ] Create `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`
     - [ ] define a default `detach()` implementation
   - [ ] Create `LazyListenerSubscriber` based on `LazyListenerAggregate`
