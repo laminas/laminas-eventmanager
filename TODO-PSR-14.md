@@ -49,8 +49,8 @@
   - [x] Create `ListenerSubscriberInterface`
     - [x] `attach(PrioritizedListenerAttachmentInterface $provider, $priority = 1)`
     - [x] `detach(PrioritizedListenerAttachmentInterface $provider)`
-  - [ ] Create `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`
-    - [ ] define a default `detach()` implementation
+  - [x] Create `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`
+    - [x] define a default `detach()` implementation
   - [ ] Create `LazyListenerSubscriber` based on `LazyListenerAggregate`
     - [ ] Define an alternate LazyListener:
       - [ ] `__construct(ContainerInterface $container, string $event = null, int $priority = 1)`
