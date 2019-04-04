@@ -15,8 +15,13 @@ interface PrioritizedListenerAttachmentInterface
      * @param  callable $listener The listener itself.
      * @param  int $priority The priority at which to attach the listener. High
      *     priorities respond earlier; negative priorities respond later.
+     * @return callable The listener attached, to allow subscribers to track
+     *    which listeners were attached, and thus detach them. This return
+     *    value will be changed to `void` in version 4; we recommend
+     *    subscribers write their own logic for tracking what has and hasn't
+     *    been attached.
      */
-    public function attach(string $event, callable $listener, int $priority = 1): void;
+    public function attach(string $event, callable $listener, int $priority = 1): callable;
 
     /**
      * @param  callable $listener The listener to detach.
@@ -40,8 +45,13 @@ interface PrioritizedListenerAttachmentInterface
      * @param  callable $listener The listener to attach.
      * @param  int      $priority The priority at which to attach the listener.
      *     High priorities respond earlier; negative priorities respond later.
+     * @return callable The listener attached, to allow subscribers to track
+     *    which listeners were attached, and thus detach them. This return
+     *    value will be changed to `void` in version 4; we recommend
+     *    subscribers write their own logic for tracking what has and hasn't
+     *    been attached.
      */
-    public function attachWildcardListener(callable $listener, int $priority = 1): void;
+    public function attachWildcardListener(callable $listener, int $priority = 1): callable;
 
     /**
      * Detaches a wildcard listener.

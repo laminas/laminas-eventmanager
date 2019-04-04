@@ -86,9 +86,11 @@ class PrioritizedListenerProvider implements
     /**
      * {@inheritDoc}
      */
-    public function attach(string $event, callable $listener, int $priority = 1): void
+    public function attach(string $event, callable $listener, int $priority = 1): callable
     {
         $this->events[$event][$priority][0][] = $listener;
+
+        return $listener;
     }
 
     /**
@@ -133,9 +135,10 @@ class PrioritizedListenerProvider implements
     /**
      * {@inheritDoc}
      */
-    public function attachWildcardListener(callable $listener, int $priority = 1): void
+    public function attachWildcardListener(callable $listener, int $priority = 1): callable
     {
         $this->events['*'][(int) $priority][0][] = $listener;
+        return $listener;
     }
 
     /**
