@@ -51,15 +51,16 @@
     - [x] `detach(PrioritizedListenerAttachmentInterface $provider)`
   - [x] Create `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`
     - [x] define a default `detach()` implementation
-  - [ ] Create `LazyListenerSubscriber` based on `LazyListenerAggregate`
-    - [ ] Define an alternate LazyListener:
-      - [ ] `__construct(ContainerInterface $container, string $event = null, int $priority = 1)`
-      - [ ] implements functionality from both `LazyListener` and `LazyEventListener`, minus passing env to container
-      - [ ] without an event, can be attached to any provider
-      - [ ] with an event, can be attached to `LazyListenerSubscriber`
-    - Constructor aggregates `LazyListener` _instances_ only
-      - [ ] `attach()` skips any where `getEvent()` returns null
+  - [x] Create `LazyListenerSubscriber` based on `LazyListenerAggregate`
+    - [x] Define an alternate LazyListener:
+      - [x] `__construct(ContainerInterface $container, string $event = null, int $priority = 1)`
+      - [x] implements functionality from both `LazyListener` and `LazyEventListener`, minus passing env to container
+      - [x] without an event, can be attached to any provider
+      - [x] with an event, can be attached to `LazyListenerSubscriber`
+    - [x] Constructor aggregates `LazyListener` _instances_ only
+      - [x] raises exception when `getEvent()` returns null
 - [ ] Event Dispatcher implementation
+  - [ ] Implement `PrioritizedListenerAttachmentInterface` (if BC)
   - [ ] Create a `PrioritizedListenerProvider` instance in the `EventManger`
     constructor, and have the various `attach()`, `detach()`, etc. methods
     proxy to it.
