@@ -45,6 +45,7 @@
     - [x] `getListenersByEvent()` will loop through each, in order, calling the
       `getListenersForEventByPriority()` method of each, returning the
       aggregated listeners in priority order.
+  - [x] Make `SharedEventManager` an extension of `PrioritizedIdentifierListenerProvider`
   - [ ] Create `ListenerSubscriberInterface`
     - [ ] `attach(PrioritizedListenerAttachmentInterface $provider, $priority = 1)`
     - [ ] `detach(PrioritizedListenerAttachmentInterface $provider)`
