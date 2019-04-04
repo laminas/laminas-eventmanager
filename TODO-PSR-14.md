@@ -40,9 +40,9 @@
     - [x] implement `getListenersForEventByPriority`
     - [x] `SharedEventManager` will extend this class
     - [x] mark as deprecated (will not use this in v4)
-  - [ ] Create a `PrioritizedAggregateListenerProvider` implementation
-    - [ ] Accepts a list of `PrioritizedListenerProvider` instances
-    - [ ] `getListenersByEvent()` will loop through each, in order, calling the
+  - [x] Create a `PrioritizedAggregateListenerProvider` implementation
+    - [x] Accepts a list of `PrioritizedListenerProvider` instances
+    - [x] `getListenersByEvent()` will loop through each, in order, calling the
       `getListenersForEventByPriority()` method of each, returning the
       aggregated listeners in priority order.
   - [ ] Create `ListenerSubscriberInterface`
