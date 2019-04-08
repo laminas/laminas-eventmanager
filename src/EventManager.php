@@ -9,6 +9,7 @@
 namespace Laminas\EventManager;
 
 use ArrayObject;
+use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
 
 use function array_keys;
@@ -27,7 +28,10 @@ use function sprintf;
  * Use the EventManager when you want to create a per-instance notification
  * system for your objects.
  */
-class EventManager implements EventManagerInterface
+class EventManager implements
+    EventManagerInterface,
+    ListenerProviderInterface,
+    ListenerProvider\PrioritizedListenerAttachmentInterface
 {
     /**
      * Subscribed events and their listeners
@@ -208,6 +212,13 @@ class EventManager implements EventManagerInterface
 
     /**
      * @inheritDoc
+     */
+    public function attachWildcardListener(callable $listener, int $priority = 1): callable
+    {
+    }
+
+    /**
+     * @inheritDoc
      * @throws Exception\InvalidArgumentException for invalid event types.
      */
     public function detach(callable $listener, $eventName = null, $force = false)
@@ -259,11 +270,25 @@ class EventManager implements EventManagerInterface
     /**
      * @inheritDoc
      */
+    public function detachWildcardListener(callable $listener): void
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function clearListeners($eventName)
     {
         if (isset($this->events[$eventName])) {
             unset($this->events[$eventName]);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getListenersForEvent(object $event): iterable
+    {
     }
 
     /**
