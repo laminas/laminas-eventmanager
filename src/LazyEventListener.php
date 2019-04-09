@@ -23,6 +23,9 @@ use function is_string;
  *
  * - event: the event name to attach to.
  * - priority: the priority at which to attach the listener, if not the default.
+ *
+ * @deprecated since 3.4.0. This class will be removed in version 4.0.0, in
+ *     favor of the ListenerProvider\LazyListener implementation.
  */
 class LazyEventListener extends LazyListener
 {

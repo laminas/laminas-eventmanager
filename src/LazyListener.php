@@ -30,6 +30,9 @@ use function method_exists;
  *
  * Pass instances directly to the event manager's `attach()` method as the
  * listener argument.
+ *
+ * @deprecated since 3.4.0. This class will be removed in version 4.0.0, in
+ *     favor of the ListenerProvider\LazyListener implementation.
  */
 class LazyListener
 {

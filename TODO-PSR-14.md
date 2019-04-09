@@ -91,22 +91,22 @@
 - [x] Additional utilities
   - [x] `EventDispatchingInterface` with a `getEventDispatcher()` method
 - [ ] Deprecations
-  - [ ] `EventInterface`
-  - [ ] `EventManagerInterface`
-  - [ ] `EventManagerAwareInterface`
-  - [ ] `EventManagerAwareTrait`
-  - [ ] `EventsCapableInterface` (point people to `EventDispatchingInterface`)
-  - [ ] `SharedEventManager`
-  - [ ] `SharedEventManagerInterface`
-  - [ ] `SharedEventsCapableInterface`
-  - [ ] `ListenerAggregateInterface` (point people to the `PrioritizedListenerAttachmentInterface`)
-  - [ ] `ListenerAggregateTrait` (point people to `ListenerSubscriberTrait`)
-  - [ ] `AbstractListenerAggregate` (point people to `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`)
-  - [ ] `ResponseCollection` (tell people to aggregate state/results in the event itself)
-  - [ ] `LazyListener` (point people to `ListenerProvider\LazyListener`)
-  - [ ] `LazyEventListener` (point people to `ListenerProvider\LazyListener`)
-  - [ ] `LazyListenerAggregate` (point people to `ListenerProvider\LazyListenerSubscriber`)
-  - [ ] `FilterChain` and `Filter` subnamespace (this should be done in a separate component)
+  - [x] `EventInterface`
+  - [x] `EventManagerInterface`
+  - [x] `EventManagerAwareInterface`
+  - [x] `EventManagerAwareTrait`
+  - [x] `EventsCapableInterface` (point people to `EventDispatchingInterface`)
+  - [x] `SharedEventManager`
+  - [x] `SharedEventManagerInterface`
+  - [x] `SharedEventsCapableInterface`
+  - [x] `ListenerAggregateInterface` (point people to the `PrioritizedListenerAttachmentInterface`)
+  - [x] `ListenerAggregateTrait` (point people to `ListenerSubscriberTrait`)
+  - [x] `AbstractListenerAggregate` (point people to `AbstractListenerSubscriber` and/or `ListenerSubscriberTrait`)
+  - [x] `ResponseCollection` (tell people to aggregate state/results in the event itself)
+  - [x] `LazyListener` (point people to `ListenerProvider\LazyListener`)
+  - [x] `LazyEventListener` (point people to `ListenerProvider\LazyListener`)
+  - [x] `LazyListenerAggregate` (point people to `ListenerProvider\LazyListenerSubscriber`)
+  - [x] `FilterChain` and `Filter` subnamespace (this should be done in a separate component)
 
 ## 4.0.0 full release
 

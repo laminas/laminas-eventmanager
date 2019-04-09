@@ -15,7 +15,7 @@ namespace Laminas\EventManager;
  * The assumption is that the SharedEventManager will be injected into EventManager
  * instances, and then queried for additional listeners when triggering an event.
  *
- * @deprecated since 3.3.0. This class will be removed in version 4.0; use
+ * @deprecated since 3.4.0. This class will be removed in version 4.0; use
  *     listener providers instead.
  */
 class SharedEventManager extends ListenerProvider\PrioritizedIdentifierListenerProvider

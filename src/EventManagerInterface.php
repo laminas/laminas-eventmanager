@@ -10,6 +10,9 @@ namespace Laminas\EventManager;
 
 /**
  * Interface for messengers
+ *
+ * @deprecated since 3.4.0; this interface will be removed in version 4.0, in
+ *     favor of the PSR-14 EventDispatcherInterface and ListenerProviderInterface.
  */
 interface EventManagerInterface extends SharedEventsCapableInterface
 {

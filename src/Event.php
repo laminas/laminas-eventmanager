@@ -200,7 +200,7 @@ class Event implements EventInterface, StoppableEventInterface
      * @deprecated Use isPropagationStopped instead, to make your application
      *     forwards-compatible with PSR-14 and zend-eventmanager v4. If you
      *     plan to override this method, please do so via the `isPropagationStopped`
-     *     method, as this method proxies to that one starting in version 3.3.0.
+     *     method, as this method proxies to that one starting in version 3.4.0.
      * @return bool
      */
     public function propagationIsStopped()
