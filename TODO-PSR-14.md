@@ -88,15 +88,10 @@
     - [x] it will return the event itself
     - [x] it will need to validate that it received an object before calling
       `triggerListeners`
-- [ ] Additional utilities
-  - [ ] `EventDispatchingInterface` with a `getEventDispatcher()` method
-  - [ ] Alternate dispatcher implementation, `EventDispatcher`
-    - [ ] Should accept a listener provider interface to its constructor
-    - [ ] Should implement `EventDispatcherInterface` via duck-typing: it will
-        implement a `dispatch()` method only
+- [x] Additional utilities
+  - [x] `EventDispatchingInterface` with a `getEventDispatcher()` method
 - [ ] Deprecations
   - [ ] `EventInterface`
-  - [ ] `EventManager`
   - [ ] `EventManagerInterface`
   - [ ] `EventManagerAwareInterface`
   - [ ] `EventManagerAwareTrait`
@@ -117,7 +112,6 @@
 
 - [ ] Removals
   - [ ] `EventInterface`
-  - [ ] `EventManager`
   - [ ] `EventManagerInterface`
   - [ ] `EventManagerAwareInterface`
   - [ ] `EventManagerAwareTrait`
