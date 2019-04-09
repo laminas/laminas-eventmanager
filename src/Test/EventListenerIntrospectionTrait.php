@@ -8,12 +8,12 @@
 
 namespace Laminas\EventManager\Test;
 
+use Laminas\EventManager\Event;
 use Laminas\EventManager\EventManager;
 use PHPUnit\Framework\Assert;
 use ReflectionProperty;
 
 use function array_keys;
-use function array_merge;
 use function iterator_to_array;
 use function krsort;
 use function sprintf;
@@ -40,15 +40,19 @@ trait EventListenerIntrospectionTrait
     /**
      * Retrieve a list of event names from an event manager.
      *
-     * @param EventManager $events
      * @return string[]
      */
-    private function getEventsFromEventManager(EventManager $events)
+    private function getEventsFromEventManager(EventManager $manager): array
     {
-        $r = new ReflectionProperty($events, 'events');
+        $r = new ReflectionProperty($manager, 'prioritizedProvider');
         $r->setAccessible(true);
-        $listeners = $r->getValue($events);
-        return array_keys($listeners);
+        $provider = $r->getValue($manager);
+
+        $r = new ReflectionProperty($provider, 'events');
+        $r->setAccessible(true);
+        $events = $r->getValue($provider);
+
+        return array_keys($events);
     }
 
     /**
@@ -64,25 +68,23 @@ trait EventListenerIntrospectionTrait
      * as many listeners will likely have the same priority, and thus casting
      * will collapse to the last added.
      *
-     * @param string $event
-     * @param EventManager $events
      * @param bool $withPriority
-     * @return \Traversable
      */
-    private function getListenersForEvent($event, EventManager $events, $withPriority = false)
+    private function getListenersForEvent(string $event, EventManager $events, bool $withPriority = false): iterable
     {
-        $r = new ReflectionProperty($events, 'events');
-        $r->setAccessible(true);
-        $internal = $r->getValue($events);
+        $event = new Event($event);
 
-        $listeners = [];
-        foreach (isset($internal[$event]) ? $internal[$event] : [] as $p => $listOfListeners) {
-            foreach ($listOfListeners as $l) {
-                $listeners[$p] = isset($listeners[$p]) ? array_merge($listeners[$p], $l) : $l;
-            }
+        if (! $withPriority) {
+            $listeners = $events->getListenersForEvent($event);
+            return iterator_to_array($listeners, false);
         }
 
-        return $this->traverseListeners($listeners, $withPriority);
+        $r = new ReflectionProperty($events, 'provider');
+        $r->setAccessible(true);
+        $provider = $r->getValue($events);
+
+        $listeners = $this->traverseListeners($provider->getListenersForEventByPriority($event), true);
+        return iterator_to_array($listeners);
     }
 
     /**
@@ -96,11 +98,11 @@ trait EventListenerIntrospectionTrait
      */
     private function assertListenerAtPriority(
         callable $expectedListener,
-        $expectedPriority,
-        $event,
+        int $expectedPriority,
+        string $event,
         EventManager $events,
-        $message = ''
-    ) {
+        string $message = ''
+    ): void {
         $message = $message ?: sprintf(
             'Listener not found for event "%s" and priority %d',
             $event,
@@ -126,22 +128,19 @@ trait EventListenerIntrospectionTrait
      * Priority values will not be included; use this only for testing if
      * specific listeners are present, or for a count of listeners.
      *
-     * @param string $event
-     * @param EventManager $events
      * @return callable[]
      */
-    private function getArrayOfListenersForEvent($event, EventManager $events)
+    private function getArrayOfListenersForEvent(string $event, EventManager $events): iterable
     {
-        return iterator_to_array($this->getListenersForEvent($event, $events));
+        return $this->getListenersForEvent($event, $events);
     }
 
     /**
      * Generator for traversing listeners in priority order.
      *
-     * @param array $listeners
      * @param bool $withPriority When true, yields priority as key.
      */
-    public function traverseListeners(array $queue, $withPriority = false)
+    public function traverseListeners(array $queue, bool $withPriority = false): iterable
     {
         krsort($queue, SORT_NUMERIC);
 

@@ -9,18 +9,25 @@
 namespace Laminas\EventManager\ListenerProvider;
 
 use Laminas\EventManager\Exception;
+use Psr\EventDispatcher\ListenerProviderInterface;
 
 class PrioritizedAggregateListenerProvider implements PrioritizedListenerProviderInterface
 {
+    /**
+     * @var ListenerProviderInterface
+     */
+    private $default;
+
     /**
      * @var PrioritizedListenerProviderInterface[]
      */
     private $providers;
 
-    public function __construct(array $providers)
+    public function __construct(array $providers, ListenerProviderInterface $default = null)
     {
         $this->validateProviders($providers);
         $this->providers = $providers;
+        $this->default   = $default;
     }
 
     /**
@@ -33,6 +40,10 @@ class PrioritizedAggregateListenerProvider implements PrioritizedListenerProvide
         yield from $this->iterateByPriority(
             $this->getListenersForEventByPriority($event, $identifiers)
         );
+
+        if ($this->default) {
+            yield from $this->default->getListenersForEvent($event, $identifiers);
+        }
     }
 
     public function getListenersForEventByPriority($event, array $identifiers = []): array

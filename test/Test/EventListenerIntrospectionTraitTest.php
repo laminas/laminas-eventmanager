@@ -12,9 +12,7 @@ use Laminas\EventManager\EventManager;
 use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use Traversable;
 
-use function iterator_to_array;
 use function sprintf;
 
 class EventListenerIntrospectionTraitTest extends TestCase
@@ -54,8 +52,6 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2, 5);
 
         $listeners = $this->getListenersForEvent('foo', $this->events);
-        self::assertInstanceOf(Traversable::class, $listeners);
-        $listeners = iterator_to_array($listeners);
 
         self::assertEquals([
             $callback5,
@@ -83,8 +79,6 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2);
 
         $listeners = $this->getListenersForEvent('foo', $this->events);
-        self::assertInstanceOf(Traversable::class, $listeners);
-        $listeners = iterator_to_array($listeners);
 
         self::assertEquals([
             $callback5,
@@ -112,8 +106,6 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2, 5);
 
         $listeners = $this->getListenersForEvent('foo', $this->events, true);
-        self::assertInstanceOf(Traversable::class, $listeners);
-        $listeners = iterator_to_array($listeners);
 
         self::assertEquals([
             1 => $callback5,
@@ -160,7 +152,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
 
         $this->events->attach('foo', $callback, 7);
 
-        self::assertListenerAtPriority($callback, 7, 'foo', $this->events);
+        $this->assertListenerAtPriority($callback, 7, 'foo', $this->events);
     }
 
     public function testAssertListenerAtPriorityFailsWhenListenerIsNotFound()
@@ -182,7 +174,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
 
         foreach ($permutations as $case => $arguments) {
             try {
-                self::assertListenerAtPriority(
+                $this->assertListenerAtPriority(
                     $arguments['listener'],
                     $arguments['priority'],
                     $arguments['event'],
@@ -190,7 +182,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
                 );
                 $this->fail('assertListenerAtPriority assertion had a false positive for case ' . $case);
             } catch (ExpectationFailedException $e) {
-                self::assertStringContainsString(sprintf(
+                $this->assertStringContainsString(sprintf(
                     'Listener not found for event "%s" and priority %d',
                     $arguments['event'],
                     $arguments['priority']

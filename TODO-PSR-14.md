@@ -59,22 +59,34 @@
       - [x] with an event, can be attached to `LazyListenerSubscriber`
     - [x] Constructor aggregates `LazyListener` _instances_ only
       - [x] raises exception when `getEvent()` returns null
-- [ ] Event Dispatcher implementation
-  - [ ] Implement `PrioritizedListenerAttachmentInterface` (if BC)
-  - [ ] Create a `PrioritizedListenerProvider` instance in the `EventManger`
-    constructor, and have the various `attach()`, `detach()`, etc. methods
-    proxy to it.
-  - [ ] When triggering listeners, create a `PrioritizedAggregateListenerProvider`
+- [x] Adapter for SharedEventManagerInterface
+  Since we type-hint on SharedEventManagerInterface, we need to adapt generic
+  implementations to work as ListenerProviders.
+  - [x] Class that adapts SharedEventManagerInterface instances to ListenerProviders
+- [x] Event Dispatcher implementation
+  - [x] Implement `PrioritizedListenerAttachmentInterface` (if BC)
+  - [x] Implement `ListenerProviderInterface` (if BC)
+  - [x] Create a `PrioritizedListenerProvider` instance in the `EventManger`
+    constructor
+    - [x] Decorate it in a `PrioritizedAggregateListenerProvider`
+    - [x] Have the various `attach()`, `detach()`, etc. methods proxy to it.
+    - [x] Adapt any provided `SharedEventManagerInterface` instance, and add it
+        to the `PrioritizedAggregateListenerProvider`
+  - [x] Create a named constructor that accepts a listener provider and which
+    then uses it internally.
+    - [x] If the instance is a `PrioritizedListenerAttachmentInterface`
+      instance, allow the attach/detach/clear methods to proxy to it.
+  - [x] When triggering listeners, create a `PrioritizedAggregateListenerProvider`
     with the composed `PrioritizedListenerProvider` and `SharedListenerProvider` /
     `PrioritizedIdentifierListenerProvider` implementations, in that order.
-  - [ ] Replace logic of `triggerListeners()` to just call
+  - [x] Replace logic of `triggerListeners()` to just call
     `getListenersForEvent()` on the provider. It can continue to aggregate the
     responses in a `ResponseCollection`
-  - [ ] `triggerListeners()` no longer needs to type-hint its first argument
-  - [ ] Create a `dispatch()` method
-    - [ ] Method will act like `triggerEvent()`, except
-    - [ ] it will return the event itself
-    - [ ] it will need to validate that it received an object before calling
+  - [x] `triggerListeners()` no longer needs to type-hint its first argument
+  - [x] Create a `dispatch()` method
+    - [x] Method will act like `triggerEvent()`, except
+    - [x] it will return the event itself
+    - [x] it will need to validate that it received an object before calling
       `triggerListeners`
 - [ ] Additional utilities
   - [ ] `EventDispatchingInterface` with a `getEventDispatcher()` method
