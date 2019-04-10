@@ -8,10 +8,6 @@
 
 namespace LaminasTest\EventManager\ListenerProvider;
 
-use Closure;
-use Laminas\EventManager\ListenerProvider\AbstractListenerSubscriber;
-use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
-
 class AbstractListenerSubscriberTest extends ListenerSubscriberTraitTest
 {
     /**
@@ -19,20 +15,6 @@ class AbstractListenerSubscriberTest extends ListenerSubscriberTraitTest
      */
     public function createProvider(callable $attachmentCallback)
     {
-        return new class($attachmentCallback) extends AbstractListenerSubscriber {
-            /** @var Closure */
-            private $attachmentCallback;
-
-            public function __construct(callable $attachmentCallback)
-            {
-                $this->attachmentCallback = $attachmentCallback;
-            }
-
-            public function attach(PrioritizedListenerAttachmentInterface $provider, int $priority = 1): void
-            {
-                $attachmentCallback = $this->attachmentCallback->bindTo($this, $this);
-                $attachmentCallback($provider, $priority);
-            }
-        };
+        return new TestAsset\ExtendedCallbackSubscriber($attachmentCallback);
     }
 }

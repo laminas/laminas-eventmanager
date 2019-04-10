@@ -21,23 +21,7 @@ class ListenerSubscriberTraitTest extends TestCase
      */
     public function createProvider(callable $attachmentCallback)
     {
-        return new class($attachmentCallback) implements ListenerSubscriberInterface {
-            use ListenerSubscriberTrait;
-
-            /** @var Closure */
-            private $attachmentCallback;
-
-            public function __construct(callable $attachmentCallback)
-            {
-                $this->attachmentCallback = $attachmentCallback;
-            }
-
-            public function attach(PrioritizedListenerAttachmentInterface $provider, int $priority = 1): void
-            {
-                $attachmentCallback = $this->attachmentCallback->bindTo($this, $this);
-                $attachmentCallback($provider, $priority);
-            }
-        };
+        return new TestAsset\CallbackSubscriber($attachmentCallback);
     }
 
     public function testSubscriberAttachesListeners()

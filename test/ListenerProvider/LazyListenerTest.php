@@ -119,22 +119,7 @@ class LazyListenerTest extends TestCase
      */
     public function testInvocationInvokesMethodDefinedInListener(string $method, string $expected)
     {
-        $listener = new class {
-            public function __invoke(object $e): void
-            {
-                $e->value = __FUNCTION__;
-            }
-
-            public function run(object $e): void
-            {
-                $e->value = __FUNCTION__;
-            }
-
-            public function onEvent(object $e): void
-            {
-                $e->value = __FUNCTION__;
-            }
-        };
+        $listener = new TestAsset\MultipleListener();
 
         $this->container
             ->get('listener')
