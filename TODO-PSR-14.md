@@ -90,7 +90,7 @@
       `triggerListeners`
 - [x] Additional utilities
   - [x] `EventDispatchingInterface` with a `getEventDispatcher()` method
-- [ ] Deprecations
+- [x] Deprecations
   - [x] `EventInterface`
   - [x] `EventManagerInterface`
   - [x] `EventManagerAwareInterface`
