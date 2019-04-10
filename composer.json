@@ -28,7 +28,7 @@
         "psr/event-dispatcher": "^1.0"
     },
     "require-dev": {
-        "container-interop/container-interop": "^1.1",
+        "container-interop/container-interop": "^1.2",
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
         "phpbench/phpbench": "^0.17.1",
@@ -36,7 +36,7 @@
         "phpunit/phpunit": "^9.4.1"
     },
     "suggest": {
-        "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
+        "container-interop/container-interop": "^1.2, to use the lazy listeners feature",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
     },
     "autoload": {
