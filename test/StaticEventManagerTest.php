@@ -1,25 +1,23 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_EventManager
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\StaticEventManager;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\StaticEventManager;
 
 /**
- * @category   Zend
- * @package    Zend_EventManager
+ * @category   Laminas
+ * @package    Laminas_EventManager
  * @subpackage UnitTests
- * @group      Zend_EventManager
+ * @group      Laminas_EventManager
  */
 class StaticEventManagerTest extends TestCase
 {
@@ -50,7 +48,7 @@ class StaticEventManagerTest extends TestCase
 
     public function testSingletonInstanceIsInstanceOfClass()
     {
-        $this->assertInstanceOf('Zend\EventManager\StaticEventManager', StaticEventManager::getInstance());
+        $this->assertInstanceOf('Laminas\EventManager\StaticEventManager', StaticEventManager::getInstance());
     }
 
     public function testCanAttachCallbackToEvent()
@@ -61,7 +59,7 @@ class StaticEventManagerTest extends TestCase
         $expected  = array($this, __FUNCTION__);
         $found     = false;
         $listeners = $events->getListeners('foo', 'bar');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+        $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $listeners);
         $this->assertTrue(0 < count($listeners), 'Empty listeners!');
         foreach ($listeners as $listener) {
             if ($expected === $listener->getCallback()) {
@@ -82,7 +80,7 @@ class StaticEventManagerTest extends TestCase
         foreach (array('foo', 'test') as $event) {
             $found     = false;
             $listeners = $events->getListeners('bar', $event);
-            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+            $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $listeners);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
             foreach ($listeners as $listener) {
                 if ($expected === $listener->getCallback()) {
@@ -104,7 +102,7 @@ class StaticEventManagerTest extends TestCase
         foreach (array('foo', 'test') as $id) {
             $found     = false;
             $listeners = $events->getListeners($id, 'bar');
-            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+            $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $listeners);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
             foreach ($listeners as $listener) {
                 if ($expected === $listener->getCallback()) {
@@ -127,7 +125,7 @@ class StaticEventManagerTest extends TestCase
             foreach (array('foo', 'test') as $event) {
                 $found     = false;
                 $listeners = $events->getListeners($resource, $event);
-                $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+                $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $listeners);
                 $this->assertTrue(0 < count($listeners), 'Empty listeners!');
                 foreach ($listeners as $listener) {
                     if ($expected === $listener->getCallback()) {
@@ -184,7 +182,7 @@ class StaticEventManagerTest extends TestCase
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $listeners = $events->getListeners('foo', 'bar');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+        $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $listeners);
         $this->assertEquals(1, count($listeners));
     }
 
@@ -205,11 +203,11 @@ class StaticEventManagerTest extends TestCase
         $events->attach('foo', 'baz', array($this, __FUNCTION__));
         $events->attach('foo', 'bat', array($this, __FUNCTION__));
         $events->clearListeners('foo', 'baz');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'baz'));
+        $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $events->getListeners('foo', 'baz'));
         $this->assertEquals(0, count($events->getListeners('foo', 'baz')));
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'bar'));
+        $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $events->getListeners('foo', 'bar'));
         $this->assertEquals(1, count($events->getListeners('foo', 'bar')));
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'bat'));
+        $this->assertInstanceOf('Laminas\Stdlib\PriorityQueue', $events->getListeners('foo', 'bat'));
         $this->assertEquals(1, count($events->getListeners('foo', 'bat')));
     }
 
