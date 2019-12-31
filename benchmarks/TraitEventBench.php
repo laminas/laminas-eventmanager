@@ -1,5 +1,5 @@
 <?php
-namespace ZendBench\EventManager;
+namespace LaminasBench\EventManager;
 
 trait TraitEventBench
 {
@@ -23,11 +23,11 @@ trait TraitEventBench
     private function getIdentifierList()
     {
         return [
-            'Zend\Stdlib\DispatchableInterface',
-            'Zend\Mvc\Controller\AbstractController',
-            'Zend\Mvc\Controller\AbstractActionController',
-            'Zend\Mvc\Controller\AbstractRestfulController',
-            'ZF\Rest\RestController',
+            'Laminas\Stdlib\DispatchableInterface',
+            'Laminas\Mvc\Controller\AbstractController',
+            'Laminas\Mvc\Controller\AbstractActionController',
+            'Laminas\Mvc\Controller\AbstractRestfulController',
+            'Laminas\ApiTools\Rest\RestController',
             'CustomRestController',
         ];
     }

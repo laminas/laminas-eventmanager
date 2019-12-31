@@ -1,6 +1,6 @@
 docs_dir: doc/book
 site_dir: doc/html
-pages:
+nav:
     - index.md
     - { Overview: intro.md }
     - { 'Quick Start': quick-start.md }
@@ -12,7 +12,6 @@ pages:
     - { 'EventManager API': api.md }
     - { 'Intercepting Filters': intercepting-filters.md }
     - { 'Migration Guide': [{ Introduction: migration/intro.md }, { 'Removed Functionality': migration/removed.md }, { 'Changed Functionality': migration/changed.md }] }
-site_name: zend-eventmanager
-site_description: 'zend-eventmanager: Powerful event bus system for Zend Framework'
-repo_url: 'https://github.com/zendframework/zend-eventmanager'
-copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-eventmanager
+site_description: 'laminas-eventmanager: Powerful event bus system for Laminas'
+repo_url: 'https://github.com/laminas/laminas-eventmanager'

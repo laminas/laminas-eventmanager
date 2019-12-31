@@ -1,5 +1,5 @@
 {
-  "title": "zend-eventmanager: Powerful event bus system for Zend Framework",
+  "title": "laminas-eventmanager: Powerful event bus system for Laminas",
   "content": [
     {"Intro": "../README.md"},
     {"Overview": "book/intro.md"},

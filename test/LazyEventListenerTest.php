@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
 use Interop\Container\ContainerInterface;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\Exception\InvalidArgumentException;
-use Zend\EventManager\LazyEventListener;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\Exception\InvalidArgumentException;
+use Laminas\EventManager\LazyEventListener;
 
 class LazyEventListenerTest extends LazyListenerTest
 {

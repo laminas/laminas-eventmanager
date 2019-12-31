@@ -1,23 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
 use Interop\Container\ContainerInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\Exception\InvalidArgumentException;
+use Laminas\EventManager\LazyEventListener;
+use Laminas\EventManager\LazyListenerAggregate;
 use PHPUnit_Framework_TestCase as TestCase;
 use Prophecy\Argument;
 use ReflectionProperty;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\LazyEventListener;
-use Zend\EventManager\LazyListenerAggregate;
-use Zend\EventManager\Exception\InvalidArgumentException;
 
 class LazyListenerAggregateTest extends TestCase
 {
