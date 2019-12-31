@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_EventManager
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
-use Zend\EventManager\GlobalEventManager;
-use Zend\EventManager\EventManager;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\GlobalEventManager;
 
 /**
- * @category   Zend
- * @package    Zend_EventManager
+ * @category   Laminas
+ * @package    Laminas_EventManager
  * @subpackage UnitTests
- * @group      Zend_EventManager
+ * @group      Laminas_EventManager
  */
 class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,16 +27,16 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
     public function testStoresAnEventManagerInstanceByDefault()
     {
         $events = GlobalEventManager::getEventCollection();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $events);
     }
 
     public function testPassingNullValueForEventCollectionResetsInstance()
     {
         $events = GlobalEventManager::getEventCollection();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $events);
         GlobalEventManager::setEventCollection(null);
         $events2 = GlobalEventManager::getEventCollection();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $events2);
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $events2);
         $this->assertNotSame($events, $events2);
     }
 
@@ -51,7 +49,7 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
             $test->params = $e->getParams();
             return $test->params;
         });
-        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
+        $this->assertInstanceOf('Laminas\Stdlib\CallbackHandler', $listener);
 
         GlobalEventManager::trigger('foo.bar', $this, array('foo' => 'bar'));
         $this->assertSame($this, $test->target);
