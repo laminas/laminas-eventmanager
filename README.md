@@ -1,9 +1,9 @@
-# zend-eventmanager
+# laminas-eventmanager
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-eventmanager.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-eventmanager)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-eventmanager?branch=master)
+[![Build Status](https://travis-ci.org/laminas/laminas-eventmanager.svg?branch=master)](https://travis-ci.org/laminas/laminas-eventmanager)
+[![Coverage Status](https://coveralls.io/repos/laminas/laminas-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/laminas/laminas-eventmanager?branch=master)
 
-zend-eventmanager is designed for the following use cases:
+laminas-eventmanager is designed for the following use cases:
 
 - Implementing simple subject/observer patterns.
 - Implementing Aspect-Oriented designs.
@@ -13,15 +13,15 @@ The basic architecture allows you to attach and detach listeners to named events
 both on a per-instance basis as well as via shared collections; trigger events;
 and interrupt execution of listeners.
 
-- File issues at https://github.com/zendframework/zend-eventmanager/issues
-- Documentation is at https://zendframework.github.io/zend-eventmanager/
+- File issues at https://github.com/laminas/laminas-eventmanager/issues
+- Documentation is at https://docs.laminas.dev/laminas-eventmanager/
 
 For migration from version 2 to version 3, please [read the migration
-documentation](https://zendframework.github.io/zend-eventmanager/migration/intro/).
+documentation](https://docs.laminas.dev/laminas-eventmanager/migration/intro/).
 
 ## Benchmarks
 
-We provide scripts for benchmarking zend-eventmanager using the
+We provide scripts for benchmarking laminas-eventmanager using the
 [PHPBench](https://github.com/phpbench/phpbench) framework; these can be
 found in the `benchmarks/` directory.
 

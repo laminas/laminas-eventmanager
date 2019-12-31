@@ -1,11 +1,11 @@
 <?php
 
-namespace ZendBench\EventManager;
+namespace LaminasBench\EventManager;
 
+use Laminas\EventManager\EventManager;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 use PhpBench\Benchmark\Metadata\Annotations\Warmup;
-use Zend\EventManager\EventManager;
 
 /**
  * @Revs(1000)

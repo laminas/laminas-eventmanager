@@ -6,12 +6,12 @@ Injection Container until they are actually triggered.
 
 The feature consists of three classes:
 
-- `Zend\EventManager\LazyListener`, which provides basic capabilities for
+- `Laminas\EventManager\LazyListener`, which provides basic capabilities for
   wrapping the retrieval of a listener from a container and invoking it.
-- `Zend\EventManager\LazyEventListener`, which extends `LazyListener` but adds
+- `Laminas\EventManager\LazyEventListener`, which extends `LazyListener` but adds
   awareness of the event and optionally priority to use when attaching the
   listener. These are primarily used and created by:
-- `Zend\EventManager\LazyListenerAggregate`, which can take a list of
+- `Laminas\EventManager\LazyListenerAggregate`, which can take a list of
   `LazyEventListeners` and/or their definitions, and be used as an aggregate
   listener for attaching the lazy listeners to an event manager.
 

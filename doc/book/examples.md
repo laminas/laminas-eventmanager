@@ -160,11 +160,11 @@ Now, let's create a `ListenerAggregateInterface` implementation that can handle
 caching for us:
 
 ```php
-use Zend\Cache\Cache;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\EventManager\EventInterface;
+use Laminas\Cache\Cache;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\EventInterface;
 
 class CacheListener implements ListenerAggregateInterface
 {

@@ -1,6 +1,6 @@
 # LazyListener
 
-`Zend\EventManager\LazyListener` provides a callable wrapper around fetching a
+`Laminas\EventManager\LazyListener` provides a callable wrapper around fetching a
 listener from a container and invoking it.
 
 ## Usage
@@ -12,7 +12,7 @@ To create a `LazyListener` instance, you must pass to its constructor:
     - a `method` key, with the name of the method to invoke on the listener instance.
 - a *container*; this is a [container-interop](https://github.com/container-interop/container-interop),
   such as provided by
-  [zend-servicemanager](https://github.com/zendframework/zend-servicemanager),
+  [laminas-servicemanager](https://github.com/laminas/laminas-servicemanager),
   [Aura.Di](https://github.com/auraphp/Aura.Di), etc.
 - optionally an `$env` array; this is a set of options or other configuration to
   use when creating the listener instance. Since not all containers support
@@ -31,7 +31,7 @@ I might then create and attach my lazy listener as follows:
 
 ```php
 use My\Application\Listener;
-use Zend\EventManager\LazyListener;
+use Laminas\EventManager\LazyListener;
 
 $events->attach('foo', new LazyListener([
     'listener' => Listener::class,
