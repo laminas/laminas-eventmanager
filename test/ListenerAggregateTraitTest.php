@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
-use ZendTest\EventManager\TestAsset\MockListenerAggregateTrait;
+use LaminasTest\EventManager\TestAsset\MockListenerAggregateTrait;
 
 /**
  * @requires PHP 5.4
@@ -17,13 +16,13 @@ use ZendTest\EventManager\TestAsset\MockListenerAggregateTrait;
 class ListenerAggregateTraitTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \Zend\EventManager\ListenerAggregateTrait::detach
+     * @covers \Laminas\EventManager\ListenerAggregateTrait::detach
      */
     public function testDetach()
     {
         $listener              = new MockListenerAggregateTrait();
-        $eventManager          = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $unrelatedEventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
+        $eventManager          = $this->getMock('Laminas\\EventManager\\EventManagerInterface');
+        $unrelatedEventManager = $this->getMock('Laminas\\EventManager\\EventManagerInterface');
         $callbackHandlers      = array();
         $test                  = $this;
 
@@ -31,7 +30,7 @@ class ListenerAggregateTraitTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('attach')
             ->will($this->returnCallback(function () use (&$callbackHandlers, $test) {
-                return $callbackHandlers[] = $test->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
+                return $callbackHandlers[] = $test->getMock('Laminas\\Stdlib\\CallbackHandler', array(), array(), '', false);
             }));
 
         $listener->attach($eventManager);
