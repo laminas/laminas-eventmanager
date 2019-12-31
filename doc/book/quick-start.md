@@ -3,9 +3,9 @@
 Typically, you will compose an `EventManager` instance in a class.
 
 ```php
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerAwareInterface;
 
 class Foo implements EventManagerAwareInterface
 {
@@ -67,7 +67,7 @@ for retrieving the event name, target, and parameters. Let's add a listener, and
 trigger the event.
 
 ```php
-use Zend\Log\Factory as LogFactory;
+use Laminas\Log\Factory as LogFactory;
 
 $log = LogFactory($someConfig);
 $foo = new Foo();
@@ -100,7 +100,7 @@ referencing a static method, or an array callback with a named static method or
 instance method. Again, any PHP callable is valid.
 
 Sometimes you may want to specify listeners without yet having an object
-instance of the class composing an `EventManager`. Zend Framework enables this
+instance of the class composing an `EventManager`. Laminas enables this
 through the concept of a `SharedEventManager`.
 
 Simply put, you can inject individual `EventManager` instances with a well-known
@@ -122,9 +122,9 @@ injection), we could change the above example to attach via the shared
 collection:
 
 ```php
-use Zend\Log\Factory as LogFactory;
+use Laminas\Log\Factory as LogFactory;
 
-// Assume $sharedEvents is a Zend\EventManager\SharedEventManager instance
+// Assume $sharedEvents is a Laminas\EventManager\SharedEventManager instance
 
 $log = LogFactory($someConfig);
 $sharedEvents->attach('Foo', 'bar', function ($e) use ($log) {

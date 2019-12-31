@@ -1,6 +1,6 @@
 # LazyEventListener
 
-`Zend\EventManager\LazyEventListener` extends from
+`Laminas\EventManager\LazyEventListener` extends from
 [LazyListener](lazy-listener.md), but **requires** supplying the event name to
 which to attach, and optionally the priority, in the definition supplied at
 construction. This allows it to be a standalone instance that a listener
@@ -30,7 +30,7 @@ You could create the lazy event listener as follows:
 
 ```php
 use My\Application\Listener;
-use Zend\EventManager\LazyEventListener;
+use Laminas\EventManager\LazyEventListener;
 
 $listener = new LazyEventListener([
     'listener' => Listener::class,

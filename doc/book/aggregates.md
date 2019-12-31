@@ -6,7 +6,7 @@
 - Attaching stateful listeners.
 
 A listener aggregate is a class implementing
-`Zend\EventManager\ListenerAggregateInterface`, which defines two methods:
+`Laminas\EventManager\ListenerAggregateInterface`, which defines two methods:
 
 ```php
 attach(EventManagerInterface $events, $priority = 1);
@@ -23,9 +23,9 @@ To implement `ListenerAggregateInterface`, you need to define the `attach()` and
 `detach()` methods. A typical implementation will look something like this:
 
 ```php
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
 
 class Aggregate implements ListenerAggregateInterface
 {
@@ -66,12 +66,12 @@ class Aggregate implements ListenerAggregateInterface
 Because the logic for detaching is essentially the same in all implementations,
 we provide two facilities for implementing this:
 
-- `Zend\EventManager\AbstractListenerAggregate` is an abstract class that
+- `Laminas\EventManager\AbstractListenerAggregate` is an abstract class that
   defines the `$listeners` property and the `detach()` method. You may *extend*
   it in order to create an implementation.
-- `Zend\EventManager\ListenerAggregateTrait` is a trait that defines the
+- `Laminas\EventManager\ListenerAggregateTrait` is a trait that defines the
   `$listeners` property and the `detach()` method. You may *implement*
-  `Zend\EventManager\ListenerAggregateInterface` and *use* this trait to
+  `Laminas\EventManager\ListenerAggregateInterface` and *use* this trait to
   implement the `detach()` logic.
 
 ## Usage

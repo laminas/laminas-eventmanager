@@ -4,16 +4,16 @@ The following interfaces, classes, and methods have been removed for version 3.
 
 ## GlobalEventManager and StaticEventManager
 
-`Zend\EventManager\GlobalEventManager` and
-`Zend\EventManager\StaticEventManager` were removed, and there are no
+`Laminas\EventManager\GlobalEventManager` and
+`Laminas\EventManager\StaticEventManager` were removed, and there are no
 replacements.  Global static state is generally considered a dangerous practice
 due to the side effects it can create, and we felt it was better to remove the
 option from the framework entirely.
 
 ## ProvidesEvents
 
-The trait `Zend\EventManager\ProvidesEvents` has been deprecated for most of
-the 2.0 series; use `Zend\EventManager\EventManagerAwareTrait` instead.
+The trait `Laminas\EventManager\ProvidesEvents` has been deprecated for most of
+the 2.0 series; use `Laminas\EventManager\EventManagerAwareTrait` instead.
 
 ## EventManagerInterface::setSharedManager()
 
@@ -86,7 +86,7 @@ The above works in all released versions of the component.
 
 ## SharedEventAggregateAwareInterface, SharedListenerAggregateInterface
 
-The interfaces `Zend\EventManager\SharedEventAggregateAwareInterface` and
+The interfaces `Laminas\EventManager\SharedEventAggregateAwareInterface` and
 `SharedListenerAggregateInterface` were removed, as the concept of shared
 listener aggregates was removed from version 3.
 
@@ -96,7 +96,7 @@ or implementing `SharedListenerAggregateInterface`.
 
 ### SharedEventAggregateAwareInterface
 
-`Zend\EventManager\SharedEventAggregateAwareInterface` was added mid-way through
+`Laminas\EventManager\SharedEventAggregateAwareInterface` was added mid-way through
 the v2 lifecycle to allow adding shared listener aggregates to the
 `SharedEventManager`. If you were extending the `SharedEventManager` and
 overriding the methods defined in `SharedEventAggregateAwareInterface`, you
@@ -122,8 +122,8 @@ you had the following:
 ```php
 namespace Foo;
 
-use Zend\EventManager\SharedEventManagerInterface;
-use Zend\EventManager\SharedListenerAggregateInterface;
+use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\SharedListenerAggregateInterface;
 
 class MySharedAggregate implements SharedListenerAggregateInterface
 {
@@ -144,7 +144,7 @@ then modify it to instead read:
 ```php
 namespace Foo;
 
-use Zend\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\SharedEventManagerInterface;
 
 class MySharedAggregate
 {
@@ -179,11 +179,11 @@ v3.
 
 #### SharedEventManagerAwareInterface
 
-The interface `Zend\EventManager\SharedEventManagerAwareInterface` was removed,
+The interface `Laminas\EventManager\SharedEventManagerAwareInterface` was removed,
 as version 3 now requires tha the `SharedEventManagerInterface` instance be
 injected into the `EventManager` instance at instantiation.
 
-A new interface, `Zend\EventManager\SharedEventsCapableInterface`, provides the
+A new interface, `Laminas\EventManager\SharedEventsCapableInterface`, provides the
 `getSharedManager()` method, and `EventManagerInterface` extends it.
 
 To migrate, you have the following options:
