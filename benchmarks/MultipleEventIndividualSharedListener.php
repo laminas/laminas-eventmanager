@@ -1,10 +1,10 @@
 <?php
 
-namespace ZendBench\EventManager;
+namespace LaminasBench\EventManager;
 
-use Zend\EventManager\SharedEventManager;
-use Zend\EventManager\EventManager;
 use Athletic\AthleticEvent;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
 
 class MultipleEventIndividualSharedListener extends AthleticEvent
 {
