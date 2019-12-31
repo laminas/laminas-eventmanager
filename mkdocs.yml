@@ -1,6 +1,6 @@
 docs_dir: doc/book
 site_dir: doc/html
-pages:
+nav:
     - Home: index.md
     - Intro: intro.md
     - "Quick Start": quick-start.md
@@ -20,6 +20,6 @@ pages:
             - Intro: migration/intro.md
             - "Removed Functionality": migration/removed.md
             - "Changed Functionality": migration/changed.md
-site_name: zend-eventmanager
+site_name: laminas-eventmanager
 site_description: 'Implement events, signal slots, aspects, and observers!'
-repo_url: 'https://github.com/zendframework/zend-eventmanager'
+repo_url: 'https://github.com/laminas/laminas-eventmanager'

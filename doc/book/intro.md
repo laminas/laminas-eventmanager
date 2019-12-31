@@ -1,6 +1,6 @@
 # The EventManager: Overview
 
-zend-eventmanager is a component designed for the following use cases:
+laminas-eventmanager is a component designed for the following use cases:
 
 - Implementing simple subject/observer patterns.
 - Implementing Aspect-Oriented designs.
