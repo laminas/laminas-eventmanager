@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\EventManager;
+namespace Laminas\EventManager;
 
-use Zend\Stdlib\CallbackHandler;
-use Zend\Stdlib\PriorityQueue;
+use Laminas\Stdlib\CallbackHandler;
+use Laminas\Stdlib\PriorityQueue;
 
 /**
  * Interface for shared event listener collections
