@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Implement events, signal slots, aspects, and observers!">  
+    <link rel="canonical" href="https://docs.laminas.dev/tutorial/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Tutorial - laminas-eventmanager - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-eventmanager</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-eventmanager/" class="header__link header__link--github" title="Go to repository of laminas-eventmanager">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#terminology" class="toc__link">Terminology</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#getting-started" class="toc__link">Getting started</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#shared-managers" class="toc__link">Shared managers</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#wildcards" class="toc__link">Wildcards</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#listener-aggregates" class="toc__link">Listener aggregates</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#introspecting-results" class="toc__link">Introspecting results</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#short-circuiting-listener-execution" class="toc__link">Short-circuiting listener execution</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#keeping-it-in-order" class="toc__link">Keeping it in order</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#custom-event-objects" class="toc__link">Custom event objects</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#putting-it-together-implementing-a-simple-caching-system" class="toc__link">Putting it together: Implementing a simple caching system</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#conclusion" class="toc__link">Conclusion</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-eventmanager</a></li>
+
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Tutorial</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+
+    <h1 id="tutorial">Tutorial</h1>
+<p>This tutorial explores the various features of laminas-eventmanager.</p>
+<h2 id="terminology">Terminology</h2>
+<ul>
+<li>An <strong>Event</strong> is a named action.</li>
+<li>A <strong>Listener</strong> is any PHP callback that reacts to an <em>event</em>.</li>
+<li>An <strong>EventManager</strong> <em>aggregates</em> listeners for one or more named events, and <em>triggers</em> events.</li>
+</ul>
+<p>Typically, an <em>event</em> will be modeled as an object, containing metadata
+surrounding when and how it was triggered, including the event name, what object
+triggered the event (the "target"), and what parameters were provided. Events
+are <em>named</em>, which allows a single <em>listener</em> to branch logic based on the
+event.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>The minimal things necessary to start using events are:</p>
+<ul>
+<li>An <code>EventManager</code> instance</li>
+<li>One or more listeners on one or more events</li>
+<li>A call to <code>trigger()</code> an event</li>
+</ul>
+<p>The simplest example looks something like this:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventManager;</span>
+
+<span class=x>$events = new EventManager();</span>
+<span class=x>$events-&gt;attach(&#39;do&#39;, function ($e) {</span>
+<span class=x>    $event = $e-&gt;getName();</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    printf(</span>
+<span class=x>        &#39;Handled event &quot;%s&quot;, with parameters %s&#39;,</span>
+<span class=x>        $event,</span>
+<span class=x>        json_encode($params)</span>
+<span class=x>    );</span>
+<span class=x>});</span>
+
+<span class=x>$params = [&#39;foo&#39; =&gt; &#39;bar&#39;, &#39;baz&#39; =&gt; &#39;bat&#39;];</span>
+<span class=x>$events-&gt;trigger(&#39;do&#39;, null, $params);</span>
+</pre></div></p>
+<p>The above will result in the following:</p>
+<p> <div class=codehilite><pre><span></span>Handled event &quot;do&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}
+</pre></div></p>
+<blockquote>
+<h3>Note</h3>
+<p>Throughout this tutorial, we use closures as listeners. However, any valid PHP
+callback can be attached as a listeners: PHP function names, static class
+methods, object instance methods, functors, or closures. We use closures
+within this post simply for illustration and simplicity.</p>
+</blockquote>
+<p>If you were paying attention to the example, you will have noted the <code>null</code>
+argument. Why is it there?</p>
+<p>Typically, you will compose an <code>EventManager</code> within a class, to allow
+triggering actions within methods. The middle argument to <code>trigger()</code> is the
+"target", and in the case described, would be the current object instance. This
+gives event listeners access to the calling object, which can often be useful.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventManager;</span>
+<span class=x>use Laminas\EventManager\EventManagerAwareInterface;</span>
+<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
+
+<span class=x>class Example implements EventManagerAwareInterface</span>
+<span class=x>{</span>
+<span class=x>    protected $events;</span>
+
+<span class=x>    public function setEventManager(EventManagerInterface $events)</span>
+<span class=x>    {</span>
+<span class=x>        $events-&gt;setIdentifiers([</span>
+<span class=x>            __CLASS__,</span>
+<span class=x>            get_class($this)</span>
+<span class=x>        ]);</span>
+<span class=x>        $this-&gt;events = $events;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function getEventManager()</span>
+<span class=x>    {</span>
+<span class=x>        if (! $this-&gt;events) {</span>
+<span class=x>            $this-&gt;setEventManager(new EventManager());</span>
+<span class=x>        }</span>
+<span class=x>        return $this-&gt;events;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function doIt($foo, $baz)</span>
+<span class=x>    {</span>
+<span class=x>        $params = compact(&#39;foo&#39;, &#39;baz&#39;);</span>
+<span class=x>        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $params);</span>
+<span class=x>    }</span>
+
+<span class=x>}</span>
+
+<span class=x>$example = new Example();</span>
+
+<span class=x>$example-&gt;getEventManager()-&gt;attach(&#39;doIt&#39;, function($e) {</span>
+<span class=x>    $event  = $e-&gt;getName();</span>
+<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    printf(</span>
+<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
+<span class=x>        $event,</span>
+<span class=x>        $target,</span>
+<span class=x>        json_encode($params)</span>
+<span class=x>    );</span>
+<span class=x>});</span>
+
+<span class=x>$example-&gt;doIt(&#39;bar&#39;, &#39;bat&#39;);</span>
+</pre></div></p>
+<p>The above is basically the same as the first example. The main difference is
+that we're now using that middle argument in order to pass the target, the
+instance of <code>Example</code>, on to the listeners. Our listener is now retrieving that
+(<code>$e-&gt;getTarget()</code>), and doing something with it.</p>
+<p>If you're reading this critically, you should have a new question: What is the
+call to <code>setIdentifiers()</code> for?</p>
+<h2 id="shared-managers">Shared managers</h2>
+<p>One aspect that the <code>EventManager</code> implementation provides is an ability to
+compose a <code>SharedEventManagerInterface</code> implementation.</p>
+<p><code>Laminas\EventManager\SharedEventManagerInterface</code> describes an object that
+aggregates listeners for events attached to objects with specific <em>identifiers</em>.
+It does not trigger events itself. Instead, an <code>EventManager</code> instance that
+composes a <code>SharedEventManager</code> will query the <code>SharedEventManager</code> for
+listeners on identifiers it's interested in, and trigger those listeners as
+well.</p>
+<p>How does this work, exactly?</p>
+<p>Consider the following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\SharedEventManager;</span>
+
+<span class=x>$sharedEvents = new SharedEventManager();</span>
+<span class=x>$sharedEvents-&gt;attach(&#39;Example&#39;, &#39;do&#39;, function ($e) {</span>
+<span class=x>    $event  = $e-&gt;getName();</span>
+<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    printf(</span>
+<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
+<span class=x>        $event,</span>
+<span class=x>        $target,</span>
+<span class=x>        json_encode($params)</span>
+<span class=x>    );</span>
+<span class=x>});</span>
+</pre></div></p>
+<p>This looks almost identical to the previous example; the key difference is that
+there is an additional argument at the <em>start</em> of the list, <code>Example</code>. This
+code is basically saying, "Listen to the 'do' event of the 'Example' target,
+and, when notified, execute this callback."</p>
+<p>This is where the <code>setIdentifiers()</code> method of <code>EventManager</code> comes into play.
+The method allows passing an array of strings, defining the names of the context
+or targets the given instance will be interested in.</p>
+<p>So, getting back to our example, let's assume that the above shared listener is
+registered, and also that the <code>Example</code> class is defined as above. (Note that as of 
+version 3, <code>setSharedManager()</code> is removed from  <code>EventManager</code>; the <code>SharedEventManager</code> 
+instance must instead be injected via the constructor.) We can then execute the following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$example = new Example();</span>
+
+<span class=x>// Prior to version 3:</span>
+<span class=x>$example-&gt;getEventManager()-&gt;setSharedManager($sharedEvents);</span>
+
+<span class=x>// As of version 3:</span>
+<span class=x>$example-&gt;setEventManager(new EventManager($sharedEvents));</span>
+
+<span class=x>// Both versions:</span>
+<span class=x>$example-&gt;doIt(&#39;bar&#39;, &#39;bat&#39;);</span>
+</pre></div></p>
+<p>and expect the following output:</p>
+<p> <div class=codehilite><pre><span></span>Handled event &quot;do&quot; on target &quot;Example&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}
+</pre></div></p>
+<p>Now, let's say we extended <code>Example</code> as follows:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>class SubExample extends Example</span>
+<span class=x>{</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>One interesting aspect of our <code>setEventManager()</code> method is that we defined it
+to listen both on <code>__CLASS__</code> and <code>get_class($this)</code>. This means that calling
+<code>do()</code> on our <code>SubExample</code> class would also trigger the shared listener! It also
+means that, if desired, we could attach to specifically <code>SubExample</code>, and
+listeners attached to only the <code>Example</code> target would not be triggered.</p>
+<p>Finally, the names used as contexts or targets need not be class names; they can
+be some name that only has meaning in your application if desired. As an
+example, you could have a set of classes that respond to "log" or "cache" — and
+listeners on these would be notified by any of them.</p>
+<blockquote>
+<h3>Note</h3>
+<p>We recommend using class names, interface names, and/or abstract class names
+for identifiers. This makes determining what events are available easier, as
+well as finding which listeners might be attaching to those events. Interfaces
+make a particularly good use case, as they allow attaching to a group of
+related classes a single operation.</p>
+</blockquote>
+<h2 id="wildcards">Wildcards</h2>
+<p>So far, with both a normal <code>EventManager</code> instance and with the
+<code>SharedEventManager</code> instance, we've seen the usage of singular strings
+representing the event and target names to which we want to attach. What if you
+want to attach a listener to multiple events or targets?</p>
+<p>One answer is to attach to the event manager using the wildcard event, <code>*</code>.</p>
+<p>Consider the following examples:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(</span>
+<span class=x>    &#39;*&#39;, // all events</span>
+<span class=x>    $listener</span>
+<span class=x>);</span>
+
+<span class=x>// All targets via wildcard</span>
+<span class=x>$sharedEvents-&gt;attach(</span>
+<span class=x>    &#39;*&#39;,           // all targets</span>
+<span class=x>    &#39;doSomething&#39;, // named event</span>
+<span class=x>    $listener</span>
+<span class=x>);</span>
+
+<span class=x>// Mix and match: all events on a single named target:</span>
+<span class=x>$sharedEvents-&gt;attach(</span>
+<span class=x>    &#39;Foo&#39;, // target</span>
+<span class=x>    &#39;*&#39;,   // all events</span>
+<span class=x>    $listener</span>
+<span class=x>);</span>
+
+<span class=x>// Mix and match: all events on all targets:</span>
+<span class=x>$sharedEvents-&gt;attach(</span>
+<span class=x>    &#39;*&#39;, // all targets</span>
+<span class=x>    &#39;*&#39;, // all events</span>
+<span class=x>    $listener</span>
+<span class=x>);</span>
+</pre></div></p>
+<p>The ability to specify wildcard targets and/or events when attaching can slim
+down your code immensely.</p>
+<h2 id="listener-aggregates">Listener aggregates</h2>
+<p>Another approach to listening to multiple events is via a concept of listener
+aggregates, represented by <code>Laminas\EventManager\ListenerAggregateInterface</code>. Via
+this approach, a single class can listen to multiple events, attaching one or
+more instance methods as listeners.</p>
+<p>This interface defines two methods, <code>attach(EventManagerInterface $events)</code> and
+<code>detach(EventManagerInterface $events)</code>. Basically, you pass an <code>EventManager</code>
+instance to one and/or the other, and then it's up to the implementing class to
+determine what to do.</p>
+<p>As an example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventInterface;</span>
+<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
+<span class=x>use Laminas\EventManager\ListenerAggregateInterface;</span>
+<span class=x>use Laminas\Log\Logger;</span>
+
+<span class=x>class LogEvents implements ListenerAggregateInterface</span>
+<span class=x>{</span>
+<span class=x>    private $listeners = [];</span>
+<span class=x>    private $log;</span>
+
+<span class=x>    public function __construct(Logger $log)</span>
+<span class=x>    {</span>
+<span class=x>        $this-&gt;log = $log;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function attach(EventManagerInterface $events)</span>
+<span class=x>    {</span>
+<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;do&#39;, [$this, &#39;log&#39;]);</span>
+<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;doSomethingElse&#39;, [$this, &#39;log&#39;]);</span>
+<span class=x>    }</span>
+
+<span class=x>    public function detach(EventManagerInterface $events)</span>
+<span class=x>    {</span>
+<span class=x>        foreach ($this-&gt;listeners as $index =&gt; $listener) {</span>
+<span class=x>            $events-&gt;detach($listener);</span>
+<span class=x>            unset($this-&gt;listeners[$index]);</span>
+<span class=x>        }</span>
+<span class=x>    }</span>
+
+<span class=x>    public function log(EventInterface $e)</span>
+<span class=x>    {</span>
+<span class=x>        $event  = $e-&gt;getName();</span>
+<span class=x>        $params = $e-&gt;getParams();</span>
+<span class=x>        $this-&gt;log-&gt;info(sprintf(&#39;%s: %s&#39;, $event, json_encode($params)));</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<blockquote>
+<h3>Note</h3>
+<p>The trait <code>Laminas\EventManager\ListenerAggregateTrait</code> can be composed to help
+implement <code>ListenerAggregateInterface</code>; it defines the <code>$listeners</code> property,
+and the <code>detach()</code> logic as demonstrated above.</p>
+</blockquote>
+<p>You can attach this by passing the event manager to the aggregate's <code>attach()</code>
+method:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$logListener = new LogEvents($logger);</span>
+<span class=x>$logListener-&gt;attach($events);</span>
+</pre></div></p>
+<p>Any events the aggregate attaches to will then be notified when triggered.</p>
+<p>Why bother? For a couple of reasons:</p>
+<ul>
+<li>Aggregates allow you to have stateful listeners. The above example
+  demonstrates this via the composition of the logger; another example would be
+  tracking configuration options.</li>
+<li>Aggregates allow grouping related listeners in a single class, and attaching
+  them at once.</li>
+</ul>
+<h2 id="introspecting-results">Introspecting results</h2>
+<p>Sometimes you'll want to know what your listeners returned. One thing to
+remember is that you may have multiple listeners on the same event; the
+interface for results must be consistent regardless of the number of listeners.</p>
+<p>The <code>EventManager</code> implementation by default returns a
+<code>Laminas\EventManager\ResponseCollection</code> instance. This class extends PHP's
+<code>SplStack</code>, allowing you to loop through responses in reverse order (since the
+last one executed is likely the one you're most interested in). It also
+implements the following methods:</p>
+<ul>
+<li><code>first()</code> will retrieve the first result received</li>
+<li><code>last()</code> will retrieve the last result received</li>
+<li><code>contains($value)</code> allows you to test all values to see if a given one was
+  received, and returns simply a boolean <code>true</code> if found, and <code>false</code> if not.</li>
+</ul>
+<p>Typically, you should not worry about the return values from events, as the
+object triggering the event shouldn't really have much insight into what
+listeners are attached. However, sometimes you may want to short-circuit
+execution if interesting results are obtained.</p>
+<h2 id="short-circuiting-listener-execution">Short-circuiting listener execution</h2>
+<p>You may want to short-circuit execution if a particular result is obtained, or if
+a listener determines that something is wrong, or that it can return something
+quicker than the target.</p>
+<p>As examples, one rationale for adding an <code>EventManager</code> is as a caching
+mechanism. You can trigger one event early in the method, returning if a cache
+is found, and trigger another event late in the method, seeding the cache.</p>
+<p>The <code>EventManager</code> component offers two ways to handle this. The first is to
+use the methods <code>triggerUntil()</code> or <code>triggerEventUntil()</code>. These accept a
+callback as their first argument; if that callback returns a boolean <code>true</code>
+value, execution is halted.</p>
+<p>As an example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
+<span class=x>{</span>
+<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
+<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
+<span class=x>        function ($r) {</span>
+<span class=x>            return ($r instanceof SomeResultClass);</span>
+<span class=x>        },</span>
+<span class=x>        __FUNCTION__, </span>
+<span class=x>        $this, </span>
+<span class=x>        $params</span>
+<span class=x>    );</span>
+
+<span class=x>    if ($results-&gt;stopped()) {</span>
+<span class=x>        return $results-&gt;last();</span>
+<span class=x>    }</span>
+
+<span class=x>    // ... do some work ...</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>With this paradigm, we know that the likely reason of execution halting is due
+to the last result meeting the test callback criteria; as such, we simply return
+that last result.</p>
+<p>The other way to halt execution is within a listener, acting on the <code>Event</code>
+object it receives. In this case, the listener calls <code>stopPropagation(true)</code>,
+and the <code>EventManager</code> will then return without notifying any additional
+listeners.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;do&#39;, function ($e) {</span>
+<span class=x>    $e-&gt;stopPropagation();</span>
+<span class=x>    return new SomeResultClass();</span>
+<span class=x>});</span>
+</pre></div></p>
+<p>This, of course, raises some ambiguity when using the trigger paradigm, as you
+can no longer be certain that the last result meets the criteria it's searching
+on. As such, we recommend that you standardize on one approach or the other.</p>
+<h2 id="keeping-it-in-order">Keeping it in order</h2>
+<p>On occasion, you may be concerned about the order in which listeners execute. As
+an example, you may want to do any logging early, to ensure that if
+short-circuiting occurs, you've logged; or if implementing a cache, you may want
+to return early if a cache hit is found, and execute late when saving to a
+cache.</p>
+<p>Each of <code>EventManager::attach()</code> and <code>SharedEventManager::attach()</code> accept one
+additional argument, a <em>priority</em>. By default, if this is omitted, listeners get
+a priority of 1, and are executed in the order in which they are attached.
+However, if you provide a priority value, you can influence order of execution.</p>
+<ul>
+<li>Higher priority values execute <em>earlier</em>.</li>
+<li>Lower (negative) priority values execute <em>later</em>.</li>
+</ul>
+<p>To borrow an example from earlier:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$priority = 100;</span>
+<span class=x>$events-&gt;attach(&#39;Example&#39;, &#39;do&#39;, function($e) {</span>
+<span class=x>    $event  = $e-&gt;getName();</span>
+<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    printf(</span>
+<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
+<span class=x>        $event,</span>
+<span class=x>        $target,</span>
+<span class=x>        json_encode($params)</span>
+<span class=x>    );</span>
+<span class=x>}, $priority);</span>
+</pre></div></p>
+<p>This would execute with high priority, meaning it would execute early. If we
+changed <code>$priority</code> to <code>-100</code>, it would execute with low priority, executing
+late.</p>
+<p>While you can't necessarily know all the listeners attached, chances are you can
+make adequate guesses when necessary in order to set appropriate priority
+values. We advise avoiding setting a priority value unless absolutely necessary.</p>
+<h2 id="custom-event-objects">Custom event objects</h2>
+<p>Hopefully some of you have been wondering, "where and when is the <code>Event</code> object
+created"? In all of the examples above, it's created based on the arguments
+passed to <code>trigger()</code> — the event name, target, and parameters. Sometimes,
+however, you may want greater control over the object.</p>
+<p>As an example, one thing that looks like a code smell is when you have code like
+this:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$routeMatch = $e-&gt;getParam(&#39;route-match&#39;, false);</span>
+<span class=x>if ( !$routeMatch) {</span>
+<span class=x>    // Oh noes! we cannot do our work! whatever shall we do?!?!?!</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>The problems with this are several. First, relying on string keys is going to
+very quickly run into problems — typos when setting or retrieving the argument
+can lead to hard to debug situations. Second, we now have a documentation issue;
+how do we document expected arguments? how do we document what we're shoving
+into the event? Third, as a side effect, we can't use IDE or editor hinting
+support — string keys give these tools nothing to work with.</p>
+<p>Similarly, consider how you might represent a computational result of a method
+when triggering an event. As an example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// in the method:</span>
+<span class=x>$params[&#39;__RESULT&#39;] = $computedResult;</span>
+<span class=x>$events-&gt;trigger(__FUNCTION__ . &#39;.post&#39;, $this, $params);</span>
+
+<span class=x>// in the listener:</span>
+<span class=x>$result = $e-&gt;getParam(&#39;__RESULT__&#39;);</span>
+<span class=x>if (! $result) {</span>
+<span class=x>    // Oh noes! we cannot do our work! whatever shall we do?!?!?!</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Sure, that key may be unique, but it suffers from a lot of the same issues.</p>
+<p>So, the solution is to create custom events. As an example, we have a custom
+<code>MvcEvent</code> in laminas-mvc. This event composes the application instance,
+the router, the route match object, request and response objects, the view
+model, and also a result. We end up with code like this in our listeners:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$response = $e-&gt;getResponse();</span>
+<span class=x>$result   = $e-&gt;getResult();</span>
+<span class=x>if (is_string($result)) {</span>
+<span class=x>    $content = $view-&gt;render(&#39;layout.phtml&#39;, [&#39;content&#39; =&gt; $result]);</span>
+<span class=x>    $response-&gt;setContent($content);</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>But how do we use this custom event? Simple: the method <code>triggerEvent()</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$event = new CustomEvent();</span>
+<span class=x>$event-&gt;setName(&#39;foo&#39;);</span>
+<span class=x>$event-&gt;setTarget($this);</span>
+<span class=x>$event-&gt;setSomeKey($value);</span>
+
+<span class=x>// Injected with event name and target:</span>
+<span class=x>$events-&gt;triggerEvent($event);</span>
+
+<span class=x>// Use triggerEventUntil() for criteria-based short-circuiting:</span>
+<span class=x>$results = $events-&gt;triggerEventUntil($callback, $event);</span>
+</pre></div></p>
+<p>This is a really powerful technique for domain-specific event systems, and
+definitely worth experimenting with.</p>
+<h2 id="putting-it-together-implementing-a-simple-caching-system">Putting it together: Implementing a simple caching system</h2>
+<p>In previous sections, I indicated that short-circuiting is a way to potentially
+implement a caching solution. Let's create a full example.</p>
+<p>First, let's define a method that could use caching. You'll note that in most of
+the examples, I've used <code>__FUNCTION__</code> as the event name; this is a good
+practice, as it makes it simple to create a macro for triggering events, as well
+as helps to keep event names unique (as they're usually within the context of
+the triggering class). However, in the case of a caching example, this would
+lead to identical events being triggered. As such, I recommend postfixing the
+event name with semantic names: "do.pre", "do.post", "do.error", etc. I'll use
+that convention in this example.</p>
+<p>Additionally, you'll notice that the <code>$params</code> I pass to the event is usually
+the list of parameters passed to the method. This is because those are often not
+stored in the object, and also to ensure the listeners have the exact same
+context as the calling method. But it raises an interesting problem in this
+example: what name do we give the result of the method? One standard that has
+emerged is the use of <code>__RESULT__</code>, as double-underscored variables are
+typically reserved for the system.</p>
+<p>Here's what the method will look like:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
+<span class=x>{</span>
+<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
+<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
+<span class=x>        function ($r) {</span>
+<span class=x>            return ($r instanceof SomeResultClass);</span>
+<span class=x>        },</span>
+<span class=x>        __FUNCTION__ . &#39;.pre&#39;,</span>
+<span class=x>        $this,</span>
+<span class=x>        $params</span>
+<span class=x>    );</span>
+
+<span class=x>    if ($results-&gt;stopped()) {</span>
+<span class=x>        return $results-&gt;last();</span>
+<span class=x>    }</span>
+
+<span class=x>    // ... do some work ...</span>
+
+<span class=x>    $params[&#39;__RESULT__&#39;] = $calculatedResult;</span>
+<span class=x>    $this-&gt;events()-&gt;trigger(__FUNCTION__ . &#39;.post&#39;, $this, $params);</span>
+<span class=x>    return $calculatedResult;</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Now, to provide some caching listeners. We'll need to attach to each of the
+<code>someExpensiveCall.pre</code> and <code>someExpensiveCall.post</code> methods. In the former;
+case, if a cache hit is detected, we return it, and move on. In the latter, we
+store the value in the cache.</p>
+<p>We'll assume <code>$cache</code> is defined, and follows the paradigms of <code>Laminas\Cache</code>.
+We'll want to return early if a hit is detected, and execute late when saving a
+cache (in case the result is modified by another listener). As such, we'll set
+the <code>someExpensiveCall.pre</code> listener to execute with priority <code>100</code>, and the
+<code>someExpensiveCall.post</code> listener to execute with priority <code>-100</code>.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;someExpensiveCall.pre&#39;, function($e) use ($cache) {</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    $key    = md5(json_encode($params));</span>
+<span class=x>    $hit    = $cache-&gt;load($key);</span>
+<span class=x>    return $hit;</span>
+<span class=x>}, 100);</span>
+
+<span class=x>$events-&gt;attach(&#39;someExpensiveCall.post&#39;, function($e) use ($cache) {</span>
+<span class=x>    $params = $e-&gt;getParams();</span>
+<span class=x>    $result = $params[&#39;__RESULT__&#39;];</span>
+<span class=x>    unset($params[&#39;__RESULT__&#39;]);</span>
+<span class=x>    $key    = md5(json_encode($params));</span>
+<span class=x>    $cache-&gt;save($result, $key);</span>
+<span class=x>}, -100);</span>
+</pre></div></p>
+<blockquote>
+<h3>Note</h3>
+<p>The above could have been done within a <code>ListenerAggregate</code>, which would have
+allowed keeping the <code>$cache</code> instance as a stateful property, instead of
+importing it into closures.</p>
+</blockquote>
+<p>Another approach would be to move the body of the method to a listener as well,
+which would allow using the priority system in order to implement caching. That
+would look like this:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function setEventManager(EventManagerInterface $events)</span>
+<span class=x>{</span>
+<span class=x>    $this-&gt;events = $events;</span>
+<span class=x>    $events-&gt;setIdentifiers(array(__CLASS__, get_class($this)));</span>
+<span class=x>    $events-&gt;attach(&#39;someExpensiveCall&#39;, [$this, &#39;doSomeExpensiveCall&#39;]);</span>
+<span class=x>}</span>
+
+<span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
+<span class=x>{</span>
+<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
+<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
+<span class=x>        function ($r) {</span>
+<span class=x>            return ($r instanceof SomeResultClass);</span>
+<span class=x>        },</span>
+<span class=x>        __FUNCTION__,</span>
+<span class=x>        $this,</span>
+<span class=x>        $params</span>
+<span class=x>    );</span>
+<span class=x>    return $results-&gt;last();</span>
+<span class=x>}</span>
+
+<span class=x>public function doSomeExpensiveCall($e)</span>
+<span class=x>{</span>
+<span class=x>    // ... do some work ...</span>
+<span class=x>    $e-&gt;setParam(&#39;__RESULT__&#39;, $calculatedResult);</span>
+<span class=x>    return $calculatedResult;</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>The listeners would then attach to the <code>someExpensiveCall</code> event, with the cache
+lookup listener listening at high priority, and the cache storage listener
+listening at low (negative) priority.</p>
+<p>Sure, we could probably simply add caching to the object itself — but this
+approach allows the same handlers to be attached to multiple events, or to
+attach multiple listeners to the same events (e.g. an argument validator, a
+logger and a cache manager). The point is that if you design your object with
+events in mind, you can easily make it more flexible and extensible, without
+requiring developers to actually extend it — they can simply attach listeners.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The <code>EventManager</code> is a powerful component. It drives the workflow of laminas-mvc,
+and is used in countless components to provide hook points for developers to
+manipulate the workflow. It can be put to any number of uses inside your own
+code, and is an important part of your Laminas toolbox.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../quick-start/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../examples/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-eventmanager/edit/master/doc/book/tutorial.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-eventmanager';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-eventmanager" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

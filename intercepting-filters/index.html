@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Implement events, signal slots, aspects, and observers!">  
+    <link rel="canonical" href="https://docs.laminas.dev/intercepting-filters/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Intercepting Filters - laminas-eventmanager - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../tutorial/" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-eventmanager</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-eventmanager/" class="header__link header__link--github" title="Go to repository of laminas-eventmanager">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#preparation" class="toc__link">Preparation</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#filterchaininterface" class="toc__link">FilterChainInterface</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#filteriterator" class="toc__link">FilterIterator</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#filters" class="toc__link">Filters</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#execution" class="toc__link">Execution</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#notes" class="toc__link">Notes</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-eventmanager</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Intercepting Filters</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="intercepting-filters">Intercepting Filters</h1>
+<p><a href="https://en.wikipedia.org/wiki/Interceptor_pattern">Intercepting filters</a> are a
+design pattern used for providing mechanisms to alter the workflow of an
+application. Implementing them provides a way to have a standard public
+interface, with the ability to attach arbitrary numbers of filters that will
+take the incoming arguments in order to alter the workflow.</p>
+<p>laminas-eventmanager provides an intercepting filter implementation via
+<code>Laminas\EventManager\FilterChain</code>.</p>
+<h2 id="preparation">Preparation</h2>
+<p>To use the <code>FilterChain</code> implementation, you will need to install laminas-stdlib,
+if you have not already:</p>
+<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-stdlib
+</pre></div></p>
+<h2 id="filterchaininterface">FilterChainInterface</h2>
+<p><code>Laminas\EventManager\FilterChain</code> is a concrete implementation of
+<code>Laminas\EventManager\Filter\FilterInterface</code>, which defines a workflow for
+intercepting filters. This includes the following methods:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>interface FilterInterface</span>
+<span class=x>{</span>
+<span class=x>    public function run($context, array $params = []);</span>
+
+<span class=x>    public function attach(callable $callback);</span>
+<span class=x>    public function detach(callable $callback);</span>
+
+<span class=x>    public function getFilters();</span>
+<span class=x>    public function clearFilters();</span>
+<span class=x>    public function getResponses();</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>In many ways, it's very similar to the <code>EventManagerInterface</code>, but with a few
+key differences:</p>
+<ul>
+<li>A filter essentially defines a single event, which obviates the need for
+  attaching to multiple events. As such, you pass the target and parameters only
+  when "triggering" (<code>run()</code>) a filter.</li>
+<li>Instead of passing an <code>EventInterface</code> to each attached filter, a
+  <code>FilterInterface</code> implementation will pass:</li>
+<li>The <code>$context</code></li>
+<li>The <code>$params</code></li>
+<li>A <code>FilterIterator</code>, to allow the listener to call on the next filter.</li>
+</ul>
+<h2 id="filteriterator">FilterIterator</h2>
+<p>When executing <code>run()</code>, a <code>FilterInterface</code> implementation is expected to
+provide the stack of attached filters to each listener. This stack will
+typically be a <code>Laminas\EventManager\Filter\FilterIterator</code> instance.</p>
+<p><code>FilterIterator</code> extends <code>Laminas\Stdlib\FastPriorityQueue</code>, and, as such, is
+iterable, and provides the method <code>next()</code> for advancing the queue. </p>
+<p>As such, a listener should decide if more processing is necessary, and, if so,
+call on <code>$chain-&gt;next()</code>, passing the same set of arguments.</p>
+<h2 id="filters">Filters</h2>
+<p>A filter attached to a <code>FilterChain</code> instance can be any callable. However,
+these callables should expect the following arguments:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>function ($context, array $argv, FilterIterator $chain)</span>
+</pre></div></p>
+<p>A filter can therefore act on the provided <code>$context</code>, using the provided
+arguments.</p>
+<p>Part of that execution can also be deciding that other filters should be called.
+To do so, it will call <code>$chain-&gt;next()</code>, providing it the same arguments:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>function ($context, array $argv, FilterIterator $chain)</span>
+<span class=x>{</span>
+<span class=x>    $message = isset($argv[&#39;message&#39;]) ? $argv[&#39;message&#39;] : &#39;&#39;;</span>
+
+<span class=x>    $message = str_rot13($message);</span>
+
+<span class=x>    $filtered = $chain-&gt;next($context, [&#39;message&#39; =&gt; $message], $chain);</span>
+
+<span class=x>    return str_rot13($filtered);</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>You can choose to call <code>$chain-&gt;next()</code> at any point in the filter, allowing you
+to:</p>
+<ul>
+<li>pre-process arguments and/or alter the state of the <code>$context</code>.</li>
+<li>post-process results and/or alter the state of the <code>$context</code> based on the
+  results.</li>
+<li>skip processing entirely if criteria is not met (e.g., missing arguments,
+  invalid <code>$context</code> state).</li>
+<li>short-circuit the chain if no processing is necessary (e.g., a cache hit is
+  detected).</li>
+</ul>
+<h2 id="execution">Execution</h2>
+<p>When executing a filter chain, you will provide the <code>$context</code>, which is usually
+the object under observation, and arguments, which are typically the arguments
+passed to the method triggering the filter chain.</p>
+<p>As an example, consider the following filter-enabled class:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\FilterChain;</span>
+
+<span class=x>class ObservedTarget</span>
+<span class=x>{</span>
+<span class=x>    private $filters = [];</span>
+
+<span class=x>    public function attachFilter($method, callable $listener)</span>
+<span class=x>    {</span>
+<span class=x>        if (! method_exists($this, $method)) {</span>
+<span class=x>            throw new \InvalidArgumentException(&#39;Invalid method&#39;);</span>
+<span class=x>        }</span>
+<span class=x>        $this-&gt;getFilters($method)-&gt;attach($listener);</span>
+<span class=x>    }</span>
+
+<span class=x>    public function execute($message)</span>
+<span class=x>    {</span>
+<span class=x>        return $this-&gt;getFilters(__FUNCTION__)</span>
+<span class=x>            -&gt;run($this, compact(&#39;message&#39;));</span>
+<span class=x>    }</span>
+
+<span class=x>    private function getFilters($method)</span>
+<span class=x>    {</span>
+<span class=x>        if (! isset($this-&gt;filters[$method])) {</span>
+<span class=x>            $this-&gt;filters[$method] = new FilterChain();</span>
+<span class=x>        }</span>
+<span class=x>        return $this-&gt;filters[$method];</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Now, let's create an instance of the class, and attach some filters to it.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$observed = new ObservedTarget();</span>
+
+<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
+<span class=x>    $args[&#39;message&#39;] = isset($args[&#39;message&#39;])</span>
+<span class=x>        ? strtoupper($args[&#39;message&#39;])</span>
+<span class=x>        : &#39;&#39;;</span>
+
+<span class=x>    return $chain-&gt;next($context, $args, $chain);</span>
+<span class=x>});</span>
+
+<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
+<span class=x>    return (isset($args[&#39;message&#39;])</span>
+<span class=x>        ? str_rot13($args[&#39;message&#39;])</span>
+<span class=x>        : &#39;&#39;);</span>
+<span class=x>});</span>
+
+<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
+<span class=x>    return (isset($args[&#39;message&#39;])</span>
+<span class=x>        ? strtolower($args[&#39;message&#39;])</span>
+<span class=x>        : &#39;&#39;);</span>
+<span class=x>});</span>
+</pre></div></p>
+<p>Finally, we'll call the method, and see what results we get:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$observed-&gt;execute(&#39;Hello, world!&#39;);</span>
+</pre></div></p>
+<p>Since filters are run in the order in which they are attached, the following
+will occur:</p>
+<ul>
+<li>The first filter will transform our message into <code>HELLO, WORLD!</code>, and then
+  call on the next filter.</li>
+<li>The second filter will apply a ROT13 transformation on the string and <em>return</em>
+  it: <code>!DLROW ,OLLEH</code>.</li>
+</ul>
+<p>Because the second filter does not call <code>$chain-&gt;next()</code>, the third filter never
+executes.</p>
+<h2 id="notes">Notes</h2>
+<p>We recommend using the construct <code>run($this, compact(method argument names)</code>
+when invoking a <code>FilterChain</code>. This makes the argument keys predictable inside
+filters.</p>
+<p>We also recommend putting the default logic for the method invoking the filter
+chain in a filter itself, and attaching it at invocation. This allows
+intercepting filters to replace the main logic, while still providing a default
+path. This might look like:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Assume that the class contains the `attachFilter()` implementation from above.</span>
+<span class=x>class ObservedTarget</span>
+<span class=x>{</span>
+<span class=x>    private $attached = [];</span>
+
+<span class=x>    public function execute($message)</span>
+<span class=x>    {</span>
+<span class=x>        if (! isset($this-&gt;attached[__FUNCTION__])) {</span>
+<span class=x>            $this-&gt;attachFilter(__FUNCTION__, $this-&gt;getExecuteFilter();</span>
+<span class=x>        }</span>
+
+<span class=x>        return $this-&gt;getFilters(__FUNCTION__)</span>
+<span class=x>            -&gt;run($this, compact(&#39;message&#39;));</span>
+<span class=x>    }</span>
+
+<span class=x>    private function getExecuteFilter()</span>
+<span class=x>    {</span>
+<span class=x>        $this-&gt;attached[&#39;execute&#39;] = true;</span>
+<span class=x>        return function ($context, array $args, FilterIterator $chain) {</span>
+<span class=x>            return $args[&#39;message&#39;];</span>
+<span class=x>        };</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Intercepting filters are a powerful way to introduce aspect-oriented programming
+paradigms into your code, as well as general-purpose mechanisms for introducing
+plugins.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../api/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../migration/intro/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-eventmanager/edit/master/doc/book/intercepting-filters.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../tutorial/" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-eventmanager';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-eventmanager" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

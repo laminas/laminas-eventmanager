@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Implement events, signal slots, aspects, and observers!">  
+    <link rel="canonical" href="https://docs.laminas.dev/migration/removed/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Removed Functionality - laminas-eventmanager - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../tutorial/" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-eventmanager</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-eventmanager/" class="header__link header__link--github" title="Go to repository of laminas-eventmanager">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#globaleventmanager-and-staticeventmanager" class="toc__link">GlobalEventManager and StaticEventManager</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#providesevents" class="toc__link">ProvidesEvents</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#eventmanagerinterfacesetsharedmanager" class="toc__link">EventManagerInterface::setSharedManager()</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#eventmanagerinterfacegetevents-and-getlisteners" class="toc__link">EventManagerInterface::getEvents() and getListeners()</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#eventmanagerinterfaceseteventclass" class="toc__link">EventManagerInterface::setEventClass()</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#eventmanagerinterfaceattachaggregate-and-detachaggregate" class="toc__link">EventManagerInterface::attachAggregate() and detachAggregate()</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#sharedeventaggregateawareinterface-sharedlisteneraggregateinterface" class="toc__link">SharedEventAggregateAwareInterface, SharedListenerAggregateInterface</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#sharedeventmanagerinterfacegetevents" class="toc__link">SharedEventManagerInterface::getEvents()</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-eventmanager</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Migration Guide</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Removed Functionality</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Migration Guide</h2>
+    
+
+    <h1 id="removed-functionality">Removed Functionality</h1>
+<p>The following interfaces, classes, and methods have been removed for version 3.</p>
+<h2 id="globaleventmanager-and-staticeventmanager">GlobalEventManager and StaticEventManager</h2>
+<p><code>Laminas\EventManager\GlobalEventManager</code> and
+<code>Laminas\EventManager\StaticEventManager</code> were removed, and there are no
+replacements.  Global static state is generally considered a dangerous practice
+due to the side effects it can create, and we felt it was better to remove the
+option from the framework entirely.</p>
+<h2 id="providesevents">ProvidesEvents</h2>
+<p>The trait <code>Laminas\EventManager\ProvidesEvents</code> has been deprecated for most of
+the 2.0 series; use <code>Laminas\EventManager\EventManagerAwareTrait</code> instead.</p>
+<h2 id="eventmanagerinterfacesetsharedmanager">EventManagerInterface::setSharedManager()</h2>
+<p>We have removed <code>EventManagerInterface::setSharedManager()</code>, and also removed it
+from the <code>EventManager</code> implementation. The <code>SharedEventManager</code> should be
+injected during instantiation now.</p>
+<h2 id="eventmanagerinterfacegetevents-and-getlisteners">EventManagerInterface::getEvents() and getListeners()</h2>
+<p>We have removed both <code>EventManagerInterface::getEvents()</code> and <code>getListeners()</code>,
+as we did not have a stated use case for the methods. The event manager should
+be something that aggregates listeners and triggers events; the details of what
+listeners or events are attached is largely irrelevant.</p>
+<p>The primary use case for <code>getListeners()</code> is often to determine if a listener is
+attached before detaching it. Since <code>detach()</code> acts as a no-op if the provided
+listener is not present, checking for presence first is not necessary.</p>
+<h2 id="eventmanagerinterfaceseteventclass">EventManagerInterface::setEventClass()</h2>
+<p>The method <code>EventManagerInterface::setEventClass()</code> was removed and replaced
+with <code>EventManagerInterface::setEventPrototype()</code>, which has the following
+signature:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>setEventPrototype(EventInterface $event);</span>
+</pre></div></p>
+<p>This was done to prevent errors that occurred when invalid event class names
+were provided. Additionally, internally, event managers will clone the
+instance any time <code>trigger()</code> or <code>triggerUntil()</code> are called — which is
+typically faster and less resource intensive than instantiating a new instance.</p>
+<h2 id="eventmanagerinterfaceattachaggregate-and-detachaggregate">EventManagerInterface::attachAggregate() and detachAggregate()</h2>
+<p>The methods <code>attachAggregate()</code> and <code>detachAggregate()</code> were removed from the
+<code>EventManagerInterface</code> and concrete <code>EventManager</code> implementation. Furthermore,
+<code>attach()</code> and <code>detach()</code> no longer handle aggregates.</p>
+<p>The reason they were removed is because they simply proxied to the <code>attach()</code>
+and <code>detach()</code> methods of the <code>ListenerAggregateInterface</code>. As such, to
+forward-proof your applications, you can alter statements that attach aggregates
+to an event manager reading as follows:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach($aggregate); // or</span>
+<span class=x>$events-&gt;attachAggregate($aggregate);</span>
+</pre></div></p>
+<p>to:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$aggregate-&gt;attach($events);</span>
+</pre></div></p>
+<p>Similarly, for detaching an aggregate, migrate from:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;detach($aggregate); // or</span>
+<span class=x>$events-&gt;detachAggregate($aggregate);</span>
+</pre></div></p>
+<p>to:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$aggregate-&gt;detach($events);</span>
+</pre></div></p>
+<p>The above works in all released versions of the component.</p>
+<h2 id="sharedeventaggregateawareinterface-sharedlisteneraggregateinterface">SharedEventAggregateAwareInterface, SharedListenerAggregateInterface</h2>
+<p>The interfaces <code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> and
+<code>SharedListenerAggregateInterface</code> were removed, as the concept of shared
+listener aggregates was removed from version 3.</p>
+<p>Migration will depend on what you have done in your application: extending
+the <code>SharedEventManager</code> and/or implementing <code>SharedEventAggregateAwareInterface</code>,
+or implementing <code>SharedListenerAggregateInterface</code>.</p>
+<h3>SharedEventAggregateAwareInterface</h3>
+<p><code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> was added mid-way through
+the v2 lifecycle to allow adding shared listener aggregates to the
+<code>SharedEventManager</code>. If you were extending the <code>SharedEventManager</code> and
+overriding the methods defined in <code>SharedEventAggregateAwareInterface</code>, you
+should remove them.</p>
+<p>If you were implementing <code>SharedEventAggregateAwareInterface</code>, the interface no
+longer exists, and you should likely remove your implementation.</p>
+<h3>SharedListenerAggregateInterface</h3>
+<p>For those implementing shared listener aggregates, you can continue to use them,
+but will need to change how you do so.</p>
+<p>To migrate, you have two steps to take: remove the
+<code>SharedListenerAggregateInterface</code> implementation declaration from your
+aggregate class, and swap attachment of the aggregate.</p>
+<p>To accomplish the first step, keep the <code>attachShared()</code> and <code>detachShared()</code>
+methods in your class, but remove the <code>implements
+SharedListenerAggregateInterface</code> from the class declaration. For instance, if
+you had the following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Foo;</span>
+
+<span class=x>use Laminas\EventManager\SharedEventManagerInterface;</span>
+<span class=x>use Laminas\EventManager\SharedListenerAggregateInterface;</span>
+
+<span class=x>class MySharedAggregate implements SharedListenerAggregateInterface</span>
+<span class=x>{</span>
+<span class=x>    public function attachShared(SharedEventManagerInterface $manager)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+
+<span class=x>    public function detachShared(SharedEventManagerInterface $manager)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>then modify it to instead read:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Foo;</span>
+
+<span class=x>use Laminas\EventManager\SharedEventManagerInterface;</span>
+
+<span class=x>class MySharedAggregate</span>
+<span class=x>{</span>
+<span class=x>    public function attachShared(SharedEventManagerInterface $manager)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+
+<span class=x>    public function detachShared(SharedEventManagerInterface $manager)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>For the second step, instead of attaching the aggregate to the shared event
+manager, you will pass the shared event manager to your aggregate. For example,
+if you had the following in your code:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$sharedEvents-&gt;attachAggregate($mySharedAggregate);</span>
+</pre></div></p>
+<p>then you can change it to:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$mySharedAggregate-&gt;attachShared($sharedEvents);</span>
+</pre></div></p>
+<p>This has exactly the same effect, and makes your code forward-compatible with
+v3.</p>
+<h4>SharedEventManagerAwareInterface</h4>
+<p>The interface <code>Laminas\EventManager\SharedEventManagerAwareInterface</code> was removed,
+as version 3 now requires tha the <code>SharedEventManagerInterface</code> instance be
+injected into the <code>EventManager</code> instance at instantiation.</p>
+<p>A new interface, <code>Laminas\EventManager\SharedEventsCapableInterface</code>, provides the
+<code>getSharedManager()</code> method, and <code>EventManagerInterface</code> extends it.</p>
+<p>To migrate, you have the following options:</p>
+<ul>
+<li>If you are only interested in the <code>getSharedManager()</code> method, you can
+  implement <code>SharedEventsCapableInterface</code> starting with version 2.6.0. If you
+  do this, you can also safely remove the <code>setSharedManager()</code> method from your
+  implementation.</li>
+<li>If you will require injecting the shared manager, use duck typing to determine
+  if a class has the <code>setSharedManager()</code> method:</li>
+</ul>
+<p><code>php
+  if (method_exists($instance, 'setSharedManager')) {
+      $instance-&gt;setSharedManager($sharedEvents);
+  }</code></p>
+<p>Alternately, if you control instantiation of the instance, consider injection
+  at instantiation, or within the factory used to create your instance.</p>
+<h2 id="sharedeventmanagerinterfacegetevents">SharedEventManagerInterface::getEvents()</h2>
+<p>The method <code>SharedEventManagerInterface::getEvents()</code> was removed. The method
+was not consumed by the event manager, and served no real purpose.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../changed/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-eventmanager/edit/master/doc/book/migration/removed.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-eventmanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Intro</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../tutorial/" class="subnavigation__link">Tutorial</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../examples/" class="subnavigation__link">Examples</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Lazy Listeners</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../api/" class="subnavigation__link">EventManager API</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration Guide</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Intro</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Removed Functionality</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../changed/" class="subnavigation__link">Changed Functionality</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../..',
+            project  = "components",
+            siteName = 'laminas-eventmanager';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-eventmanager" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
