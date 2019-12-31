@@ -1,19 +1,22 @@
 {
-    "name": "zendframework/zend-eventmanager",
+    "name": "laminas/laminas-eventmanager",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "eventmanager"
     ],
-    "autoload": {
-        "psr-4": {
-            "Zend\\EventManager\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-eventmanager/",
+        "issues": "https://github.com/laminas/laminas-eventmanager/issues",
+        "source": "https://github.com/laminas/laminas-eventmanager",
+        "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": ">=5.3.23",
-        "zendframework/zend-stdlib": "self.version"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -21,15 +24,27 @@
             "dev-develop": "2.4-dev"
         }
     },
-    "homepage": "https://github.com/zendframework/zend-event-manager",
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\EventManager\\": "test/"
-        }
+    "require": {
+        "php": ">=5.3.23",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\EventManager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\EventManager\\": "test/"
+        }
+    },
+    "replace": {
+        "zendframework/zend-eventmanager": "self.version"
     }
 }

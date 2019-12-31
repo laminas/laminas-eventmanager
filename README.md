@@ -1,6 +1,6 @@
-# zend-eventmanager
+# laminas-eventmanager
 
-The `Zend\EventManager` is a component designed for the following use cases:
+The `Laminas\EventManager` is a component designed for the following use cases:
 
 - Implementing simple subject/observer patterns.
 - Implementing Aspect-Oriented designs.
@@ -11,5 +11,5 @@ both on a per-instance basis as well as via shared collections; trigger events;
 and interrupt execution of listeners.
 
 
-- File issues at https://github.com/zendframework/zend-eventmanager/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-eventmanager
+- File issues at https://github.com/laminas/laminas-eventmanager/issues
+- Documentation is at https://docs.laminas.dev/laminas-eventmanager
