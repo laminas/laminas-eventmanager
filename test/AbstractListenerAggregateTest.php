@@ -1,27 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_EventManager
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
-use ZendTest\EventManager\TestAsset\MockAbstractListenerAggregate;
+use LaminasTest\EventManager\TestAsset\MockAbstractListenerAggregate;
 
 /**
- * @category   Zend
- * @package    Zend_EventManager
+ * @category   Laminas
+ * @package    Laminas_EventManager
  * @subpackage UnitTests
- * @group      Zend_EventManager
+ * @group      Laminas_EventManager
  */
 class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \ZendTest\EventManager\TestAsset\MockAbstractListenerAggregate
+     * @var \LaminasTest\EventManager\TestAsset\MockAbstractListenerAggregate
      */
     protected $listener;
 
@@ -34,12 +32,12 @@ class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\EventManager\AbstractListenerAggregate::detach
+     * @covers \Laminas\EventManager\AbstractListenerAggregate::detach
      */
     public function testDetach()
     {
-        $eventManager          = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $unrelatedEventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
+        $eventManager          = $this->getMock('Laminas\\EventManager\\EventManagerInterface');
+        $unrelatedEventManager = $this->getMock('Laminas\\EventManager\\EventManagerInterface');
         $callbackHandlers      = array();
         $test                  = $this;
 
@@ -47,7 +45,7 @@ class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('attach')
             ->will($this->returnCallback(function () use (&$callbackHandlers, $test) {
-                return $callbackHandlers[] = $test->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
+                return $callbackHandlers[] = $test->getMock('Laminas\\Stdlib\\CallbackHandler', array(), array(), '', false);
             }));
 
         $this->listener->attach($eventManager);
