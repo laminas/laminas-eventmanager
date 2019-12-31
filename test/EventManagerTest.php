@@ -1,24 +1,23 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
 use ArrayIterator;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\EventManager\StaticEventManager;
 use stdClass;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
-use Zend\EventManager\StaticEventManager;
 
 /**
- * @group      Zend_EventManager
+ * @group      Laminas_EventManager
  */
 class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,7 +40,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testAttachShouldReturnCallbackHandler()
     {
         $listener = $this->events->attach('test', array($this, __METHOD__));
-        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
+        $this->assertInstanceOf('Laminas\Stdlib\CallbackHandler', $listener);
     }
 
     public function testAttachShouldAddListenerToEvent()
@@ -88,7 +87,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $listeners);
 
         foreach ($listeners as $listener) {
-            $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
+            $this->assertInstanceOf('Laminas\Stdlib\CallbackHandler', $listener);
             $this->assertSame($callback, $listener->getCallback());
         }
     }
@@ -142,7 +141,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return str_rot13($string);
         });
         $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertEquals(2, $responses->count());
         $this->assertEquals('foo', $responses->first());
         $this->assertEquals(\str_rot13(' foo '), $responses->last());
@@ -166,7 +165,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             array('string' => 'foo', 'search' => 'f'),
             array($this, 'evaluateStringCallback')
         );
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertSame(0, $responses->last());
     }
 
@@ -206,7 +205,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
         $this->assertEquals('found', $result);
@@ -222,7 +221,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
     }
@@ -236,7 +235,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'never found');
         });
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());
     }
@@ -265,7 +264,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     {
         $aggregate = new TestAsset\MockAggregate();
         $method    = $this->events->attachAggregate($aggregate);
-        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::attach', $method);
+        $this->assertSame('LaminasTest\EventManager\TestAsset\MockAggregate::attach', $method);
     }
 
     public function testCanDetachListenerAggregates()
@@ -349,7 +348,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
         $method = $this->events->detachAggregate($aggregate);
-        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::detach', $method);
+        $this->assertSame('LaminasTest\EventManager\TestAsset\MockAggregate::detach', $method);
     }
 
     public function testAttachAggregateAcceptsOptionalPriorityValue()
@@ -373,7 +372,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function ($e) { return 'found'; }, 2);
         $this->events->attach('foo.bar', function ($e) { return 'zero'; }, 1);
         $responses = $this->events->trigger('foo.bar', $this, array());
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('nada', $responses->last());
         $this->assertTrue($responses->contains('bogus'));
@@ -555,21 +554,21 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     {
         $identifier1 = 'foo';
         $identifiers = array($identifier1);
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifier1));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->setIdentifiers($identifier1));
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
         $identifier2 = 'baz';
         $identifiers = array($identifier1, $identifier2);
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifier2));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->addIdentifiers($identifier2));
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
     }
 
     public function testIdentifierGetterSettersWorkWithArrays()
     {
         $identifiers = array('foo', 'bar');
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
         $identifiers[] = 'baz';
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
 
         // This is done because the keys doesn't matter, just the values
         $expectedIdentifiers = $this->events->getIdentifiers();
@@ -581,10 +580,10 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testIdentifierGetterSettersWorkWithTraversables()
     {
         $identifiers = new ArrayIterator(array('foo', 'bar'));
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
         $identifiers = new ArrayIterator(array('foo', 'bar', 'baz'));
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
+        $this->assertInstanceOf('Laminas\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
 
         // This is done because the keys doesn't matter, just the values
         $expectedIdentifiers = $this->events->getIdentifiers();
@@ -627,7 +626,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
                 return true;
             }
         );
-        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $callbackHandler);
+        $this->assertInstanceOf('Laminas\Stdlib\CallbackHandler', $callbackHandler);
     }
 
     public function testDoesNotCreateStaticInstanceIfNonePresent()
