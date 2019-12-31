@@ -1,9 +1,9 @@
 <?php
 
-namespace ZendBench\EventManager;
+namespace LaminasBench\EventManager;
 
-use Zend\EventManager\EventManager;
 use Athletic\AthleticEvent;
+use Laminas\EventManager\EventManager;
 
 class SingleEventSingleListener extends AthleticEvent
 {

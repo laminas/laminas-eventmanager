@@ -292,7 +292,7 @@ the specific event for the named identifier.
 
 ## EventInterface
 
-In most cases, you will use `Zend\EventManager\Event`, but some components will
+In most cases, you will use `Laminas\EventManager\Event`, but some components will
 define custom events. The `EventInterface` thus defines the common methods
 across any event implementation.
 

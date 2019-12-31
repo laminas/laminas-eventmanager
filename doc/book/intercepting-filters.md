@@ -6,22 +6,22 @@ application. Implementing them provides a way to have a standard public
 interface, with the ability to attach arbitrary numbers of filters that will
 take the incoming arguments in order to alter the workflow.
 
-zend-eventmanager provides an intercepting filter implementation via
-`Zend\EventManager\FilterChain`.
+laminas-eventmanager provides an intercepting filter implementation via
+`Laminas\EventManager\FilterChain`.
 
 ## Preparation
 
-To use the `FilterChain` implementation, you will need to install zend-stdlib,
+To use the `FilterChain` implementation, you will need to install laminas-stdlib,
 if you have not already:
 
 ```bash
-$ composer require zendframework/zend-stdlib
+$ composer require laminas/laminas-stdlib
 ```
 
 ## FilterChainInterface
 
-`Zend\EventManager\FilterChain` is a concrete implementation of
-`Zend\EventManager\Filter\FilterInterface`, which defines a workflow for
+`Laminas\EventManager\FilterChain` is a concrete implementation of
+`Laminas\EventManager\Filter\FilterInterface`, which defines a workflow for
 intercepting filters. This includes the following methods:
 
 ```php
@@ -54,9 +54,9 @@ key differences:
 
 When executing `run()`, a `FilterInterface` implementation is expected to
 provide the stack of attached filters to each listener. This stack will
-typically be a `Zend\EventManager\Filter\FilterIterator` instance.
+typically be a `Laminas\EventManager\Filter\FilterIterator` instance.
 
-`FilterIterator` extends `Zend\Stdlib\FastPriorityQueue`, and, as such, is
+`FilterIterator` extends `Laminas\Stdlib\FastPriorityQueue`, and, as such, is
 iterable, and provides the method `next()` for advancing the queue. 
 
 As such, a listener should decide if more processing is necessary, and, if so,
@@ -110,7 +110,7 @@ passed to the method triggering the filter chain.
 As an example, consider the following filter-enabled class:
 
 ```php
-use Zend\EventManager\FilterChain;
+use Laminas\EventManager\FilterChain;
 
 class ObservedTarget
 {

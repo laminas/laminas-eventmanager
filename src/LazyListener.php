@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\EventManager;
+namespace Laminas\EventManager;
 
 use Interop\Container\ContainerInterface;
 
@@ -109,7 +108,7 @@ class LazyListener
             return $this->listener;
         }
 
-        // In the future, typehint against Zend\ServiceManager\ServiceLocatorInterface,
+        // In the future, typehint against Laminas\ServiceManager\ServiceLocatorInterface,
         // which defines this message starting in v3.
         if (method_exists($this->container, 'build') && ! empty($this->env)) {
             $this->listener = $this->container->build($this->service, $this->env);

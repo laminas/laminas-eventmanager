@@ -1,6 +1,6 @@
 # Tutorial
 
-This tutorial explores the various features of zend-eventmanager.
+This tutorial explores the various features of laminas-eventmanager.
 
 ## Terminology
 
@@ -25,7 +25,7 @@ The minimal things necessary to start using events are:
 The simplest example looks something like this:
 
 ```php
-use Zend\EventManager\EventManager;
+use Laminas\EventManager\EventManager;
 
 $events = new EventManager();
 $events->attach('do', function ($e) {
@@ -64,9 +64,9 @@ triggering actions within methods. The middle argument to `trigger()` is the
 gives event listeners access to the calling object, which can often be useful.
 
 ```php
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerInterface;
 
 class Example implements EventManagerAwareInterface
 {
@@ -127,7 +127,7 @@ call to `setIdentifiers()` for?
 One aspect that the `EventManager` implementation provides is an ability to
 compose a `SharedEventManagerInterface` implementation.
 
-`Zend\EventManager\SharedEventManagerInterface` describes an object that
+`Laminas\EventManager\SharedEventManagerInterface` describes an object that
 aggregates listeners for events attached to objects with specific *identifiers*.
 It does not trigger events itself. Instead, an `EventManager` instance that
 composes a `SharedEventManager` will query the `SharedEventManager` for
@@ -139,7 +139,7 @@ How does this work, exactly?
 Consider the following:
 
 ```php
-use Zend\EventManager\SharedEventManager;
+use Laminas\EventManager\SharedEventManager;
 
 $sharedEvents = new SharedEventManager();
 $sharedEvents->attach('Example', 'do', function ($e) {
@@ -260,7 +260,7 @@ down your code immensely.
 ## Listener aggregates
 
 Another approach to listening to multiple events is via a concept of listener
-aggregates, represented by `Zend\EventManager\ListenerAggregateInterface`. Via
+aggregates, represented by `Laminas\EventManager\ListenerAggregateInterface`. Via
 this approach, a single class can listen to multiple events, attaching one or
 more instance methods as listeners.
 
@@ -272,10 +272,10 @@ determine what to do.
 As an example:
 
 ```php
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Log\Logger;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Log\Logger;
 
 class LogEvents implements ListenerAggregateInterface
 {
@@ -312,7 +312,7 @@ class LogEvents implements ListenerAggregateInterface
 
 > ### Note
 >
-> The trait `Zend\EventManager\ListenerAggregateTrait` can be composed to help
+> The trait `Laminas\EventManager\ListenerAggregateTrait` can be composed to help
 > implement `ListenerAggregateInterface`; it defines the `$listeners` property,
 > and the `detach()` logic as demonstrated above.
 
@@ -341,7 +341,7 @@ remember is that you may have multiple listeners on the same event; the
 interface for results must be consistent regardless of the number of listeners.
 
 The `EventManager` implementation by default returns a
-`Zend\EventManager\ResponseCollection` instance. This class extends PHP's
+`Laminas\EventManager\ResponseCollection` instance. This class extends PHP's
 `SplStack`, allowing you to loop through responses in reverse order (since the
 last one executed is likely the one you're most interested in). It also
 implements the following methods:
@@ -497,7 +497,7 @@ if (! $result) {
 Sure, that key may be unique, but it suffers from a lot of the same issues.
 
 So, the solution is to create custom events. As an example, we have a custom
-`MvcEvent` in zend-mvc. This event composes the application instance,
+`MvcEvent` in laminas-mvc. This event composes the application instance,
 the router, the route match object, request and response objects, the view
 model, and also a result. We end up with code like this in our listeners:
 
@@ -582,7 +582,7 @@ Now, to provide some caching listeners. We'll need to attach to each of the
 case, if a cache hit is detected, we return it, and move on. In the latter, we
 store the value in the cache.
 
-We'll assume `$cache` is defined, and follows the paradigms of `Zend\Cache`.
+We'll assume `$cache` is defined, and follows the paradigms of `Laminas\Cache`.
 We'll want to return early if a hit is detected, and execute late when saving a
 cache (in case the result is modified by another listener). As such, we'll set
 the `someExpensiveCall.pre` listener to execute with priority `100`, and the
@@ -658,7 +658,7 @@ requiring developers to actually extend it — they can simply attach listeners.
 
 ## Conclusion
 
-The `EventManager` is a powerful component. It drives the workflow of zend-mvc,
+The `EventManager` is a powerful component. It drives the workflow of laminas-mvc,
 and is used in countless components to provide hook points for developers to
 manipulate the workflow. It can be put to any number of uses inside your own
-code, and is an important part of your Zend Framework toolbox.
+code, and is an important part of your Laminas toolbox.
