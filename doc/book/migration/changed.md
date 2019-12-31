@@ -141,10 +141,10 @@ with the following argument definitions:
 
 - `$event` could be either a string event name, or an instance of
   `ListenerAggregateInterface`.
-- `$callback` could be a callable, an instance of `Zend\Stdlib\CallbackHandler`,
+- `$callback` could be a callable, an instance of `Laminas\Stdlib\CallbackHandler`,
   or an integer priority (if `$event` was an aggregate).
 - `$priority` could be null or an integer.
-- `$listener` could be either a `Zend\Stdlib\CallbackHandler` (as that was how
+- `$listener` could be either a `Laminas\Stdlib\CallbackHandler` (as that was how
   listeners were stored internally in that version), or an instance of
   `ListenerAggregateInterface`.
 
@@ -217,11 +217,11 @@ their calls.
 
 ## SharedEventManagerInterface::getListeners()
 
-`Zend\EventManager\SharedEventManagerInterface::getListeners()` has changed. The
+`Laminas\EventManager\SharedEventManagerInterface::getListeners()` has changed. The
 previous signature was:
 
 ```php
-getListeners($id, $event = null): false|Zend\Stdlib\PriorityQueue
+getListeners($id, $event = null): false|Laminas\Stdlib\PriorityQueue
 ```
 
 Version 3 has the following signature:
@@ -334,7 +334,7 @@ you want to be more or less specific when detaching the listener.
 
 ## ListenerAggregateInterface::attach()
 
-`Zend\EventManager\ListenerAggregateInterface::attach()` was updated to add an
+`Laminas\EventManager\ListenerAggregateInterface::attach()` was updated to add an
 optional argument, `$priority = 1`. This codifies how the `EventManager` was
 already implemented.
 
@@ -360,7 +360,7 @@ any listeners you attach.
 
 ## FilterInterface::attach() and detach()
 
-`Zend\EventManager\Filter\FilterInterface::attach()` and `detach()` have changed
+`Laminas\EventManager\Filter\FilterInterface::attach()` and `detach()` have changed
 signatures. The originals were:
 
 ```php
@@ -383,7 +383,7 @@ to `detach()`. Since we can now pass the original callable argument to
 
 ## FilterIterator
 
-`Zend\EventManager\Filter\FilterIterator` now defines/overrides the `insert()`
+`Laminas\EventManager\Filter\FilterIterator` now defines/overrides the `insert()`
 method in order to validate the incoming value and ensure it is callable,
 raising an exception when it is not. This simplifies logic in `FilterChain`, as
 it no longer needs to check if a filter is callable at runtime.
@@ -394,5 +394,5 @@ chain, vs at runtime.
 
 ## ResponseCollection::setStopped()
 
-`Zend\EventManager\ResponseCollection::setStopped()` no longer implements a
+`Laminas\EventManager\ResponseCollection::setStopped()` no longer implements a
 fluent interface.

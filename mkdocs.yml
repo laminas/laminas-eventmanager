@@ -1,6 +1,6 @@
 docs_dir: doc/book
 site_dir: doc/html
-pages:
+nav:
     - index.md
     - Intro: intro.md
     - "Quick Start": quick-start.md
@@ -20,7 +20,6 @@ pages:
             - Intro: migration/intro.md
             - "Removed Functionality": migration/removed.md
             - "Changed Functionality": migration/changed.md
-site_name: zend-eventmanager
-site_description: "zend-eventmanager: Implement events, signal slots, aspects, and observers!"
-repo_url: 'https://github.com/zendframework/zend-eventmanager'
-copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-eventmanager
+site_description: "laminas-eventmanager: Implement events, signal slots, aspects, and observers!"
+repo_url: 'https://github.com/laminas/laminas-eventmanager'
