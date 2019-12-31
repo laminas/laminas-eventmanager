@@ -1,9 +1,9 @@
-# zend-eventmanager
+# laminas-eventmanager
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-eventmanager.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-eventmanager)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-eventmanager?branch=master)
+[![Build Status](https://travis-ci.org/laminas/laminas-eventmanager.svg?branch=master)](https://travis-ci.org/laminas/laminas-eventmanager)
+[![Coverage Status](https://coveralls.io/repos/laminas/laminas-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/laminas/laminas-eventmanager?branch=master)
 
-The `Zend\EventManager` is a component designed for the following use cases:
+The `Laminas\EventManager` is a component designed for the following use cases:
 
 - Implementing simple subject/observer patterns.
 - Implementing Aspect-Oriented designs.
@@ -14,12 +14,12 @@ both on a per-instance basis as well as via shared collections; trigger events;
 and interrupt execution of listeners.
 
 
-- File issues at https://github.com/zendframework/zend-eventmanager/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-eventmanager
+- File issues at https://github.com/laminas/laminas-eventmanager/issues
+- Documentation is at https://docs.laminas.dev/laminas-eventmanager
 
 ## Benchmarks
 
-We provide scripts for benchmarking zend-eventmanager using the
+We provide scripts for benchmarking laminas-eventmanager using the
 [Athletic](https://github.com/polyfractal/athletic) framework; these can be
 found in the `benchmarks/` directory.
 
