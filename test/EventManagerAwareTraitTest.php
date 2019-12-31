@@ -1,23 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
+use Laminas\EventManager\EventManager;
+use LaminasTest\EventManager\TestAsset\MockEventManagerAwareTrait;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\EventManager\EventManager;
-use ZendTest\EventManager\TestAsset\MockEventManagerAwareTrait;
 
 class EventManagerAwareTraitTest extends TestCase
 {
     public function testSetEventManager()
     {
-        $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\EventManager\EventManagerAwareTrait');
 
         $this->assertAttributeEquals(null, 'events', $object);
 
@@ -30,9 +29,9 @@ class EventManagerAwareTraitTest extends TestCase
 
     public function testGetEventManager()
     {
-        $object = $this->getObjectForTrait('\Zend\EventManager\EventManagerAwareTrait');
+        $object = $this->getObjectForTrait('\Laminas\EventManager\EventManagerAwareTrait');
 
-        $this->assertInstanceOf('\Zend\EventManager\EventManagerInterface', $object->getEventManager());
+        $this->assertInstanceOf('\Laminas\EventManager\EventManagerInterface', $object->getEventManager());
 
         $eventManager = new EventManager;
 

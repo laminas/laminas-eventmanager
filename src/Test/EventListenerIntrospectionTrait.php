@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\EventManager\Test;
+namespace Laminas\EventManager\Test;
 
+use Laminas\EventManager\EventManager;
+use Laminas\Stdlib\PriorityQueue;
 use PHPUnit_Framework_Assert as Assert;
-use Zend\EventManager\EventManager;
-use Zend\Stdlib\PriorityQueue;
 
 /**
  * Trait providing utility methods and assertions for use in PHPUnit test cases.
@@ -25,7 +24,7 @@ use Zend\Stdlib\PriorityQueue;
  * version 2 EventManagerInterface and/or EventManager implementation, but
  * abstracts that functionality for use in v3. As such, components or code
  * that is testing for listener registration should use the methods in this
- * trait to ensure tests are forwards-compatible between zend-eventmanager
+ * trait to ensure tests are forwards-compatible between laminas-eventmanager
  * versions.
  */
 trait EventListenerIntrospectionTrait
