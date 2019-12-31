@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
-use Zend\EventManager\Exception\InvalidArgumentException;
-use Zend\EventManager\Filter\FilterIterator;
+use Laminas\EventManager\Exception\InvalidArgumentException;
+use Laminas\EventManager\Filter\FilterIterator;
 
 /**
- * @group      Zend_Stdlib
+ * @group      Laminas_Stdlib
  */
 class FilterIteratorTest extends \PHPUnit_Framework_TestCase
 {

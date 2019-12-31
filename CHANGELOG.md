@@ -18,8 +18,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#24](https://github.com/zendframework/zend-eventmanager/pull/24) updates the
-  zend-stdlib dependency to `^2.7.3 || ^3.0`, allowing either major version.
+- [zendframework/zend-eventmanager#24](https://github.com/zendframework/zend-eventmanager/pull/24) updates the
+  laminas-stdlib dependency to `^2.7.3 || ^3.0`, allowing either major version.
 
 ## 3.0.0 - 2016-01-12
 
@@ -69,8 +69,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - `LazyListenerAggregate`, which, provided a list of `LazyEventListeners` and/or
   definitions to use to create them, acts as an aggregate for attaching a number
   of such listeners at once.
-- [#20](https://github.com/zendframework/zend-eventmanager/pull/20) updates the
-  trait `Zend\EventManager\Test\EventListenerIntrospectionTrait` so that the
+- [zendframework/zend-eventmanager#20](https://github.com/zendframework/zend-eventmanager/pull/20) updates the
+  trait `Laminas\EventManager\Test\EventListenerIntrospectionTrait` so that the
   implementation will work with the v3 changes; the tests written for v2
   continue to pass, allowing this trait to be used to provide compatibility
   testing between v2 and v3.
@@ -110,8 +110,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#19](https://github.com/zendframework/zend-eventmanager/pull/19) adds a new
-  trait, `Zend\EventManager\Test\EventListenerIntrospectionTrait`, intended for
+- [zendframework/zend-eventmanager#19](https://github.com/zendframework/zend-eventmanager/pull/19) adds a new
+  trait, `Laminas\EventManager\Test\EventListenerIntrospectionTrait`, intended for
   composition in unit tests. It provides a number of methods that can be used
   to retrieve listeners with or without associated priority, and the assertion
   `assertListenerAtPriority(callable $listener, $priority, $event, EventManager $events, $message = '')`,
@@ -119,7 +119,7 @@ All notable changes to this project will be documented in this file, in reverse 
   priority with the specified event.
 
   The features in this patch are intended to facilitate testing against both
-  version 2 and version 3 of zend-eventmanager, as it provides a consistent API
+  version 2 and version 3 of laminas-eventmanager, as it provides a consistent API
   for retrieving lists of events and listeners between the two versions.
 
 ### Deprecated
@@ -138,8 +138,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Added `Zend\EventManager\SharedEventsCapableInterface`. This interface will
-  largely replace `Zend\EventManager\SharedEventManagerAwareInterface` in
+- Added `Laminas\EventManager\SharedEventsCapableInterface`. This interface will
+  largely replace `Laminas\EventManager\SharedEventManagerAwareInterface` in
   version 3, and the latter was updated to extend it.
 - Added `EventManager::triggerEvent(EventInterface $event)` as a
   forwards-compatibility feature.
@@ -190,7 +190,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#5](https://github.com/zendframework/zend-eventmanager/pull/5) adds a number
+- [zendframework/zend-eventmanager#5](https://github.com/zendframework/zend-eventmanager/pull/5) adds a number
   of unit tests to improve test coverage, and thus maintainability and
   stability.
 
@@ -200,11 +200,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#3](https://github.com/zendframework/zend-eventmanager/pull/3) removes some
+- [zendframework/zend-eventmanager#3](https://github.com/zendframework/zend-eventmanager/pull/3) removes some
   PHP 5.3- and 5.4-isms (such as marking Traits as requiring 5.4, and closing
   over a copy of `$this`) from the test suite.
 
 ### Fixed
 
-- [#5](https://github.com/zendframework/zend-eventmanager/pull/5) fixes a bug in
+- [zendframework/zend-eventmanager#5](https://github.com/zendframework/zend-eventmanager/pull/5) fixes a bug in
   `FilterIterator` that occurs when attempting to extract from an empty heap.

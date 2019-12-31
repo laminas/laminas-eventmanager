@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\EventManager;
+namespace Laminas\EventManager;
 
 use Traversable;
 
@@ -16,10 +15,10 @@ use Traversable;
  *
  * If you use this trait in an object, you will probably want to also implement
  * EventManagerAwareInterface, which will make it so the default initializer in
- * a ZF2 MVC application will automatically inject an instance of the
+ * a Laminas MVC application will automatically inject an instance of the
  * EventManager into your object when it is pulled from the ServiceManager.
  *
- * @see Zend\Mvc\Service\ServiceManagerConfig
+ * @see Laminas\Mvc\Service\ServiceManagerConfig
  */
 trait EventManagerAwareTrait
 {

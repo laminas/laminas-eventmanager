@@ -1,24 +1,23 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zend-eventmanager for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-eventmanager/blob/master/LICENSE.md
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\Exception;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\EventManager\SharedEventManagerInterface;
 use Prophecy\Argument;
 use ReflectionProperty;
 use stdClass;
-use Zend\EventManager\Event;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\Exception;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\SharedEventManager;
-use Zend\EventManager\SharedEventManagerInterface;
 
 class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -119,7 +118,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return str_rot13($string);
         });
         $responses = $this->events->trigger('string.transform', $this, ['string' => ' foo ']);
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertEquals(2, $responses->count());
         $this->assertEquals('foo', $responses->first());
         $this->assertEquals(\str_rot13(' foo '), $responses->last());
@@ -143,7 +142,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             $this,
             ['string' => 'foo', 'search' => 'f']
         );
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertSame(0, $responses->last());
     }
 
@@ -186,7 +185,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->triggerUntil(function ($result) {
             return ($result === 'found');
         }, 'foo.bar', $this);
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $result = $responses->last();
         $this->assertEquals('found', $result);
@@ -205,7 +204,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->triggerUntil(function ($result) {
             return ($result === 'found');
         }, 'foo.bar', $this);
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('found', $responses->last());
     }
@@ -222,7 +221,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->triggerUntil(function ($result) {
             return ($result === 'never found');
         }, 'foo.bar', $this);
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertFalse($responses->stopped());
         $this->assertEquals('zero', $responses->last());
     }
@@ -237,7 +236,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         // @codingStandardsIgnoreEnd
 
         $responses = $this->events->trigger('foo.bar');
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $responses);
+        $this->assertInstanceOf('Laminas\EventManager\ResponseCollection', $responses);
         $this->assertTrue($responses->stopped());
         $this->assertEquals('nada', $responses->last());
         $this->assertTrue($responses->contains('bogus'));

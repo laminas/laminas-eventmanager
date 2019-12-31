@@ -1,6 +1,6 @@
 # LazyListenerAggregate
 
-`Zend\EventManager\LazyListenerAggregate` exists to facilitate attaching a
+`Laminas\EventManager\LazyListenerAggregate` exists to facilitate attaching a
 number of listeners as lazy listeners.
 
 ## Usage
@@ -23,7 +23,7 @@ priority -100.
 ```php
 use My\Application\DispatchListener;
 use My\Application\RouteListener;
-use Zend\EventManager\LazyListenerAggregate;
+use Laminas\EventManager\LazyListenerAggregate;
 
 $definitions = [
     [
@@ -57,8 +57,8 @@ Below is a functionally identical example, mixing in a concrete
 ```php
 use My\Application\DispatchListener;
 use My\Application\RouteListener;
-use Zend\EventManager\LazyEventListener;
-use Zend\EventManager\LazyListenerAggregate;
+use Laminas\EventManager\LazyEventListener;
+use Laminas\EventManager\LazyListenerAggregate;
 
 $dispatchListener = new LazyEventListener([
     'listener' => DispatchListener::class,
