@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\EventManager;
+namespace LaminasTest\EventManager;
 
-use Zend\EventManager\FilterChain;
+use Laminas\EventManager\FilterChain;
 
 /**
- * @group      Zend_Stdlib
+ * @group      Laminas_Stdlib
  */
 class FilterChainTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +31,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testSubscribeShouldReturnCallbackHandler()
     {
         $handle = $this->filterchain->attach([ $this, __METHOD__ ]);
-        $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $handle);
+        $this->assertInstanceOf('Laminas\Stdlib\CallbackHandler', $handle);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()
@@ -136,7 +135,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function filterReceivalCallback($context, array $params, $chain)
     {
-        $this->assertInstanceOf('Zend\EventManager\Filter\FilterIterator', $chain);
+        $this->assertInstanceOf('Laminas\EventManager\Filter\FilterIterator', $chain);
     }
 
     public function testRunReturnsNullWhenChainIsEmpty()
@@ -149,7 +148,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $filterChain = new FilterChain();
 
-        $this->setExpectedException('Zend\EventManager\Exception\InvalidCallbackException', 'No callback provided');
+        $this->setExpectedException('Laminas\EventManager\Exception\InvalidCallbackException', 'No callback provided');
         $filterChain->attach([]);
     }
 
