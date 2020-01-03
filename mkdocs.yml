@@ -23,3 +23,6 @@ nav:
 site_name: laminas-eventmanager
 site_description: 'Implement events, signal slots, aspects, and observers!'
 repo_url: 'https://github.com/laminas/laminas-eventmanager'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
