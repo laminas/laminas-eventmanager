@@ -1,6 +1,6 @@
 # laminas-eventmanager
 
-[![Build Status](https://travis-ci.org/laminas/laminas-eventmanager.svg?branch=master)](https://travis-ci.org/laminas/laminas-eventmanager)
+[![Build Status](https://travis-ci.com/laminas/laminas-eventmanager.svg?branch=master)](https://travis-ci.com/laminas/laminas-eventmanager)
 [![Coverage Status](https://coveralls.io/repos/laminas/laminas-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/laminas/laminas-eventmanager?branch=master)
 
 laminas-eventmanager is designed for the following use cases:
