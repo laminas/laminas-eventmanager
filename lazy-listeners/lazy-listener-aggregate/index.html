@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -357,64 +361,62 @@ use to create <code>LazyEventListener</code> instances; you may also intersperse
 will use its <code>onRoute()</code> method to listen to the <code>route</code> event at priority 100,
 the second its <code>onDispatch()</code> method to listen to the <code>dispatch</code> event at
 priority -100.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use My\Application\DispatchListener;</span>
-<span class=x>use My\Application\RouteListener;</span>
-<span class=x>use Laminas\EventManager\LazyListenerAggregate;</span>
+<pre class=codehilite><code class=language-php>use My\Application\DispatchListener;
+use My\Application\RouteListener;
+use Laminas\EventManager\LazyListenerAggregate;
 
-<span class=x>$definitions = [</span>
-<span class=x>    [</span>
-<span class=x>        &#39;listener&#39; =&gt; RouteListener::class,</span>
-<span class=x>        &#39;method&#39;   =&gt; &#39;onRoute&#39;,</span>
-<span class=x>        &#39;event&#39;    =&gt; &#39;route&#39;,</span>
-<span class=x>        &#39;priority&#39; =&gt; 100,</span>
-<span class=x>    ],</span>
-<span class=x>    [</span>
-<span class=x>        &#39;listener&#39; =&gt; DispatchListener::class,</span>
-<span class=x>        &#39;method&#39;   =&gt; &#39;onDispatch&#39;,</span>
-<span class=x>        &#39;event&#39;    =&gt; &#39;dispatch&#39;,</span>
-<span class=x>        &#39;priority&#39; =&gt; -100,</span>
-<span class=x>    ],</span>
-<span class=x>];</span>
+$definitions = [
+    [
+        'listener' =&gt; RouteListener::class,
+        'method'   =&gt; 'onRoute',
+        'event'    =&gt; 'route',
+        'priority' =&gt; 100,
+    ],
+    [
+        'listener' =&gt; DispatchListener::class,
+        'method'   =&gt; 'onDispatch',
+        'event'    =&gt; 'dispatch',
+        'priority' =&gt; -100,
+    ],
+];
 
-<span class=x>$aggregate = new LazyListenerAggregate(</span>
-<span class=x>    $definitions,</span>
-<span class=x>    $container</span>
-<span class=x>);</span>
-<span class=x>$aggregate-&gt;attach($events);</span>
-</pre></div></p>
+$aggregate = new LazyListenerAggregate(
+    $definitions,
+    $container
+);
+$aggregate-&gt;attach($events);</code></pre>
 <p>Internally, the <code>LazyListenerAggregate</code> will create <code>LazyEventListener</code>
 instances, and during its <code>attach()</code> phase use them to attach to the event
 manager using the event and priority they compose.</p>
 <p>Below is a functionally identical example, mixing in a concrete
 <code>LazyEventListener</code> instance for one listener:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use My\Application\DispatchListener;</span>
-<span class=x>use My\Application\RouteListener;</span>
-<span class=x>use Laminas\EventManager\LazyEventListener;</span>
-<span class=x>use Laminas\EventManager\LazyListenerAggregate;</span>
+<pre class=codehilite><code class=language-php>use My\Application\DispatchListener;
+use My\Application\RouteListener;
+use Laminas\EventManager\LazyEventListener;
+use Laminas\EventManager\LazyListenerAggregate;
 
-<span class=x>$dispatchListener = new LazyEventListener([</span>
-<span class=x>    &#39;listener&#39; =&gt; DispatchListener::class,</span>
-<span class=x>    &#39;method&#39;   =&gt; &#39;onDispatch&#39;,</span>
-<span class=x>    &#39;event&#39;    =&gt; &#39;dispatch&#39;,</span>
-<span class=x>    &#39;priority&#39; =&gt; -100,</span>
-<span class=x>], $container);</span>
+$dispatchListener = new LazyEventListener([
+    'listener' =&gt; DispatchListener::class,
+    'method'   =&gt; 'onDispatch',
+    'event'    =&gt; 'dispatch',
+    'priority' =&gt; -100,
+], $container);
 
-<span class=x>$definitions = [</span>
-<span class=x>    [</span>
-<span class=x>        &#39;listener&#39; =&gt; RouteListener::class,</span>
-<span class=x>        &#39;method&#39;   =&gt; &#39;onRoute&#39;,</span>
-<span class=x>        &#39;event&#39;    =&gt; &#39;route&#39;,</span>
-<span class=x>        &#39;priority&#39; =&gt; 100,</span>
-<span class=x>    ],</span>
-<span class=x>    $dispatchListener,</span>
-<span class=x>];</span>
+$definitions = [
+    [
+        'listener' =&gt; RouteListener::class,
+        'method'   =&gt; 'onRoute',
+        'event'    =&gt; 'route',
+        'priority' =&gt; 100,
+    ],
+    $dispatchListener,
+];
 
-<span class=x>$aggregate = new LazyListenerAggregate(</span>
-<span class=x>    $definitions,</span>
-<span class=x>    $container</span>
-<span class=x>);</span>
-<span class=x>$aggregate-&gt;attach($events);</span>
-</pre></div></p>
+$aggregate = new LazyListenerAggregate(
+    $definitions,
+    $container
+);
+$aggregate-&gt;attach($events);</code></pre>
 <h2 id="recommendations">Recommendations</h2>
 <p>We recommend using <code>LazyListenerAggregate</code> when you have listeners you will be
 pulling from a Dependency Injection Container, but which may not execute on
@@ -662,9 +664,10 @@ be a healthy performance optimization.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -701,7 +704,7 @@ be a healthy performance optimization.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -710,8 +713,8 @@ be a healthy performance optimization.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

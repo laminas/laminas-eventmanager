@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -361,24 +365,22 @@ take the incoming arguments in order to alter the workflow.</p>
 <h2 id="preparation">Preparation</h2>
 <p>To use the <code>FilterChain</code> implementation, you will need to install laminas-stdlib,
 if you have not already:</p>
-<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-stdlib
-</pre></div></p>
+<pre class=codehilite><code class=language-bash>$ composer require laminas/laminas-stdlib</code></pre>
 <h2 id="filterchaininterface">FilterChainInterface</h2>
 <p><code>Laminas\EventManager\FilterChain</code> is a concrete implementation of
 <code>Laminas\EventManager\Filter\FilterInterface</code>, which defines a workflow for
 intercepting filters. This includes the following methods:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>interface FilterInterface</span>
-<span class=x>{</span>
-<span class=x>    public function run($context, array $params = []);</span>
+<pre class=codehilite><code class=language-php>interface FilterInterface
+{
+    public function run($context, array $params = []);
 
-<span class=x>    public function attach(callable $callback);</span>
-<span class=x>    public function detach(callable $callback);</span>
+    public function attach(callable $callback);
+    public function detach(callable $callback);
 
-<span class=x>    public function getFilters();</span>
-<span class=x>    public function clearFilters();</span>
-<span class=x>    public function getResponses();</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function getFilters();
+    public function clearFilters();
+    public function getResponses();
+}</code></pre>
 <p>In many ways, it's very similar to the <code>EventManagerInterface</code>, but with a few
 key differences:</p>
 <ul>
@@ -402,23 +404,21 @@ call on <code>$chain-&gt;next()</code>, passing the same set of arguments.</p>
 <h2 id="filters">Filters</h2>
 <p>A filter attached to a <code>FilterChain</code> instance can be any callable. However,
 these callables should expect the following arguments:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>function ($context, array $argv, FilterIterator $chain)</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>function ($context, array $argv, FilterIterator $chain)</code></pre>
 <p>A filter can therefore act on the provided <code>$context</code>, using the provided
 arguments.</p>
 <p>Part of that execution can also be deciding that other filters should be called.
 To do so, it will call <code>$chain-&gt;next()</code>, providing it the same arguments:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>function ($context, array $argv, FilterIterator $chain)</span>
-<span class=x>{</span>
-<span class=x>    $message = isset($argv[&#39;message&#39;]) ? $argv[&#39;message&#39;] : &#39;&#39;;</span>
+<pre class=codehilite><code class=language-php>function ($context, array $argv, FilterIterator $chain)
+{
+    $message = isset($argv['message']) ? $argv['message'] : '';
 
-<span class=x>    $message = str_rot13($message);</span>
+    $message = str_rot13($message);
 
-<span class=x>    $filtered = $chain-&gt;next($context, [&#39;message&#39; =&gt; $message], $chain);</span>
+    $filtered = $chain-&gt;next($context, ['message' =&gt; $message], $chain);
 
-<span class=x>    return str_rot13($filtered);</span>
-<span class=x>}</span>
-</pre></div></p>
+    return str_rot13($filtered);
+}</code></pre>
 <p>You can choose to call <code>$chain-&gt;next()</code> at any point in the filter, allowing you
 to:</p>
 <ul>
@@ -435,61 +435,58 @@ to:</p>
 the object under observation, and arguments, which are typically the arguments
 passed to the method triggering the filter chain.</p>
 <p>As an example, consider the following filter-enabled class:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\FilterChain;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\FilterChain;
 
-<span class=x>class ObservedTarget</span>
-<span class=x>{</span>
-<span class=x>    private $filters = [];</span>
+class ObservedTarget
+{
+    private $filters = [];
 
-<span class=x>    public function attachFilter($method, callable $listener)</span>
-<span class=x>    {</span>
-<span class=x>        if (! method_exists($this, $method)) {</span>
-<span class=x>            throw new \InvalidArgumentException(&#39;Invalid method&#39;);</span>
-<span class=x>        }</span>
-<span class=x>        $this-&gt;getFilters($method)-&gt;attach($listener);</span>
-<span class=x>    }</span>
+    public function attachFilter($method, callable $listener)
+    {
+        if (! method_exists($this, $method)) {
+            throw new \InvalidArgumentException('Invalid method');
+        }
+        $this-&gt;getFilters($method)-&gt;attach($listener);
+    }
 
-<span class=x>    public function execute($message)</span>
-<span class=x>    {</span>
-<span class=x>        return $this-&gt;getFilters(__FUNCTION__)</span>
-<span class=x>            -&gt;run($this, compact(&#39;message&#39;));</span>
-<span class=x>    }</span>
+    public function execute($message)
+    {
+        return $this-&gt;getFilters(__FUNCTION__)
+            -&gt;run($this, compact('message'));
+    }
 
-<span class=x>    private function getFilters($method)</span>
-<span class=x>    {</span>
-<span class=x>        if (! isset($this-&gt;filters[$method])) {</span>
-<span class=x>            $this-&gt;filters[$method] = new FilterChain();</span>
-<span class=x>        }</span>
-<span class=x>        return $this-&gt;filters[$method];</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    private function getFilters($method)
+    {
+        if (! isset($this-&gt;filters[$method])) {
+            $this-&gt;filters[$method] = new FilterChain();
+        }
+        return $this-&gt;filters[$method];
+    }
+}</code></pre>
 <p>Now, let's create an instance of the class, and attach some filters to it.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$observed = new ObservedTarget();</span>
+<pre class=codehilite><code class=language-php>$observed = new ObservedTarget();
 
-<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
-<span class=x>    $args[&#39;message&#39;] = isset($args[&#39;message&#39;])</span>
-<span class=x>        ? strtoupper($args[&#39;message&#39;])</span>
-<span class=x>        : &#39;&#39;;</span>
+$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
+    $args['message'] = isset($args['message'])
+        ? strtoupper($args['message'])
+        : '';
 
-<span class=x>    return $chain-&gt;next($context, $args, $chain);</span>
-<span class=x>});</span>
+    return $chain-&gt;next($context, $args, $chain);
+});
 
-<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
-<span class=x>    return (isset($args[&#39;message&#39;])</span>
-<span class=x>        ? str_rot13($args[&#39;message&#39;])</span>
-<span class=x>        : &#39;&#39;);</span>
-<span class=x>});</span>
+$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
+    return (isset($args['message'])
+        ? str_rot13($args['message'])
+        : '');
+});
 
-<span class=x>$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {</span>
-<span class=x>    return (isset($args[&#39;message&#39;])</span>
-<span class=x>        ? strtolower($args[&#39;message&#39;])</span>
-<span class=x>        : &#39;&#39;);</span>
-<span class=x>});</span>
-</pre></div></p>
+$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
+    return (isset($args['message'])
+        ? strtolower($args['message'])
+        : '');
+});</code></pre>
 <p>Finally, we'll call the method, and see what results we get:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$observed-&gt;execute(&#39;Hello, world!&#39;);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$observed-&gt;execute('Hello, world!');</code></pre>
 <p>Since filters are run in the order in which they are attached, the following
 will occur:</p>
 <ul>
@@ -508,30 +505,29 @@ filters.</p>
 chain in a filter itself, and attaching it at invocation. This allows
 intercepting filters to replace the main logic, while still providing a default
 path. This might look like:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Assume that the class contains the `attachFilter()` implementation from above.</span>
-<span class=x>class ObservedTarget</span>
-<span class=x>{</span>
-<span class=x>    private $attached = [];</span>
+<pre class=codehilite><code class=language-php>// Assume that the class contains the `attachFilter()` implementation from above.
+class ObservedTarget
+{
+    private $attached = [];
 
-<span class=x>    public function execute($message)</span>
-<span class=x>    {</span>
-<span class=x>        if (! isset($this-&gt;attached[__FUNCTION__])) {</span>
-<span class=x>            $this-&gt;attachFilter(__FUNCTION__, $this-&gt;getExecuteFilter();</span>
-<span class=x>        }</span>
+    public function execute($message)
+    {
+        if (! isset($this-&gt;attached[__FUNCTION__])) {
+            $this-&gt;attachFilter(__FUNCTION__, $this-&gt;getExecuteFilter();
+        }
 
-<span class=x>        return $this-&gt;getFilters(__FUNCTION__)</span>
-<span class=x>            -&gt;run($this, compact(&#39;message&#39;));</span>
-<span class=x>    }</span>
+        return $this-&gt;getFilters(__FUNCTION__)
+            -&gt;run($this, compact('message'));
+    }
 
-<span class=x>    private function getExecuteFilter()</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;attached[&#39;execute&#39;] = true;</span>
-<span class=x>        return function ($context, array $args, FilterIterator $chain) {</span>
-<span class=x>            return $args[&#39;message&#39;];</span>
-<span class=x>        };</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    private function getExecuteFilter()
+    {
+        $this-&gt;attached['execute'] = true;
+        return function ($context, array $args, FilterIterator $chain) {
+            return $args['message'];
+        };
+    }
+}</code></pre>
 <p>Intercepting filters are a powerful way to introduce aspect-oriented programming
 paradigms into your code, as well as general-purpose mechanisms for introducing
 plugins.</p>
@@ -776,9 +772,10 @@ plugins.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -815,7 +812,7 @@ plugins.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -824,8 +821,8 @@ plugins.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Implement events, signal slots, aspects, and observers!">  
-    <link rel="canonical" href="https://docs.laminas.dev/wildcard-listeners/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Wildcard Listeners - laminas-eventmanager - Laminas Docs</title>
+    <title>laminas-eventmanager - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-eventmanager</a>
+            <a href="../.">laminas-eventmanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -134,8 +133,8 @@
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Wildcard Listeners</a>
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
     </li>
 
                                     
@@ -282,130 +281,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#attaching-using-the-wildcard" class="toc__link">Attaching using the wildcard</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#attaching-using-the-wildcard-via-a-sharedeventmanager" class="toc__link">Attaching using the wildcard via a SharedEventManager</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-eventmanager</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Wildcard Listeners</li>
-            
-        
-    </ol>
-</nav>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-
-
-    
-    
-        <h2 class="chapter__headline">Reference</h2>
-    
-
-    <h1 id="wildcard-listeners">Wildcard Listeners</h1>
-<p>Sometimes you'll want to attach the same listener to all events of a given
-instance — or potentially, with a shared event collection, all contexts.</p>
-<h2 id="attaching-using-the-wildcard">Attaching using the wildcard</h2>
-<p>To attach to all events on a given <code>EventManager</code> instance, you can use the
-wildcard event, <code>*</code>:</p>
-<pre class=codehilite><code class=language-php>$events = new EventManager();
-$events-&gt;attach('*', $listener);</code></pre>
-<p>Note that if you specify a priority, that priority will be used for this
-listener for any event triggered.</p>
-<p>What the above specifies is that <strong>any</strong> event triggered by the event manager
-instance will result in notification of this particular listener.</p>
-<h2 id="attaching-using-the-wildcard-via-a-sharedeventmanager">Attaching using the wildcard via a SharedEventManager</h2>
-<p>Using the <code>SharedEventManager</code>, you can indicate that you want to attach to all
-events of a given identifier, a single named event across all identifiers, or
-all events on all identifiers.</p>
-<pre class=codehilite><code class=language-php>$sharedEvents = new SharedEventManager();
-
-// Attach to all events on the context &quot;foo&quot;
-$sharedEvents-&gt;attach('foo', '*', $listener);
-
-// Attach to the &quot;foo&quot; event of any context:
-$sharedEvents-&gt;attach('*', 'foo', $listener);
-
-// Attach to all events on all contexts:
-$sharedEvents-&gt;attach('*', '*', $listener);</code></pre>
-<p>Note that if you specify a priority, that priority will be used for all events
-specified.</p>
-
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../examples/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../aggregates/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-eventmanager/edit/master/doc/book/wildcard-listeners.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -420,7 +310,7 @@ specified.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-eventmanager</a>
+            <a href="../.">laminas-eventmanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -495,8 +385,8 @@ specified.</p>
                                 <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Wildcard Listeners</a>
+    <li class="subnavigation__list-item ">
+        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
     </li>
 
                                     

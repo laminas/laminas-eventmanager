@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -385,8 +389,7 @@
 <p>The following methods had changes in signatures.</p>
 <h2 id="eventmanager__construct">EventManager::__construct()</h2>
 <p>In version 2, the signature of <code>__construct()</code> was:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>__construct($identifiers = null)</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>__construct($identifiers = null)</code></pre>
 <p>where <code>$identifiers</code> could be a string, array of strings, or <code>Traversable</code> of
 strings.</p>
 <p>Version 3 requires that the shared event manager be injected at instantiation,
@@ -394,16 +397,14 @@ instead of via a setter. This also enforces the idea that identifiers have no
 semantic meaning without a shared event manager composed. As such, the
 constructor now has two arguments, with the first being the shared event
 manager:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>__construct(SharedEventManagerInterface $sharedEvents, array $identifiers = [])</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>__construct(SharedEventManagerInterface $sharedEvents, array $identifiers = [])</code></pre>
 <p>Finally, because we changed the signature of <code>setIdentifiers()</code> and
 <code>addIdentifiers()</code> to only accept arrays (see more below), we changed the
 <code>$identifiers</code> argument to only allow arrays.</p>
 <h2 id="eventmanagerinterfacetrigger-and-triggeruntil">EventManagerInterface::trigger() and triggerUntil()</h2>
 <p>In version 2, the signatures of <code>trigger()</code> and <code>triggerUntil()</code> are:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>trigger($event, $target = null, $argv = [], $callback = null);</span>
-<span class=x>triggerUntil($event, $target = null, $argv = [], $callback = null);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>trigger($event, $target = null, $argv = [], $callback = null);
+triggerUntil($event, $target = null, $argv = [], $callback = null);</code></pre>
 <p>The methods allow overloading essentially every argument:</p>
 <ul>
 <li><code>$event</code> could be the event name, array or traversable of event names,  or an
@@ -422,9 +423,8 @@ manager:</p>
 <li>Dozens of lines used to validate and marshal arguments.</li>
 </ul>
 <p>In version 3, we changed the methods to have the following signatures:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>trigger($event, $target = null, $argv = []);</span>
-<span class=x>triggerUntil(callable $callback, $event, $target = null, $argv = []);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>trigger($event, $target = null, $argv = []);
+triggerUntil(callable $callback, $event, $target = null, $argv = []);</code></pre>
 <p>with the following definitions:</p>
 <ul>
 <li><code>$event</code> is a string event name.</li>
@@ -440,10 +440,9 @@ usage, and ensures the argument order stays predictable for the remaining
 arguments.</p>
 <p>In order to accommodate other styles of usage, we <strong>added</strong> the following
 methods:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>triggerUntil(callable $callback, $event, $target = null, $argv = []);</span>
-<span class=x>triggerEvent(EventInterface $event);</span>
-<span class=x>triggerEventUntil(callable $callback, EventInterface $event);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>triggerUntil(callable $callback, $event, $target = null, $argv = []);
+triggerEvent(EventInterface $event);
+triggerEventUntil(callable $callback, EventInterface $event);</code></pre>
 <p>These allow the other primary use cases for <code>trigger()</code> in v2, but with discrete
 signatures.</p>
 <p>Starting in version 2.6.0, you can use these three additional methods, as the
@@ -452,40 +451,37 @@ evaluating your code to see which of the four possible call styles you are
 using, and that you adapt your code to use one of the 4 discrete methods.</p>
 <p>The following signatures, however, are no longer supported, and will need to be
 updated as illustrated:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Event instance as second argument:</span>
-<span class=x>$events-&gt;trigger(&#39;foo&#39;, $event);</span>
+<pre class=codehilite><code class=language-php>// Event instance as second argument:
+$events-&gt;trigger('foo', $event);
 
-<span class=x>// Resolve by setting the event name prior to trigger:</span>
-<span class=x>$event-&gt;setName(&#39;foo&#39;);</span>
-<span class=x>$events-&gt;triggerEvent($event);</span>
+// Resolve by setting the event name prior to trigger:
+$event-&gt;setName('foo');
+$events-&gt;triggerEvent($event);
 
-<span class=x>// Event instance as third argument:</span>
-<span class=x>$events-&gt;trigger(&#39;foo&#39;, $this, $event);</span>
+// Event instance as third argument:
+$events-&gt;trigger('foo', $this, $event);
 
-<span class=x>// Resolve by setting the event name and target prior to trigger:</span>
-<span class=x>$event-&gt;setName(&#39;foo&#39;);</span>
-<span class=x>$event-&gt;setTarget($this);</span>
-<span class=x>$events-&gt;triggerEvent($event);</span>
-</pre></div></p>
+// Resolve by setting the event name and target prior to trigger:
+$event-&gt;setName('foo');
+$event-&gt;setTarget($this);
+$events-&gt;triggerEvent($event);</code></pre>
 <p>If you are using a callback to short-circuit, use one of the <code>*Until()</code> methods,
 passing the callback as the first argument:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Standard trigger:</span>
-<span class=x>$events-&gt;trigger(&#39;foo&#39;, $this, [&#39;bar&#39; =&gt; &#39;baz&#39;], $criteria);</span>
+<pre class=codehilite><code class=language-php>// Standard trigger:
+$events-&gt;trigger('foo', $this, ['bar' =&gt; 'baz'], $criteria);
 
-<span class=x>// becomes:</span>
-<span class=x>$events-&gt;triggerUntil($criteria, &#39;foo&#39;, $this, [&#39;bar&#39; =&gt; &#39;baz&#39;]);</span>
+// becomes:
+$events-&gt;triggerUntil($criteria, 'foo', $this, ['bar' =&gt; 'baz']);
 
-<span class=x>// Triggering with an event:</span>
-<span class=x>$events-&gt;trigger($event, $criteria);</span>
+// Triggering with an event:
+$events-&gt;trigger($event, $criteria);
 
-<span class=x>// becomes:</span>
-<span class=x>$events-&gt;triggerEventUntil($criteria, $event);</span>
-</pre></div></p>
+// becomes:
+$events-&gt;triggerEventUntil($criteria, $event);</code></pre>
 <h2 id="eventmanagerinterfaceattach-and-detach">EventManagerInterface::attach() and detach()</h2>
 <p>In version 2, <code>attach()</code> and <code>detach()</code> had the following signatures:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($event, $callback = null, $priority = null);</span>
-<span class=x>detach($listener);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($event, $callback = null, $priority = null);
+detach($listener);</code></pre>
 <p>with the following argument definitions:</p>
 <ul>
 <li><code>$event</code> could be either a string event name, or an instance of
@@ -498,9 +494,8 @@ passing the callback as the first argument:</p>
   <code>ListenerAggregateInterface</code>.</li>
 </ul>
 <p>Much like we did for the <code>trigger*()</code> methods, we simplified the signatures:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($event, callable $listener, $priority = 1);</span>
-<span class=x>detach(callable $listener, $event = null);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($event, callable $listener, $priority = 1);
+detach(callable $listener, $event = null);</code></pre>
 <p>Where:</p>
 <ul>
 <li><code>$event</code> is always a string event name (except when not passed to <code>detach()</code>.</li>
@@ -527,12 +522,11 @@ event manager, stop doing so, and attach the callable listener itself instead.
 This, too, is completely forwards compatible.</p>
 <p>If you are passing <code>CallbackHandler</code> instances to <code>detach()</code>, you will need to
 make the following change after updating to version 3:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// This code:</span>
-<span class=x>$events-&gt;detach($callbackHandler);</span>
+<pre class=codehilite><code class=language-php>// This code:
+$events-&gt;detach($callbackHandler);
 
-<span class=x>// Will become:</span>
-<span class=x>$events-&gt;detach($callbackHandler-&gt;getCallback());</span>
-</pre></div></p>
+// Will become:
+$events-&gt;detach($callbackHandler-&gt;getCallback());</code></pre>
 <p>In most cases, the callback handler you are storing is likely the result of
 calling <code>attach()</code> in the first place. Since <code>attach()</code> no longer creates a
 <code>CallbackHandler</code> instance, it instead simply returns the listener back to the
@@ -551,11 +545,9 @@ their calls.</p>
 <h2 id="sharedeventmanagerinterfacegetlisteners">SharedEventManagerInterface::getListeners()</h2>
 <p><code>Laminas\EventManager\SharedEventManagerInterface::getListeners()</code> has changed. The
 previous signature was:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>getListeners($id, $event = null): false|Laminas\Stdlib\PriorityQueue</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getListeners($id, $event = null): false|Laminas\Stdlib\PriorityQueue</code></pre>
 <p>Version 3 has the following signature:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>getListeners(array $identifiers, $eventName) : array</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getListeners(array $identifiers, $eventName) : array</code></pre>
 <p>The changes are:</p>
 <ul>
 <li>The first argument now expects an <em>array</em> of identifiers. This is so an event
@@ -569,8 +561,7 @@ previous signature was:</p>
 </ul>
 <h2 id="sharedeventmanagerinterfaceattach">SharedEventManagerInterface::attach()</h2>
 <p>The v2 signature of <code>attach()</code> was:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($id, $event, $callback, $priority = 1) : CallbackHandler|CallbackHandler[]</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($id, $event, $callback, $priority = 1) : CallbackHandler|CallbackHandler[]</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$id</code> could be a string identifier, or an array or <code>Traversable</code> of
@@ -581,8 +572,7 @@ previous signature was:</p>
 <li><code>$priority</code> was an integer.</li>
 </ul>
 <p>The v3 signature becomes:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($identifier, $eventName, callable $listener, $priority = 1) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($identifier, $eventName, callable $listener, $priority = 1) : void</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$identifier</code> <em>must</em> be a string <em>only</em>.</li>
@@ -615,8 +605,7 @@ previous signature was:</p>
 </ul>
 <h2 id="sharedeventmanagerinterfacedetach">SharedEventManagerInterface::detach()</h2>
 <p>The v2 signature of <code>detach()</code> was:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>detach($id, CallbackHandler $listener) : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>detach($id, CallbackHandler $listener) : bool</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$id</code> was a string identifier</li>
@@ -624,8 +613,7 @@ previous signature was:</p>
 <li>the method returned a boolean indicating whether or not it removed anything.</li>
 </ul>
 <p>The v3 signature becomes:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>detach(callable $listener, $identifier = null, $eventName = null) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>detach(callable $listener, $identifier = null, $eventName = null) : void</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$listener</code> is the callable listener you wish to remove</li>
@@ -652,25 +640,21 @@ already implemented.</p>
 abstract methods, you can forward-proof your existing
 <code>ListenerAggregateInterface</code> implementations by adding the argument.</p>
 <p>As an example, if you define your method like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function attach(EventManagerInterface $events)</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function attach(EventManagerInterface $events)</code></pre>
 <p>Simply change it to this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function attach(EventManagerInterface $events, $priority = 1)</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function attach(EventManagerInterface $events, $priority = 1)</code></pre>
 <p>You do not need to do anything with the <code>$priority</code> argument, though we
 recommend passing it as a default value if you are not specifying a priority for
 any listeners you attach.</p>
 <h2 id="filterinterfaceattach-and-detach">FilterInterface::attach() and detach()</h2>
 <p><code>Laminas\EventManager\Filter\FilterInterface::attach()</code> and <code>detach()</code> have changed
 signatures. The originals were:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($callback) : CallbackHandler</span>
-<span class=x>detach(CallbackHandler $callback) : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($callback) : CallbackHandler
+detach(CallbackHandler $callback) : bool</code></pre>
 <p>where <code>$callback</code> for <code>attach()</code> could be a callable or a <code>CallbackHandler</code>. The
 new signatures are:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach(callable $callback) : void</span>
-<span class=x>detach(callable $filter) : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach(callable $callback) : void
+detach(callable $filter) : bool</code></pre>
 <p>Typical usage in v2 was to capture the return value of <code>attach()</code> and pass it to
 <code>detach()</code>, as <code>attach()</code> would create a <code>CallbackHandler</code> for you to later pass
 to <code>detach()</code>. Since we can now pass the original callable argument to
@@ -923,9 +907,10 @@ fluent interface.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -962,7 +947,7 @@ fluent interface.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -971,8 +956,8 @@ fluent interface.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -382,25 +386,23 @@ event.</p>
 <li>A call to <code>trigger()</code> an event</li>
 </ul>
 <p>The simplest example looks something like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventManager;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventManager;
 
-<span class=x>$events = new EventManager();</span>
-<span class=x>$events-&gt;attach(&#39;do&#39;, function ($e) {</span>
-<span class=x>    $event = $e-&gt;getName();</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    printf(</span>
-<span class=x>        &#39;Handled event &quot;%s&quot;, with parameters %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        json_encode($params)</span>
-<span class=x>    );</span>
-<span class=x>});</span>
+$events = new EventManager();
+$events-&gt;attach('do', function ($e) {
+    $event = $e-&gt;getName();
+    $params = $e-&gt;getParams();
+    printf(
+        'Handled event &quot;%s&quot;, with parameters %s',
+        $event,
+        json_encode($params)
+    );
+});
 
-<span class=x>$params = [&#39;foo&#39; =&gt; &#39;bar&#39;, &#39;baz&#39; =&gt; &#39;bat&#39;];</span>
-<span class=x>$events-&gt;trigger(&#39;do&#39;, null, $params);</span>
-</pre></div></p>
+$params = ['foo' =&gt; 'bar', 'baz' =&gt; 'bat'];
+$events-&gt;trigger('do', null, $params);</code></pre>
 <p>The above will result in the following:</p>
-<p> <div class=codehilite><pre><span></span>Handled event &quot;do&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}
-</pre></div></p>
+<pre class=codehilite><code class=language-text>Handled event &quot;do&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
 <blockquote>
 <h3>Note</h3>
 <p>Throughout this tutorial, we use closures as listeners. However, any valid PHP
@@ -414,55 +416,54 @@ argument. Why is it there?</p>
 triggering actions within methods. The middle argument to <code>trigger()</code> is the
 "target", and in the case described, would be the current object instance. This
 gives event listeners access to the calling object, which can often be useful.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventManager;</span>
-<span class=x>use Laminas\EventManager\EventManagerAwareInterface;</span>
-<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerInterface;
 
-<span class=x>class Example implements EventManagerAwareInterface</span>
-<span class=x>{</span>
-<span class=x>    protected $events;</span>
+class Example implements EventManagerAwareInterface
+{
+    protected $events;
 
-<span class=x>    public function setEventManager(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        $events-&gt;setIdentifiers([</span>
-<span class=x>            __CLASS__,</span>
-<span class=x>            get_class($this)</span>
-<span class=x>        ]);</span>
-<span class=x>        $this-&gt;events = $events;</span>
-<span class=x>    }</span>
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events-&gt;setIdentifiers([
+            __CLASS__,
+            get_class($this)
+        ]);
+        $this-&gt;events = $events;
+    }
 
-<span class=x>    public function getEventManager()</span>
-<span class=x>    {</span>
-<span class=x>        if (! $this-&gt;events) {</span>
-<span class=x>            $this-&gt;setEventManager(new EventManager());</span>
-<span class=x>        }</span>
-<span class=x>        return $this-&gt;events;</span>
-<span class=x>    }</span>
+    public function getEventManager()
+    {
+        if (! $this-&gt;events) {
+            $this-&gt;setEventManager(new EventManager());
+        }
+        return $this-&gt;events;
+    }
 
-<span class=x>    public function doIt($foo, $baz)</span>
-<span class=x>    {</span>
-<span class=x>        $params = compact(&#39;foo&#39;, &#39;baz&#39;);</span>
-<span class=x>        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $params);</span>
-<span class=x>    }</span>
+    public function doIt($foo, $baz)
+    {
+        $params = compact('foo', 'baz');
+        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $params);
+    }
 
-<span class=x>}</span>
+}
 
-<span class=x>$example = new Example();</span>
+$example = new Example();
 
-<span class=x>$example-&gt;getEventManager()-&gt;attach(&#39;doIt&#39;, function($e) {</span>
-<span class=x>    $event  = $e-&gt;getName();</span>
-<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    printf(</span>
-<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        $target,</span>
-<span class=x>        json_encode($params)</span>
-<span class=x>    );</span>
-<span class=x>});</span>
+$example-&gt;getEventManager()-&gt;attach('doIt', function($e) {
+    $event  = $e-&gt;getName();
+    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;
+    $params = $e-&gt;getParams();
+    printf(
+        'Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s',
+        $event,
+        $target,
+        json_encode($params)
+    );
+});
 
-<span class=x>$example-&gt;doIt(&#39;bar&#39;, &#39;bat&#39;);</span>
-</pre></div></p>
+$example-&gt;doIt('bar', 'bat');</code></pre>
 <p>The above is basically the same as the first example. The main difference is
 that we're now using that middle argument in order to pass the target, the
 instance of <code>Example</code>, on to the listeners. Our listener is now retrieving that
@@ -480,21 +481,20 @@ listeners on identifiers it's interested in, and trigger those listeners as
 well.</p>
 <p>How does this work, exactly?</p>
 <p>Consider the following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\SharedEventManager;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\SharedEventManager;
 
-<span class=x>$sharedEvents = new SharedEventManager();</span>
-<span class=x>$sharedEvents-&gt;attach(&#39;Example&#39;, &#39;do&#39;, function ($e) {</span>
-<span class=x>    $event  = $e-&gt;getName();</span>
-<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    printf(</span>
-<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        $target,</span>
-<span class=x>        json_encode($params)</span>
-<span class=x>    );</span>
-<span class=x>});</span>
-</pre></div></p>
+$sharedEvents = new SharedEventManager();
+$sharedEvents-&gt;attach('Example', 'do', function ($e) {
+    $event  = $e-&gt;getName();
+    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;
+    $params = $e-&gt;getParams();
+    printf(
+        'Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s',
+        $event,
+        $target,
+        json_encode($params)
+    );
+});</code></pre>
 <p>This looks almost identical to the previous example; the key difference is that
 there is an additional argument at the <em>start</em> of the list, <code>Example</code>. This
 code is basically saying, "Listen to the 'do' event of the 'Example' target,
@@ -506,25 +506,22 @@ or targets the given instance will be interested in.</p>
 registered, and also that the <code>Example</code> class is defined as above. (Note that as of 
 version 3, <code>setSharedManager()</code> is removed from  <code>EventManager</code>; the <code>SharedEventManager</code> 
 instance must instead be injected via the constructor.) We can then execute the following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$example = new Example();</span>
+<pre class=codehilite><code class=language-php>$example = new Example();
 
-<span class=x>// Prior to version 3:</span>
-<span class=x>$example-&gt;getEventManager()-&gt;setSharedManager($sharedEvents);</span>
+// Prior to version 3:
+$example-&gt;getEventManager()-&gt;setSharedManager($sharedEvents);
 
-<span class=x>// As of version 3:</span>
-<span class=x>$example-&gt;setEventManager(new EventManager($sharedEvents));</span>
+// As of version 3:
+$example-&gt;setEventManager(new EventManager($sharedEvents));
 
-<span class=x>// Both versions:</span>
-<span class=x>$example-&gt;doIt(&#39;bar&#39;, &#39;bat&#39;);</span>
-</pre></div></p>
+// Both versions:
+$example-&gt;doIt('bar', 'bat');</code></pre>
 <p>and expect the following output:</p>
-<p> <div class=codehilite><pre><span></span>Handled event &quot;do&quot; on target &quot;Example&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}
-</pre></div></p>
+<pre class=codehilite><code class=language-text>Handled event &quot;do&quot; on target &quot;Example&quot;, with parameters {&quot;foo&quot;:&quot;bar&quot;,&quot;baz&quot;:&quot;bat&quot;}</code></pre>
 <p>Now, let's say we extended <code>Example</code> as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class SubExample extends Example</span>
-<span class=x>{</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>class SubExample extends Example
+{
+}</code></pre>
 <p>One interesting aspect of our <code>setEventManager()</code> method is that we defined it
 to listen both on <code>__CLASS__</code> and <code>get_class($this)</code>. This means that calling
 <code>do()</code> on our <code>SubExample</code> class would also trigger the shared listener! It also
@@ -549,32 +546,31 @@ representing the event and target names to which we want to attach. What if you
 want to attach a listener to multiple events or targets?</p>
 <p>One answer is to attach to the event manager using the wildcard event, <code>*</code>.</p>
 <p>Consider the following examples:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(</span>
-<span class=x>    &#39;*&#39;, // all events</span>
-<span class=x>    $listener</span>
-<span class=x>);</span>
+<pre class=codehilite><code class=language-php>$events-&gt;attach(
+    '*', // all events
+    $listener
+);
 
-<span class=x>// All targets via wildcard</span>
-<span class=x>$sharedEvents-&gt;attach(</span>
-<span class=x>    &#39;*&#39;,           // all targets</span>
-<span class=x>    &#39;doSomething&#39;, // named event</span>
-<span class=x>    $listener</span>
-<span class=x>);</span>
+// All targets via wildcard
+$sharedEvents-&gt;attach(
+    '*',           // all targets
+    'doSomething', // named event
+    $listener
+);
 
-<span class=x>// Mix and match: all events on a single named target:</span>
-<span class=x>$sharedEvents-&gt;attach(</span>
-<span class=x>    &#39;Foo&#39;, // target</span>
-<span class=x>    &#39;*&#39;,   // all events</span>
-<span class=x>    $listener</span>
-<span class=x>);</span>
+// Mix and match: all events on a single named target:
+$sharedEvents-&gt;attach(
+    'Foo', // target
+    '*',   // all events
+    $listener
+);
 
-<span class=x>// Mix and match: all events on all targets:</span>
-<span class=x>$sharedEvents-&gt;attach(</span>
-<span class=x>    &#39;*&#39;, // all targets</span>
-<span class=x>    &#39;*&#39;, // all events</span>
-<span class=x>    $listener</span>
-<span class=x>);</span>
-</pre></div></p>
+// Mix and match: all events on all targets:
+$sharedEvents-&gt;attach(
+    '*', // all targets
+    '*', // all events
+    $listener
+);</code></pre>
 <p>The ability to specify wildcard targets and/or events when attaching can slim
 down your code immensely.</p>
 <h2 id="listener-aggregates">Listener aggregates</h2>
@@ -587,43 +583,42 @@ more instance methods as listeners.</p>
 instance to one and/or the other, and then it's up to the implementing class to
 determine what to do.</p>
 <p>As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventInterface;</span>
-<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
-<span class=x>use Laminas\EventManager\ListenerAggregateInterface;</span>
-<span class=x>use Laminas\Log\Logger;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Log\Logger;
 
-<span class=x>class LogEvents implements ListenerAggregateInterface</span>
-<span class=x>{</span>
-<span class=x>    private $listeners = [];</span>
-<span class=x>    private $log;</span>
+class LogEvents implements ListenerAggregateInterface
+{
+    private $listeners = [];
+    private $log;
 
-<span class=x>    public function __construct(Logger $log)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;log = $log;</span>
-<span class=x>    }</span>
+    public function __construct(Logger $log)
+    {
+        $this-&gt;log = $log;
+    }
 
-<span class=x>    public function attach(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;do&#39;, [$this, &#39;log&#39;]);</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;doSomethingElse&#39;, [$this, &#39;log&#39;]);</span>
-<span class=x>    }</span>
+    public function attach(EventManagerInterface $events)
+    {
+        $this-&gt;listeners[] = $events-&gt;attach('do', [$this, 'log']);
+        $this-&gt;listeners[] = $events-&gt;attach('doSomethingElse', [$this, 'log']);
+    }
 
-<span class=x>    public function detach(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        foreach ($this-&gt;listeners as $index =&gt; $listener) {</span>
-<span class=x>            $events-&gt;detach($listener);</span>
-<span class=x>            unset($this-&gt;listeners[$index]);</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this-&gt;listeners as $index =&gt; $listener) {
+            $events-&gt;detach($listener);
+            unset($this-&gt;listeners[$index]);
+        }
+    }
 
-<span class=x>    public function log(EventInterface $e)</span>
-<span class=x>    {</span>
-<span class=x>        $event  = $e-&gt;getName();</span>
-<span class=x>        $params = $e-&gt;getParams();</span>
-<span class=x>        $this-&gt;log-&gt;info(sprintf(&#39;%s: %s&#39;, $event, json_encode($params)));</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function log(EventInterface $e)
+    {
+        $event  = $e-&gt;getName();
+        $params = $e-&gt;getParams();
+        $this-&gt;log-&gt;info(sprintf('%s: %s', $event, json_encode($params)));
+    }
+}</code></pre>
 <blockquote>
 <h3>Note</h3>
 <p>The trait <code>Laminas\EventManager\ListenerAggregateTrait</code> can be composed to help
@@ -632,9 +627,8 @@ and the <code>detach()</code> logic as demonstrated above.</p>
 </blockquote>
 <p>You can attach this by passing the event manager to the aggregate's <code>attach()</code>
 method:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$logListener = new LogEvents($logger);</span>
-<span class=x>$logListener-&gt;attach($events);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$logListener = new LogEvents($logger);
+$logListener-&gt;attach($events);</code></pre>
 <p>Any events the aggregate attaches to will then be notified when triggered.</p>
 <p>Why bother? For a couple of reasons:</p>
 <ul>
@@ -675,25 +669,24 @@ use the methods <code>triggerUntil()</code> or <code>triggerEventUntil()</code>.
 callback as their first argument; if that callback returns a boolean <code>true</code>
 value, execution is halted.</p>
 <p>As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
-<span class=x>{</span>
-<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
-<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
-<span class=x>        function ($r) {</span>
-<span class=x>            return ($r instanceof SomeResultClass);</span>
-<span class=x>        },</span>
-<span class=x>        __FUNCTION__, </span>
-<span class=x>        $this, </span>
-<span class=x>        $params</span>
-<span class=x>    );</span>
+<pre class=codehilite><code class=language-php>public function someExpensiveCall($criteria1, $criteria2)
+{
+    $params  = compact('criteria1', 'criteria2');
+    $results = $this-&gt;getEventManager()-&gt;triggerUntil(
+        function ($r) {
+            return ($r instanceof SomeResultClass);
+        },
+        __FUNCTION__, 
+        $this, 
+        $params
+    );
 
-<span class=x>    if ($results-&gt;stopped()) {</span>
-<span class=x>        return $results-&gt;last();</span>
-<span class=x>    }</span>
+    if ($results-&gt;stopped()) {
+        return $results-&gt;last();
+    }
 
-<span class=x>    // ... do some work ...</span>
-<span class=x>}</span>
-</pre></div></p>
+    // ... do some work ...
+}</code></pre>
 <p>With this paradigm, we know that the likely reason of execution halting is due
 to the last result meeting the test callback criteria; as such, we simply return
 that last result.</p>
@@ -701,11 +694,10 @@ that last result.</p>
 object it receives. In this case, the listener calls <code>stopPropagation(true)</code>,
 and the <code>EventManager</code> will then return without notifying any additional
 listeners.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;do&#39;, function ($e) {</span>
-<span class=x>    $e-&gt;stopPropagation();</span>
-<span class=x>    return new SomeResultClass();</span>
-<span class=x>});</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$events-&gt;attach('do', function ($e) {
+    $e-&gt;stopPropagation();
+    return new SomeResultClass();
+});</code></pre>
 <p>This, of course, raises some ambiguity when using the trigger paradigm, as you
 can no longer be certain that the last result meets the criteria it's searching
 on. As such, we recommend that you standardize on one approach or the other.</p>
@@ -724,19 +716,18 @@ However, if you provide a priority value, you can influence order of execution.<
 <li>Lower (negative) priority values execute <em>later</em>.</li>
 </ul>
 <p>To borrow an example from earlier:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$priority = 100;</span>
-<span class=x>$events-&gt;attach(&#39;Example&#39;, &#39;do&#39;, function($e) {</span>
-<span class=x>    $event  = $e-&gt;getName();</span>
-<span class=x>    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    printf(</span>
-<span class=x>        &#39;Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        $target,</span>
-<span class=x>        json_encode($params)</span>
-<span class=x>    );</span>
-<span class=x>}, $priority);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$priority = 100;
+$events-&gt;attach('Example', 'do', function($e) {
+    $event  = $e-&gt;getName();
+    $target = get_class($e-&gt;getTarget()); // &quot;Example&quot;
+    $params = $e-&gt;getParams();
+    printf(
+        'Handled event &quot;%s&quot; on target &quot;%s&quot;, with parameters %s',
+        $event,
+        $target,
+        json_encode($params)
+    );
+}, $priority);</code></pre>
 <p>This would execute with high priority, meaning it would execute early. If we
 changed <code>$priority</code> to <code>-100</code>, it would execute with low priority, executing
 late.</p>
@@ -750,11 +741,10 @@ passed to <code>trigger()</code> — the event name, target, and parameters. Som
 however, you may want greater control over the object.</p>
 <p>As an example, one thing that looks like a code smell is when you have code like
 this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$routeMatch = $e-&gt;getParam(&#39;route-match&#39;, false);</span>
-<span class=x>if ( !$routeMatch) {</span>
-<span class=x>    // Oh noes! we cannot do our work! whatever shall we do?!?!?!</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$routeMatch = $e-&gt;getParam('route-match', false);
+if ( !$routeMatch) {
+    // Oh noes! we cannot do our work! whatever shall we do?!?!?!
+}</code></pre>
 <p>The problems with this are several. First, relying on string keys is going to
 very quickly run into problems — typos when setting or retrieving the argument
 can lead to hard to debug situations. Second, we now have a documentation issue;
@@ -763,40 +753,37 @@ into the event? Third, as a side effect, we can't use IDE or editor hinting
 support — string keys give these tools nothing to work with.</p>
 <p>Similarly, consider how you might represent a computational result of a method
 when triggering an event. As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// in the method:</span>
-<span class=x>$params[&#39;__RESULT&#39;] = $computedResult;</span>
-<span class=x>$events-&gt;trigger(__FUNCTION__ . &#39;.post&#39;, $this, $params);</span>
+<pre class=codehilite><code class=language-php>// in the method:
+$params['__RESULT'] = $computedResult;
+$events-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
 
-<span class=x>// in the listener:</span>
-<span class=x>$result = $e-&gt;getParam(&#39;__RESULT__&#39;);</span>
-<span class=x>if (! $result) {</span>
-<span class=x>    // Oh noes! we cannot do our work! whatever shall we do?!?!?!</span>
-<span class=x>}</span>
-</pre></div></p>
+// in the listener:
+$result = $e-&gt;getParam('__RESULT__');
+if (! $result) {
+    // Oh noes! we cannot do our work! whatever shall we do?!?!?!
+}</code></pre>
 <p>Sure, that key may be unique, but it suffers from a lot of the same issues.</p>
 <p>So, the solution is to create custom events. As an example, we have a custom
 <code>MvcEvent</code> in laminas-mvc. This event composes the application instance,
 the router, the route match object, request and response objects, the view
 model, and also a result. We end up with code like this in our listeners:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$response = $e-&gt;getResponse();</span>
-<span class=x>$result   = $e-&gt;getResult();</span>
-<span class=x>if (is_string($result)) {</span>
-<span class=x>    $content = $view-&gt;render(&#39;layout.phtml&#39;, [&#39;content&#39; =&gt; $result]);</span>
-<span class=x>    $response-&gt;setContent($content);</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$response = $e-&gt;getResponse();
+$result   = $e-&gt;getResult();
+if (is_string($result)) {
+    $content = $view-&gt;render('layout.phtml', ['content' =&gt; $result]);
+    $response-&gt;setContent($content);
+}</code></pre>
 <p>But how do we use this custom event? Simple: the method <code>triggerEvent()</code>.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$event = new CustomEvent();</span>
-<span class=x>$event-&gt;setName(&#39;foo&#39;);</span>
-<span class=x>$event-&gt;setTarget($this);</span>
-<span class=x>$event-&gt;setSomeKey($value);</span>
+<pre class=codehilite><code class=language-php>$event = new CustomEvent();
+$event-&gt;setName('foo');
+$event-&gt;setTarget($this);
+$event-&gt;setSomeKey($value);
 
-<span class=x>// Injected with event name and target:</span>
-<span class=x>$events-&gt;triggerEvent($event);</span>
+// Injected with event name and target:
+$events-&gt;triggerEvent($event);
 
-<span class=x>// Use triggerEventUntil() for criteria-based short-circuiting:</span>
-<span class=x>$results = $events-&gt;triggerEventUntil($callback, $event);</span>
-</pre></div></p>
+// Use triggerEventUntil() for criteria-based short-circuiting:
+$results = $events-&gt;triggerEventUntil($callback, $event);</code></pre>
 <p>This is a really powerful technique for domain-specific event systems, and
 definitely worth experimenting with.</p>
 <h2 id="putting-it-together-implementing-a-simple-caching-system">Putting it together: Implementing a simple caching system</h2>
@@ -818,29 +805,28 @@ example: what name do we give the result of the method? One standard that has
 emerged is the use of <code>__RESULT__</code>, as double-underscored variables are
 typically reserved for the system.</p>
 <p>Here's what the method will look like:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
-<span class=x>{</span>
-<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
-<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
-<span class=x>        function ($r) {</span>
-<span class=x>            return ($r instanceof SomeResultClass);</span>
-<span class=x>        },</span>
-<span class=x>        __FUNCTION__ . &#39;.pre&#39;,</span>
-<span class=x>        $this,</span>
-<span class=x>        $params</span>
-<span class=x>    );</span>
+<pre class=codehilite><code class=language-php>public function someExpensiveCall($criteria1, $criteria2)
+{
+    $params  = compact('criteria1', 'criteria2');
+    $results = $this-&gt;getEventManager()-&gt;triggerUntil(
+        function ($r) {
+            return ($r instanceof SomeResultClass);
+        },
+        __FUNCTION__ . '.pre',
+        $this,
+        $params
+    );
 
-<span class=x>    if ($results-&gt;stopped()) {</span>
-<span class=x>        return $results-&gt;last();</span>
-<span class=x>    }</span>
+    if ($results-&gt;stopped()) {
+        return $results-&gt;last();
+    }
 
-<span class=x>    // ... do some work ...</span>
+    // ... do some work ...
 
-<span class=x>    $params[&#39;__RESULT__&#39;] = $calculatedResult;</span>
-<span class=x>    $this-&gt;events()-&gt;trigger(__FUNCTION__ . &#39;.post&#39;, $this, $params);</span>
-<span class=x>    return $calculatedResult;</span>
-<span class=x>}</span>
-</pre></div></p>
+    $params['__RESULT__'] = $calculatedResult;
+    $this-&gt;events()-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
+    return $calculatedResult;
+}</code></pre>
 <p>Now, to provide some caching listeners. We'll need to attach to each of the
 <code>someExpensiveCall.pre</code> and <code>someExpensiveCall.post</code> methods. In the former;
 case, if a cache hit is detected, we return it, and move on. In the latter, we
@@ -850,21 +836,20 @@ We'll want to return early if a hit is detected, and execute late when saving a
 cache (in case the result is modified by another listener). As such, we'll set
 the <code>someExpensiveCall.pre</code> listener to execute with priority <code>100</code>, and the
 <code>someExpensiveCall.post</code> listener to execute with priority <code>-100</code>.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;someExpensiveCall.pre&#39;, function($e) use ($cache) {</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    $key    = md5(json_encode($params));</span>
-<span class=x>    $hit    = $cache-&gt;load($key);</span>
-<span class=x>    return $hit;</span>
-<span class=x>}, 100);</span>
+<pre class=codehilite><code class=language-php>$events-&gt;attach('someExpensiveCall.pre', function($e) use ($cache) {
+    $params = $e-&gt;getParams();
+    $key    = md5(json_encode($params));
+    $hit    = $cache-&gt;load($key);
+    return $hit;
+}, 100);
 
-<span class=x>$events-&gt;attach(&#39;someExpensiveCall.post&#39;, function($e) use ($cache) {</span>
-<span class=x>    $params = $e-&gt;getParams();</span>
-<span class=x>    $result = $params[&#39;__RESULT__&#39;];</span>
-<span class=x>    unset($params[&#39;__RESULT__&#39;]);</span>
-<span class=x>    $key    = md5(json_encode($params));</span>
-<span class=x>    $cache-&gt;save($result, $key);</span>
-<span class=x>}, -100);</span>
-</pre></div></p>
+$events-&gt;attach('someExpensiveCall.post', function($e) use ($cache) {
+    $params = $e-&gt;getParams();
+    $result = $params['__RESULT__'];
+    unset($params['__RESULT__']);
+    $key    = md5(json_encode($params));
+    $cache-&gt;save($result, $key);
+}, -100);</code></pre>
 <blockquote>
 <h3>Note</h3>
 <p>The above could have been done within a <code>ListenerAggregate</code>, which would have
@@ -874,34 +859,33 @@ importing it into closures.</p>
 <p>Another approach would be to move the body of the method to a listener as well,
 which would allow using the priority system in order to implement caching. That
 would look like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function setEventManager(EventManagerInterface $events)</span>
-<span class=x>{</span>
-<span class=x>    $this-&gt;events = $events;</span>
-<span class=x>    $events-&gt;setIdentifiers(array(__CLASS__, get_class($this)));</span>
-<span class=x>    $events-&gt;attach(&#39;someExpensiveCall&#39;, [$this, &#39;doSomeExpensiveCall&#39;]);</span>
-<span class=x>}</span>
+<pre class=codehilite><code class=language-php>public function setEventManager(EventManagerInterface $events)
+{
+    $this-&gt;events = $events;
+    $events-&gt;setIdentifiers(array(__CLASS__, get_class($this)));
+    $events-&gt;attach('someExpensiveCall', [$this, 'doSomeExpensiveCall']);
+}
 
-<span class=x>public function someExpensiveCall($criteria1, $criteria2)</span>
-<span class=x>{</span>
-<span class=x>    $params  = compact(&#39;criteria1&#39;, &#39;criteria2&#39;);</span>
-<span class=x>    $results = $this-&gt;getEventManager()-&gt;triggerUntil(</span>
-<span class=x>        function ($r) {</span>
-<span class=x>            return ($r instanceof SomeResultClass);</span>
-<span class=x>        },</span>
-<span class=x>        __FUNCTION__,</span>
-<span class=x>        $this,</span>
-<span class=x>        $params</span>
-<span class=x>    );</span>
-<span class=x>    return $results-&gt;last();</span>
-<span class=x>}</span>
+public function someExpensiveCall($criteria1, $criteria2)
+{
+    $params  = compact('criteria1', 'criteria2');
+    $results = $this-&gt;getEventManager()-&gt;triggerUntil(
+        function ($r) {
+            return ($r instanceof SomeResultClass);
+        },
+        __FUNCTION__,
+        $this,
+        $params
+    );
+    return $results-&gt;last();
+}
 
-<span class=x>public function doSomeExpensiveCall($e)</span>
-<span class=x>{</span>
-<span class=x>    // ... do some work ...</span>
-<span class=x>    $e-&gt;setParam(&#39;__RESULT__&#39;, $calculatedResult);</span>
-<span class=x>    return $calculatedResult;</span>
-<span class=x>}</span>
-</pre></div></p>
+public function doSomeExpensiveCall($e)
+{
+    // ... do some work ...
+    $e-&gt;setParam('__RESULT__', $calculatedResult);
+    return $calculatedResult;
+}</code></pre>
 <p>The listeners would then attach to the <code>someExpensiveCall</code> event, with the cache
 lookup listener listening at high priority, and the cache storage listener
 listening at low (negative) priority.</p>
@@ -1157,9 +1141,10 @@ code, and is an important part of your Laminas toolbox.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -1196,7 +1181,7 @@ code, and is an important part of your Laminas toolbox.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -1205,8 +1190,8 @@ code, and is an important part of your Laminas toolbox.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

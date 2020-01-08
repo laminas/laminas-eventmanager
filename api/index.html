@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -347,40 +351,34 @@
 <code>EventInterface</code>, and <code>ResponseCollection</code>.</p>
 <h2 id="eventmanager">EventManager</h2>
 <h3>Constructor</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>public function __construct(</span>
-<span class=x>    SharedEventManagerInterface $sharedEvents = null,</span>
-<span class=x>    array $identifiers = []</span>
-<span class=x>)</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function __construct(
+    SharedEventManagerInterface $sharedEvents = null,
+    array $identifiers = []
+)</code></pre>
 <p>The <code>EventManager</code> instance accepts a shared event manager instance and
 identifiers to use with the shared event manager.</p>
 <h3>setEventPrototype()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>public function setEventPrototype(EventInterface $event) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function setEventPrototype(EventInterface $event) : void</code></pre>
 <p>Use this method in order to provide an event prototype. The event prototype is
 used with the <code>trigger()</code> and <code>triggerUntil()</code> methods to create a new event
 instance; the prototype is cloned and populated with the event name, target, and
 arguments passed to the method.</p>
 <h3>getSharedManager()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>public function getSharedManager() : null|SharedEventManagerInterface</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function getSharedManager() : null|SharedEventManagerInterface</code></pre>
 <p>Use this method to retrieve the composed shared event manager instance, if any.</p>
 <h3>getIdentifiers()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>public function getIdentifiers() : array</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function getIdentifiers() : array</code></pre>
 <p>Use this method to retrieve the current list of identifiers the event manager
 defines. Identifiers are used when retrieving listeners from the composed shared
 event manager.</p>
 <h3>setIdentifiers() and addIdentifiers()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>public function setIdentifiers(array $identifiers) : void</span>
-<span class=x>public function addIdentifiers(array $identifiers) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function setIdentifiers(array $identifiers) : void
+public function addIdentifiers(array $identifiers) : void</code></pre>
 <p>Use these methods to manipulate the list of identifiers the event manager
 is interested in. <code>setIdentifiers()</code> will overwrite any identifiers previously
 set, while <code>addIdentifiers()</code> will merge them.</p>
 <h3>trigger()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>trigger($eventName, $target = null, $argv = []) : ResponseCollection</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>trigger($eventName, $target = null, $argv = []) : ResponseCollection</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$eventName</code> is a string event name.</li>
@@ -393,8 +391,7 @@ set, while <code>addIdentifiers()</code> will merge them.</p>
 <p>The target and/or arguments may be omitted, but the event name is required.</p>
 <p>When done triggering, the method returns a <code>ResponseCollection</code>.</p>
 <h3>triggerUntil()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>triggerUntil(callable $callback, $eventName, $target = null, $argv = []) : ResponseCollection</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>triggerUntil(callable $callback, $eventName, $target = null, $argv = []) : ResponseCollection</code></pre>
 <p><code>triggerUntil()</code> is a sibling to <code>trigger()</code>, and prefixes the argument list
 with a single <code>$callback</code>.</p>
 <p>The <code>$callback</code> is invoked after each listener completes, with the result of
@@ -402,46 +399,41 @@ that listener. The <code>$callback</code> should inspect the result, and determi
 should result in short-circuiting the event loop. Returning a boolean <code>true</code>
 value indicates that the criteria has been met and the event loop should end.</p>
 <p>As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;foo&#39;, function ($e) {</span>
-<span class=x>    echo &quot;Triggered first\n&quot;;</span>
-<span class=x>    return true;</span>
-<span class=x>});</span>
-<span class=x>$events-&gt;attach(&#39;foo&#39;, function ($e) {</span>
-<span class=x>    echo &quot;Triggered second\n&quot;;</span>
-<span class=x>    return false;</span>
-<span class=x>});</span>
-<span class=x>$events-&gt;attach(&#39;foo&#39;, function ($e) {</span>
-<span class=x>    echo &quot;Triggered third\n&quot;;</span>
-<span class=x>    return true;</span>
-<span class=x>});</span>
+<pre class=codehilite><code class=language-php>$events-&gt;attach('foo', function ($e) {
+    echo &quot;Triggered first\n&quot;;
+    return true;
+});
+$events-&gt;attach('foo', function ($e) {
+    echo &quot;Triggered second\n&quot;;
+    return false;
+});
+$events-&gt;attach('foo', function ($e) {
+    echo &quot;Triggered third\n&quot;;
+    return true;
+});
 
-<span class=x>$events-&gt;triggerUntil(function ($result) {</span>
-<span class=x>    return (false === $result);</span>
-<span class=x>}, &#39;foo&#39;);</span>
-</pre></div></p>
+$events-&gt;triggerUntil(function ($result) {
+    return (false === $result);
+}, 'foo');</code></pre>
 <p>In the above example, the event loop will short-circuit after the second
 listener executes, resulting in the following output:</p>
-<p> <div class=codehilite><pre><span></span>Triggered first
-Triggered second
-</pre></div></p>
+<pre class=codehilite><code class=language-text>Triggered first
+Triggered second</code></pre>
 <h3>triggerEvent()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>triggerEvent(EventInterface $event) : ResponseCollection</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>triggerEvent(EventInterface $event) : ResponseCollection</code></pre>
 <p>This method is a sibling to <code>trigger()</code>, but unlike <code>trigger()</code>, it accepts an
 <code>EventInterface</code> instance as its sole argument. It is up to the caller to ensure
 the event is properly populated.</p>
 <p>This method behaves identically to <code>trigger()</code>, returning a <code>ResponseCollection</code>
 after all listeners have been triggered.</p>
 <h3>triggerEventUntil()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>triggerEventUntil(callable $callback, EventInterface $event) : ResponseCollection</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>triggerEventUntil(callable $callback, EventInterface $event) : ResponseCollection</code></pre>
 <p>This method is a sibling to <code>triggerEvent()</code> and <code>triggerUntil()</code>. Like
 <code>triggerUntil()</code>, the first argument is a PHP callable to invoke for each
 response, and is used to determine whether or not to short-circuit execution.
 Like <code>triggerEvent()</code>, the next argument is an <code>EventInterface</code> instance.</p>
 <h3>attach()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($eventName, callable $listener, $priority = 1) : callable</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($eventName, callable $listener, $priority = 1) : callable</code></pre>
 <p>Use <code>attach()</code> to attach a callable listener to a named event. <code>$priority</code> can
 be used to indicate where in the listener queue the event should be executed.
 Priorities <strong>must</strong> be integers. High positive integers indicate higher priority
@@ -450,52 +442,44 @@ execute last). The default priority is 1, and listeners registered with the same
 priority will execute in the order in which they attach to the event manager.</p>
 <p>The method returns the listener attached.</p>
 <h3>detach()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>detach(callable $listener, $eventName = null) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>detach(callable $listener, $eventName = null) : void</code></pre>
 <p>Use <code>detach()</code> to remove a listener. When a named <code>$eventName</code> is provided, the
 method will detach the listener from that event only (or, if the event does not
 exist in the event manager, nothing will occur). If no event is provided, or the
 wildcard event is provided, the listener will be detached from all events.</p>
 <h3>clearListeners()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>clearListeners($eventName) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>clearListeners($eventName) : void</code></pre>
 <p>Use this method to remove all listeners for a given named event.</p>
 <h3>prepareArgs()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>prepareArgs(array $args) : ArrayObject</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>prepareArgs(array $args) : ArrayObject</code></pre>
 <p>Normally when working with an event, if you want to change any arguments in the
 event, you would need to do the following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$args = $e-&gt;getParams();</span>
+<pre class=codehilite><code class=language-php>$args = $e-&gt;getParams();
 
-<span class=x>// Manipulate args:</span>
-<span class=x>$args[&#39;foo&#39;] = &#39;bar&#39;;</span>
+// Manipulate args:
+$args['foo'] = 'bar';
 
-<span class=x>// Pass them back in:</span>
-<span class=x>$e-&gt;setParams($args);</span>
-</pre></div></p>
+// Pass them back in:
+$e-&gt;setParams($args);</code></pre>
 <p>If the arguments you provide are an <em>object</em>, however, you can manipulate them
 directly:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$args = $e-&gt;getParams();</span>
+<pre class=codehilite><code class=language-php>$args = $e-&gt;getParams();
 
-<span class=x>// Manipulate args:</span>
-<span class=x>$args-&gt;foo = &#39;bar&#39;;</span>
+// Manipulate args:
+$args-&gt;foo = 'bar';
 
-<span class=x>// Done!</span>
-</pre></div></p>
+// Done!</code></pre>
 <p>Using an object, however, makes accessing individual parameters difficult:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$foo = $e-&gt;getParam(&#39;foo&#39;); // How should the event know how to get this?</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$foo = $e-&gt;getParam('foo'); // How should the event know how to get this?</code></pre>
 <p>As such, we recommend passing either an array or an <code>ArrayObject</code> instance for
 event arguments. If you pass the latter, you get the benefit of being able to
 manipulate by reference.</p>
 <p><code>prepareArgs()</code> can thus be used to return an <code>ArrayObject</code> representation of
 your arguments to pass to <code>trigger()</code> or <code>triggerUntil()</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach(&#39;foo&#39;, $this, $events-&gt;prepareArgs(compact(&#39;bar&#39;, &#39;baz&#39;)));</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$events-&gt;attach('foo', $this, $events-&gt;prepareArgs(compact('bar', 'baz')));</code></pre>
 <h2 id="sharedeventmanager">SharedEventManager</h2>
 <h3>attach()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>attach($identifier, $eventName, callable $listener, $priority = 1) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach($identifier, $eventName, callable $listener, $priority = 1) : void</code></pre>
 <p>Attach a listener to a named event triggered by an identified context, where:</p>
 <ul>
 <li><code>$identifier</code> is a string identifier that may be defined by an <code>EventManager</code>
@@ -505,8 +489,7 @@ your arguments to pass to <code>trigger()</code> or <code>triggerUntil()</code>:
 <li><code>$priority</code> is the priority to use when attaching the listener.</li>
 </ul>
 <h3>detach()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>detach(callable $listener, $identifier = null, $eventName = null) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>detach(callable $listener, $identifier = null, $eventName = null) : void</code></pre>
 <p>Detach a listener, optionally from a single identifier, and optionally from a
 named event, where:</p>
 <ul>
@@ -518,22 +501,19 @@ named event, where:</p>
 identified contexts. If no or a null <code>$eventName</code> is provided, the listener will be
 detached from all named events discovered.</p>
 <h3>getListeners()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>getListeners(array $identifiers, $eventName = null) : array[]</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getListeners(array $identifiers, $eventName = null) : array[]</code></pre>
 <p>Retrieves all registered listeners for a given identifier and named event; if
 the event name is omitted, it returns all listeners for the identifier.</p>
 <p>Each value in the array returned is in the form:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>[</span>
-<span class=x>    &#39;listener&#39; =&gt; callable,</span>
-<span class=x>    &#39;priority&#39; =&gt; int,</span>
-<span class=x>]</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>[
+    'listener' =&gt; callable,
+    'priority' =&gt; int,
+]</code></pre>
 <p>Implementations should return wildcard listeners in this array.</p>
 <p>This method is used by the <code>EventManager</code> in order to get a set of listeners for
 the event being triggered.</p>
 <h3>clearListeners()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>clearListeners($id, $eventName = null) : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>clearListeners($id, $eventName = null) : bool</code></pre>
 <p>This event will clear all listeners for a given identifier, or, if specified,
 the specific event for the named identifier.</p>
 <h2 id="eventinterface">EventInterface</h2>
@@ -541,46 +521,36 @@ the specific event for the named identifier.</p>
 define custom events. The <code>EventInterface</code> thus defines the common methods
 across any event implementation.</p>
 <h3>getName()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>getName() : string</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getName() : string</code></pre>
 <p>Returns the event name.</p>
 <h3>getTarget()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>getTarget() : null|string|object</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getTarget() : null|string|object</code></pre>
 <p>Returns the event target, if any.</p>
 <h3>getParams()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>getParams() : array|ArrayAccess</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getParams() : array|ArrayAccess</code></pre>
 <p>Returns the event parameters, if any.</p>
 <h3>getParam()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>getParam($name, $default = null) : mixed</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>getParam($name, $default = null) : mixed</code></pre>
 <p>Returns a single named parameter, returning the <code>$default</code> if not found.</p>
 <h3>setName()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>setName($name) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>setName($name) : void</code></pre>
 <p>Sets the event name.</p>
 <h3>setTarget()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>setTarget($target) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>setTarget($target) : void</code></pre>
 <p>Sets the event target. <code>$target</code> may be a string or object.</p>
 <h3>setParams()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>setParams($params) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>setParams($params) : void</code></pre>
 <p>Set the event parameters; <code>$params</code> should be an array or object implementing
 <code>ArrayAccess</code>.</p>
 <h3>setParam()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>setParam($name, $value) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>setParam($name, $value) : void</code></pre>
 <p>Set a single named event parameter value.</p>
 <h3>stopPropagation()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>stopPropagation($flag = true) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>stopPropagation($flag = true) : void</code></pre>
 <p>Indicate whether or not event propagation should halt (short-circuit). This
 value is what will be returned by <code>propagationIsStopped()</code>.</p>
 <h3>propagationIsStopped()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>propagationIsStopped() : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>propagationIsStopped() : bool</code></pre>
 <p>Used by the event manager to determine if the event has indicated that the event
 loop should short-circuit.</p>
 <h2 id="responsecollection">ResponseCollection</h2>
@@ -591,20 +561,16 @@ the various results of listener execution.</p>
 responses in the order in which they were provided. In addition, it has the API
 listed below.</p>
 <h3>stopped()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>stopped() : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>stopped() : bool</code></pre>
 <p>Use this to determine if something caused the event loop to short-circuit.</p>
 <h3>first()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>first() : mixed</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>first() : mixed</code></pre>
 <p>Returns the result from the first listener executed.</p>
 <h3>last()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>last() : mixed</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>last() : mixed</code></pre>
 <p>Returns the result from the last listener executed.</p>
 <h3>contains()</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>contains($value) : bool</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>contains($value) : bool</code></pre>
 <p>Query the response collection to determine if a specific value was returned by
 any listener.</p>
 
@@ -848,9 +814,10 @@ any listener.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -887,7 +854,7 @@ any listener.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -896,8 +863,8 @@ any listener.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

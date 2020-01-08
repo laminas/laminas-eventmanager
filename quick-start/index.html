@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -312,33 +316,32 @@
 
     <h1 id="quick-start">Quick Start</h1>
 <p>Typically, you will compose an <code>EventManager</code> instance in a class.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventManagerInterface;</span>
-<span class=x>use Laminas\EventManager\EventManager;</span>
-<span class=x>use Laminas\EventManager\EventManagerAwareInterface;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerAwareInterface;
 
-<span class=x>class Foo implements EventManagerAwareInterface</span>
-<span class=x>{</span>
-<span class=x>    protected $events;</span>
+class Foo implements EventManagerAwareInterface
+{
+    protected $events;
 
-<span class=x>    public function setEventManager(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        $events-&gt;setIdentifiers([</span>
-<span class=x>            __CLASS__,</span>
-<span class=x>            get_called_class(),</span>
-<span class=x>        ]);</span>
-<span class=x>        $this-&gt;events = $events;</span>
-<span class=x>        return $this;</span>
-<span class=x>    }</span>
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events-&gt;setIdentifiers([
+            __CLASS__,
+            get_called_class(),
+        ]);
+        $this-&gt;events = $events;
+        return $this;
+    }
 
-<span class=x>    public function getEventManager()</span>
-<span class=x>    {</span>
-<span class=x>        if (null === $this-&gt;events) {</span>
-<span class=x>            $this-&gt;setEventManager(new EventManager());</span>
-<span class=x>        }</span>
-<span class=x>        return $this-&gt;events;</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function getEventManager()
+    {
+        if (null === $this-&gt;events) {
+            $this-&gt;setEventManager(new EventManager());
+        }
+        return $this-&gt;events;
+    }
+}</code></pre>
 <p>The above allows users to access the <code>EventManager</code> instance, or reset it with a
 new instance; if one does not exist, it will be lazily instantiated on-demand.</p>
 <p>The instance property <code>$events</code> is a convention for referring to the
@@ -350,46 +353,44 @@ EventManager instance.</p>
 <li>The <em>target</em>, which is usually the current object instance;</li>
 <li>Event <em>arguments</em>, which are usually the arguments provided to the current function/method.</li>
 </ul>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo</span>
-<span class=x>{</span>
-<span class=x>    // ... assume events definition from above</span>
+<pre class=codehilite><code class=language-php>class Foo
+{
+    // ... assume events definition from above
 
-<span class=x>    public function bar($baz, $bat = null)</span>
-<span class=x>    {</span>
-<span class=x>        $params = compact(&#39;baz&#39;, &#39;bat&#39;);</span>
-<span class=x>        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $params);</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function bar($baz, $bat = null)
+    {
+        $params = compact('baz', 'bat');
+        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $params);
+    }
+}</code></pre>
 <p>In turn, triggering events is only interesting if something is listening for the
 event.</p>
 <p>Listeners attach to the <code>EventManager</code>, specifying a named event and the
 callback to notify. The callback receives an <code>Event</code> object, which has accessors
 for retrieving the event name, target, and parameters. Let's add a listener, and
 trigger the event.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Log\Factory as LogFactory;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Log\Factory as LogFactory;
 
-<span class=x>$log = LogFactory($someConfig);</span>
-<span class=x>$foo = new Foo();</span>
-<span class=x>$foo-&gt;getEventManager()-&gt;attach(&#39;bar&#39;, function ($e) use ($log) {</span>
-<span class=x>    $event  = $e-&gt;getName();</span>
-<span class=x>    $target = get_class($e-&gt;getTarget());</span>
-<span class=x>    $params = json_encode($e-&gt;getParams());</span>
+$log = LogFactory($someConfig);
+$foo = new Foo();
+$foo-&gt;getEventManager()-&gt;attach('bar', function ($e) use ($log) {
+    $event  = $e-&gt;getName();
+    $target = get_class($e-&gt;getTarget());
+    $params = json_encode($e-&gt;getParams());
 
-<span class=x>    $log-&gt;info(sprintf(</span>
-<span class=x>        &#39;%s called on %s, using params %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        $target,</span>
-<span class=x>        $params</span>
-<span class=x>    ));</span>
-<span class=x>});</span>
+    $log-&gt;info(sprintf(
+        '%s called on %s, using params %s',
+        $event,
+        $target,
+        $params
+    ));
+});
 
-<span class=x>// The following method call:</span>
-<span class=x>$foo-&gt;bar(&#39;baz&#39;, &#39;bat&#39;);</span>
+// The following method call:
+$foo-&gt;bar('baz', 'bat');
 
-<span class=x>// Results in the log message reading:</span>
-<span class=x>// bar called on Foo, using params {&quot;baz&quot; : &quot;baz&quot;, &quot;bat&quot; : &quot;bat&quot;}&quot;</span>
-</pre></div></p>
+// Results in the log message reading:
+// bar called on Foo, using params {&quot;baz&quot; : &quot;baz&quot;, &quot;bat&quot; : &quot;bat&quot;}&quot;</code></pre>
 <p>Note that the second argument to <code>attach()</code> is any valid PHP callable; an
 anonymous function is shown in the example in order to keep the example
 self-contained.</p>
@@ -413,33 +414,32 @@ those identifiers from the <code>SharedEventManager</code>.</p>
 been injected in our <code>EventManager</code> instances (for instance, via dependency
 injection), we could change the above example to attach via the shared
 collection:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Log\Factory as LogFactory;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Log\Factory as LogFactory;
 
-<span class=x>// Assume $sharedEvents is a Laminas\EventManager\SharedEventManager instance</span>
+// Assume $sharedEvents is a Laminas\EventManager\SharedEventManager instance
 
-<span class=x>$log = LogFactory($someConfig);</span>
-<span class=x>$sharedEvents-&gt;attach(&#39;Foo&#39;, &#39;bar&#39;, function ($e) use ($log) {</span>
-<span class=x>    $event  = $e-&gt;getName();</span>
-<span class=x>    $target = get_class($e-&gt;getTarget());</span>
-<span class=x>    $params = json_encode($e-&gt;getParams());</span>
+$log = LogFactory($someConfig);
+$sharedEvents-&gt;attach('Foo', 'bar', function ($e) use ($log) {
+    $event  = $e-&gt;getName();
+    $target = get_class($e-&gt;getTarget());
+    $params = json_encode($e-&gt;getParams());
 
-<span class=x>    $log-&gt;info(sprintf(</span>
-<span class=x>        &#39;%s called on %s, using params %s&#39;,</span>
-<span class=x>        $event,</span>
-<span class=x>        $target,</span>
-<span class=x>        $params</span>
-<span class=x>    ));</span>
-<span class=x>});</span>
+    $log-&gt;info(sprintf(
+        '%s called on %s, using params %s',
+        $event,
+        $target,
+        $params
+    ));
+});
 
-<span class=x>// Later, instantiate Foo:</span>
-<span class=x>$foo = new Foo();</span>
-<span class=x>$foo-&gt;setEventManager(new EventManager($sharedEvents, []));</span>
+// Later, instantiate Foo:
+$foo = new Foo();
+$foo-&gt;setEventManager(new EventManager($sharedEvents, []));
 
-<span class=x>// And we can still trigger the above event:</span>
-<span class=x>$foo-&gt;bar(&#39;baz&#39;, &#39;bat&#39;);</span>
-<span class=x>// results in log message:</span>
-<span class=x>// bar called on Foo, using params {&quot;baz&quot; : &quot;baz&quot;, &quot;bat&quot; : &quot;bat&quot;}&quot;</span>
-</pre></div></p>
+// And we can still trigger the above event:
+$foo-&gt;bar('baz', 'bat');
+// results in log message:
+// bar called on Foo, using params {&quot;baz&quot; : &quot;baz&quot;, &quot;bat&quot; : &quot;bat&quot;}&quot;</code></pre>
 <p>The <code>EventManager</code> also provides the ability to detach listeners, short-circuit
 execution of an event either from within a listener or by testing return values
 of listeners, test and loop through the results returned by listeners,
@@ -686,9 +686,10 @@ examples.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -725,7 +726,7 @@ examples.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -734,8 +735,8 @@ examples.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -392,8 +396,7 @@ listener is not present, checking for presence first is not necessary.</p>
 <p>The method <code>EventManagerInterface::setEventClass()</code> was removed and replaced
 with <code>EventManagerInterface::setEventPrototype()</code>, which has the following
 signature:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>setEventPrototype(EventInterface $event);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>setEventPrototype(EventInterface $event);</code></pre>
 <p>This was done to prevent errors that occurred when invalid event class names
 were provided. Additionally, internally, event managers will clone the
 instance any time <code>trigger()</code> or <code>triggerUntil()</code> are called — which is
@@ -406,19 +409,15 @@ typically faster and less resource intensive than instantiating a new instance.<
 and <code>detach()</code> methods of the <code>ListenerAggregateInterface</code>. As such, to
 forward-proof your applications, you can alter statements that attach aggregates
 to an event manager reading as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;attach($aggregate); // or</span>
-<span class=x>$events-&gt;attachAggregate($aggregate);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$events-&gt;attach($aggregate); // or
+$events-&gt;attachAggregate($aggregate);</code></pre>
 <p>to:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$aggregate-&gt;attach($events);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$aggregate-&gt;attach($events);</code></pre>
 <p>Similarly, for detaching an aggregate, migrate from:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$events-&gt;detach($aggregate); // or</span>
-<span class=x>$events-&gt;detachAggregate($aggregate);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$events-&gt;detach($aggregate); // or
+$events-&gt;detachAggregate($aggregate);</code></pre>
 <p>to:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$aggregate-&gt;detach($events);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$aggregate-&gt;detach($events);</code></pre>
 <p>The above works in all released versions of the component.</p>
 <h2 id="sharedeventaggregateawareinterface-sharedlisteneraggregateinterface">SharedEventAggregateAwareInterface, SharedListenerAggregateInterface</h2>
 <p>The interfaces <code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> and
@@ -445,50 +444,46 @@ aggregate class, and swap attachment of the aggregate.</p>
 methods in your class, but remove the <code>implements
 SharedListenerAggregateInterface</code> from the class declaration. For instance, if
 you had the following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Foo;</span>
+<pre class=codehilite><code class=language-php>namespace Foo;
 
-<span class=x>use Laminas\EventManager\SharedEventManagerInterface;</span>
-<span class=x>use Laminas\EventManager\SharedListenerAggregateInterface;</span>
+use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\SharedListenerAggregateInterface;
 
-<span class=x>class MySharedAggregate implements SharedListenerAggregateInterface</span>
-<span class=x>{</span>
-<span class=x>    public function attachShared(SharedEventManagerInterface $manager)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
+class MySharedAggregate implements SharedListenerAggregateInterface
+{
+    public function attachShared(SharedEventManagerInterface $manager)
+    {
+        // ...
+    }
 
-<span class=x>    public function detachShared(SharedEventManagerInterface $manager)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function detachShared(SharedEventManagerInterface $manager)
+    {
+        // ...
+    }
+}</code></pre>
 <p>then modify it to instead read:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Foo;</span>
+<pre class=codehilite><code class=language-php>namespace Foo;
 
-<span class=x>use Laminas\EventManager\SharedEventManagerInterface;</span>
+use Laminas\EventManager\SharedEventManagerInterface;
 
-<span class=x>class MySharedAggregate</span>
-<span class=x>{</span>
-<span class=x>    public function attachShared(SharedEventManagerInterface $manager)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
+class MySharedAggregate
+{
+    public function attachShared(SharedEventManagerInterface $manager)
+    {
+        // ...
+    }
 
-<span class=x>    public function detachShared(SharedEventManagerInterface $manager)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function detachShared(SharedEventManagerInterface $manager)
+    {
+        // ...
+    }
+}</code></pre>
 <p>For the second step, instead of attaching the aggregate to the shared event
 manager, you will pass the shared event manager to your aggregate. For example,
 if you had the following in your code:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$sharedEvents-&gt;attachAggregate($mySharedAggregate);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$sharedEvents-&gt;attachAggregate($mySharedAggregate);</code></pre>
 <p>then you can change it to:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$mySharedAggregate-&gt;attachShared($sharedEvents);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$mySharedAggregate-&gt;attachShared($sharedEvents);</code></pre>
 <p>This has exactly the same effect, and makes your code forward-compatible with
 v3.</p>
 <h4>SharedEventManagerAwareInterface</h4>
@@ -756,9 +751,10 @@ was not consumed by the event manager, and served no real purpose.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -795,7 +791,7 @@ was not consumed by the event manager, and served no real purpose.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -804,8 +800,8 @@ was not consumed by the event manager, and served no real purpose.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

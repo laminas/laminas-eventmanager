@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -339,97 +343,93 @@ a string and convert it to a <code>DateTime</code> argument.</p>
 <p>To do this, you can pass your arguments to <code>prepareArgs()</code>, and pass this new
 object when triggering an event. You will then pull that value back into your
 method.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use DateTime;</span>
+<pre class=codehilite><code class=language-php>use DateTime;
 
-<span class=x>class ValueObject</span>
-<span class=x>{</span>
-<span class=x>    // assume a composed event manager</span>
+class ValueObject
+{
+    // assume a composed event manager
 
-<span class=x>    function inject(array $values)</span>
-<span class=x>    {</span>
-<span class=x>        $argv = compact(&#39;values&#39;);</span>
-<span class=x>        $argv = $this-&gt;getEventManager()-&gt;prepareArgs($argv);</span>
-<span class=x>        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $argv);</span>
-<span class=x>        $date = isset($argv[&#39;values&#39;][&#39;date&#39;])</span>
-<span class=x>            ? $argv[&#39;values&#39;][&#39;date&#39;]</span>
-<span class=x>            : new DateTime(&#39;now&#39;);</span>
+    function inject(array $values)
+    {
+        $argv = compact('values');
+        $argv = $this-&gt;getEventManager()-&gt;prepareArgs($argv);
+        $this-&gt;getEventManager()-&gt;trigger(__FUNCTION__, $this, $argv);
+        $date = isset($argv['values']['date'])
+            ? $argv['values']['date']
+            : new DateTime('now');
 
-<span class=x>        // ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+        // ...
+    }
+}
 
-<span class=x>$v = new ValueObject();</span>
+$v = new ValueObject();
 
-<span class=x>$v-&gt;getEventManager()-&gt;attach(&#39;inject&#39;, function($e) {</span>
-<span class=x>    $values = $e-&gt;getParam(&#39;values&#39;);</span>
-<span class=x>    if (! $values) {</span>
-<span class=x>        return;</span>
-<span class=x>    }</span>
+$v-&gt;getEventManager()-&gt;attach('inject', function($e) {
+    $values = $e-&gt;getParam('values');
+    if (! $values) {
+        return;
+    }
 
-<span class=x>    $values[&#39;date&#39;] = isset($values[&#39;date&#39;])</span>
-<span class=x>        ? new DateTime($values[&#39;date&#39;])</span>
-<span class=x>        : new DateTime(&#39;now&#39;);</span>
+    $values['date'] = isset($values['date'])
+        ? new DateTime($values['date'])
+        : new DateTime('now');
 
-<span class=x>    $e-&gt;setParam(&#39;values&#39;, $values);</span>
-<span class=x>});</span>
+    $e-&gt;setParam('values', $values);
+});
 
-<span class=x>$v-&gt;inject([</span>
-<span class=x>    &#39;date&#39; =&gt; &#39;2011-08-10 15:30:29&#39;,</span>
-<span class=x>]);</span>
-</pre></div></p>
+$v-&gt;inject([
+    'date' =&gt; '2011-08-10 15:30:29',
+]);</code></pre>
 <h2 id="short-circuiting">Short Circuiting</h2>
 <p>One common use case for events is to trigger listeners until either one
 indicates no further processing should be done, or until a return value meets
 specific criteria.</p>
 <p>As an example, a request listener might be able to return a response object, and
 would signal to the target to stop event propagation.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$listener = function($e) {</span>
-<span class=x>    // do some work</span>
+<pre class=codehilite><code class=language-php>$listener = function($e) {
+    // do some work
 
-<span class=x>    // Stop propagation and return a response</span>
-<span class=x>    $e-&gt;stopPropagation(true);</span>
-<span class=x>    return $response;</span>
-<span class=x>};</span>
-</pre></div></p>
+    // Stop propagation and return a response
+    $e-&gt;stopPropagation(true);
+    return $response;
+};</code></pre>
 <p>Alternately, the request handler could halt execution at the first listener that
 returns a response.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo implements DispatchableInterface</span>
-<span class=x>{</span>
-<span class=x>    // assume composed event manager</span>
+<pre class=codehilite><code class=language-php>class Foo implements DispatchableInterface
+{
+    // assume composed event manager
 
-<span class=x>    public function dispatch(Request $request, Response $response = null)</span>
-<span class=x>    {</span>
-<span class=x>        $argv = compact(&#39;request&#39;, &#39;response&#39;);</span>
-<span class=x>        $results = $this-&gt;getEventManager()-&gt;triggerUntil(function($v) {</span>
-<span class=x>            return ($v instanceof Response);</span>
-<span class=x>        }, __FUNCTION__, $this, $argv);</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function dispatch(Request $request, Response $response = null)
+    {
+        $argv = compact('request', 'response');
+        $results = $this-&gt;getEventManager()-&gt;triggerUntil(function($v) {
+            return ($v instanceof Response);
+        }, __FUNCTION__, $this, $argv);
+    }
+}</code></pre>
 <p>Typically, you may want to return the value that stopped execution, or use it
 some way. All <code>trigger*()</code> methods return a <code>ResponseCollection</code> instance; call
 its <code>stopped()</code> method to test if execution was stopped, and the <code>last()</code> method
 to retrieve the return value from the last executed listener:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo implements DispatchableInterface</span>
-<span class=x>{</span>
-<span class=x>    // assume composed event manager</span>
+<pre class=codehilite><code class=language-php>class Foo implements DispatchableInterface
+{
+    // assume composed event manager
 
-<span class=x>    public function dispatch(Request $request, Response $response = null)</span>
-<span class=x>    {</span>
-<span class=x>        $argv = compact(&#39;request&#39;, &#39;response&#39;);</span>
-<span class=x>        $results = $this-&gt;getEventManager()-&gt;triggerUntil(function($v) {</span>
-<span class=x>            return ($v instanceof Response);</span>
-<span class=x>        }, __FUNCTION__, $this, $argv);</span>
+    public function dispatch(Request $request, Response $response = null)
+    {
+        $argv = compact('request', 'response');
+        $results = $this-&gt;getEventManager()-&gt;triggerUntil(function($v) {
+            return ($v instanceof Response);
+        }, __FUNCTION__, $this, $argv);
 
-<span class=x>        // Test if execution was halted, and return last result:</span>
-<span class=x>        if ($results-&gt;stopped()) {</span>
-<span class=x>            return $results-&gt;last();</span>
-<span class=x>        }</span>
+        // Test if execution was halted, and return last result:
+        if ($results-&gt;stopped()) {
+            return $results-&gt;last();
+        }
 
-<span class=x>        // continue...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        // continue...
+    }
+}</code></pre>
 <h2 id="assigning-priority-to-listeners">Assigning Priority to Listeners</h2>
 <p>One use case for the <code>EventManager</code> is for implementing caching systems. As
 such, you often want to check the cache early, and save to it late.</p>
@@ -441,77 +441,74 @@ a given priority.</p>
 method start as well as at method end. At method start, we want an event that
 will trigger early; at method end, an event should trigger late.</p>
 <p>Here is the class in which we want caching:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class SomeValueObject</span>
-<span class=x>{</span>
-<span class=x>    // assume it composes an event manager</span>
+<pre class=codehilite><code class=language-php>class SomeValueObject
+{
+    // assume it composes an event manager
 
-<span class=x>    public function get($id)</span>
-<span class=x>    {</span>
-<span class=x>        $params = compact(&#39;id&#39;);</span>
-<span class=x>        $results = $this-&gt;getEventManager()-&gt;trigger(&#39;get.pre&#39;, $this, $params);</span>
+    public function get($id)
+    {
+        $params = compact('id');
+        $results = $this-&gt;getEventManager()-&gt;trigger('get.pre', $this, $params);
 
-<span class=x>        // If an event stopped propagation, return the value</span>
-<span class=x>        if ($results-&gt;stopped()) {</span>
-<span class=x>            return $results-&gt;last();</span>
-<span class=x>        }</span>
+        // If an event stopped propagation, return the value
+        if ($results-&gt;stopped()) {
+            return $results-&gt;last();
+        }
 
-<span class=x>        // do some work...</span>
+        // do some work...
 
-<span class=x>        $params[&#39;__RESULT__&#39;] = $someComputedContent;</span>
-<span class=x>        $this-&gt;getEventManager()-&gt;trigger(&#39;get.post&#39;, $this, $params);</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        $params['__RESULT__'] = $someComputedContent;
+        $this-&gt;getEventManager()-&gt;trigger('get.post', $this, $params);
+    }
+}</code></pre>
 <p>Now, let's create a <code>ListenerAggregateInterface</code> implementation that can handle
 caching for us:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Cache\Cache;</span>
-<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
-<span class=x>use Laminas\EventManager\ListenerAggregateInterface;</span>
-<span class=x>use Laminas\EventManager\ListenerAggregateTrait;</span>
-<span class=x>use Laminas\EventManager\EventInterface;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Cache\Cache;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\EventManager\EventInterface;
 
-<span class=x>class CacheListener implements ListenerAggregateInterface</span>
-<span class=x>{</span>
-<span class=x>    use ListenerAggregateTrait;</span>
+class CacheListener implements ListenerAggregateInterface
+{
+    use ListenerAggregateTrait;
 
-<span class=x>    private $cache;</span>
+    private $cache;
 
-<span class=x>    public function __construct(Cache $cache)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;cache = $cache;</span>
-<span class=x>    }</span>
+    public function __construct(Cache $cache)
+    {
+        $this-&gt;cache = $cache;
+    }
 
-<span class=x>    public function attach(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;get.pre&#39;, [$this, &#39;load&#39;], 100);</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;get.post&#39;, [$this, &#39;save&#39;], -100);</span>
-<span class=x>    }</span>
+    public function attach(EventManagerInterface $events)
+    {
+        $this-&gt;listeners[] = $events-&gt;attach('get.pre', [$this, 'load'], 100);
+        $this-&gt;listeners[] = $events-&gt;attach('get.post', [$this, 'save'], -100);
+    }
 
-<span class=x>    public function load(EventInterface $e)</span>
-<span class=x>    {</span>
-<span class=x>        $id = get_class($e-&gt;getTarget()) . &#39;-&#39; . json_encode($e-&gt;getParams());</span>
-<span class=x>        if (false !== ($content = $this-&gt;cache-&gt;load($id))) {</span>
-<span class=x>            $e-&gt;stopPropagation(true);</span>
-<span class=x>            return $content;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
+    public function load(EventInterface $e)
+    {
+        $id = get_class($e-&gt;getTarget()) . '-' . json_encode($e-&gt;getParams());
+        if (false !== ($content = $this-&gt;cache-&gt;load($id))) {
+            $e-&gt;stopPropagation(true);
+            return $content;
+        }
+    }
 
-<span class=x>    public function save(EventInterface $e)</span>
-<span class=x>    {</span>
-<span class=x>        $params  = $e-&gt;getParams();</span>
-<span class=x>        $content = $params[&#39;__RESULT__&#39;];</span>
-<span class=x>        unset($params[&#39;__RESULT__&#39;]);</span>
+    public function save(EventInterface $e)
+    {
+        $params  = $e-&gt;getParams();
+        $content = $params['__RESULT__'];
+        unset($params['__RESULT__']);
 
-<span class=x>        $id = get_class($e-&gt;getTarget()) . &#39;-&#39; . json_encode($params);</span>
-<span class=x>        $this-&gt;cache-&gt;save($content, $id);</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        $id = get_class($e-&gt;getTarget()) . '-' . json_encode($params);
+        $this-&gt;cache-&gt;save($content, $id);
+    }
+}</code></pre>
 <p>We can then attach the aggregate to an event manager instance.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$value         = new SomeValueObject();</span>
-<span class=x>$cacheListener = new CacheListener($cache);</span>
-<span class=x>$cacheListener-&gt;attach($value-&gt;getEventManager());</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$value         = new SomeValueObject();
+$cacheListener = new CacheListener($cache);
+$cacheListener-&gt;attach($value-&gt;getEventManager());</code></pre>
 <p>Now, as we call <code>get()</code>, if we have a cached entry, it will be returned
 immediately; if not, a computed entry will be cached when we complete the
 method.</p>
@@ -756,9 +753,10 @@ method.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -795,7 +793,7 @@ method.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -804,8 +802,8 @@ method.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

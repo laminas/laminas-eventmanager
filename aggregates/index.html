@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -346,54 +350,52 @@
 </ul>
 <p>A listener aggregate is a class implementing
 <code>Laminas\EventManager\ListenerAggregateInterface</code>, which defines two methods:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>attach(EventManagerInterface $events, $priority = 1);</span>
-<span class=x>detach(EventManagerInterface $events);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>attach(EventManagerInterface $events, $priority = 1);
+detach(EventManagerInterface $events);</code></pre>
 <p>To attach an aggregate to an event manager, you pass the event manager to the
 aggregate's <code>attach()</code> method; in that method, you will then attach listeners to
 the events you are interested in.</p>
 <h2 id="implementation">Implementation</h2>
 <p>To implement <code>ListenerAggregateInterface</code>, you need to define the <code>attach()</code> and
 <code>detach()</code> methods. A typical implementation will look something like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventInterface;</span>
-<span class=x>use Laminas\EventManager\EventManagerInterface;</span>
-<span class=x>use Laminas\EventManager\ListenerAggregateInterface;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
 
-<span class=x>class Aggregate implements ListenerAggregateInterface</span>
-<span class=x>{</span>
-<span class=x>    private $listeners = [];</span>
+class Aggregate implements ListenerAggregateInterface
+{
+    private $listeners = [];
 
-<span class=x>    public function attach(EventManagerInterface $events, $priority = 1)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;something&#39;, [$this, &#39;onSomething&#39;], $priority);</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;else&#39;, [$this, &#39;onElse&#39;], $priority);</span>
-<span class=x>        $this-&gt;listeners[] = $events-&gt;attach(&#39;again&#39;, [$this, &#39;onAgain&#39;], $priority);</span>
-<span class=x>    }</span>
+    public function attach(EventManagerInterface $events, $priority = 1)
+    {
+        $this-&gt;listeners[] = $events-&gt;attach('something', [$this, 'onSomething'], $priority);
+        $this-&gt;listeners[] = $events-&gt;attach('else', [$this, 'onElse'], $priority);
+        $this-&gt;listeners[] = $events-&gt;attach('again', [$this, 'onAgain'], $priority);
+    }
 
-<span class=x>    public function detach(EventManagerInterface $events)</span>
-<span class=x>    {</span>
-<span class=x>        foreach ($this-&gt;listeners as $index =&gt; $listener) {</span>
-<span class=x>            $events-&gt;detach($listener);</span>
-<span class=x>            unset($this-&gt;listeners[$index]);</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this-&gt;listeners as $index =&gt; $listener) {
+            $events-&gt;detach($listener);
+            unset($this-&gt;listeners[$index]);
+        }
+    }
 
-<span class=x>    public function onSomething(EventInterface $event)</span>
-<span class=x>    {</span>
-<span class=x>        // handle event</span>
-<span class=x>    }</span>
+    public function onSomething(EventInterface $event)
+    {
+        // handle event
+    }
 
-<span class=x>    public function onElse(EventInterface $event)</span>
-<span class=x>    {</span>
-<span class=x>        // handle event</span>
-<span class=x>    }</span>
+    public function onElse(EventInterface $event)
+    {
+        // handle event
+    }
 
-<span class=x>    public function onAgain(EventInterface $event)</span>
-<span class=x>    {</span>
-<span class=x>        // handle event</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function onAgain(EventInterface $event)
+    {
+        // handle event
+    }
+}</code></pre>
 <p>Because the logic for detaching is essentially the same in all implementations,
 we provide two facilities for implementing this:</p>
 <ul>
@@ -409,10 +411,9 @@ we provide two facilities for implementing this:</p>
 <p>To use an aggregate listener, you need to attach it to the event manager. As
 noted in the intro to this section, you do so by passing the event
 manager to the aggregate's <code>attach()</code> method:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Assume $events is an EventManager instance, and $aggregate is an instance of</span>
-<span class=x>// the Aggregate class defined earlier.</span>
-<span class=x>$aggregate-&gt;attach($events);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>// Assume $events is an EventManager instance, and $aggregate is an instance of
+// the Aggregate class defined earlier.
+$aggregate-&gt;attach($events);</code></pre>
 <h2 id="recommendations">Recommendations</h2>
 <ul>
 <li>
@@ -667,9 +668,10 @@ manager to the aggregate's <code>attach()</code> method:</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -706,7 +708,7 @@ manager to the aggregate's <code>attach()</code> method:</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-eventmanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -715,8 +717,8 @@ manager to the aggregate's <code>attach()</code> method:</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-eventmanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
