@@ -12,14 +12,15 @@
     <title>Changed Functionality - laminas-eventmanager - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
+    
 </head>
-<body id="page-top" class="components">
+<body id="page-top" class="components" data-spy="scroll" data-target=".toc" data-offset="20">
 
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         
-        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+        <a class="logo-link navbar-brand" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
             <img src="https://docs.laminas.dev/img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
@@ -250,7 +251,7 @@
         <div class="row">
 
             
-            <div class="col-6 offset-md-2">
+            <div class="col-8">
                 <h1 class="header__title">
                     Components
 
@@ -280,7 +281,7 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-sm-12">
+            <div class="col-md-9 col-sm-12 content" role="main">
                 
                 
                     
@@ -293,51 +294,51 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#eventmanager__construct" class="toc__link">EventManager::__construct()</a>
+                        <a href="#eventmanager__construct" class="toc__link nav-link">EventManager::__construct()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#eventmanagerinterfacetrigger-and-triggeruntil" class="toc__link">EventManagerInterface::trigger() and triggerUntil()</a>
+                        <a href="#eventmanagerinterfacetrigger-and-triggeruntil" class="toc__link nav-link">EventManagerInterface::trigger() and triggerUntil()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#eventmanagerinterfaceattach-and-detach" class="toc__link">EventManagerInterface::attach() and detach()</a>
+                        <a href="#eventmanagerinterfaceattach-and-detach" class="toc__link nav-link">EventManagerInterface::attach() and detach()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#eventmanagerinterfaceseteventclass-and-seteventprototype" class="toc__link">EventManagerInterface::setEventClass() and setEventPrototype()</a>
+                        <a href="#eventmanagerinterfaceseteventclass-and-seteventprototype" class="toc__link nav-link">EventManagerInterface::setEventClass() and setEventPrototype()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#eventmanagerinterfacesetidentifiers-and-addidentifiers" class="toc__link">EventManagerInterface::setIdentifiers() and addIdentifiers()</a>
+                        <a href="#eventmanagerinterfacesetidentifiers-and-addidentifiers" class="toc__link nav-link">EventManagerInterface::setIdentifiers() and addIdentifiers()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#sharedeventmanagerinterfacegetlisteners" class="toc__link">SharedEventManagerInterface::getListeners()</a>
+                        <a href="#sharedeventmanagerinterfacegetlisteners" class="toc__link nav-link">SharedEventManagerInterface::getListeners()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#sharedeventmanagerinterfaceattach" class="toc__link">SharedEventManagerInterface::attach()</a>
+                        <a href="#sharedeventmanagerinterfaceattach" class="toc__link nav-link">SharedEventManagerInterface::attach()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#sharedeventmanagerinterfacedetach" class="toc__link">SharedEventManagerInterface::detach()</a>
+                        <a href="#sharedeventmanagerinterfacedetach" class="toc__link nav-link">SharedEventManagerInterface::detach()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#listeneraggregateinterfaceattach" class="toc__link">ListenerAggregateInterface::attach()</a>
+                        <a href="#listeneraggregateinterfaceattach" class="toc__link nav-link">ListenerAggregateInterface::attach()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#filterinterfaceattach-and-detach" class="toc__link">FilterInterface::attach() and detach()</a>
+                        <a href="#filterinterfaceattach-and-detach" class="toc__link nav-link">FilterInterface::attach() and detach()</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#filteriterator" class="toc__link">FilterIterator</a>
+                        <a href="#filteriterator" class="toc__link nav-link">FilterIterator</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#responsecollectionsetstopped" class="toc__link">ResponseCollection::setStopped()</a>
+                        <a href="#responsecollectionsetstopped" class="toc__link nav-link">ResponseCollection::setStopped()</a>
                     </li>
                 
             </ul>
@@ -345,8 +346,7 @@
     
 
                 
-            </div>
-            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+
                 
                     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -908,7 +908,7 @@ fluent interface.</p>
         </div>
 
         <div class="row">
-            <div class="col-md-10 offset-md-2">
+            <div class="col-md-12">
                 <h5>Laminas</h5>
                 <ul>
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
@@ -920,7 +920,7 @@ fluent interface.</p>
         </div>
 
         <div class="row">
-            <div class="col-md-10 offset-md-2"> 
+            <div class="col-md-12">
                 <div class="row">
 
                     
@@ -978,7 +978,9 @@ fluent interface.</p>
             siteName = 'laminas-eventmanager';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
+    
         <script src="../../search/main.js"></script>
+    
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
