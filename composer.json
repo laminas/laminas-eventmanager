@@ -66,6 +66,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-eventmanager": "self.version"
+        "zendframework/zend-eventmanager": "^3.2.1"
     }
 }
