@@ -455,7 +455,8 @@ listener is not present, checking for presence first is not necessary.</p>
 <p>The method <code>EventManagerInterface::setEventClass()</code> was removed and replaced
 with <code>EventManagerInterface::setEventPrototype()</code>, which has the following
 signature:</p>
-<pre class=codehilite><code class=language-php>setEventPrototype(EventInterface $event);</code></pre>
+<pre class="highlight"><code class="language-php">setEventPrototype(EventInterface $event);</code></pre>
+
 <p>This was done to prevent errors that occurred when invalid event class names
 were provided. Additionally, internally, event managers will clone the
 instance any time <code>trigger()</code> or <code>triggerUntil()</code> are called — which is
@@ -468,15 +469,19 @@ typically faster and less resource intensive than instantiating a new instance.<
 and <code>detach()</code> methods of the <code>ListenerAggregateInterface</code>. As such, to
 forward-proof your applications, you can alter statements that attach aggregates
 to an event manager reading as follows:</p>
-<pre class=codehilite><code class=language-php>$events-&gt;attach($aggregate); // or
+<pre class="highlight"><code class="language-php">$events-&gt;attach($aggregate); // or
 $events-&gt;attachAggregate($aggregate);</code></pre>
+
 <p>to:</p>
-<pre class=codehilite><code class=language-php>$aggregate-&gt;attach($events);</code></pre>
+<pre class="highlight"><code class="language-php">$aggregate-&gt;attach($events);</code></pre>
+
 <p>Similarly, for detaching an aggregate, migrate from:</p>
-<pre class=codehilite><code class=language-php>$events-&gt;detach($aggregate); // or
+<pre class="highlight"><code class="language-php">$events-&gt;detach($aggregate); // or
 $events-&gt;detachAggregate($aggregate);</code></pre>
+
 <p>to:</p>
-<pre class=codehilite><code class=language-php>$aggregate-&gt;detach($events);</code></pre>
+<pre class="highlight"><code class="language-php">$aggregate-&gt;detach($events);</code></pre>
+
 <p>The above works in all released versions of the component.</p>
 <h2 id="sharedeventaggregateawareinterface-sharedlisteneraggregateinterface">SharedEventAggregateAwareInterface, SharedListenerAggregateInterface</h2>
 <p>The interfaces <code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> and
@@ -503,7 +508,7 @@ aggregate class, and swap attachment of the aggregate.</p>
 methods in your class, but remove the <code>implements
 SharedListenerAggregateInterface</code> from the class declaration. For instance, if
 you had the following:</p>
-<pre class=codehilite><code class=language-php>namespace Foo;
+<pre class="highlight"><code class="language-php">namespace Foo;
 
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\EventManager\SharedListenerAggregateInterface;
@@ -520,8 +525,9 @@ class MySharedAggregate implements SharedListenerAggregateInterface
         // ...
     }
 }</code></pre>
+
 <p>then modify it to instead read:</p>
-<pre class=codehilite><code class=language-php>namespace Foo;
+<pre class="highlight"><code class="language-php">namespace Foo;
 
 use Laminas\EventManager\SharedEventManagerInterface;
 
@@ -537,12 +543,15 @@ class MySharedAggregate
         // ...
     }
 }</code></pre>
+
 <p>For the second step, instead of attaching the aggregate to the shared event
 manager, you will pass the shared event manager to your aggregate. For example,
 if you had the following in your code:</p>
-<pre class=codehilite><code class=language-php>$sharedEvents-&gt;attachAggregate($mySharedAggregate);</code></pre>
+<pre class="highlight"><code class="language-php">$sharedEvents-&gt;attachAggregate($mySharedAggregate);</code></pre>
+
 <p>then you can change it to:</p>
-<pre class=codehilite><code class=language-php>$mySharedAggregate-&gt;attachShared($sharedEvents);</code></pre>
+<pre class="highlight"><code class="language-php">$mySharedAggregate-&gt;attachShared($sharedEvents);</code></pre>
+
 <p>This has exactly the same effect, and makes your code forward-compatible with
 v3.</p>
 <h4>SharedEventManagerAwareInterface</h4>
@@ -560,10 +569,10 @@ injected into the <code>EventManager</code> instance at instantiation.</p>
 <li>If you will require injecting the shared manager, use duck typing to determine
   if a class has the <code>setSharedManager()</code> method:</li>
 </ul>
-<p><code>php
-  if (method_exists($instance, 'setSharedManager')) {
-      $instance-&gt;setSharedManager($sharedEvents);
-  }</code></p>
+<pre class="highlight"><code class="language-php">if (method_exists($instance, 'setSharedManager')) {
+    $instance-&gt;setSharedManager($sharedEvents);
+}</code></pre>
+
 <p>Alternately, if you control instantiation of the instance, consider injection
   at instantiation, or within the factory used to create your instance.</p>
 <h2 id="sharedeventmanagerinterfacegetevents">SharedEventManagerInterface::getEvents()</h2>
