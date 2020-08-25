@@ -21,19 +21,19 @@ class FilterIteratorTest extends TestCase
     public function testNextReturnsNullOnEmptyChain()
     {
         $filterIterator = new FilterIterator();
-        $this->assertNull($filterIterator->next([]));
+        self::assertNull($filterIterator->next([]));
     }
 
     public function testNextReturnsNullWithEmptyHeap()
     {
         $filterIterator = new FilterIterator();
-        $this->assertNull($filterIterator->next([0, 1, 2]));
+        self::assertNull($filterIterator->next([0, 1, 2]));
     }
 
     public function testContainsReturnsFalseForInvalidElement()
     {
         $filterIterator = new FilterIterator();
-        $this->assertFalse($filterIterator->contains('foo'));
+        self::assertFalse($filterIterator->contains('foo'));
     }
 
     public function testContainsReturnsTrueForValidElement()
@@ -42,14 +42,14 @@ class FilterIteratorTest extends TestCase
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
-        $this->assertTrue($filterIterator->contains($callback));
+        self::assertTrue($filterIterator->contains($callback));
     }
 
     public function testRemoveFromEmptyQueueReturnsFalse()
     {
         $filterIterator = new FilterIterator();
 
-        $this->assertFalse($filterIterator->remove('foo'));
+        self::assertFalse($filterIterator->remove('foo'));
     }
 
     public function testRemoveUnrecognizedItemFromQueueReturnsFalse()
@@ -59,7 +59,7 @@ class FilterIteratorTest extends TestCase
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
 
-        $this->assertFalse($filterIterator->remove(clone $callback));
+        self::assertFalse($filterIterator->remove(clone $callback));
     }
 
     public function testRemoveValidItemFromQueueReturnsTrue()
@@ -69,7 +69,7 @@ class FilterIteratorTest extends TestCase
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
 
-        $this->assertTrue($filterIterator->remove($callback));
+        self::assertTrue($filterIterator->remove($callback));
     }
 
     public function testNextReturnsNullWhenFilterChainIsEmpty()
@@ -78,7 +78,7 @@ class FilterIteratorTest extends TestCase
 
         $chain = new FilterIterator();
 
-        $this->assertNull($filterIterator->next([0, 1, 2], ['foo', 'bar'], $chain));
+        self::assertNull($filterIterator->next([0, 1, 2], ['foo', 'bar'], $chain));
     }
 
     public function invalidFilters()

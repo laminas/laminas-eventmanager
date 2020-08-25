@@ -18,9 +18,11 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use ReflectionProperty;
 
+use function array_shift;
+
 class LazyListenerAggregateTest extends TestCase
 {
-    public function setUp()
+    protected function setUp() : void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
     }
@@ -106,9 +108,9 @@ class LazyListenerAggregateTest extends TestCase
         $r->setAccessible(true);
         $test = $r->getValue($aggregate);
 
-        $this->assertInstanceOf(LazyEventListener::class, $test[0]);
-        $this->assertEquals('event', $test[0]->getEvent());
-        $this->assertSame($listeners[1], $test[1], 'LazyEventListener instance changed during instantiation');
+        self::assertInstanceOf(LazyEventListener::class, $test[0]);
+        self::assertEquals('event', $test[0]->getEvent());
+        self::assertSame($listeners[1], $test[1], 'LazyEventListener instance changed during instantiation');
         return $listeners;
     }
 
@@ -156,10 +158,10 @@ class LazyListenerAggregateTest extends TestCase
         $r->setAccessible(true);
         $listeners = $r->getValue($aggregate);
 
-        $this->assertInternalType('array', $listeners);
-        $this->assertCount(1, $listeners);
+        self::assertIsArray($listeners);
+        self::assertCount(1, $listeners);
         $listener = array_shift($listeners);
-        $this->assertInstanceOf(LazyEventListener::class, $listener);
+        self::assertInstanceOf(LazyEventListener::class, $listener);
         $listener($event->reveal());
     }
 }

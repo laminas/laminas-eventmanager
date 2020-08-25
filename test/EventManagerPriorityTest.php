@@ -14,9 +14,16 @@ use Laminas\EventManager\SharedEventManager;
 use PHPUnit\Framework\TestCase;
 use SplQueue;
 
+use function array_shift;
+use function compact;
+use function count;
+use function iterator_to_array;
+use function sprintf;
+use function var_export;
+
 class EventManagerPriorityTest extends TestCase
 {
-    public function setUp()
+    protected function setUp() : void
     {
         $this->identifiers  = [__CLASS__];
         $this->sharedEvents = new SharedEventManager();
@@ -49,7 +56,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [4, 3, 2, 1, 0, -1],
             $values,
             sprintf("Did not receive values in priority order: %s\n", var_export($values, 1))
@@ -65,7 +72,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [-1, 0, 1, 2, 3, 4],
             $values,
             sprintf("Did not receive values in attachment order: %s\n", var_export($values, 1))
@@ -81,7 +88,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $values,
             sprintf("Did not receive wildcard values after explicit listeners: %s\n", var_export($values, 1))
@@ -97,7 +104,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $values,
             sprintf("Did not receive shared listener values after wildcard listeners: %s\n", var_export($values, 1))
@@ -113,7 +120,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $values,
             sprintf(
@@ -132,7 +139,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $values,
             sprintf(
@@ -151,7 +158,7 @@ class EventManagerPriorityTest extends TestCase
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
         $values = iterator_to_array($event->getParam('accumulator'));
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $values,
             sprintf(
@@ -200,11 +207,11 @@ class EventManagerPriorityTest extends TestCase
         $this->events->triggerEvent($event);
 
         $values = $report = iterator_to_array($event->getParam('accumulator'));
-        $this->assertCount(28, $values);
+        self::assertCount(28, $values);
         $original = array_shift($values);
         do {
             $compare = array_shift($values);
-            $this->assertLessThan(
+            self::assertLessThan(
                 $original,
                 $compare,
                 sprintf("Did not receive values in expected order: %s\n", var_export($report, 1))

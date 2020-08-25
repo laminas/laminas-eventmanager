@@ -8,14 +8,12 @@
 
 namespace LaminasTest\EventManager;
 
-use Interop\Container\ContainerInterface;
-use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
 
 class LazyEventListenerTest extends LazyListenerTest
 {
-    public function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->listenerClass = LazyEventListener::class;
@@ -60,7 +58,7 @@ class LazyEventListenerTest extends LazyListenerTest
         ];
 
         $listener = new $class($struct, $this->container->reveal());
-        $this->assertInstanceOf($class, $listener);
+        self::assertInstanceOf($class, $listener);
         return $listener;
     }
 
@@ -69,7 +67,7 @@ class LazyEventListenerTest extends LazyListenerTest
      */
     public function testCanRetrieveEventFromListener($listener)
     {
-        $this->assertEquals('event', $listener->getEvent());
+        self::assertEquals('event', $listener->getEvent());
     }
 
     /**
@@ -77,7 +75,7 @@ class LazyEventListenerTest extends LazyListenerTest
      */
     public function testCanRetrievePriorityFromListener($listener)
     {
-        $this->assertEquals(5, $listener->getPriority());
+        self::assertEquals(5, $listener->getPriority());
     }
 
     public function testGetPriorityWillReturnProvidedPriorityIfNoneGivenAtInstantiation()
@@ -90,7 +88,7 @@ class LazyEventListenerTest extends LazyListenerTest
         ];
 
         $listener = new $class($struct, $this->container->reveal());
-        $this->assertInstanceOf($class, $listener);
-        $this->assertEquals(5, $listener->getPriority(5));
+        self::assertInstanceOf($class, $listener);
+        self::assertEquals(5, $listener->getPriority(5));
     }
 }

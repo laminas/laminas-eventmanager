@@ -10,6 +10,11 @@ namespace Laminas\EventManager;
 
 use ArrayAccess;
 
+use function gettype;
+use function is_array;
+use function is_object;
+use function sprintf;
+
 /**
  * Representation of an event
  *

@@ -12,6 +12,14 @@ use Laminas\EventManager\EventManager;
 use PHPUnit\Framework\Assert;
 use ReflectionProperty;
 
+use function array_keys;
+use function array_merge;
+use function iterator_to_array;
+use function krsort;
+use function sprintf;
+
+use const SORT_NUMERIC;
+
 /**
  * Trait providing utility methods and assertions for use in PHPUnit test cases.
  *

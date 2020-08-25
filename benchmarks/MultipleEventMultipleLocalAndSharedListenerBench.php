@@ -2,42 +2,46 @@
 
 namespace LaminasBench\EventManager;
 
-use Athletic\AthleticEvent;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
+use PhpBench\Benchmark\Metadata\Annotations\Iterations;
+use PhpBench\Benchmark\Metadata\Annotations\Revs;
+use PhpBench\Benchmark\Metadata\Annotations\Warmup;
 
-class MultipleEventMultipleLocalAndSharedListener extends AthleticEvent
+use function array_filter;
+
+/**
+ * @Revs(1000)
+ * @Iterations(10)
+ * @Warmup(2)
+ */
+class MultipleEventMultipleLocalAndSharedListenerBench
 {
-    use TraitEventBench;
+    use BenchTrait;
 
-    private $sharedEvents;
-
+    /** @var EventManager */
     private $events;
 
+    /** @var array */
     private $eventsToTrigger;
 
-    public function setUp()
+    public function __construct()
     {
         $identifiers = $this->getIdentifierList();
-        $this->sharedEvents = new SharedEventManager();
+        $sharedEvents = new SharedEventManager();
         foreach ($this->getIdentifierList() as $identifier) {
             foreach ($this->getEventList() as $event) {
-                $this->sharedEvents->attach($identifier, $event, $this->generateCallback());
+                $sharedEvents->attach($identifier, $event, $this->generateCallback());
             }
         }
-        $this->events = new EventManager($this->sharedEvents, $identifiers);
+        $this->events = new EventManager($sharedEvents, $identifiers);
 
         $this->eventsToTrigger = array_filter($this->getEventList(), function ($value) {
             return ($value !== '*');
         });
     }
 
-    /**
-     * Attach and trigger the event list
-     *
-     * @iterations 5000
-     */
-    public function trigger()
+    public function benchTrigger()
     {
         foreach ($this->eventsToTrigger as $event) {
             for ($i = 0; $i < $this->numListeners; $i += 1) {

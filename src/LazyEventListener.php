@@ -10,6 +10,8 @@ namespace Laminas\EventManager;
 
 use Interop\Container\ContainerInterface;
 
+use function is_string;
+
 /**
  * Lazy listener instance for use with LazyListenerAggregate.
  *

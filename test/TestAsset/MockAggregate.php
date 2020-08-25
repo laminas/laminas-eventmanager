@@ -11,6 +11,8 @@ namespace LaminasTest\EventManager\TestAsset;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\ListenerAggregateInterface;
 
+use function spl_object_hash;
+
 /**
  * @group      Laminas_EventManager
  */
@@ -28,14 +30,14 @@ class MockAggregate implements ListenerAggregateInterface
         $listeners[] = $events->attach('foo.bar', [ $this, 'fooBar' ]);
         $listeners[] = $events->attach('foo.baz', [ $this, 'fooBaz' ]);
 
-        $this->listeners[ \spl_object_hash($events) ] = $listeners;
+        $this->listeners[ spl_object_hash($events) ] = $listeners;
 
         return __METHOD__;
     }
 
     public function detach(EventManagerInterface $events)
     {
-        foreach ($this->listeners[ \spl_object_hash($events) ] as $listener) {
+        foreach ($this->listeners[ spl_object_hash($events) ] as $listener) {
             $events->detach($listener);
         }
 

@@ -10,6 +10,14 @@ namespace Laminas\EventManager;
 
 use Traversable;
 
+use function array_merge;
+use function array_unique;
+use function get_class;
+use function is_array;
+use function is_object;
+use function is_string;
+use function method_exists;
+
 /**
  * A trait for objects that provide events.
  *
