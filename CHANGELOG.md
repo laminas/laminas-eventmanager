@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.3.0 - TBD
+## 3.3.0 - 2020-08-25
 
 ### Added
 
@@ -21,28 +21,6 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Removed
 
 - [#10](https://github.com/laminas/laminas-eventmanager/pull/10) removes support for PHP versions prior to PHP 7.3.
-
-### Fixed
-
-- Nothing.
-
-## 3.2.2 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 
