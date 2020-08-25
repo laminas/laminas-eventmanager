@@ -20,26 +20,26 @@ class EventManagerAwareTraitTest extends TestCase
     {
         $object = $this->getObjectForTrait(EventManagerAwareTrait::class);
 
-        $this->assertAttributeEquals(null, 'events', $object);
+        self::assertAttributeEquals(null, 'events', $object);
 
         $eventManager = new EventManager;
 
         $object->setEventManager($eventManager);
 
-        $this->assertAttributeEquals($eventManager, 'events', $object);
+        self::assertAttributeEquals($eventManager, 'events', $object);
     }
 
     public function testGetEventManager()
     {
         $object = $this->getObjectForTrait(EventManagerAwareTrait::class);
 
-        $this->assertInstanceOf(EventManagerInterface::class, $object->getEventManager());
+        self::assertInstanceOf(EventManagerInterface::class, $object->getEventManager());
 
         $eventManager = new EventManager;
 
         $object->setEventManager($eventManager);
 
-        $this->assertSame($eventManager, $object->getEventManager());
+        self::assertSame($eventManager, $object->getEventManager());
     }
 
     public function testSetEventManagerWithEventIdentifier()
@@ -53,9 +53,9 @@ class EventManagerAwareTraitTest extends TestCase
         $object->setEventManager($eventManager);
 
         //check that the identifier has been added.
-        $this->assertContains($eventIdentifier, $eventManager->getIdentifiers());
+        self::assertContains($eventIdentifier, $eventManager->getIdentifiers());
 
         //check that the method attachDefaultListeners has been called
-        $this->assertTrue($object->defaultEventListenersCalled());
+        self::assertTrue($object->defaultEventListenersCalled());
     }
 }

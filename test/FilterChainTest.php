@@ -22,7 +22,7 @@ class FilterChainTest extends TestCase
      */
     protected $filterchain;
 
-    public function setUp()
+    protected function setUp() : void
     {
         if (isset($this->message)) {
             unset($this->message);
@@ -33,25 +33,25 @@ class FilterChainTest extends TestCase
     public function testSubscribeShouldReturnCallbackHandler()
     {
         $handle = $this->filterchain->attach([ $this, __METHOD__ ]);
-        $this->assertSame([ $this, __METHOD__ ], $handle);
+        self::assertSame([ $this, __METHOD__ ], $handle);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()
     {
         $handler  = $this->filterchain->attach([$this, __METHOD__]);
         $handlers = $this->filterchain->getFilters();
-        $this->assertEquals(1, count($handlers));
-        $this->assertTrue($handlers->contains($handler));
+        self::assertEquals(1, count($handlers));
+        self::assertTrue($handlers->contains($handler));
     }
 
     public function testDetachShouldRemoveCallbackHandlerFromFilters()
     {
         $handle = $this->filterchain->attach([ $this, __METHOD__ ]);
         $handles = $this->filterchain->getFilters();
-        $this->assertTrue($handles->contains($handle));
+        self::assertTrue($handles->contains($handle));
         $this->filterchain->detach($handle);
         $handles = $this->filterchain->getFilters();
-        $this->assertFalse($handles->contains($handle));
+        self::assertFalse($handles->contains($handle));
     }
 
     public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
@@ -59,13 +59,13 @@ class FilterChainTest extends TestCase
         $handle1 = $this->filterchain->attach([ $this, __METHOD__ ]);
         $this->filterchain->clearFilters();
         $handle2 = $this->filterchain->attach([ $this, 'handleTestTopic' ]);
-        $this->assertFalse($this->filterchain->detach($handle1));
+        self::assertFalse($this->filterchain->detach($handle1));
     }
 
     public function testRetrievingAttachedFiltersShouldReturnEmptyArrayWhenNoFiltersExist()
     {
         $handles = $this->filterchain->getFilters();
-        $this->assertEquals(0, count($handles));
+        self::assertEquals(0, count($handles));
     }
 
     public function testFilterChainShouldReturnLastResponse()
@@ -82,7 +82,7 @@ class FilterChainTest extends TestCase
             return str_rot13($string);
         });
         $value = $this->filterchain->run($this, ['string' => ' foo ']);
-        $this->assertEquals(str_rot13(trim(' foo ')), $value);
+        self::assertEquals(str_rot13(trim(' foo ')), $value);
     }
 
     public function testFilterIsPassedContextAndArguments()
@@ -90,9 +90,9 @@ class FilterChainTest extends TestCase
         $this->filterchain->attach([ $this, 'filterTestCallback1' ]);
         $obj = (object) ['foo' => 'bar', 'bar' => 'baz'];
         $value = $this->filterchain->run($this, ['object' => $obj]);
-        $this->assertEquals('filtered', $value);
-        $this->assertEquals('filterTestCallback1', $this->message);
-        $this->assertEquals('foobarbaz', $obj->foo);
+        self::assertEquals('filtered', $value);
+        self::assertEquals('filterTestCallback1', $this->message);
+        self::assertEquals('foobarbaz', $obj->foo);
     }
 
     public function testInterceptingFilterShouldReceiveChain()
@@ -118,7 +118,7 @@ class FilterChainTest extends TestCase
             return hash('md5', $string);
         }, 100);
         $value = $this->filterchain->run($this, ['string' => ' foo ']);
-        $this->assertEquals(str_rot13(trim(' foo ')), $value);
+        self::assertEquals(str_rot13(trim(' foo ')), $value);
     }
 
     public function handleTestTopic($message)
@@ -137,18 +137,18 @@ class FilterChainTest extends TestCase
 
     public function filterReceivalCallback($context, array $params, $chain)
     {
-        $this->assertInstanceOf(FilterIterator::class, $chain);
+        self::assertInstanceOf(FilterIterator::class, $chain);
     }
 
     public function testRunReturnsNullWhenChainIsEmpty()
     {
         $filterChain = new FilterChain();
-        $this->assertNull($filterChain->run(null));
+        self::assertNull($filterChain->run(null));
     }
 
     public function testGetResponses()
     {
         $filterChain = new FilterChain();
-        $this->assertNull($filterChain->getResponses());
+        self::assertNull($filterChain->getResponses());
     }
 }

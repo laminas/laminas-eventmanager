@@ -18,7 +18,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
 
-    public function setUp()
+    protected function setUp() : void
     {
         $this->events = new EventManager();
     }
@@ -31,7 +31,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('baz', function ($e) {});
         // @codingStandardsIgnoreEnd
 
-        $this->assertEquals(['foo', 'bar', 'baz'], $this->getEventsFromEventManager($this->events));
+        self::assertEquals(['foo', 'bar', 'baz'], $this->getEventsFromEventManager($this->events));
     }
 
     public function testGetListenersForEventReturnsIteratorOfListenersForEventInPriorityOrder()
@@ -51,10 +51,10 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2, 5);
 
         $listeners = $this->getListenersForEvent('foo', $this->events);
-        $this->assertInstanceOf(Traversable::class, $listeners);
+        self::assertInstanceOf(Traversable::class, $listeners);
         $listeners = iterator_to_array($listeners);
 
-        $this->assertEquals([
+        self::assertEquals([
             $callback5,
             $callback1,
             $callback4,
@@ -80,10 +80,10 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2);
 
         $listeners = $this->getListenersForEvent('foo', $this->events);
-        $this->assertInstanceOf(Traversable::class, $listeners);
+        self::assertInstanceOf(Traversable::class, $listeners);
         $listeners = iterator_to_array($listeners);
 
-        $this->assertEquals([
+        self::assertEquals([
             $callback5,
             $callback1,
             $callback4,
@@ -109,10 +109,10 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2, 5);
 
         $listeners = $this->getListenersForEvent('foo', $this->events, true);
-        $this->assertInstanceOf(Traversable::class, $listeners);
+        self::assertInstanceOf(Traversable::class, $listeners);
         $listeners = iterator_to_array($listeners);
 
-        $this->assertEquals([
+        self::assertEquals([
             1 => $callback5,
             2 => $callback1,
             3 => $callback4,
@@ -138,9 +138,9 @@ class EventListenerIntrospectionTraitTest extends TestCase
         $this->events->attach('foo', $callback2, 2);
 
         $listeners = $this->getArrayOfListenersForEvent('foo', $this->events);
-        $this->assertInternalType('array', $listeners);
+        self::assertIsArray($listeners);
 
-        $this->assertEquals([
+        self::assertEquals([
             $callback5,
             $callback1,
             $callback3,
@@ -157,7 +157,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
 
         $this->events->attach('foo', $callback, 7);
 
-        $this->assertListenerAtPriority($callback, 7, 'foo', $this->events);
+        self::assertListenerAtPriority($callback, 7, 'foo', $this->events);
     }
 
     public function testAssertListenerAtPriorityFailsWhenListenerIsNotFound()
@@ -179,7 +179,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
 
         foreach ($permutations as $case => $arguments) {
             try {
-                $this->assertListenerAtPriority(
+                self::assertListenerAtPriority(
                     $arguments['listener'],
                     $arguments['priority'],
                     $arguments['event'],
@@ -187,7 +187,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
                 );
                 $this->fail('assertListenerAtPriority assertion had a false positive for case ' . $case);
             } catch (ExpectationFailedException $e) {
-                $this->assertContains(sprintf(
+                self::assertContains(sprintf(
                     'Listener not found for event "%s" and priority %d',
                     $arguments['event'],
                     $arguments['priority']
