@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#10](https://github.com/laminas/laminas-eventmanager/pull/10) adds support for the upcoming PHP 8.0 release.
+
 - [zendframework/zend-eventmanager#72](https://github.com/zendframework/zend-eventmanager/pull/72) adds support for PHP 7.3.
 
 ### Changed
@@ -18,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#10](https://github.com/laminas/laminas-eventmanager/pull/10) removes support for PHP versions prior to PHP 7.3.
 
 ### Fixed
 
