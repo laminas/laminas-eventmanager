@@ -18,6 +18,8 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use ReflectionProperty;
 
+use function array_shift;
+
 class LazyListenerAggregateTest extends TestCase
 {
     protected function setUp() : void

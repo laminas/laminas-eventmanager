@@ -9,7 +9,6 @@
 namespace LaminasTest\EventManager\TestAsset;
 
 use Laminas\EventManager\SharedEventManagerInterface;
-use Laminas\Stdlib\CallbackHandler;
 
 class StaticEventsMock implements SharedEventManagerInterface
 {

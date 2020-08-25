@@ -8,8 +8,6 @@
 
 namespace LaminasTest\EventManager;
 
-use Interop\Container\ContainerInterface;
-use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
 

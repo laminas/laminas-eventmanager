@@ -8,8 +8,6 @@
 
 namespace LaminasTest\EventManager;
 
-use Laminas\EventManager\EventManagerInterface;
-
 class AbstractListenerAggregateTest extends ListenerAggregateTraitTest
 {
     public $aggregateClass = TestAsset\MockAbstractListenerAggregate::class;

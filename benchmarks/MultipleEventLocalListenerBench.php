@@ -7,6 +7,8 @@ use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 use PhpBench\Benchmark\Metadata\Annotations\Warmup;
 
+use function array_filter;
+
 /**
  * @Revs(1000)
  * @Iterations(10)

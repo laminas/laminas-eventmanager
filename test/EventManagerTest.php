@@ -19,6 +19,19 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
 
+use function array_keys;
+use function array_shift;
+use function array_walk;
+use function count;
+use function get_class;
+use function sort;
+use function sprintf;
+use function str_rot13;
+use function strpos;
+use function strstr;
+use function trim;
+use function var_export;
+
 class EventManagerTest extends TestCase
 {
     protected function setUp() : void
@@ -126,7 +139,7 @@ class EventManagerTest extends TestCase
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertEquals(2, $responses->count());
         self::assertEquals('foo', $responses->first());
-        self::assertEquals(\str_rot13(' foo '), $responses->last());
+        self::assertEquals(str_rot13(' foo '), $responses->last());
     }
 
     public function testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue()
@@ -163,7 +176,7 @@ class EventManagerTest extends TestCase
         });
         $responses = $this->events->trigger('string.transform', $this, ['string' => ' foo ']);
         self::assertTrue($responses->contains('foo'));
-        self::assertTrue($responses->contains(\str_rot13(' foo ')));
+        self::assertTrue($responses->contains(str_rot13(' foo ')));
         self::assertFalse($responses->contains(' foo '));
     }
 

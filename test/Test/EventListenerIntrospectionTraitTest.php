@@ -14,6 +14,9 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Traversable;
 
+use function iterator_to_array;
+use function sprintf;
+
 class EventListenerIntrospectionTraitTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
@@ -187,7 +190,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
                 );
                 $this->fail('assertListenerAtPriority assertion had a false positive for case ' . $case);
             } catch (ExpectationFailedException $e) {
-                self::assertContains(sprintf(
+                self::assertStringContainsString(sprintf(
                     'Listener not found for event "%s" and priority %d',
                     $arguments['event'],
                     $arguments['priority']

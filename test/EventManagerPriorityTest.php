@@ -14,6 +14,13 @@ use Laminas\EventManager\SharedEventManager;
 use PHPUnit\Framework\TestCase;
 use SplQueue;
 
+use function array_shift;
+use function compact;
+use function count;
+use function iterator_to_array;
+use function sprintf;
+use function var_export;
+
 class EventManagerPriorityTest extends TestCase
 {
     protected function setUp() : void

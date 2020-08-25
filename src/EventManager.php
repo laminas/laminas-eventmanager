@@ -10,6 +10,16 @@ namespace Laminas\EventManager;
 
 use ArrayObject;
 
+use function array_keys;
+use function array_merge;
+use function array_unique;
+use function get_class;
+use function gettype;
+use function is_object;
+use function is_string;
+use function krsort;
+use function sprintf;
+
 /**
  * Event manager: notification system
  *

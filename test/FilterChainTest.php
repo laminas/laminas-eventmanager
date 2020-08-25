@@ -12,6 +12,12 @@ use Laminas\EventManager\Filter\FilterIterator;
 use Laminas\EventManager\FilterChain;
 use PHPUnit\Framework\TestCase;
 
+use function count;
+use function hash;
+use function is_object;
+use function str_rot13;
+use function trim;
+
 /**
  * @group      Laminas_Stdlib
  */

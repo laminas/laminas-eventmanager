@@ -8,12 +8,13 @@
 
 namespace LaminasTest\EventManager;
 
-use ArrayIterator;
 use Laminas\EventManager\Exception;
 use Laminas\EventManager\SharedEventManager;
-use Laminas\EventManager\SharedListenerAggregateInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
+
+use function array_shift;
+use function sprintf;
+use function var_export;
 
 class SharedEventManagerTest extends TestCase
 {

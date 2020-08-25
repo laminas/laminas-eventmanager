@@ -10,6 +10,8 @@ namespace Laminas\EventManager;
 
 use SplStack;
 
+use function count;
+
 /**
  * Collection of signal handler return values
  */

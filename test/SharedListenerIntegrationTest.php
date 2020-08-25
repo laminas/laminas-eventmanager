@@ -8,10 +8,13 @@
 
 namespace LaminasTest\EventManager;
 
-use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
 use PHPUnit\Framework\TestCase;
+
+use function array_rand;
+use function range;
+use function sprintf;
 
 class SharedListenerIntegrationTest extends TestCase
 {

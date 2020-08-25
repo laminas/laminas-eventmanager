@@ -11,6 +11,12 @@ namespace Laminas\EventManager\Filter;
 use Laminas\EventManager\Exception;
 use Laminas\Stdlib\FastPriorityQueue;
 
+use function get_class;
+use function gettype;
+use function is_callable;
+use function is_object;
+use function sprintf;
+
 /**
  * Specialized priority queue implementation for use with an intercepting
  * filter chain.
