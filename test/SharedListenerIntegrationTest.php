@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class SharedListenerIntegrationTest extends TestCase
 {
-    public function setUp()
+    protected function setUp() : void
     {
         $this->identifiers = ['Foo', 'Bar', 'Baz'];
         $this->sharedEvents = new SharedEventManager();
@@ -31,7 +31,7 @@ class SharedListenerIntegrationTest extends TestCase
         for ($i = 0; $i < $iterations; $i += 1) {
             $this->events->trigger('foo');
         }
-        $this->assertSame($iterations, $listener->count);
+        self::assertSame($iterations, $listener->count);
     }
 
     public function testTriggeringSameEventMultipleTimesTriggersNewSharedListeners()
@@ -47,7 +47,7 @@ class SharedListenerIntegrationTest extends TestCase
         for ($i = 0; $i < 5; $i += 1) {
             $expected = 5 - $i;
             $listener = $listeners[$i];
-            $this->assertSame(
+            self::assertSame(
                 $expected,
                 $listener->count,
                 sprintf('Listener %s was not triggered expected %d times; instead %d', $i, $expected, $listener->count)
@@ -75,7 +75,7 @@ class SharedListenerIntegrationTest extends TestCase
 
         for ($i = 0; $i < 5; $i += 1) {
             $listener = $listeners[$i];
-            $this->assertEquals($i, $listener->count);
+            self::assertEquals($i, $listener->count);
         }
     }
 }

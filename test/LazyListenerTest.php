@@ -18,7 +18,7 @@ use stdClass;
 
 class LazyListenerTest extends TestCase
 {
-    public function setUp()
+    protected function setUp() : void
     {
         $this->listenerClass = LazyListener::class;
         $this->container = $this->prophesize(ContainerInterface::class);
@@ -105,7 +105,7 @@ class LazyListenerTest extends TestCase
         ];
 
         $listener = new $class($struct, $this->container->reveal());
-        $this->assertInstanceOf($class, $listener);
+        self::assertInstanceOf($class, $listener);
         return $listener;
     }
 
@@ -114,7 +114,7 @@ class LazyListenerTest extends TestCase
      */
     public function testInstatiationSetsListenerMethod($listener)
     {
-        $this->assertAttributeEquals('method', 'method', $listener);
+        self::assertAttributeEquals('method', 'method', $listener);
     }
 
     public function testLazyListenerActsAsInvokableAroundListenerCreation()
@@ -137,9 +137,9 @@ class LazyListenerTest extends TestCase
         ];
 
         $lazyListener = new $class($struct, $this->container->reveal());
-        $this->assertInstanceOf($class, $lazyListener);
+        self::assertInstanceOf($class, $lazyListener);
 
-        $this->assertEquals('RECEIVED', $lazyListener($event->reveal()));
+        self::assertEquals('RECEIVED', $lazyListener($event->reveal()));
     }
 
     public function testInvocationWillDelegateToContainerBuildMethodWhenPresentAndEnvIsNonEmpty()
@@ -168,8 +168,8 @@ class LazyListenerTest extends TestCase
         ];
 
         $lazyListener = new $class($struct, $container->reveal(), $env);
-        $this->assertInstanceOf($class, $lazyListener);
+        self::assertInstanceOf($class, $lazyListener);
 
-        $this->assertEquals('RECEIVED', $lazyListener($event->reveal()));
+        self::assertEquals('RECEIVED', $lazyListener($event->reveal()));
     }
 }

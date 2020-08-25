@@ -10,7 +10,6 @@ namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManagerInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 
 class ListenerAggregateTraitTest extends TestCase
 {
@@ -34,15 +33,15 @@ class ListenerAggregateTraitTest extends TestCase
         $aggregate->attach($events);
 
         $listeners = $aggregate->getCallbacks();
-        $this->assertInternalType('array', $listeners);
-        $this->assertCount(2, $listeners);
+        self::assertIsArray($listeners);
+        self::assertCount(2, $listeners);
 
         foreach ($listeners as $listener) {
-            $this->assertSame([$aggregate, 'doFoo'], $listener);
+            self::assertSame([$aggregate, 'doFoo'], $listener);
         }
 
         $aggregate->detach($events);
 
-        $this->assertAttributeSame([], 'listeners', $aggregate);
+        self::assertSame([], $aggregate->getCallbacks());
     }
 }

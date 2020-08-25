@@ -26,9 +26,9 @@ class EventTest extends TestCase
 
         $event = new Event($name, $target, $params);
 
-        $this->assertEquals($name, $event->getName());
-        $this->assertEquals($target, $event->getTarget());
-        $this->assertEquals($params, $event->getParams());
+        self::assertEquals($name, $event->getName());
+        self::assertEquals($target, $event->getTarget());
+        self::assertEquals($params, $event->getParams());
     }
 
     public function testSetParamsWithInvalidParameter()
@@ -43,7 +43,7 @@ class EventTest extends TestCase
         $event = new Event('foo', 'bar', []);
         $default = 1;
 
-        $this->assertEquals($default, $event->getParam('foo', $default));
+        self::assertEquals($default, $event->getParam('foo', $default));
     }
 
     public function testGetParamReturnsDefaultForObject()
@@ -52,7 +52,7 @@ class EventTest extends TestCase
         $event = new Event('foo', 'bar', $params);
         $default = 1;
 
-        $this->assertEquals($default, $event->getParam('foo', $default));
+        self::assertEquals($default, $event->getParam('foo', $default));
     }
 
     public function testGetParamReturnsForObject()
@@ -65,6 +65,6 @@ class EventTest extends TestCase
         $event = new Event('foo', 'bar', $params);
         $default = 1;
 
-        $this->assertEquals($value, $event->getParam($key));
+        self::assertEquals($value, $event->getParam($key));
     }
 }

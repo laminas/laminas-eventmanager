@@ -17,7 +17,7 @@ use Prophecy\Argument;
 
 class SharedEventManagerTest extends TestCase
 {
-    public function setUp()
+    protected function setUp() : void
     {
         $this->callback = function ($e) {
         };
@@ -91,7 +91,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
 
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertSame([$this->callback], $listeners);
+        self::assertSame([$this->callback], $listeners);
     }
 
     public function detachIdentifierAndEvent()
@@ -112,7 +112,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
         $this->manager->detach($this->callback, $identifier, $event);
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertSame([], $listeners);
+        self::assertSame([], $listeners);
     }
 
     public function testDetachDoesNothingIfIdentifierNotInManager()
@@ -121,7 +121,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->detach($this->callback, 'DIFFERENT-IDENTIFIER');
 
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertSame([$this->callback], $listeners);
+        self::assertSame([$this->callback], $listeners);
     }
 
     public function testDetachDoesNothingIfIdentifierDoesNotContainEvent()
@@ -129,14 +129,14 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
         $this->manager->detach($this->callback, 'IDENTIFIER', 'DIFFERENT-EVENT');
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertSame([$this->callback], $listeners);
+        self::assertSame([$this->callback], $listeners);
     }
 
     public function testWhenEventIsProvidedAndNoListenersFoundForIdentiferGetListenersWillReturnEmptyList()
     {
         $test = $this->manager->getListeners([ 'IDENTIFIER' ], 'EVENT');
-        $this->assertInternalType('array', $test);
-        $this->assertCount(0, $test);
+        self::assertIsArray($test);
+        self::assertCount(0, $test);
     }
 
     public function testWhenEventIsProvidedGetListenersReturnsAllListenersIncludingWildcardListeners()
@@ -152,7 +152,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach('IDENTIFIER', 'EVENT', $callback4);
 
         $test = $this->getListeners($this->manager, [ 'IDENTIFIER' ], 'EVENT');
-        $this->assertEquals([
+        self::assertEquals([
             $callback1,
             $callback4,
             $callback2,
@@ -171,7 +171,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->clearListeners('IDENTIFIER');
 
         $listeners = $this->getListeners($this->manager, [ 'IDENTIFIER' ], 'EVENT');
-        $this->assertSame(
+        self::assertSame(
             [$wildcardIdentifier],
             $listeners,
             sprintf(
@@ -193,23 +193,22 @@ class SharedEventManagerTest extends TestCase
         $this->manager->clearListeners('IDENTIFIER', 'EVENT');
 
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertInternalType('array', $listeners, 'Unexpected return value from getListeners() for event EVENT');
-        $this->assertCount(1, $listeners);
+        self::assertIsArray($listeners, 'Unexpected return value from getListeners() for event EVENT');
+        self::assertCount(1, $listeners);
         $listener = array_shift($listeners);
-        $this->assertSame($wildcard, $listener, sprintf(
+        self::assertSame($wildcard, $listener, sprintf(
             'Expected only wildcard listener on event EVENT after clearListener operation; received: %s',
             var_export($listener, 1)
         ));
 
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'ALTERNATE');
-        $this->assertInternalType(
-            'array',
+        self::assertIsArray(
             $listeners,
             'Unexpected return value from getListeners() for event ALTERNATE'
         );
-        $this->assertCount(1, $listeners);
+        self::assertCount(1, $listeners);
         $listener = array_shift($listeners);
-        $this->assertSame($alternate, $listener, 'Unexpected listener list for event ALTERNATE');
+        self::assertSame($alternate, $listener, 'Unexpected listener list for event ALTERNATE');
     }
 
     public function testClearListenersDoesNotRemoveWildcardListenersWhenEventIsProvided()
@@ -224,17 +223,17 @@ class SharedEventManagerTest extends TestCase
         $this->manager->clearListeners('IDENTIFIER', 'EVENT');
 
         $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
-        $this->assertContains(
+        self::assertContains(
             $wildcardEventListener,
             $listeners,
             'Event listener list after clear operation does not include wildcard event listener'
         );
-        $this->assertContains(
+        self::assertContains(
             $wildcardIdentifierListener,
             $listeners,
             'Event listener list after clear operation does not include wildcard identifier listener'
         );
-        $this->assertNotContains(
+        self::assertNotContains(
             $this->callback,
             $listeners,
             'Event listener list after clear operation includes explicitly attached listener and should not'
@@ -250,7 +249,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->clearListeners('IDENTIFIER', 'EVENT');
 
         // getListeners() always pulls in wildcard listeners
-        $this->assertEquals([1 => [
+        self::assertEquals([1 => [
             $this->callback,
         ]], $this->manager->getListeners([ 'IDENTIFIER' ], 'EVENT'));
     }
