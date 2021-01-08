@@ -92,7 +92,7 @@ class LazyListener
             ));
         }
 
-        if (empty($event)) {
+        if (null !== $event && empty($event)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s requires a null or non-empty string $event argument; received %s',
                 __CLASS__,

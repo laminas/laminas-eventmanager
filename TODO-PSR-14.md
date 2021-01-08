@@ -1,17 +1,14 @@
 # TODO for PSR-14 implementation
 
-## 3.3.0 forwards-compatibility release
+## 3.4.0 forwards-compatibility release
 
-- [ ] `StoppableEventInterface` implementation
-  - [x] Create a `StoppableEventInterface`
+- [x] `StoppableEventInterface` implementation
   - [x] Make `Event` implement it
   - [x] Deprecate `propagationIsStopped()` in both `EventInterface` and `Event`
     - [x] Have `Event::propagationIsStopped()` proxy to `Event::isPropagationStopped()`
   - [x] Modify `EventManager` internals to use the PSR-14 method if available
-  - [ ] Mark `StoppableEventInterface` as deprecated
-- [ ] Listener provider implementation
+- [x] Listener provider implementation
   - [x] Create a `ListenerProvider` subnamespace
-  - [x] Create a `ListenerProviderInterface` shim
   - [x] Create a `PrioritizedListenerProvider` interface extending the
       `ListenerProviderInterface` and defining a
       `getListenersForEventByPriority($event, array $identifiers = []) : array<int, callable[]>` method.

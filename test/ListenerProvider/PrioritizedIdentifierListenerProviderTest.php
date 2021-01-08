@@ -142,8 +142,14 @@ class PrioritizedIdentifierListenerProviderTest extends TestCase
 
     public function testProviderReturnsEmptyListWhenNoListenersAttachedForEventAndIdentifier()
     {
-        $test = $this->provider->getListenersForEvent('EVENT', ['IDENTIFIER']);
-        $this->assertInternalType('iterable', $test);
+        $event = new class {
+            public function getName(): string
+            {
+                return 'EVENT';
+            }
+        };
+        $test = $this->provider->getListenersForEvent($event, ['IDENTIFIER']);
+        $this->assertIsIterable($test);
         $this->assertCount(0, $test);
     }
 
@@ -201,7 +207,7 @@ class PrioritizedIdentifierListenerProviderTest extends TestCase
         $this->provider->clearListeners('IDENTIFIER', 'EVENT');
 
         $listeners = $this->getListeners($this->provider, ['IDENTIFIER'], 'EVENT');
-        $this->assertInternalType('array', $listeners, 'Unexpected return value from getListeners() for event EVENT');
+        $this->assertIsArray($listeners, 'Unexpected return value from getListeners() for event EVENT');
         $this->assertCount(1, $listeners);
         $listener = array_shift($listeners);
         $this->assertSame($wildcard, $listener, sprintf(
@@ -210,8 +216,7 @@ class PrioritizedIdentifierListenerProviderTest extends TestCase
         ));
 
         $listeners = $this->getListeners($this->provider, ['IDENTIFIER'], 'ALTERNATE');
-        $this->assertInternalType(
-            'array',
+        $this->assertIsArray(
             $listeners,
             'Unexpected return value from getListeners() for event ALTERNATE'
         );

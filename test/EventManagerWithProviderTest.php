@@ -12,6 +12,7 @@ use Laminas\EventManager\EventManager;
 use Laminas\EventManager\Exception\RuntimeException;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 /**
@@ -19,6 +20,8 @@ use Psr\EventDispatcher\ListenerProviderInterface;
  */
 class EventManagerWithProviderTest extends TestCase
 {
+    use DeprecatedAssertions;
+
     public function testCanCreateInstanceWithListenerProvider()
     {
         $provider = $this->prophesize(ListenerProviderInterface::class)->reveal();
@@ -85,6 +88,15 @@ class EventManagerWithProviderTest extends TestCase
         // Creating instances here, because prophecies cannot be passed as dependencies
         $provider = $this->prophesize(ListenerProviderInterface::class);
         $provider->willImplement(PrioritizedListenerAttachmentInterface::class);
+        $provider
+            ->attachWildcardListener(
+                Argument::type('callable'),
+                Argument::type('int')
+            )
+            ->will(function ($args) {
+                return array_shift($args);
+            });
+
         $manager = EventManager::createUsingListenerProvider($provider->reveal());
 
         $manager->{$method}(...$arguments);
@@ -95,7 +107,7 @@ class EventManagerWithProviderTest extends TestCase
     public function testGetListenersForEventProxiesToProvider()
     {
         $event    = (object) ['name' => 'test'];
-        $listener = function ($e) {
+        $listener = function (object $e): void {
         };
 
         $listeners = [

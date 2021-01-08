@@ -290,6 +290,14 @@ class EventManager implements
      */
     public function attach($eventName, callable $listener, $priority = 1)
     {
+        if (! is_string($eventName) || empty($eventName)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a non-empty string $eventName argument; received %s',
+                __METHOD__, 
+                is_object($eventName) ? get_class($eventName) : gettype($eventName)
+            ));
+        }
+
         if (! $this->prioritizedProvider) {
             throw new Exception\RuntimeException(sprintf(
                 'The provider composed into this %s instance is not of type %s (received %s);'
@@ -335,6 +343,14 @@ class EventManager implements
      */
     public function detach(callable $listener, $eventName = null, $force = false)
     {
+        if ($eventName !== null && ! is_string($eventName)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a null or string $eventName argument; received %s',
+                __METHOD__, 
+                is_object($eventName) ? get_class($eventName) : gettype($eventName)
+            ));
+        }
+
         if (! $this->prioritizedProvider) {
             throw new Exception\RuntimeException(sprintf(
                 'The provider composed into this %s instance is not of type %s (received %s);'

@@ -52,7 +52,7 @@ class PrioritizedListenerProvider implements
      * @param  string[] $identifiers Ignored in this implementation.
      * @throws InvalidArgumentException For non-object $event types.
      */
-    public function getListenersForEventByPriority($event, array $identifiers = []): iterable
+    public function getListenersForEventByPriority($event, array $identifiers = []): array
     {
         if (! is_object($event)) {
             throw new InvalidArgumentException(sprintf(
@@ -86,9 +86,16 @@ class PrioritizedListenerProvider implements
     /**
      * {@inheritDoc}
      */
-    public function attach(string $event, callable $listener, int $priority = 1): callable
+    public function attach($event, callable $listener, $priority = 1)
     {
-        $this->events[$event][$priority][0][] = $listener;
+        if (! is_string($event)) {
+            throw new InvalidArgumentException(sprintf(
+                '%s expects a string $event argument; received %s',
+                is_object($event) ? get_class($event) : gettype($event)
+            ));
+        }
+
+        $this->events[$event][(int) $priority][0][] = $listener;
 
         return $listener;
     }
@@ -98,7 +105,7 @@ class PrioritizedListenerProvider implements
      * @param bool $force Internal; used by attachWildcardListener to force
      *     removal of the '*' event.
      */
-    public function detach(callable $listener, ?string $event = null, $force = false): void
+    public function detach(callable $listener, $event = null, $force = false)
     {
         if (null === $event || ('*' === $event && ! $force)) {
             $this->detachWildcardListener($listener);
@@ -154,7 +161,7 @@ class PrioritizedListenerProvider implements
     /**
      * {@inheritDoc}
      */
-    public function clearListeners(string $event): void
+    public function clearListeners($event)
     {
         if (isset($this->events[$event])) {
             unset($this->events[$event]);

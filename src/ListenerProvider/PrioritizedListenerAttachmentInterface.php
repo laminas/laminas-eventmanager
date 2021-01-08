@@ -21,7 +21,7 @@ interface PrioritizedListenerAttachmentInterface
      *    subscribers write their own logic for tracking what has and hasn't
      *    been attached.
      */
-    public function attach(string $event, callable $listener, int $priority = 1): callable;
+    public function attach($event, callable $listener, $priority = 1);
 
     /**
      * @param  callable $listener The listener to detach.
@@ -29,7 +29,7 @@ interface PrioritizedListenerAttachmentInterface
      *     When null, all events. If '*', this will only detach the wildcard
      *     entry for a listener, unless $force is true.
      */
-    public function detach(callable $listener, ?string $event = null): void;
+    public function detach(callable $listener, $event = null);
 
     /**
      * Attaches a listener as a wildcard listener (to all events).
@@ -70,6 +70,7 @@ interface PrioritizedListenerAttachmentInterface
 
     /**
      * @param  string $event The event for which to remove listeners.
+     * @return void
      */
-    public function clearListeners(string $event): void;
+    public function clearListeners($event);
 }

@@ -20,41 +20,22 @@ class LazyListenerTest extends TestCase
         $this->container = $this->prophesize(ContainerInterface::class);
     }
 
-    public function invalidListenerTypes()
-    {
-        return [
-            'null'       => [null],
-            'true'       => [true],
-            'false'      => [false],
-            'zero'       => [0],
-            'int'        => [1],
-            'zero-float' => [0.0],
-            'float'      => [1.1],
-            'empty'      => [''],
-            'array'      => [['event']],
-            'object'     => [(object) ['event' => 'event']],
-        ];
-    }
-
-    /**
-     * @dataProvider invalidListenerTypes
-     * @param mixed $listener
-     */
-    public function testConstructorRaisesExceptionForInvalidListenerType($listener)
+    public function testConstructorRaisesExceptionForEmptyListener()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('requires a non-empty string $listener argument');
-        new LazyListener($this->container->reveal(), $listener);
+        new LazyListener($this->container->reveal(), '');
     }
 
     public function invalidMethodArguments(): array
     {
-        return array_merge($this->invalidListenerTypes(), [
+        return [
+            'empty'           => [''],
             'digit-first'     => ['0invalid'],
             'with-whitespace' => ['also invalid'],
             'with-dash'       => ['also-invalid'],
             'with-symbols'    => ['alsoInv@l!d'],
-        ]);
+        ];
     }
 
     /**

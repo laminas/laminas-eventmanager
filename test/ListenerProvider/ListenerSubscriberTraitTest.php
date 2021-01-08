@@ -8,14 +8,15 @@
 
 namespace LaminasTest\EventManager\ListenerProvider;
 
-use Closure;
 use Laminas\EventManager\ListenerProvider\ListenerSubscriberInterface;
-use Laminas\EventManager\ListenerProvider\ListenerSubscriberTrait;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
+use LaminasTest\EventManager\DeprecatedAssertions;
 use PHPUnit\Framework\TestCase;
 
 class ListenerSubscriberTraitTest extends TestCase
 {
+    use DeprecatedAssertions;
+
     /**
      * @return ListenerSubscriberInterface
      */

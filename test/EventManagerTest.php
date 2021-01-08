@@ -640,6 +640,7 @@ class EventManagerTest extends TestCase
         }
     }
 
+<<<<<<< HEAD
     public function testNotPassingEventNameToDetachDetachesListenerFromAllEvents()
     {
         $eventNames = ['foo', 'bar'];
@@ -661,6 +662,8 @@ class EventManagerTest extends TestCase
         }
     }
 
+=======
+>>>>>>> 22d9703... qa: ensure tests pass, and BC breaks identified and removed
     public function testCanDetachASingleListenerFromAnEventWithMultipleListeners()
     {
         $listener = function ($e) {
