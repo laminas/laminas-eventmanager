@@ -293,7 +293,7 @@ class EventManager implements
         if (! is_string($eventName) || empty($eventName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a non-empty string $eventName argument; received %s',
-                __METHOD__, 
+                __METHOD__,
                 is_object($eventName) ? get_class($eventName) : gettype($eventName)
             ));
         }
@@ -346,7 +346,7 @@ class EventManager implements
         if ($eventName !== null && ! is_string($eventName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a null or string $eventName argument; received %s',
-                __METHOD__, 
+                __METHOD__,
                 is_object($eventName) ? get_class($eventName) : gettype($eventName)
             ));
         }
