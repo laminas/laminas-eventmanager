@@ -35,6 +35,9 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1"
     },
+    "provide": {
+        "psr/event-dispatcher-implementation": "^1.0"
+    },
     "suggest": {
         "container-interop/container-interop": "^1.2, to use the lazy listeners feature",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
