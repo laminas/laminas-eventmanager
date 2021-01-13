@@ -32,6 +32,7 @@
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
         "phpbench/phpbench": "^0.17.1",
+        "phpspec/prophecy": "^1.12",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1"
     },
