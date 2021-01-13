@@ -12,10 +12,12 @@ use Laminas\EventManager\ListenerProvider\ListenerSubscriberInterface;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
 use LaminasTest\EventManager\DeprecatedAssertions;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ListenerSubscriberTraitTest extends TestCase
 {
     use DeprecatedAssertions;
+    use ProphecyTrait;
 
     /**
      * @return ListenerSubscriberInterface

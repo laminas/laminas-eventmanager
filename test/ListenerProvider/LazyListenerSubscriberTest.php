@@ -13,9 +13,12 @@ use Laminas\EventManager\ListenerProvider\LazyListener;
 use Laminas\EventManager\ListenerProvider\LazyListenerSubscriber;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class LazyListenerAggregateTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);

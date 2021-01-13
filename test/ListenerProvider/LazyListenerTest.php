@@ -11,10 +11,13 @@ namespace LaminasTest\EventManager\ListenerProvider;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\ListenerProvider\LazyListener;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 class LazyListenerTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);

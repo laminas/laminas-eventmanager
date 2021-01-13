@@ -13,6 +13,7 @@ use Laminas\EventManager\Exception\RuntimeException;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerAttachmentInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 /**
@@ -21,6 +22,7 @@ use Psr\EventDispatcher\ListenerProviderInterface;
 class EventManagerWithProviderTest extends TestCase
 {
     use DeprecatedAssertions;
+    use ProphecyTrait;
 
     public function testCanCreateInstanceWithListenerProvider()
     {

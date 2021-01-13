@@ -15,10 +15,13 @@ use Laminas\EventManager\ListenerProvider\PrioritizedListenerProvider;
 use Laminas\EventManager\ListenerProvider\PrioritizedListenerProviderInterface;
 use Laminas\EventManager\ListenerProvider\PrioritizedIdentifierListenerProvider;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 class PrioritizedAggregateListenerProviderTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function invalidProviders(): array
     {
         $genericProvider = $this->prophesize(ListenerProviderInterface::class)->reveal();
