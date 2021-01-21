@@ -16,6 +16,8 @@ use PHPUnit\Framework\TestCase;
 
 class EventManagerAwareTraitTest extends TestCase
 {
+    use DeprecatedAssertions;
+
     public function testSetEventManager()
     {
         $object = $this->getObjectForTrait(EventManagerAwareTrait::class);

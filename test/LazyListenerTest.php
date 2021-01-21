@@ -14,10 +14,14 @@ use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyListener;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 
 class LazyListenerTest extends TestCase
 {
+    use DeprecatedAssertions;
+    use ProphecyTrait;
+
     protected function setUp() : void
     {
         $this->listenerClass = LazyListener::class;

@@ -10,9 +10,12 @@ namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ListenerAggregateTraitTest extends TestCase
 {
+    use ProphecyTrait;
+
     public $aggregateClass = TestAsset\MockListenerAggregateTrait::class;
 
     public function testDetachRemovesAttachedListeners()
