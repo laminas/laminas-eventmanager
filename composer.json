@@ -53,6 +53,7 @@
         ]
     },
     "scripts": {
+        "benchmark": "phpbench run --revs=2 --iterations=2 --report=aggregate",
         "check": [
             "@cs-check",
             "@test"
