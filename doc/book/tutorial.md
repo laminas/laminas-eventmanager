@@ -165,8 +165,8 @@ The method allows passing an array of strings, defining the names of the context
 or targets the given instance will be interested in.
 
 So, getting back to our example, let's assume that the above shared listener is
-registered, and also that the `Example` class is defined as above. (Note that as of 
-version 3, `setSharedManager()` is removed from  `EventManager`; the `SharedEventManager` 
+registered, and also that the `Example` class is defined as above. (Note that as of
+version 3, `setSharedManager()` is removed from  `EventManager`; the `SharedEventManager`
 instance must instead be injected via the constructor.) We can then execute the following:
 
 ```php
@@ -287,7 +287,7 @@ class LogEvents implements ListenerAggregateInterface
         $this->log = $log;
     }
 
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach('do', [$this, 'log']);
         $this->listeners[] = $events->attach('doSomethingElse', [$this, 'log']);
@@ -381,8 +381,8 @@ public function someExpensiveCall($criteria1, $criteria2)
         function ($r) {
             return ($r instanceof SomeResultClass);
         },
-        __FUNCTION__, 
-        $this, 
+        __FUNCTION__,
+        $this,
         $params
     );
 
