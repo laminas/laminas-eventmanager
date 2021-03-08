@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/intro/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/quick-start/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/tutorial/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/examples/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/wildcard-listeners/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/aggregates/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/lazy-listeners/intro/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/lazy-listeners/lazy-listener/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/lazy-listeners/lazy-event-listener/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/lazy-listeners/lazy-listener-aggregate/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/api/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/intercepting-filters/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/migration/intro/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/migration/removed/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-eventmanager/migration/changed/</loc>
-     <lastmod>2020-08-25</lastmod>
+     <lastmod>2021-03-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

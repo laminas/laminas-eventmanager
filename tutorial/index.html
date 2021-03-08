@@ -317,7 +317,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -460,12 +460,10 @@ $events-&gt;attach('do', function ($e) {
 
 $params = ['foo' =&gt; 'bar', 'baz' =&gt; 'bat'];
 $events-&gt;trigger('do', null, $params);</code></pre>
-
 <p>The above will result in the following:</p>
 <pre class="highlight"><code class="language-text">Handled event "do", with parameters {"foo":"bar","baz":"bat"}</code></pre>
-
 <blockquote>
-<h3>Note</h3>
+<h3 id="note">Note</h3>
 <p>Throughout this tutorial, we use closures as listeners. However, any valid PHP
 callback can be attached as a listeners: PHP function names, static class
 methods, object instance methods, functors, or closures. We use closures
@@ -525,7 +523,6 @@ $example-&gt;getEventManager()-&gt;attach('doIt', function($e) {
 });
 
 $example-&gt;doIt('bar', 'bat');</code></pre>
-
 <p>The above is basically the same as the first example. The main difference is
 that we're now using that middle argument in order to pass the target, the
 instance of <code>Example</code>, on to the listeners. Our listener is now retrieving that
@@ -557,7 +554,6 @@ $sharedEvents-&gt;attach('Example', 'do', function ($e) {
         json_encode($params)
     );
 });</code></pre>
-
 <p>This looks almost identical to the previous example; the key difference is that
 there is an additional argument at the <em>start</em> of the list, <code>Example</code>. This
 code is basically saying, "Listen to the 'do' event of the 'Example' target,
@@ -566,8 +562,8 @@ and, when notified, execute this callback."</p>
 The method allows passing an array of strings, defining the names of the context
 or targets the given instance will be interested in.</p>
 <p>So, getting back to our example, let's assume that the above shared listener is
-registered, and also that the <code>Example</code> class is defined as above. (Note that as of 
-version 3, <code>setSharedManager()</code> is removed from  <code>EventManager</code>; the <code>SharedEventManager</code> 
+registered, and also that the <code>Example</code> class is defined as above. (Note that as of
+version 3, <code>setSharedManager()</code> is removed from  <code>EventManager</code>; the <code>SharedEventManager</code>
 instance must instead be injected via the constructor.) We can then execute the following:</p>
 <pre class="highlight"><code class="language-php">$example = new Example();
 
@@ -579,15 +575,12 @@ $example-&gt;setEventManager(new EventManager($sharedEvents));
 
 // Both versions:
 $example-&gt;doIt('bar', 'bat');</code></pre>
-
 <p>and expect the following output:</p>
 <pre class="highlight"><code class="language-text">Handled event "do" on target "Example", with parameters {"foo":"bar","baz":"bat"}</code></pre>
-
 <p>Now, let's say we extended <code>Example</code> as follows:</p>
 <pre class="highlight"><code class="language-php">class SubExample extends Example
 {
 }</code></pre>
-
 <p>One interesting aspect of our <code>setEventManager()</code> method is that we defined it
 to listen both on <code>__CLASS__</code> and <code>get_class($this)</code>. This means that calling
 <code>do()</code> on our <code>SubExample</code> class would also trigger the shared listener! It also
@@ -598,7 +591,7 @@ be some name that only has meaning in your application if desired. As an
 example, you could have a set of classes that respond to "log" or "cache" — and
 listeners on these would be notified by any of them.</p>
 <blockquote>
-<h3>Note</h3>
+<h3 id="note_1">Note</h3>
 <p>We recommend using class names, interface names, and/or abstract class names
 for identifiers. This makes determining what events are available easier, as
 well as finding which listeners might be attaching to those events. Interfaces
@@ -637,7 +630,6 @@ $sharedEvents-&gt;attach(
     '*', // all events
     $listener
 );</code></pre>
-
 <p>The ability to specify wildcard targets and/or events when attaching can slim
 down your code immensely.</p>
 <h2 id="listener-aggregates">Listener aggregates</h2>
@@ -665,7 +657,7 @@ class LogEvents implements ListenerAggregateInterface
         $this-&gt;log = $log;
     }
 
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this-&gt;listeners[] = $events-&gt;attach('do', [$this, 'log']);
         $this-&gt;listeners[] = $events-&gt;attach('doSomethingElse', [$this, 'log']);
@@ -686,9 +678,8 @@ class LogEvents implements ListenerAggregateInterface
         $this-&gt;log-&gt;info(sprintf('%s: %s', $event, json_encode($params)));
     }
 }</code></pre>
-
 <blockquote>
-<h3>Note</h3>
+<h3 id="note_2">Note</h3>
 <p>The trait <code>Laminas\EventManager\ListenerAggregateTrait</code> can be composed to help
 implement <code>ListenerAggregateInterface</code>; it defines the <code>$listeners</code> property,
 and the <code>detach()</code> logic as demonstrated above.</p>
@@ -697,7 +688,6 @@ and the <code>detach()</code> logic as demonstrated above.</p>
 method:</p>
 <pre class="highlight"><code class="language-php">$logListener = new LogEvents($logger);
 $logListener-&gt;attach($events);</code></pre>
-
 <p>Any events the aggregate attaches to will then be notified when triggered.</p>
 <p>Why bother? For a couple of reasons:</p>
 <ul>
@@ -745,8 +735,8 @@ value, execution is halted.</p>
         function ($r) {
             return ($r instanceof SomeResultClass);
         },
-        __FUNCTION__, 
-        $this, 
+        __FUNCTION__,
+        $this,
         $params
     );
 
@@ -756,7 +746,6 @@ value, execution is halted.</p>
 
     // ... do some work ...
 }</code></pre>
-
 <p>With this paradigm, we know that the likely reason of execution halting is due
 to the last result meeting the test callback criteria; as such, we simply return
 that last result.</p>
@@ -768,7 +757,6 @@ listeners.</p>
     $e-&gt;stopPropagation();
     return new SomeResultClass();
 });</code></pre>
-
 <p>This, of course, raises some ambiguity when using the trigger paradigm, as you
 can no longer be certain that the last result meets the criteria it's searching
 on. As such, we recommend that you standardize on one approach or the other.</p>
@@ -799,7 +787,6 @@ $events-&gt;attach('Example', 'do', function($e) {
         json_encode($params)
     );
 }, $priority);</code></pre>
-
 <p>This would execute with high priority, meaning it would execute early. If we
 changed <code>$priority</code> to <code>-100</code>, it would execute with low priority, executing
 late.</p>
@@ -817,7 +804,6 @@ this:</p>
 if ( !$routeMatch) {
     // Oh noes! we cannot do our work! whatever shall we do?!?!?!
 }</code></pre>
-
 <p>The problems with this are several. First, relying on string keys is going to
 very quickly run into problems — typos when setting or retrieving the argument
 can lead to hard to debug situations. Second, we now have a documentation issue;
@@ -835,7 +821,6 @@ $result = $e-&gt;getParam('__RESULT__');
 if (! $result) {
     // Oh noes! we cannot do our work! whatever shall we do?!?!?!
 }</code></pre>
-
 <p>Sure, that key may be unique, but it suffers from a lot of the same issues.</p>
 <p>So, the solution is to create custom events. As an example, we have a custom
 <code>MvcEvent</code> in laminas-mvc. This event composes the application instance,
@@ -847,7 +832,6 @@ if (is_string($result)) {
     $content = $view-&gt;render('layout.phtml', ['content' =&gt; $result]);
     $response-&gt;setContent($content);
 }</code></pre>
-
 <p>But how do we use this custom event? Simple: the method <code>triggerEvent()</code>.</p>
 <pre class="highlight"><code class="language-php">$event = new CustomEvent();
 $event-&gt;setName('foo');
@@ -859,7 +843,6 @@ $events-&gt;triggerEvent($event);
 
 // Use triggerEventUntil() for criteria-based short-circuiting:
 $results = $events-&gt;triggerEventUntil($callback, $event);</code></pre>
-
 <p>This is a really powerful technique for domain-specific event systems, and
 definitely worth experimenting with.</p>
 <h2 id="putting-it-together-implementing-a-simple-caching-system">Putting it together: Implementing a simple caching system</h2>
@@ -903,7 +886,6 @@ typically reserved for the system.</p>
     $this-&gt;events()-&gt;trigger(__FUNCTION__ . '.post', $this, $params);
     return $calculatedResult;
 }</code></pre>
-
 <p>Now, to provide some caching listeners. We'll need to attach to each of the
 <code>someExpensiveCall.pre</code> and <code>someExpensiveCall.post</code> methods. In the former;
 case, if a cache hit is detected, we return it, and move on. In the latter, we
@@ -927,9 +909,8 @@ $events-&gt;attach('someExpensiveCall.post', function($e) use ($cache) {
     $key    = md5(json_encode($params));
     $cache-&gt;save($result, $key);
 }, -100);</code></pre>
-
 <blockquote>
-<h3>Note</h3>
+<h3 id="note_3">Note</h3>
 <p>The above could have been done within a <code>ListenerAggregate</code>, which would have
 allowed keeping the <code>$cache</code> instance as a stateful property, instead of
 importing it into closures.</p>
@@ -964,7 +945,6 @@ public function doSomeExpensiveCall($e)
     $e-&gt;setParam('__RESULT__', $calculatedResult);
     return $calculatedResult;
 }</code></pre>
-
 <p>The listeners would then attach to the <code>someExpensiveCall</code> event, with the cache
 lookup listener listening at high priority, and the cache storage listener
 listening at low (negative) priority.</p>
@@ -1208,6 +1188,7 @@ code, and is an important part of your Laminas toolbox.</p>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -1280,7 +1261,7 @@ code, and is an important part of your Laminas toolbox.</p>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

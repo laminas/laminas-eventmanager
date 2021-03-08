@@ -317,7 +317,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -456,7 +456,6 @@ listener is not present, checking for presence first is not necessary.</p>
 with <code>EventManagerInterface::setEventPrototype()</code>, which has the following
 signature:</p>
 <pre class="highlight"><code class="language-php">setEventPrototype(EventInterface $event);</code></pre>
-
 <p>This was done to prevent errors that occurred when invalid event class names
 were provided. Additionally, internally, event managers will clone the
 instance any time <code>trigger()</code> or <code>triggerUntil()</code> are called — which is
@@ -471,17 +470,13 @@ forward-proof your applications, you can alter statements that attach aggregates
 to an event manager reading as follows:</p>
 <pre class="highlight"><code class="language-php">$events-&gt;attach($aggregate); // or
 $events-&gt;attachAggregate($aggregate);</code></pre>
-
 <p>to:</p>
 <pre class="highlight"><code class="language-php">$aggregate-&gt;attach($events);</code></pre>
-
 <p>Similarly, for detaching an aggregate, migrate from:</p>
 <pre class="highlight"><code class="language-php">$events-&gt;detach($aggregate); // or
 $events-&gt;detachAggregate($aggregate);</code></pre>
-
 <p>to:</p>
 <pre class="highlight"><code class="language-php">$aggregate-&gt;detach($events);</code></pre>
-
 <p>The above works in all released versions of the component.</p>
 <h2 id="sharedeventaggregateawareinterface-sharedlisteneraggregateinterface">SharedEventAggregateAwareInterface, SharedListenerAggregateInterface</h2>
 <p>The interfaces <code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> and
@@ -490,7 +485,7 @@ listener aggregates was removed from version 3.</p>
 <p>Migration will depend on what you have done in your application: extending
 the <code>SharedEventManager</code> and/or implementing <code>SharedEventAggregateAwareInterface</code>,
 or implementing <code>SharedListenerAggregateInterface</code>.</p>
-<h3>SharedEventAggregateAwareInterface</h3>
+<h3 id="sharedeventaggregateawareinterface">SharedEventAggregateAwareInterface</h3>
 <p><code>Laminas\EventManager\SharedEventAggregateAwareInterface</code> was added mid-way through
 the v2 lifecycle to allow adding shared listener aggregates to the
 <code>SharedEventManager</code>. If you were extending the <code>SharedEventManager</code> and
@@ -498,7 +493,7 @@ overriding the methods defined in <code>SharedEventAggregateAwareInterface</code
 should remove them.</p>
 <p>If you were implementing <code>SharedEventAggregateAwareInterface</code>, the interface no
 longer exists, and you should likely remove your implementation.</p>
-<h3>SharedListenerAggregateInterface</h3>
+<h3 id="sharedlisteneraggregateinterface">SharedListenerAggregateInterface</h3>
 <p>For those implementing shared listener aggregates, you can continue to use them,
 but will need to change how you do so.</p>
 <p>To migrate, you have two steps to take: remove the
@@ -525,7 +520,6 @@ class MySharedAggregate implements SharedListenerAggregateInterface
         // ...
     }
 }</code></pre>
-
 <p>then modify it to instead read:</p>
 <pre class="highlight"><code class="language-php">namespace Foo;
 
@@ -543,18 +537,15 @@ class MySharedAggregate
         // ...
     }
 }</code></pre>
-
 <p>For the second step, instead of attaching the aggregate to the shared event
 manager, you will pass the shared event manager to your aggregate. For example,
 if you had the following in your code:</p>
 <pre class="highlight"><code class="language-php">$sharedEvents-&gt;attachAggregate($mySharedAggregate);</code></pre>
-
 <p>then you can change it to:</p>
 <pre class="highlight"><code class="language-php">$mySharedAggregate-&gt;attachShared($sharedEvents);</code></pre>
-
 <p>This has exactly the same effect, and makes your code forward-compatible with
 v3.</p>
-<h4>SharedEventManagerAwareInterface</h4>
+<h4 id="sharedeventmanagerawareinterface">SharedEventManagerAwareInterface</h4>
 <p>The interface <code>Laminas\EventManager\SharedEventManagerAwareInterface</code> was removed,
 as version 3 now requires tha the <code>SharedEventManagerInterface</code> instance be
 injected into the <code>EventManager</code> instance at instantiation.</p>
@@ -572,7 +563,6 @@ injected into the <code>EventManager</code> instance at instantiation.</p>
 <pre class="highlight"><code class="language-php">if (method_exists($instance, 'setSharedManager')) {
     $instance-&gt;setSharedManager($sharedEvents);
 }</code></pre>
-
 <p>Alternately, if you control instantiation of the instance, consider injection
   at instantiation, or within the factory used to create your instance.</p>
 <h2 id="sharedeventmanagerinterfacegetevents">SharedEventManagerInterface::getEvents()</h2>
@@ -807,6 +797,7 @@ was not consumed by the event manager, and served no real purpose.</p>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -879,7 +870,7 @@ was not consumed by the event manager, and served no real purpose.</p>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

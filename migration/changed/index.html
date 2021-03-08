@@ -317,7 +317,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -449,7 +449,6 @@
 <h2 id="eventmanager__construct">EventManager::__construct()</h2>
 <p>In version 2, the signature of <code>__construct()</code> was:</p>
 <pre class="highlight"><code class="language-php">__construct($identifiers = null)</code></pre>
-
 <p>where <code>$identifiers</code> could be a string, array of strings, or <code>Traversable</code> of
 strings.</p>
 <p>Version 3 requires that the shared event manager be injected at instantiation,
@@ -458,7 +457,6 @@ semantic meaning without a shared event manager composed. As such, the
 constructor now has two arguments, with the first being the shared event
 manager:</p>
 <pre class="highlight"><code class="language-php">__construct(SharedEventManagerInterface $sharedEvents, array $identifiers = [])</code></pre>
-
 <p>Finally, because we changed the signature of <code>setIdentifiers()</code> and
 <code>addIdentifiers()</code> to only accept arrays (see more below), we changed the
 <code>$identifiers</code> argument to only allow arrays.</p>
@@ -466,7 +464,6 @@ manager:</p>
 <p>In version 2, the signatures of <code>trigger()</code> and <code>triggerUntil()</code> are:</p>
 <pre class="highlight"><code class="language-php">trigger($event, $target = null, $argv = [], $callback = null);
 triggerUntil($event, $target = null, $argv = [], $callback = null);</code></pre>
-
 <p>The methods allow overloading essentially every argument:</p>
 <ul>
 <li><code>$event</code> could be the event name, array or traversable of event names,  or an
@@ -487,7 +484,6 @@ triggerUntil($event, $target = null, $argv = [], $callback = null);</code></pre>
 <p>In version 3, we changed the methods to have the following signatures:</p>
 <pre class="highlight"><code class="language-php">trigger($event, $target = null, $argv = []);
 triggerUntil(callable $callback, $event, $target = null, $argv = []);</code></pre>
-
 <p>with the following definitions:</p>
 <ul>
 <li><code>$event</code> is a string event name.</li>
@@ -506,7 +502,6 @@ methods:</p>
 <pre class="highlight"><code class="language-php">triggerUntil(callable $callback, $event, $target = null, $argv = []);
 triggerEvent(EventInterface $event);
 triggerEventUntil(callable $callback, EventInterface $event);</code></pre>
-
 <p>These allow the other primary use cases for <code>trigger()</code> in v2, but with discrete
 signatures.</p>
 <p>Starting in version 2.6.0, you can use these three additional methods, as the
@@ -529,7 +524,6 @@ $events-&gt;trigger('foo', $this, $event);
 $event-&gt;setName('foo');
 $event-&gt;setTarget($this);
 $events-&gt;triggerEvent($event);</code></pre>
-
 <p>If you are using a callback to short-circuit, use one of the <code>*Until()</code> methods,
 passing the callback as the first argument:</p>
 <pre class="highlight"><code class="language-php">// Standard trigger:
@@ -543,12 +537,10 @@ $events-&gt;trigger($event, $criteria);
 
 // becomes:
 $events-&gt;triggerEventUntil($criteria, $event);</code></pre>
-
 <h2 id="eventmanagerinterfaceattach-and-detach">EventManagerInterface::attach() and detach()</h2>
 <p>In version 2, <code>attach()</code> and <code>detach()</code> had the following signatures:</p>
 <pre class="highlight"><code class="language-php">attach($event, $callback = null, $priority = null);
 detach($listener);</code></pre>
-
 <p>with the following argument definitions:</p>
 <ul>
 <li><code>$event</code> could be either a string event name, or an instance of
@@ -563,7 +555,6 @@ detach($listener);</code></pre>
 <p>Much like we did for the <code>trigger*()</code> methods, we simplified the signatures:</p>
 <pre class="highlight"><code class="language-php">attach($event, callable $listener, $priority = 1);
 detach(callable $listener, $event = null);</code></pre>
-
 <p>Where:</p>
 <ul>
 <li><code>$event</code> is always a string event name (except when not passed to <code>detach()</code>.</li>
@@ -595,7 +586,6 @@ $events-&gt;detach($callbackHandler);
 
 // Will become:
 $events-&gt;detach($callbackHandler-&gt;getCallback());</code></pre>
-
 <p>In most cases, the callback handler you are storing is likely the result of
 calling <code>attach()</code> in the first place. Since <code>attach()</code> no longer creates a
 <code>CallbackHandler</code> instance, it instead simply returns the listener back to the
@@ -615,10 +605,8 @@ their calls.</p>
 <p><code>Laminas\EventManager\SharedEventManagerInterface::getListeners()</code> has changed. The
 previous signature was:</p>
 <pre class="highlight"><code class="language-php">getListeners($id, $event = null): false|Laminas\Stdlib\PriorityQueue</code></pre>
-
 <p>Version 3 has the following signature:</p>
 <pre class="highlight"><code class="language-php">getListeners(array $identifiers, $eventName) : array</code></pre>
-
 <p>The changes are:</p>
 <ul>
 <li>The first argument now expects an <em>array</em> of identifiers. This is so an event
@@ -633,7 +621,6 @@ previous signature was:</p>
 <h2 id="sharedeventmanagerinterfaceattach">SharedEventManagerInterface::attach()</h2>
 <p>The v2 signature of <code>attach()</code> was:</p>
 <pre class="highlight"><code class="language-php">attach($id, $event, $callback, $priority = 1) : CallbackHandler|CallbackHandler[]</code></pre>
-
 <p>where:</p>
 <ul>
 <li><code>$id</code> could be a string identifier, or an array or <code>Traversable</code> of
@@ -645,7 +632,6 @@ previous signature was:</p>
 </ul>
 <p>The v3 signature becomes:</p>
 <pre class="highlight"><code class="language-php">attach($identifier, $eventName, callable $listener, $priority = 1) : void</code></pre>
-
 <p>where:</p>
 <ul>
 <li><code>$identifier</code> <em>must</em> be a string <em>only</em>.</li>
@@ -665,7 +651,6 @@ previous signature was:</p>
 array_walk($identifiers, function ($id) use ($listener) {
     $this-&gt;sharedEvents-&gt;attach($id, 'foo', $listener);
 });</code></pre>
-
 <ul>
 <li>
 <p>If you are passing <code>CallbackHandler</code> arguments, pass the callable listener
@@ -679,7 +664,6 @@ array_walk($identifiers, function ($id) use ($listener) {
 <h2 id="sharedeventmanagerinterfacedetach">SharedEventManagerInterface::detach()</h2>
 <p>The v2 signature of <code>detach()</code> was:</p>
 <pre class="highlight"><code class="language-php">detach($id, CallbackHandler $listener) : bool</code></pre>
-
 <p>where:</p>
 <ul>
 <li><code>$id</code> was a string identifier</li>
@@ -688,7 +672,6 @@ array_walk($identifiers, function ($id) use ($listener) {
 </ul>
 <p>The v3 signature becomes:</p>
 <pre class="highlight"><code class="language-php">detach(callable $listener, $identifier = null, $eventName = null) : void</code></pre>
-
 <p>where:</p>
 <ul>
 <li><code>$listener</code> is the callable listener you wish to remove</li>
@@ -716,10 +699,8 @@ abstract methods, you can forward-proof your existing
 <code>ListenerAggregateInterface</code> implementations by adding the argument.</p>
 <p>As an example, if you define your method like this:</p>
 <pre class="highlight"><code class="language-php">public function attach(EventManagerInterface $events)</code></pre>
-
 <p>Simply change it to this:</p>
 <pre class="highlight"><code class="language-php">public function attach(EventManagerInterface $events, $priority = 1)</code></pre>
-
 <p>You do not need to do anything with the <code>$priority</code> argument, though we
 recommend passing it as a default value if you are not specifying a priority for
 any listeners you attach.</p>
@@ -728,12 +709,10 @@ any listeners you attach.</p>
 signatures. The originals were:</p>
 <pre class="highlight"><code class="language-php">attach($callback) : CallbackHandler
 detach(CallbackHandler $callback) : bool</code></pre>
-
 <p>where <code>$callback</code> for <code>attach()</code> could be a callable or a <code>CallbackHandler</code>. The
 new signatures are:</p>
 <pre class="highlight"><code class="language-php">attach(callable $callback) : void
 detach(callable $filter) : bool</code></pre>
-
 <p>Typical usage in v2 was to capture the return value of <code>attach()</code> and pass it to
 <code>detach()</code>, as <code>attach()</code> would create a <code>CallbackHandler</code> for you to later pass
 to <code>detach()</code>. Since we can now pass the original callable argument to
@@ -974,6 +953,7 @@ fluent interface.</p>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -1046,7 +1026,7 @@ fluent interface.</p>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-eventmanager/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
