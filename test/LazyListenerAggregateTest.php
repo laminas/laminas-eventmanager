@@ -16,12 +16,15 @@ use Laminas\EventManager\LazyEventListener;
 use Laminas\EventManager\LazyListenerAggregate;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionProperty;
 
 use function array_shift;
 
 class LazyListenerAggregateTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected function setUp() : void
     {
         $this->container = $this->prophesize(ContainerInterface::class);

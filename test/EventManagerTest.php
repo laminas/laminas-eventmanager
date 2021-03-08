@@ -16,6 +16,7 @@ use Laminas\EventManager\ResponseCollection;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\EventManager\SharedEventManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionProperty;
 use stdClass;
 
@@ -34,6 +35,9 @@ use function var_export;
 
 class EventManagerTest extends TestCase
 {
+    use DeprecatedAssertions;
+    use ProphecyTrait;
+
     protected function setUp() : void
     {
         if (isset($this->message)) {
@@ -642,14 +646,17 @@ class EventManagerTest extends TestCase
         }
     }
 
-    /**
-     * @depends testAllowsPassingArrayOfEventNamesWhenAttaching
-     */
-    public function testNotPassingEventNameToDetachDetachesListenerFromAllEvents($dependencies)
+    public function testNotPassingEventNameToDetachDetachesListenerFromAllEvents()
     {
-        $eventNames = $dependencies['event_names'];
-        $events     = $dependencies['events'];
-        $listener   = $dependencies['listener'];
+        $eventNames = ['foo', 'bar'];
+        $events     = $this->events;
+        $listener   = function ($e) {
+            return 'listener';
+        };
+
+        foreach ($eventNames as $event) {
+            $events->attach($event, $listener);
+        }
 
         $events->detach($listener);
 

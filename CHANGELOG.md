@@ -2,16 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.4.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.3.1 - 2021-03-08
 
-
------
-
 ### Release Notes for [3.3.1](https://github.com/laminas/laminas-eventmanager/milestone/3)
-
-3.3.x bugfix release (patch)
-
-### 3.3.1
 
 - Total issues resolved: **0**
 - Total pull requests resolved: **1**

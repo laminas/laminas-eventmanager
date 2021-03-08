@@ -13,6 +13,8 @@ use Laminas\EventManager\LazyEventListener;
 
 class LazyEventListenerTest extends LazyListenerTest
 {
+    use DeprecatedAssertions;
+
     protected function setUp() : void
     {
         parent::setUp();
