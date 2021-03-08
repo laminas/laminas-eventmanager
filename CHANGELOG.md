@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.3.1 - TBD
+## 3.3.1 - 2021-03-08
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.3.1](https://github.com/laminas/laminas-eventmanager/milestone/3)
 
-- Nothing.
+3.3.x bugfix release (patch)
 
-### Deprecated
+### 3.3.1
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Bug,Documentation
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [16: &#91;Doc Tutorial&#93; Add missing , $priority = 1 parameter in example LogEvents::attach()](https://github.com/laminas/laminas-eventmanager/pull/16) thanks to @samsonasik
 
 ## 3.3.0 - 2020-08-25
 
