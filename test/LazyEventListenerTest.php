@@ -93,4 +93,12 @@ class LazyEventListenerTest extends LazyListenerTest
         self::assertInstanceOf($class, $listener);
         self::assertEquals(5, $listener->getPriority(5));
     }
+
+    /**
+     * @depends testCanInstantiateLazyListenerWithValidDefinition
+     */
+    public function testInstatiationSetsListenerMethod($listener)
+    {
+        $this->markTestSkipped('Cannot introspect private parent properties in extending class');
+    }
 }

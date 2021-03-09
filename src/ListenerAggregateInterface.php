@@ -15,6 +15,9 @@ namespace Laminas\EventManager;
  * with an EventManager, without an event name. The {@link attach()} method will
  * then be called with the current EventManager instance, allowing the class to
  * wire up one or more listeners.
+ *
+ * @deprecated since 3.4.0. This interface will be removed in version 4.0.0, in
+ *     favor of the ListenerProvider\ListenerSubscriberInterface.
  */
 interface ListenerAggregateInterface
 {

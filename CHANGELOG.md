@@ -8,13 +8,79 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+- Adds the ability to use the EventManager as a [PSR-14](https://www.php-fig.org/psr/psr-14/) event dispatcher.
+
+- Adds the following interfaces:
+  - `Laminas\EventManager\EventDispatchingInterface`, for indicating a class composes an `EventDispatcherInterface` instance.
+    This interface will replace the `Laminas\EventManager\EventsCapableInterface` in version 4.0.
+
+  - `Laminas\Expressive\ListenerProvider\PrioritizedListenerProviderInterface`, which extends the `ListenerProviderInterface`, and adds the method `getListenersForEventByPriority($event, $identifiers = [])`.
+    This method will return a list of integer priority keys mapping to lists of callable listeners.
+
+  - `Laminas\Expressive\ListenerProvider\PrioritizedListenerAttachmentInterface`, which provides methods for attaching and detaching listeners with optional priority values.
+    This interface largely replaces the various related methods in the current `EventManagerInterface`, and is for use with listener providers.
+
+  - `Laminas\Expressive\ListenerProvider\ListenerSubscriberInterface`, for indicating that a class can attach multiple listeners to a `PrioritizedListenerAttachmentInterface` instance.
+    This largely replaces the current `ListenerAggregateInterface` functionality.
+    Users should likely use the PSR-14 utility package's `DelegatingProvider` instead, however.
+
+- Adds the following listener provider classes and utilities:
+  - `AbstractListenerSubscriber` and `ListenerSubscriberTrait` can be used to provide a generic way to detach subscribers.
+    In most cases, `ListenerSubscriberInterface` implementations should define their own logic for doing so.
+
+  - `PrioritizedListenerProvider` implements `PrioritizedListenerProviderInterface` and `PrioritizedListenerAttachmentInterface` in order to provide the various listener attachment and retrieval capabilities in previous versions of the `EventManager` class.
+
+  - `PrioritizedIdentifierListenerProvider` implements `PrioritizedListenerProviderInterface` and `SharedEventManagerInterface`, and provides all features of the `SharedEventManager` class from previous versions of the package.
+
+  - `PrioritizedAggregateListenerProvider` implements `PrioritizedListenerProviderInterface` and accepts a list of `PrioritizedListenerProviderInterface` instances and optionally a generic `ListenerProviderInterface` instance to its constructor.
+    When retrieving listeners, it will loop through the `PrioritizedListenerProviderInterface` instance in order, yielding from each, and then, if present, yield from the generic `ListenerProviderInterface` instance.
+    This approach essentially replaces the listener and shared listener aggregation in previous versions of the `EventManager`.
+
+  - `LazyListener` combines the functionalities of `Zend\EventManager\LazyListener` and `Zend\EventManager\LazyEventListener`.
+    If no event or priority are provided to the constructor, than the `getEvent()` and `getPriority()` methods will each return `null`.
+    When invoked, the listener will pull the specified service from the provided DI container, and then invoke it.
+
+  - `LazyListenerSubscriber` implements `ListenerSubscriberInterface` and accepts a list of `LazyListener` instances to its constructor; any non-`LazyListener` instances or any that do not define an event will cause
+    the constructor to raise an exception.
+    When its `attach()` method is called, it attaches the lazy listeners based on the event an priority values it pulls from them.
+
+- Adds the static method `createUsingListenerProvider()` to the `EventManager` class.
+  This method takes a `ListenerProviderInterface`, and will then pull directly from it when triggering events.
+  If the provider also implements `PrioritizedListenerAttachmentInterface`, the various listener attachment methods defined in `EventManager` will proxy to it.
+
+- Adds the static method `createUsingListenerProvider()` to the `EventManager`.
+
 ### Changed
 
-- Nothing.
+- Modifies the `SharedEventManager` class to extend the new `Laminas\EventManager\ListenerProvider\PrioritizedIdentifierListenerProvider` class.
+
+- Modifies the `EventManager` class as follows:
+  - It now implements each of the PSR-14 `ListenerProviderInterface` and the new `PrioritizedListenerAttachmentInterface`.
+  - If constructed normally, it will create a `PrioritizedListenerProvider` instance, and use that for all listener attachment.
+    If a `SharedEventManagerInterface` is provided, it will create a `PrioritizedAggregateListenerProvider` using its own `PrioritizedListenerProvider` and the shared manager, and use that for fetching listeners.
+  - Adds a `dispatch()` method as an alternative to the various `trigger*()` methods.
 
 ### Deprecated
 
-- Nothing.
+- Deprecates the following interfaces and classes:
+  - `Laminas\EventManager\EventInterface`.
+    Users should start using vanilla PHP objects that encapsulate all expected behavior for setting and retrieving values and otherwise mutating state, including how and when propagation of the event should stop.
+
+  - `Laminas\EventManager\EventManagerInterface`; start typehinting against the PSR-14 `EventDispatcherInterface`.
+  - `Laminas\EventManager\EventManagerAwareInterface`
+  - `Laminas\EventManager\EventManagerAwareTrait`
+  - `Laminas\EventManager\EventsCapableInterface`; start using `EventDispatchingInterface` instead.
+  - `Laminas\EventManager\SharedEventManager`; start using listener providers instead, attaching to identifiers based on event types.
+  - `Laminas\EventManager\SharedEventManagerInterface`
+  - `Laminas\EventManager\SharedEventsCapableInterface`
+  - `Laminas\EventManager\ListenerAggregateInterface`; use the new `ListenerSubscriberInterface` instead.
+  - `Laminas\EventManager\ListenerAggregateTrait`; use the new `ListenerSubscriberTrait`, or define your own detachment logic.
+  - `Laminas\EventManager\AbstractListenerAggregate`; use the new `AbstractListenerSubscriber`, or define your own detachment logic.
+  - `Laminas\EventManager\ResponseCollection`; aggregate state in the event itself, and have the event determine when propagation needs to stop.
+  - `Laminas\EventManager\LazyListener`; use `Laminas\EventManager\ListenerProvider\LazyListener` instead.
+  - `Laminas\EventManager\LazyEventListener`; use `Laminas\EventManager\ListenerProvider\LazyListener` instead.
+  - `Laminas\EventManager\LazyListenerAggregate`; use `Laminas\EventManager\ListenerProvider\LazyListenerSubscriber` instead.
+  - `Laminas\EventManager\FilterChain` and the `Filter` subnamespace; these will move to a separate package in the future.
 
 ### Removed
 
@@ -113,7 +179,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - [zendframework/zend-eventmanager#17](https://github.com/zendframework/zend-eventmanager/pull/17) makes a
   number of internal changes to how listeners are stored in order to improve
   performance, by as much as 10% in the scenario used in the MVC layer.
-  
+
   Additionally, it optimizes when the target and event arguments are injected
   into an event, eliminating that step entirely when either is unavailable.
 

@@ -12,6 +12,9 @@ use ArrayAccess;
 
 /**
  * Representation of an event
+ *
+ * @deprecated since 3.4.0. This interface will be removed in version 4.0, in
+ *     favor of using simple PHP objects as events.
  */
 interface EventInterface
 {
@@ -89,6 +92,8 @@ interface EventInterface
     /**
      * Has this event indicated event propagation should stop?
      *
+     * @deprecated Implement StoppableEventInterface instead, to make your
+     *     application forwards-compatible with PSR-14 and zend-eventmanager v4.
      * @return bool
      */
     public function propagationIsStopped();

@@ -24,18 +24,23 @@
     },
     "require": {
         "php": "^7.3 || ^8.0",
-        "laminas/laminas-zendframework-bridge": "^1.0"
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "psr/event-dispatcher": "^1.0"
     },
     "require-dev": {
-        "container-interop/container-interop": "^1.1",
+        "container-interop/container-interop": "^1.2",
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
         "phpbench/phpbench": "^0.17.1",
+        "phpspec/prophecy": "^1.12",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1"
     },
+    "provide": {
+        "psr/event-dispatcher-implementation": "^1.0"
+    },
     "suggest": {
-        "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
+        "container-interop/container-interop": "^1.2, to use the lazy listeners feature",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
     },
     "autoload": {

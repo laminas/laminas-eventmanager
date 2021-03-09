@@ -10,8 +10,6 @@ namespace LaminasTest\EventManager;
 
 use PHPUnit\Framework\Assert;
 use ReflectionClass;
-use ReflectionObject;
-use ReflectionProperty;
 use stdClass;
 
 use function get_class;

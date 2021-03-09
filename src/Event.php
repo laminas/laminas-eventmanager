@@ -9,6 +9,7 @@
 namespace Laminas\EventManager;
 
 use ArrayAccess;
+use Psr\EventDispatcher\StoppableEventInterface;
 
 use function gettype;
 use function is_array;
@@ -21,7 +22,7 @@ use function sprintf;
  * Encapsulates the target context and parameters passed, and provides some
  * behavior for interacting with the event manager.
  */
-class Event implements EventInterface
+class Event implements EventInterface, StoppableEventInterface
 {
     /**
      * @var string Event name
@@ -196,9 +197,21 @@ class Event implements EventInterface
     /**
      * Is propagation stopped?
      *
+     * @deprecated Use isPropagationStopped instead, to make your application
+     *     forwards-compatible with PSR-14 and zend-eventmanager v4. If you
+     *     plan to override this method, please do so via the `isPropagationStopped`
+     *     method, as this method proxies to that one starting in version 3.4.0.
      * @return bool
      */
     public function propagationIsStopped()
+    {
+        return $this->isPropagationStopped();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isPropagationStopped(): bool
     {
         return $this->stopPropagation;
     }

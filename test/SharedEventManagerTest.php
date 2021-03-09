@@ -283,15 +283,16 @@ class SharedEventManagerTest extends TestCase
         $this->manager->detach($this->callback, 'IDENTIFIER', $eventName);
     }
 
-    public function invalidListenersAndEventNamesForFetchingListeners()
+    public function invalidEventNamesForFetchingListeners()
     {
         $events = $this->invalidIdentifiers();
         $events['wildcard'] = ['*'];
+        unset($events['non-traversable-object']);
         return $events;
     }
 
     /**
-     * @dataProvider invalidListenersAndEventNamesForFetchingListeners
+     * @dataProvider invalidEventNamesForFetchingListeners
      */
     public function testGetListenersRaisesExceptionForInvalidEventName($eventName)
     {
@@ -301,12 +302,12 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidListenersAndEventNamesForFetchingListeners
+     * @dataProvider invalidIdentifiers
      */
     public function testGetListenersRaisesExceptionForInvalidIdentifier($identifier)
     {
         $this->expectException(Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage('non-empty, non-wildcard');
+        $this->expectExceptionMessage('non-empty');
         $this->manager->getListeners([$identifier], 'EVENT');
     }
 }

@@ -27,6 +27,7 @@ use function method_exists;
  * EventManager into your object when it is pulled from the ServiceManager.
  *
  * @see Laminas\Mvc\Service\ServiceManagerConfig
+ * @deprecated since 3.4.0. This trait will be removed in version 4.0.
  */
 trait EventManagerAwareTrait
 {

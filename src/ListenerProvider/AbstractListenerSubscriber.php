@@ -6,18 +6,9 @@
  * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\EventManager;
+namespace Laminas\EventManager\ListenerProvider;
 
-/**
- * Provides logic to easily create aggregate listeners, without worrying about
- * manually detaching events
- *
- * @deprecated since 3.4.0. This trait will be removed in version 4.0.0, in
- *     favor of the ListenerProvider\ListenerSubscriberTrait. In most cases,
- *     subscribers should fully implement ListenerSubscriberInterface on their
- *     own, however.
- */
-trait ListenerAggregateTrait
+abstract class AbstractListenerSubscriber implements ListenerSubscriberInterface
 {
     /**
      * @var callable[]
@@ -27,10 +18,10 @@ trait ListenerAggregateTrait
     /**
      * {@inheritDoc}
      */
-    public function detach(EventManagerInterface $events)
+    public function detach(PrioritizedListenerAttachmentInterface $provider): void
     {
         foreach ($this->listeners as $index => $callback) {
-            $events->detach($callback);
+            $provider->detach($callback);
             unset($this->listeners[$index]);
         }
     }
