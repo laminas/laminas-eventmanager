@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.7.2@83a0325c0a95c0ab531d6b90c877068b464377b5">
+  <file src="src/Event.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>! is_array($params) &amp;&amp; ! is_object($params)</code>
+    </DocblockTypeContradiction>
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>array|object|ArrayAccess</code>
+    </LessSpecificImplementedReturnType>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>$target</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>$name</code>
+      <code>$target</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(bool) $flag</code>
+      <code>(string) $name</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/EventManager.php">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>$argv</code>
+      <code>$argv</code>
+    </ArgumentTypeCoercion>
+    <DocblockTypeContradiction occurrences="2">
+      <code>is_string($eventName)</code>
+      <code>is_string($eventName)</code>
+    </DocblockTypeContradiction>
+    <MissingParamType occurrences="1">
+      <code>$force</code>
+    </MissingParamType>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$eventName</code>
+      <code>$identifiers</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="3">
+      <code>$listOfListeners[0]</code>
+      <code>$listeners[0]</code>
+      <code>$this-&gt;events[$eventName][$priority][0]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="3">
+      <code>$listOfListenersByPriority[$priority][]</code>
+      <code>$listOfListenersByPriority[$priority][]</code>
+      <code>$this-&gt;events[$eventName][(int) $priority][0]</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="1">
+      <code>$this-&gt;events[$eventName][$priority][0][$index]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="11">
+      <code>$evaluatedListener</code>
+      <code>$index</code>
+      <code>$listOfListeners</code>
+      <code>$listOfListeners</code>
+      <code>$listOfListenersByPriority[$priority][]</code>
+      <code>$listOfListenersByPriority[$priority][]</code>
+      <code>$listener</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$response</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$listener($event)</code>
+    </MixedFunctionCall>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(int) $priority</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/EventManagerAwareTrait.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;events instanceof EventManagerInterface</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="1">
+      <code>$events</code>
+    </MissingConstructor>
+    <MissingReturnType occurrences="1">
+      <code>setEventManager</code>
+    </MissingReturnType>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$identifiers</code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="src/Filter/FilterInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>attach</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Filter/FilterIterator.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>is_object($value)</code>
+    </DocblockTypeContradiction>
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>mixed</code>
+    </LessSpecificImplementedReturnType>
+    <MixedArgument occurrences="3">
+      <code>$item['data']</code>
+      <code>$priority</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$item['data']</code>
+      <code>$item['data']</code>
+      <code>$item['priority']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="5">
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$items[]</code>
+      <code>$next</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$next($context, $params, $chain)</code>
+    </MixedFunctionCall>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>gettype($value)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/FilterChain.php">
+    <ImplementedReturnTypeMismatch occurrences="2">
+      <code>Filter\FilterIterator</code>
+      <code>null|ResponseCollection</code>
+    </ImplementedReturnTypeMismatch>
+    <InvalidReturnStatement occurrences="1">
+      <code>$callback</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="2">
+      <code>CallbackHandler</code>
+      <code>null|ResponseCollection</code>
+    </InvalidReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$next</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$next($context, $argv, $chain)</code>
+    </MixedFunctionCall>
+    <ParamNameMismatch occurrences="1">
+      <code>$argv</code>
+    </ParamNameMismatch>
+    <UndefinedDocblockClass occurrences="1">
+      <code>CallbackHandler</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/LazyEventListener.php">
+    <MissingParamType occurrences="1">
+      <code>$default</code>
+    </MissingParamType>
+    <MixedInferredReturnType occurrences="1">
+      <code>int</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>(null !== $this-&gt;priority) ? $this-&gt;priority : $default</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/LazyListener.php">
+    <InvalidMethodCall occurrences="1">
+      <code>$method</code>
+    </InvalidMethodCall>
+    <MixedAssignment occurrences="2">
+      <code>$this-&gt;listener</code>
+      <code>$this-&gt;listener</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>callable</code>
+      <code>callable</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="3">
+      <code>$listener-&gt;{$method}($event)</code>
+      <code>$this-&gt;listener</code>
+      <code>$this-&gt;listener</code>
+    </MixedReturnStatement>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$listener</code>
+    </PropertyNotSetInConstructor>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$this-&gt;listener</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/ResponseCollection.php">
+    <MissingPropertyType occurrences="1">
+      <code>$stopped</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="1">
+      <code>setStopped</code>
+    </MissingReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$response</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;stopped</code>
+    </MixedReturnStatement>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $flag</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/SharedEventManager.php">
+    <DocblockTypeContradiction occurrences="12">
+      <code>! is_string($event)</code>
+      <code>! is_string($eventName)</code>
+      <code>! is_string($eventName)</code>
+      <code>! is_string($identifier)</code>
+      <code>! is_string($identifier)</code>
+      <code>! is_string($identifier)</code>
+      <code>'*' === $eventName || ! is_string($eventName)</code>
+      <code>'*' === $identifier || ! is_string($identifier)</code>
+      <code>is_object($event)</code>
+      <code>is_object($eventName)</code>
+      <code>is_object($identifier)</code>
+      <code>is_object($identifier)</code>
+    </DocblockTypeContradiction>
+    <MissingParamType occurrences="1">
+      <code>$force</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="2">
+      <code>clearListeners</code>
+      <code>detach</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="6">
+      <code>$event</code>
+      <code>$eventName</code>
+      <code>$identifier</code>
+      <code>$identifier</code>
+      <code>$listOfListeners</code>
+      <code>$this-&gt;identifiers[$identifier]</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$eventName</code>
+      <code>$identifier</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="9">
+      <code>$listenersByIdentifier[$eventName]</code>
+      <code>$listenersByIdentifier['*']</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$wildcardIdentifier[$eventName]</code>
+      <code>$wildcardIdentifier['*']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$this-&gt;identifiers[$identifier][$event]</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="7">
+      <code>$returnListeners[$priority]</code>
+      <code>$returnListeners[$priority]</code>
+      <code>$returnListeners[$priority]</code>
+      <code>$returnListeners[$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="18">
+      <code>$evaluatedListener</code>
+      <code>$index</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listenersByIdentifier</code>
+      <code>$priority</code>
+      <code>$priority</code>
+      <code>$priority</code>
+      <code>$priority</code>
+      <code>$priority</code>
+      <code>$returnListeners[$priority][]</code>
+      <code>$returnListeners[$priority][]</code>
+      <code>$returnListeners[$priority][]</code>
+      <code>$returnListeners[$priority][]</code>
+      <code>$wildcardIdentifier</code>
+    </MixedAssignment>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$identifiers</code>
+    </MoreSpecificImplementedParamType>
+    <ParamNameMismatch occurrences="1">
+      <code>$event</code>
+    </ParamNameMismatch>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(int) $priority</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="4">
+      <code>gettype($event)</code>
+      <code>gettype($eventName)</code>
+      <code>gettype($identifier)</code>
+      <code>gettype($identifier)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/SharedEventManagerInterface.php">
+    <InvalidParamDefault occurrences="1">
+      <code>string</code>
+    </InvalidParamDefault>
+    <MissingReturnType occurrences="3">
+      <code>attach</code>
+      <code>clearListeners</code>
+      <code>detach</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Test/EventListenerIntrospectionTrait.php">
+    <InvalidDocblockParamName occurrences="1">
+      <code>$listeners</code>
+    </InvalidDocblockParamName>
+    <MissingReturnType occurrences="2">
+      <code>assertListenerAtPriority</code>
+      <code>traverseListeners</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$l</code>
+      <code>$listeners</code>
+      <code>$listeners[$p]</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$internal[$event]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="2">
+      <code>$listeners[$p]</code>
+      <code>$listeners[$p]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="10">
+      <code>$internal</code>
+      <code>$l</code>
+      <code>$listOfListeners</code>
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners[$p]</code>
+      <code>$p</code>
+      <code>$priority</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>\Traversable</code>
+    </MixedInferredReturnType>
+    <MixedReturnTypeCoercion occurrences="2">
+      <code>callable[]</code>
+      <code>string[]</code>
+    </MixedReturnTypeCoercion>
+  </file>
+  <file src="test/AbstractListenerAggregateTest.php">
+    <MissingPropertyType occurrences="1">
+      <code>$aggregateClass</code>
+    </MissingPropertyType>
+  </file>
+  <file src="test/EventManagerAwareTraitTest.php">
+    <InvalidScalarArgument occurrences="2">
+      <code>EventManagerAwareTrait::class</code>
+      <code>EventManagerAwareTrait::class</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="3">
+      <code>testGetEventManager</code>
+      <code>testSetEventManager</code>
+      <code>testSetEventManagerWithEventIdentifier</code>
+    </MissingReturnType>
+    <MixedMethodCall occurrences="4">
+      <code>getEventManager</code>
+      <code>getEventManager</code>
+      <code>setEventManager</code>
+      <code>setEventManager</code>
+    </MixedMethodCall>
+    <UndefinedMethod occurrences="2">
+      <code>self::assertAttributeEquals($eventManager, 'events', $object)</code>
+      <code>self::assertAttributeEquals(null, 'events', $object)</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/EventManagerPriorityTest.php">
+    <InvalidScalarArgument occurrences="8">
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+      <code>1</code>
+    </InvalidScalarArgument>
+    <MissingClosureParamType occurrences="1">
+      <code>$event</code>
+    </MissingClosureParamType>
+    <MissingParamType occurrences="1">
+      <code>$return</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="10">
+      <code>createEvent</code>
+      <code>createListener</code>
+      <code>testTriggeringMixOfLocalAndSharedAndWildcardListenersWorksAsExpected</code>
+      <code>testTriggersFullyWildcardSharedListenersAfterWildcardIdentifierListenersOfSamePriority</code>
+      <code>testTriggersListenersOfDifferentPrioritiesInPriorityOrder</code>
+      <code>testTriggersListenersOfSamePriorityInAttachmentOrder</code>
+      <code>testTriggersSharedListenersAfterWildcardListenersOfSamePriority</code>
+      <code>testTriggersSharedWildcardIdentifierListenersAfterWildcardSharedListenersOfSamePriority</code>
+      <code>testTriggersSharedWildcardListenersAfterSharedListenersOfSamePriority</code>
+      <code>testTriggersWildcardListenersAfterExplicitListenersOfSamePriority</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="8">
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+      <code>$event-&gt;getParam('accumulator')</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="11">
+      <code>$compare</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$original</code>
+      <code>$original</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="63">
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>enqueue</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+    </MixedMethodCall>
+    <PossiblyNullArgument occurrences="8">
+      <code>var_export($report, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+      <code>var_export($values, 1)</code>
+    </PossiblyNullArgument>
+    <UndefinedThisPropertyAssignment occurrences="3">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;identifiers</code>
+      <code>$this-&gt;sharedEvents</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="13">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;sharedEvents</code>
+      <code>$this-&gt;sharedEvents</code>
+      <code>$this-&gt;sharedEvents</code>
+      <code>$this-&gt;sharedEvents</code>
+      <code>$this-&gt;sharedEvents</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/EventManagerTest.php">
+    <InvalidScalarArgument occurrences="2">
+      <code>1</code>
+      <code>1</code>
+    </InvalidScalarArgument>
+    <MissingClosureParamType occurrences="45">
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$r</code>
+      <code>$r</code>
+      <code>$result</code>
+      <code>$result</code>
+      <code>$result</code>
+      <code>$result</code>
+      <code>$result</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="14">
+      <code>function ($e) use ($test) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($e) {</code>
+      <code>function ($r) {</code>
+      <code>function ($result) {</code>
+      <code>function ($result) {</code>
+      <code>function () {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="11">
+      <code>$callback</code>
+      <code>$dependencies</code>
+      <code>$dependencies</code>
+      <code>$dependencies</code>
+      <code>$e</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$method</code>
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="49">
+      <code>evaluateStringCallback</code>
+      <code>eventArguments</code>
+      <code>eventsMissingNames</code>
+      <code>handleTestEvent</code>
+      <code>invalidEventsForAttach</code>
+      <code>invalidEventsForDetach</code>
+      <code>testAttachRaisesExceptionForInvalidEventType</code>
+      <code>testAttachShouldAddEventIfItDoesNotExist</code>
+      <code>testAttachShouldAddListenerToEvent</code>
+      <code>testAttachShouldAddReturnTheListener</code>
+      <code>testCallingEventsStopPropagationMethodHaltsEventEmission</code>
+      <code>testCanAddWildcardListenersAfterFirstTrigger</code>
+      <code>testCanAlterParametersWithinAEvent</code>
+      <code>testCanClearAllListenersForAnEvent</code>
+      <code>testCanDetachASingleListenerFromAnEventWithMultipleListeners</code>
+      <code>testCanDetachListenerFromNamedEvent</code>
+      <code>testCanDetachWildcardListeners</code>
+      <code>testCanInjectSharedManagerDuringConstruction</code>
+      <code>testCanPassEventObjectAndCallbackToTriggerEventUntil</code>
+      <code>testCanPassEventObjectAsSoleArgumentToTriggerEvent</code>
+      <code>testCanPassObjectForEventParameters</code>
+      <code>testCreatesAnEventPrototypeAtInstantiation</code>
+      <code>testDetachDoesNothingIfEventIsNotPresentInManager</code>
+      <code>testDetachRemovesAllOccurrencesOfListenerForEvent</code>
+      <code>testDetachedWildcardListenerWillNotBeTriggered</code>
+      <code>testDuplicateIdentifiersAreNotRegistered</code>
+      <code>testIdentifierGetterSetters</code>
+      <code>testIdentifiersAreNotInjectedWhenNoSharedManagerProvided</code>
+      <code>testListenersAttachedWithWildcardAreTriggeredForAllEvents</code>
+      <code>testNotPassingEventNameToDetachDetachesListenerFromAllEvents</code>
+      <code>testParametersArePassedToEventByReference</code>
+      <code>testPassingInvalidEventTypeToDetachRaisesException</code>
+      <code>testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByTriggerUntil</code>
+      <code>testResponseCollectionLastReturnsNull</code>
+      <code>testSetEventPrototype</code>
+      <code>testSharedManagerClearListenersReturnsFalse</code>
+      <code>testTriggerEventAcceptsEventInstanceAndTriggersListeners</code>
+      <code>testTriggerEventUntilAcceptsEventInstanceAndTriggersListenersUntilCallbackEvaluatesTrue</code>
+      <code>testTriggerEventUntilSetsStopPropagationFlagToFalse</code>
+      <code>testTriggerResponseCollectionContains</code>
+      <code>testTriggerSetsStopPropagationFlagToFalse</code>
+      <code>testTriggerShouldReturnAllListenerReturnValues</code>
+      <code>testTriggerShouldTriggerAttachedListeners</code>
+      <code>testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet</code>
+      <code>testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener</code>
+      <code>testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue</code>
+      <code>testTriggeringAnEventWithAnEmptyNameRaisesAnException</code>
+      <code>testWillTriggerSharedListeners</code>
+      <code>testWillTriggerSharedWildcardListeners</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="30">
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$events</code>
+      <code>$events</code>
+      <code>$expectedIdentifiers</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$r-&gt;getValue($manager)</code>
+      <code>$search</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="14">
+      <code>$args['bar']</code>
+      <code>$args['foo']</code>
+      <code>$dependencies['event']</code>
+      <code>$dependencies['event_names']</code>
+      <code>$dependencies['event_names']</code>
+      <code>$dependencies['events']</code>
+      <code>$dependencies['events']</code>
+      <code>$dependencies['events']</code>
+      <code>$dependencies['listener']</code>
+      <code>$dependencies['listener']</code>
+      <code>$dependencies['not_contains']</code>
+      <code>$events[$event]</code>
+      <code>$events['null']</code>
+      <code>$listeners[0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="47">
+      <code>$args</code>
+      <code>$bar</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$eventNames</code>
+      <code>$eventNames</code>
+      <code>$events</code>
+      <code>$events</code>
+      <code>$events</code>
+      <code>$events</code>
+      <code>$events</code>
+      <code>$expectedIdentifiers</code>
+      <code>$foo</code>
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$listenersByPriority</code>
+      <code>$message</code>
+      <code>$notContains</code>
+      <code>$priority</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$responses</code>
+      <code>$result</code>
+      <code>$results</code>
+      <code>$search</code>
+      <code>$search</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="121">
+      <code>$method</code>
+      <code>$method</code>
+      <code>addIdentifiers</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>contains</code>
+      <code>contains</code>
+      <code>contains</code>
+      <code>contains</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>getIdentifiers</code>
+      <code>getIdentifiers</code>
+      <code>getName</code>
+      <code>getName</code>
+      <code>getName</code>
+      <code>getName</code>
+      <code>getName</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>getParam</code>
+      <code>last</code>
+      <code>last</code>
+      <code>last</code>
+      <code>last</code>
+      <code>prepareArgs</code>
+      <code>propagationIsStopped</code>
+      <code>propagationIsStopped</code>
+      <code>setEventPrototype</code>
+      <code>setIdentifiers</code>
+      <code>setParam</code>
+      <code>setParam</code>
+      <code>setParam</code>
+      <code>setParam</code>
+      <code>setParam</code>
+      <code>setParam</code>
+      <code>stopPropagation</code>
+      <code>stopped</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>trigger</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEvent</code>
+      <code>triggerEventUntil</code>
+      <code>triggerEventUntil</code>
+      <code>triggerEventUntil</code>
+      <code>triggerUntil</code>
+      <code>triggerUntil</code>
+      <code>triggerUntil</code>
+      <code>triggerUntil</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="2">
+      <code>$bar</code>
+      <code>$foo</code>
+    </MixedOperand>
+    <MixedReturnStatement occurrences="1">
+      <code>$listenersByPriority</code>
+    </MixedReturnStatement>
+    <MixedReturnTypeCoercion occurrences="2">
+      <code>array_keys($r-&gt;getValue($manager))</code>
+      <code>string[]</code>
+    </MixedReturnTypeCoercion>
+    <PossiblyNullArgument occurrences="2">
+      <code>var_export($listeners, 1)</code>
+      <code>var_export($listeners, 1)</code>
+    </PossiblyNullArgument>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>assertIsArray</code>
+    </RedundantConditionGivenDocblockType>
+    <UndefinedMethod occurrences="3">
+      <code>self::assertAttributeEmpty('events', $this-&gt;events)</code>
+      <code>self::assertAttributeInstanceOf(EventInterface::class, 'eventPrototype', $this-&gt;events)</code>
+      <code>self::assertAttributeSame($event, 'eventPrototype', $this-&gt;events)</code>
+    </UndefinedMethod>
+    <UndefinedThisPropertyAssignment occurrences="2">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;message</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="37">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;message</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="13">
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$r</code>
+      <code>$result</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="5">
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$priority</code>
+      <code>$responses</code>
+      <code>$responses</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/EventTest.php">
+    <InvalidArgument occurrences="3">
+      <code>$params</code>
+      <code>$params</code>
+      <code>'test'</code>
+    </InvalidArgument>
+    <MissingReturnType occurrences="5">
+      <code>testConstructorWithArguments</code>
+      <code>testGetParamReturnsDefault</code>
+      <code>testGetParamReturnsDefaultForObject</code>
+      <code>testGetParamReturnsForObject</code>
+      <code>testSetParamsWithInvalidParameter</code>
+    </MissingReturnType>
+    <UnusedVariable occurrences="1">
+      <code>$default</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/FilterChainTest.php">
+    <InvalidArgument occurrences="6">
+      <code>$handle</code>
+      <code>$handle1</code>
+      <code>[ $this, __METHOD__ ]</code>
+      <code>[ $this, __METHOD__ ]</code>
+      <code>[ $this, __METHOD__ ]</code>
+      <code>[$this, __METHOD__]</code>
+    </InvalidArgument>
+    <MissingClosureParamType occurrences="11">
+      <code>$chain</code>
+      <code>$chain</code>
+      <code>$chain</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$params</code>
+      <code>$params</code>
+      <code>$params</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>function ($context, $params, $chain) {</code>
+      <code>function ($context, $params, $chain) {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="4">
+      <code>$chain</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$message</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="14">
+      <code>filterReceivalCallback</code>
+      <code>filterTestCallback1</code>
+      <code>handleTestTopic</code>
+      <code>testDetachShouldRemoveCallbackHandlerFromFilters</code>
+      <code>testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist</code>
+      <code>testFilterChainShouldReturnLastResponse</code>
+      <code>testFilterIsPassedContextAndArguments</code>
+      <code>testFilteringStopsAsSoonAsAFilterFailsToCallNext</code>
+      <code>testGetResponses</code>
+      <code>testInterceptingFilterShouldReceiveChain</code>
+      <code>testRetrievingAttachedFiltersShouldReturnEmptyArrayWhenNoFiltersExist</code>
+      <code>testRunReturnsNullWhenChainIsEmpty</code>
+      <code>testSubscribeShouldAddCallbackHandlerToFilters</code>
+      <code>testSubscribeShouldReturnCallbackHandler</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$params['string']</code>
+      <code>$params['string']</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$params['string']</code>
+      <code>$params['string']</code>
+      <code>$params['string']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="2">
+      <code>$params['string']</code>
+      <code>$params['string']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="7">
+      <code>$return</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$string</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="2">
+      <code>next</code>
+      <code>next</code>
+    </MixedMethodCall>
+    <MixedPropertyAssignment occurrences="1">
+      <code>$context</code>
+    </MixedPropertyAssignment>
+    <UndefinedThisPropertyAssignment occurrences="1">
+      <code>$this-&gt;message</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="1">
+      <code>$this-&gt;message</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="4">
+      <code>$chain</code>
+      <code>$context</code>
+      <code>$context</code>
+      <code>$context</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="1">
+      <code>$handle2</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/FilterIteratorTest.php">
+    <MissingClosureReturnType occurrences="3">
+      <code>function () {</code>
+      <code>function () {</code>
+      <code>function () {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="1">
+      <code>$filter</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="10">
+      <code>invalidFilters</code>
+      <code>testContainsReturnsFalseForInvalidElement</code>
+      <code>testContainsReturnsTrueForValidElement</code>
+      <code>testInsertShouldRaiseExceptionOnNonCallableDatum</code>
+      <code>testNextReturnsNullOnEmptyChain</code>
+      <code>testNextReturnsNullWhenFilterChainIsEmpty</code>
+      <code>testNextReturnsNullWithEmptyHeap</code>
+      <code>testRemoveFromEmptyQueueReturnsFalse</code>
+      <code>testRemoveUnrecognizedItemFromQueueReturnsFalse</code>
+      <code>testRemoveValidItemFromQueueReturnsTrue</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$filter</code>
+    </MixedArgument>
+  </file>
+  <file src="test/LazyEventListenerTest.php">
+    <MissingParamType occurrences="3">
+      <code>$event</code>
+      <code>$listener</code>
+      <code>$listener</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="6">
+      <code>testCanInstantiateLazyListenerWithValidDefinition</code>
+      <code>testCanRetrieveEventFromListener</code>
+      <code>testCanRetrievePriorityFromListener</code>
+      <code>testConstructorRaisesExceptionForInvalidEventType</code>
+      <code>testConstructorRaisesExceptionForMissingEvent</code>
+      <code>testGetPriorityWillReturnProvidedPriorityIfNoneGivenAtInstantiation</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$class</code>
+      <code>$class</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="11">
+      <code>getEvent</code>
+      <code>getPriority</code>
+      <code>getPriority</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+    </MixedMethodCall>
+    <UndefinedThisPropertyAssignment occurrences="1">
+      <code>$this-&gt;listenerClass</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="8">
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/LazyListenerAggregateTest.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$args</code>
+      <code>$args</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($args) {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="3">
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listeners</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="7">
+      <code>invalidListenerTypes</code>
+      <code>invalidListeners</code>
+      <code>testAttachAttachesLazyListenersViaClosures</code>
+      <code>testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation</code>
+      <code>testListenersArePulledFromContainerAndInvokedWhenTriggered</code>
+      <code>testPassingInvalidListenerTypesAtInstantiationRaisesException</code>
+      <code>testPassingInvalidListenersAtInstantiationRaisesException</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="7">
+      <code>$listeners</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$args[1]</code>
+      <code>$test[0]</code>
+      <code>$test[1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="3">
+      <code>$listener</code>
+      <code>$listeners</code>
+      <code>$test</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="8">
+      <code>get</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>will</code>
+    </MixedMethodCall>
+    <UndefinedThisPropertyAssignment occurrences="1">
+      <code>$this-&gt;container</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="5">
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="1">
+      <code>$args</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="test/LazyListenerTest.php">
+    <InvalidFunctionCall occurrences="2">
+      <code>$lazyListener($event-&gt;reveal())</code>
+      <code>$lazyListener($event-&gt;reveal())</code>
+    </InvalidFunctionCall>
+    <MissingClosureParamType occurrences="2">
+      <code>$args</code>
+      <code>$args</code>
+    </MissingClosureParamType>
+    <MissingParamType occurrences="3">
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$method</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="9">
+      <code>invalidTypes</code>
+      <code>testCanInstantiateLazyListenerWithValidDefinition</code>
+      <code>testConstructorRaisesExceptionForInvalidListenerType</code>
+      <code>testConstructorRaisesExceptionForInvalidMethodType</code>
+      <code>testConstructorRaisesExceptionForMissingListener</code>
+      <code>testConstructorRaisesExceptionForMissingMethod</code>
+      <code>testInstatiationSetsListenerMethod</code>
+      <code>testInvocationWillDelegateToContainerBuildMethodWhenPresentAndEnvIsNonEmpty</code>
+      <code>testLazyListenerActsAsInvokableAroundListenerCreation</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="7">
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="15">
+      <code>get</code>
+      <code>new $class($struct, $container-&gt;reveal(), $env)</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>will</code>
+    </MixedMethodCall>
+    <UndefinedMethod occurrences="1">
+      <code>self::assertAttributeEquals('method', 'method', $listener)</code>
+    </UndefinedMethod>
+    <UndefinedThisPropertyAssignment occurrences="2">
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;listenerClass</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="13">
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;container</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+      <code>$this-&gt;listenerClass</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="2">
+      <code>$args</code>
+      <code>$args</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="1">
+      <code>$instance</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/ListenerAggregateTraitTest.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$args</code>
+      <code>$args</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>function ($args) {</code>
+      <code>function ($args) {</code>
+    </MissingClosureReturnType>
+    <MissingPropertyType occurrences="1">
+      <code>$aggregateClass</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="1">
+      <code>testDetachRemovesAttachedListeners</code>
+    </MissingReturnType>
+    <MixedArrayAccess occurrences="2">
+      <code>$args[1]</code>
+      <code>$args[1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$class</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="5">
+      <code>attach</code>
+      <code>detach</code>
+      <code>getCallbacks</code>
+      <code>getCallbacks</code>
+      <code>new $class()</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/SharedEventManagerTest.php">
+    <InvalidScalarArgument occurrences="2">
+      <code>1</code>
+      <code>1</code>
+    </InvalidScalarArgument>
+    <MissingClosureParamType occurrences="1">
+      <code>$e</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($e) {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="10">
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$eventName</code>
+      <code>$eventName</code>
+      <code>$identifier</code>
+      <code>$identifier</code>
+      <code>$identifier</code>
+      <code>$identifier</code>
+      <code>$priority</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="22">
+      <code>detachIdentifierAndEvent</code>
+      <code>getListeners</code>
+      <code>invalidEventNames</code>
+      <code>invalidIdentifiers</code>
+      <code>invalidIdentifiersAndEvents</code>
+      <code>invalidListenersAndEventNamesForFetchingListeners</code>
+      <code>testAttachRaisesExceptionForInvalidEvent</code>
+      <code>testAttachRaisesExceptionForInvalidIdentifer</code>
+      <code>testCanAttachToSharedManager</code>
+      <code>testCanDetachFromSharedManagerUsingIdentifierAndEvent</code>
+      <code>testClearListenersDoesNotRemoveWildcardListenersWhenEventIsProvided</code>
+      <code>testClearListenersDoesNothingIfNoEventsRegisteredForIdentifier</code>
+      <code>testClearListenersRemovesAllExplicitListenersForGivenIdentifierAndEvent</code>
+      <code>testClearListenersWhenNoEventIsProvidedRemovesAllListenersForTheIdentifier</code>
+      <code>testDetachDoesNothingIfIdentifierDoesNotContainEvent</code>
+      <code>testDetachDoesNothingIfIdentifierNotInManager</code>
+      <code>testDetachingWithInvalidEventTypeRaisesException</code>
+      <code>testDetachingWithInvalidIdentifierTypeRaisesException</code>
+      <code>testGetListenersRaisesExceptionForInvalidEventName</code>
+      <code>testGetListenersRaisesExceptionForInvalidIdentifier</code>
+      <code>testWhenEventIsProvidedAndNoListenersFoundForIdentiferGetListenersWillReturnEmptyList</code>
+      <code>testWhenEventIsProvidedGetListenersReturnsAllListenersIncludingWildcardListeners</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="10">
+      <code>$event</code>
+      <code>$listeners</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$identifiers</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="1">
+      <code>$types['null']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$events['wildcard']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="17">
+      <code>$alternate</code>
+      <code>$callback</code>
+      <code>$callback1</code>
+      <code>$callback2</code>
+      <code>$callback3</code>
+      <code>$callback4</code>
+      <code>$events</code>
+      <code>$listener</code>
+      <code>$listener</code>
+      <code>$listeners</code>
+      <code>$listeners</code>
+      <code>$test</code>
+      <code>$types</code>
+      <code>$wildcard</code>
+      <code>$wildcardEventListener</code>
+      <code>$wildcardIdentifier</code>
+      <code>$wildcardIdentifierListener</code>
+    </MixedAssignment>
+    <MixedClone occurrences="10">
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+      <code>clone $this-&gt;callback</code>
+    </MixedClone>
+    <MixedMethodCall occurrences="38">
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>clearListeners</code>
+      <code>clearListeners</code>
+      <code>clearListeners</code>
+      <code>clearListeners</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>detach</code>
+      <code>getListeners</code>
+      <code>getListeners</code>
+      <code>getListeners</code>
+      <code>getListeners</code>
+    </MixedMethodCall>
+    <PossiblyNullArgument occurrences="2">
+      <code>var_export($listener, 1)</code>
+      <code>var_export($listeners, 1)</code>
+    </PossiblyNullArgument>
+    <UndefinedThisPropertyAssignment occurrences="2">
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;manager</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="29">
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;callback</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+      <code>$this-&gt;manager</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="1">
+      <code>$e</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="1">
+      <code>$callback</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/SharedListenerIntegrationTest.php">
+    <MissingPropertyType occurrences="3">
+      <code>$listener-&gt;count</code>
+      <code>$listener-&gt;count</code>
+      <code>$listener-&gt;count</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="3">
+      <code>testCanTriggerTheSameSharedListenerMultipleTimes</code>
+      <code>testTriggeringSameEventMultipleTimesDoesNotTriggersDetachedSharedListeners</code>
+      <code>testTriggeringSameEventMultipleTimesTriggersNewSharedListeners</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$listener-&gt;count</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="4">
+      <code>attach</code>
+      <code>attach</code>
+      <code>trigger</code>
+      <code>trigger</code>
+    </MixedMethodCall>
+    <UndefinedPropertyAssignment occurrences="1">
+      <code>$listener-&gt;index</code>
+    </UndefinedPropertyAssignment>
+    <UndefinedThisPropertyAssignment occurrences="3">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;identifiers</code>
+      <code>$this-&gt;sharedEvents</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="4">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;sharedEvents</code>
+      <code>$this-&gt;sharedEvents</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/Test/EventListenerIntrospectionTraitTest.php">
+    <MissingClosureParamType occurrences="26">
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="23">
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+      <code>function ($e) {}</code>
+    </MissingClosureReturnType>
+    <MissingReturnType occurrences="7">
+      <code>testAssertListenerAtPriorityFailsWhenListenerIsNotFound</code>
+      <code>testAssertListenerAtPriorityPassesWhenListenerIsFound</code>
+      <code>testGetArrayOfListenersForEventReturnsArrayOfListenersInPriorityOrder</code>
+      <code>testGetEventsFromEventManagerReturnsEventList</code>
+      <code>testGetListenersForEventCanReturnPriorityKeysWhenRequested</code>
+      <code>testGetListenersForEventReturnsIteratorOfListenersForEventInPriorityOrder</code>
+      <code>testGetListenersForEventReturnsIteratorOfListenersInAttachmentOrderWhenSamePriority</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="7">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="25">
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+      <code>attach</code>
+    </MixedMethodCall>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>assertIsArray</code>
+    </RedundantConditionGivenDocblockType>
+    <UndefinedThisPropertyAssignment occurrences="1">
+      <code>$this-&gt;events</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="7">
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+    </UndefinedThisPropertyFetch>
+    <UnusedClosureParam occurrences="26">
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+      <code>$e</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="test/TestAsset/BuilderInterface.php">
+    <MissingParamType occurrences="1">
+      <code>$service</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="1">
+      <code>build</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/CountingListener.php">
+    <MissingParamType occurrences="1">
+      <code>$e</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="1">
+      <code>$count</code>
+    </MissingPropertyType>
+    <MixedOperand occurrences="1">
+      <code>$this-&gt;count</code>
+    </MixedOperand>
+  </file>
+  <file src="test/TestAsset/Functor.php">
+    <MissingParamType occurrences="1">
+      <code>$e</code>
+    </MissingParamType>
+  </file>
+  <file src="test/TestAsset/MockAbstractListenerAggregate.php">
+    <MissingPropertyType occurrences="1">
+      <code>$priority</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="2">
+      <code>doFoo</code>
+      <code>getCallbacks</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/MockAggregate.php">
+    <InvalidReturnStatement occurrences="2">
+      <code>__METHOD__</code>
+      <code>__METHOD__</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="2">
+      <code>attach</code>
+      <code>detach</code>
+    </InvalidReturnType>
+    <MissingPropertyType occurrences="2">
+      <code>$listeners</code>
+      <code>$priority</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="2">
+      <code>fooBar</code>
+      <code>fooBaz</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$listener</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;listeners[ spl_object_hash($events) ]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$this-&gt;listeners[ spl_object_hash($events) ]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="1">
+      <code>$listener</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/TestAsset/MockEventManagerAwareTrait.php">
+    <MissingParamType occurrences="1">
+      <code>$eventIdentifier</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="2">
+      <code>$defaultEventListenersCalled</code>
+      <code>$eventIdentifier</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="4">
+      <code>attachDefaultListeners</code>
+      <code>defaultEventListenersCalled</code>
+      <code>getEventIdentifier</code>
+      <code>setEventIdentifier</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/MockListenerAggregateTrait.php">
+    <MissingReturnType occurrences="2">
+      <code>doFoo</code>
+      <code>getCallbacks</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/StaticEventsMock.php">
+    <ParamNameMismatch occurrences="1">
+      <code>$event</code>
+    </ParamNameMismatch>
+    <UnimplementedInterfaceMethod occurrences="1">
+      <code>StaticEventsMock</code>
+    </UnimplementedInterfaceMethod>
+  </file>
+  <file src="test/bootstrap.php">
+    <MixedArgument occurrences="1">
+      <code>$phpUnitVersion</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$phpUnitVersion</code>
+    </MixedAssignment>
+  </file>
+</files>
