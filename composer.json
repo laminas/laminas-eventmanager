@@ -31,7 +31,9 @@
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
         "phpbench/phpbench": "^0.17.1",
-        "phpunit/phpunit": "^8.5.8"
+        "phpunit/phpunit": "^9.5.0",
+        "psalm/plugin-phpunit": "^0.15.1",
+        "vimeo/psalm": "^4.7"
     },
     "suggest": {
         "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
@@ -58,6 +60,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
