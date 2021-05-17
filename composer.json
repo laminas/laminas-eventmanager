@@ -1,7 +1,6 @@
 {
     "name": "laminas/laminas-eventmanager",
     "description": "Trigger and listen to events within a PHP application",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "event",
@@ -9,22 +8,13 @@
         "eventmanager"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-eventmanager/",
-        "issues": "https://github.com/laminas/laminas-eventmanager/issues",
-        "source": "https://github.com/laminas/laminas-eventmanager",
-        "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ^8.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "replace": {
+        "zendframework/zend-eventmanager": "^3.2.1"
     },
     "require-dev": {
         "container-interop/container-interop": "^1.1",
@@ -37,6 +27,10 @@
         "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\EventManager\\": "src/"
@@ -61,7 +55,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-eventmanager": "^3.2.1"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-eventmanager/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-eventmanager",
+        "docs": "https://docs.laminas.dev/laminas-eventmanager/",
+        "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom"
     }
 }
