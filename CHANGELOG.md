@@ -2,27 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.4.0 - TBD
+## 3.4.0 - 2021-09-07
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.4.0](https://github.com/laminas/laminas-eventmanager/milestone/2)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 3.4.0
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **5**
+- Total contributors: **2**
 
-- Nothing.
+#### Enhancement
 
-### Fixed
+ - [22: Provide PHP 8.1 support](https://github.com/laminas/laminas-eventmanager/pull/22) thanks to @weierophinney
+ - [15: Refactor unit-tests action to automate test matrix](https://github.com/laminas/laminas-eventmanager/pull/15) thanks to @weierophinney
+ - [14: Improve CI workflow](https://github.com/laminas/laminas-eventmanager/pull/14) thanks to @weierophinney
+ - [13: Switch from Travis-Ci to GitHub Actions](https://github.com/laminas/laminas-eventmanager/pull/13) thanks to @weierophinney
 
-- Nothing.
+#### Duplicate,Enhancement
+
+ - [18: Remove file headers](https://github.com/laminas/laminas-eventmanager/pull/18) thanks to @ghostwriter
 
 ## 3.3.1 - 2021-03-08
 
