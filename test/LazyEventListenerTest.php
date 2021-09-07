@@ -1,21 +1,16 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
+use Laminas\EventManager\LazyListener;
 
 class LazyEventListenerTest extends LazyListenerTest
 {
     use DeprecatedAssertions;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->listenerClass = LazyEventListener::class;
@@ -35,6 +30,7 @@ class LazyEventListenerTest extends LazyListenerTest
 
     /**
      * @dataProvider invalidTypes
+     * @param mixed $event
      */
     public function testConstructorRaisesExceptionForInvalidEventType($event)
     {
@@ -49,7 +45,7 @@ class LazyEventListenerTest extends LazyListenerTest
         new $class($struct, $this->container->reveal());
     }
 
-    public function testCanInstantiateLazyListenerWithValidDefinition()
+    public function testCanInstantiateLazyListenerWithValidDefinition(): LazyListener
     {
         $class  = $this->listenerClass;
         $struct = [
@@ -67,7 +63,7 @@ class LazyEventListenerTest extends LazyListenerTest
     /**
      * @depends testCanInstantiateLazyListenerWithValidDefinition
      */
-    public function testCanRetrieveEventFromListener($listener)
+    public function testCanRetrieveEventFromListener(LazyEventListener $listener)
     {
         self::assertEquals('event', $listener->getEvent());
     }
@@ -75,7 +71,7 @@ class LazyEventListenerTest extends LazyListenerTest
     /**
      * @depends testCanInstantiateLazyListenerWithValidDefinition
      */
-    public function testCanRetrievePriorityFromListener($listener)
+    public function testCanRetrievePriorityFromListener(LazyEventListener $listener)
     {
         self::assertEquals(5, $listener->getPriority());
     }

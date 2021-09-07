@@ -1,17 +1,17 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager\TestAsset;
 
+use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\SharedEventManagerInterface;
 
 class StaticEventsMock implements SharedEventManagerInterface
 {
+    /**
+     * @param non-empty-string $id,
+     * @param null|string|EventInterface $event
+     * @return callable[]
+     */
     public function getListeners($id, $event = null)
     {
         return [];
@@ -27,6 +27,15 @@ class StaticEventsMock implements SharedEventManagerInterface
      * @return void
      */
     public function attach($identifier, $event, callable $listener, $priority = 1)
+    {
+    }
+
+    /**
+     * @param null|non-empty-string $identifier
+     * @param null|string $eventName
+     * @return void
+     */
+    public function detach(callable $listener, $identifier = null, $eventName = null)
     {
     }
 

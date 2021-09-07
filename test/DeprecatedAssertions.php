@@ -1,23 +1,16 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use PHPUnit\Framework\Assert;
 use ReflectionClass;
-use ReflectionObject;
-use ReflectionProperty;
 use stdClass;
 
 use function get_class;
 use function property_exists;
 use function sprintf;
 
+// phpcs:ignore WebimpressCodingStandard.NamingConventions.Trait.Suffix
 trait DeprecatedAssertions
 {
     /**
@@ -28,7 +21,6 @@ trait DeprecatedAssertions
         object $instance,
         string $message = ''
     ): void {
-
         if (! self::propertyExists($instance, $attributeName)) {
             Assert::fail(sprintf(
                 'Failed to assert attribute %s is empty; attribute does not exist in instance of %s',
@@ -49,7 +41,6 @@ trait DeprecatedAssertions
         object $instance,
         string $message = ''
     ): void {
-
         if (! self::propertyExists($instance, $attributeName)) {
             Assert::fail(sprintf(
                 'Failed to assert equality against attribute %s; attribute does not exist in instance of %s',
@@ -70,7 +61,6 @@ trait DeprecatedAssertions
         object $instance,
         string $message = ''
     ): void {
-
         if (! self::propertyExists($instance, $attributeName)) {
             Assert::fail(sprintf(
                 'Failed to assert type of attribute %s; attribute does not exist in instance of %s',
@@ -91,7 +81,6 @@ trait DeprecatedAssertions
         object $instance,
         string $message = ''
     ): void {
-
         if (! self::propertyExists($instance, $attributeName)) {
             Assert::fail(sprintf(
                 'Failed to assert equality against attribute %s; attribute does not exist in instance of %s',

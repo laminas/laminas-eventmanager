@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Exception\InvalidArgumentException;
@@ -17,7 +11,6 @@ use PHPUnit\Framework\TestCase;
  */
 class FilterIteratorTest extends TestCase
 {
-
     public function testNextReturnsNullOnEmptyChain()
     {
         $filterIterator = new FilterIterator();
@@ -38,7 +31,7 @@ class FilterIteratorTest extends TestCase
 
     public function testContainsReturnsTrueForValidElement()
     {
-        $callback = function () {
+        $callback       = function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
@@ -54,7 +47,7 @@ class FilterIteratorTest extends TestCase
 
     public function testRemoveUnrecognizedItemFromQueueReturnsFalse()
     {
-        $callback = function () {
+        $callback       = function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
@@ -64,7 +57,7 @@ class FilterIteratorTest extends TestCase
 
     public function testRemoveValidItemFromQueueReturnsTrue()
     {
-        $callback = function () {
+        $callback       = function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
@@ -81,7 +74,8 @@ class FilterIteratorTest extends TestCase
         self::assertNull($filterIterator->next([0, 1, 2], ['foo', 'bar'], $chain));
     }
 
-    public function invalidFilters()
+    /** @psalm-return array<string, array{0: mixed}> */
+    public function invalidFilters(): array
     {
         return [
             'null'                 => [null],
@@ -99,6 +93,7 @@ class FilterIteratorTest extends TestCase
 
     /**
      * @dataProvider invalidFilters
+     * @param mixed $filter
      */
     public function testInsertShouldRaiseExceptionOnNonCallableDatum($filter)
     {

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 /**
@@ -13,9 +7,7 @@ namespace Laminas\EventManager;
  */
 class FilterChain implements Filter\FilterInterface
 {
-    /**
-     * @var Filter\FilterIterator All filters
-     */
+    /** @var Filter\FilterIterator All filters */
     protected $filters;
 
     /**
@@ -68,7 +60,6 @@ class FilterChain implements Filter\FilterInterface
     /**
      * Detach a filter from the chain
      *
-     * @param  callable $filter
      * @return bool Returns true if filter found and unsubscribed; returns false otherwise
      */
     public function detach(callable $filter)
@@ -106,6 +97,6 @@ class FilterChain implements Filter\FilterInterface
      */
     public function getResponses()
     {
-        return;
+        return null;
     }
 }

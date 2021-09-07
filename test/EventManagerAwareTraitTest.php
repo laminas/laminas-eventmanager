@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManager;
@@ -24,7 +18,7 @@ class EventManagerAwareTraitTest extends TestCase
 
         self::assertAttributeEquals(null, 'events', $object);
 
-        $eventManager = new EventManager;
+        $eventManager = new EventManager();
 
         $object->setEventManager($eventManager);
 
@@ -37,7 +31,7 @@ class EventManagerAwareTraitTest extends TestCase
 
         self::assertInstanceOf(EventManagerInterface::class, $object->getEventManager());
 
-        $eventManager = new EventManager;
+        $eventManager = new EventManager();
 
         $object->setEventManager($eventManager);
 
@@ -46,7 +40,7 @@ class EventManagerAwareTraitTest extends TestCase
 
     public function testSetEventManagerWithEventIdentifier()
     {
-        $object = new MockEventManagerAwareTrait();
+        $object       = new MockEventManagerAwareTrait();
         $eventManager = new EventManager();
 
         $eventIdentifier = 'foo';

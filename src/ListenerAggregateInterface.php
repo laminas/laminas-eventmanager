@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 /**
@@ -24,7 +18,6 @@ interface ListenerAggregateInterface
      * Implementors may add an optional $priority argument; the EventManager
      * implementation will pass this to the aggregate.
      *
-     * @param EventManagerInterface $events
      * @param int                   $priority
      * @return void
      */
@@ -33,7 +26,6 @@ interface ListenerAggregateInterface
     /**
      * Detach all previously attached listeners
      *
-     * @param EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events);

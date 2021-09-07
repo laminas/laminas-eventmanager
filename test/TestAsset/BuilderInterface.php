@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager\TestAsset;
 
 use Interop\Container\ContainerInterface;
@@ -16,5 +10,6 @@ use Interop\Container\ContainerInterface;
  */
 interface BuilderInterface extends ContainerInterface
 {
+    /** @param object $service */
     public function build($service, array $opts = []);
 }

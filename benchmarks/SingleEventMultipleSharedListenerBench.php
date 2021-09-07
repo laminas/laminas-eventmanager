@@ -22,7 +22,7 @@ class SingleEventMultipleSharedListenerBench
 
     public function __construct()
     {
-        $identifiers = $this->getIdentifierList();
+        $identifiers  = $this->getIdentifierList();
         $sharedEvents = new SharedEventManager();
         for ($i = 0; $i < $this->numListeners; $i += 1) {
             $sharedEvents->attach($identifiers[0], 'dispatch', $this->generateCallback());

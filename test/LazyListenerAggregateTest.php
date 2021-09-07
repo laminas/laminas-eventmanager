@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Interop\Container\ContainerInterface;
@@ -25,12 +19,13 @@ class LazyListenerAggregateTest extends TestCase
 {
     use ProphecyTrait;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
     }
 
-    public function invalidListenerTypes()
+    /** @psalm-return array<string, array{0: mixed}> */
+    public function invalidListenerTypes(): array
     {
         return [
             'null'       => [null],
@@ -45,32 +40,34 @@ class LazyListenerAggregateTest extends TestCase
         ];
     }
 
-    public function invalidListeners()
+    /** @psalm-return array<string, array{0: array<string, string>}> */
+    public function invalidListeners(): array
     {
         return [
-            'missing-event' => [
+            'missing-event'    => [
                 [
                     'listener' => 'listener',
                     'method'   => 'method',
-                ]
+                ],
             ],
             'missing-listener' => [
                 [
                     'event'  => 'event',
                     'method' => 'method',
-                ]
+                ],
             ],
-            'missing-method' => [
+            'missing-method'   => [
                 [
                     'event'    => 'event',
                     'listener' => 'listener',
-                ]
+                ],
             ],
         ];
     }
 
     /**
      * @dataProvider invalidListenerTypes
+     * @param mixed $listener
      */
     public function testPassingInvalidListenerTypesAtInstantiationRaisesException($listener)
     {
@@ -81,6 +78,7 @@ class LazyListenerAggregateTest extends TestCase
 
     /**
      * @dataProvider invalidListeners
+     * @param mixed $listener
      */
     public function testPassingInvalidListenersAtInstantiationRaisesException($listener)
     {
@@ -89,7 +87,15 @@ class LazyListenerAggregateTest extends TestCase
         new LazyListenerAggregate([$listener], $this->container->reveal());
     }
 
-    public function testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation()
+    /**
+     * @psalm-return array<array-key, callable|array{
+     *     event: string,
+     *     listener: string|object,
+     *     method: string,
+     *     priority: int
+     * }> $listeners
+     */
+    public function testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation(): array
     {
         $listeners = [
             [
@@ -119,11 +125,17 @@ class LazyListenerAggregateTest extends TestCase
 
     /**
      * @depends testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation
+     * @psalm-param array<array-key, callable|array{
+     *     event: string,
+     *     listener: string|object,
+     *     method: string,
+     *     priority: int
+     * }> $listeners
      */
-    public function testAttachAttachesLazyListenersViaClosures($listeners)
+    public function testAttachAttachesLazyListenersViaClosures(array $listeners)
     {
         $aggregate = new LazyListenerAggregate($listeners, $this->container->reveal());
-        $events = $this->prophesize(EventManagerInterface::class);
+        $events    = $this->prophesize(EventManagerInterface::class);
         $events->attach('event', Argument::type('callable'), 5)->shouldBeCalled();
         $events->attach('event2', Argument::type('callable'), 7)->shouldBeCalled();
 
@@ -137,7 +149,7 @@ class LazyListenerAggregateTest extends TestCase
 
         $event = $this->prophesize(EventInterface::class);
 
-        $this->container->get('listener')->will(function ($args) use ($listener) {
+        $this->container->get('listener')->will(function () use ($listener) {
             return $listener->reveal();
         });
 

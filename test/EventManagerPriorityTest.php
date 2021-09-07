@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Event;
@@ -15,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use SplQueue;
 
 use function array_shift;
-use function compact;
 use function count;
 use function iterator_to_array;
 use function sprintf;
@@ -23,24 +16,25 @@ use function var_export;
 
 class EventManagerPriorityTest extends TestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->identifiers  = [__CLASS__];
+        $this->identifiers  = [self::class];
         $this->sharedEvents = new SharedEventManager();
-        $this->events = new EventManager($this->sharedEvents, $this->identifiers);
+        $this->events       = new EventManager($this->sharedEvents, $this->identifiers);
     }
 
-    public function createEvent()
+    public function createEvent(): Event
     {
         $accumulator = new SplQueue();
-        $event = new Event();
+        $event       = new Event();
         $event->setName('test');
         $event->setTarget($this);
-        $event->setParams(compact('accumulator'));
+        $event->setParams(['accumulator' => $accumulator]);
         return $event;
     }
 
-    public function createListener($return)
+    /** @param mixed $return */
+    public function createListener($return): callable
     {
         return function ($event) use ($return) {
             $event->getParam('accumulator')->enqueue($return);
@@ -97,9 +91,9 @@ class EventManagerPriorityTest extends TestCase
 
     public function testTriggersSharedListenersAfterWildcardListenersOfSamePriority()
     {
-        $this->sharedEvents->attach(__CLASS__, 'test', $this->createListener(2), 5);
+        $this->sharedEvents->attach(self::class, 'test', $this->createListener(2), 5);
         $this->events->attach('*', $this->createListener(1), 5);
-        $this->sharedEvents->attach(__CLASS__, 'test', $this->createListener(3), 5);
+        $this->sharedEvents->attach(self::class, 'test', $this->createListener(3), 5);
 
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
@@ -113,9 +107,9 @@ class EventManagerPriorityTest extends TestCase
 
     public function testTriggersSharedWildcardListenersAfterSharedListenersOfSamePriority()
     {
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(2), 5);
-        $this->sharedEvents->attach(__CLASS__, 'test', $this->createListener(1), 5);
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(3), 5);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(2), 5);
+        $this->sharedEvents->attach(self::class, 'test', $this->createListener(1), 5);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(3), 5);
 
         $event = $this->createEvent();
         $this->events->triggerEvent($event);
@@ -133,7 +127,7 @@ class EventManagerPriorityTest extends TestCase
     public function testTriggersSharedWildcardIdentifierListenersAfterWildcardSharedListenersOfSamePriority()
     {
         $this->sharedEvents->attach('*', 'test', $this->createListener(2), 5);
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(1), 5);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(1), 5);
         $this->sharedEvents->attach('*', 'test', $this->createListener(3), 5);
 
         $event = $this->createEvent();
@@ -181,19 +175,19 @@ class EventManagerPriorityTest extends TestCase
         $this->events->attach('*', $this->createListener(513), 512);
         $this->events->attach('test', $this->createListener(514), 512);
 
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(256), 256);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(256), 256);
         $this->sharedEvents->attach('*', '*', $this->createListener(253), 256);
         $this->sharedEvents->attach('*', 'test', $this->createListener(254), 256);
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(255), 256);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(255), 256);
         $this->events->attach('*', $this->createListener(257), 256);
         $this->events->attach('test', $this->createListener(258), 256);
 
-        $this->sharedEvents->attach(__CLASS__, 'test', $this->createListener(128), 128);
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(126), 128);
+        $this->sharedEvents->attach(self::class, 'test', $this->createListener(128), 128);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(126), 128);
         $this->sharedEvents->attach('*', '*', $this->createListener(123), 128);
         $this->sharedEvents->attach('*', 'test', $this->createListener(124), 128);
-        $this->sharedEvents->attach(__CLASS__, '*', $this->createListener(125), 128);
-        $this->sharedEvents->attach(__CLASS__, 'test', $this->createListener(127), 128);
+        $this->sharedEvents->attach(self::class, '*', $this->createListener(125), 128);
+        $this->sharedEvents->attach(self::class, 'test', $this->createListener(127), 128);
         $this->events->attach('*', $this->createListener(129), 128);
         $this->events->attach('test', $this->createListener(130), 128);
 

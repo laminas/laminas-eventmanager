@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager\TestAsset;
 
 use Laminas\EventManager\EventManagerInterface;
@@ -18,24 +12,27 @@ use function spl_object_hash;
  */
 class MockAggregate implements ListenerAggregateInterface
 {
-
+    /** @var callable[] */
     protected $listeners = [];
+
+    /** @var null|int */
     public $priority;
 
-    public function attach(EventManagerInterface $events, $priority = 1)
+    /** @param int $priority */
+    public function attach(EventManagerInterface $events, $priority = 1): string
     {
         $this->priority = $priority;
 
-        $listeners = [];
-        $listeners[] = $events->attach('foo.bar', [ $this, 'fooBar' ]);
-        $listeners[] = $events->attach('foo.baz', [ $this, 'fooBaz' ]);
+        $listeners   = [];
+        $listeners[] = $events->attach('foo.bar', [$this, 'fooBar']);
+        $listeners[] = $events->attach('foo.baz', [$this, 'fooBaz']);
 
         $this->listeners[ spl_object_hash($events) ] = $listeners;
 
         return __METHOD__;
     }
 
-    public function detach(EventManagerInterface $events)
+    public function detach(EventManagerInterface $events): string
     {
         foreach ($this->listeners[ spl_object_hash($events) ] as $listener) {
             $events->detach($listener);
@@ -44,12 +41,12 @@ class MockAggregate implements ListenerAggregateInterface
         return __METHOD__;
     }
 
-    public function fooBar()
+    public function fooBar(): string
     {
         return __METHOD__;
     }
 
-    public function fooBaz()
+    public function fooBaz(): string
     {
         return __METHOD__;
     }

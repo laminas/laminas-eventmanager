@@ -23,16 +23,15 @@
     "extra": {
     },
     "require": {
-        "php": "^7.3 || ^8.0",
-        "laminas/laminas-zendframework-bridge": "^1.0"
+        "php": "^7.3 || ~8.0.0 || ~8.1.0"
     },
     "require-dev": {
         "container-interop/container-interop": "^1.1",
-        "laminas/laminas-coding-standard": "~1.0.0",
-        "laminas/laminas-stdlib": "^2.7.3 || ^3.0",
-        "phpbench/phpbench": "^0.17.1",
+        "laminas/laminas-coding-standard": "~2.2.1",
+        "laminas/laminas-stdlib": "^3.6",
+        "phpbench/phpbench": "^1.1",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.4.1"
+        "phpunit/phpunit": "^9.5.5"
     },
     "suggest": {
         "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
@@ -63,7 +62,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-eventmanager": "^3.2.1"
+    "conflict": {
+        "zendframework/zend-eventmanager": "*"
     }
 }

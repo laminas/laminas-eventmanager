@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager\TestAsset;
 
 use Laminas\EventManager\EventManagerAwareTrait;
@@ -17,26 +11,29 @@ class MockEventManagerAwareTrait
 {
     use EventManagerAwareTrait;
 
+    /** @var string */
     protected $eventIdentifier = 'foo.bar';
+
+    /** @var bool */
     protected $defaultEventListenersCalled = false;
 
-    public function getEventIdentifier()
+    public function getEventIdentifier(): string
     {
         return $this->eventIdentifier;
     }
 
-    public function setEventIdentifier($eventIdentifier)
+    public function setEventIdentifier(string $eventIdentifier): self
     {
         $this->eventIdentifier = $eventIdentifier;
         return $this;
     }
 
-    public function attachDefaultListeners()
+    public function attachDefaultListeners(): void
     {
         $this->defaultEventListenersCalled = true;
     }
 
-    public function defaultEventListenersCalled()
+    public function defaultEventListenersCalled(): bool
     {
         return $this->defaultEventListenersCalled;
     }

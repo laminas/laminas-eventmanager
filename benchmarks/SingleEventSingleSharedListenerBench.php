@@ -22,7 +22,7 @@ class SingleEventSingleSharedListenerBench
 
     public function __construct()
     {
-        $identifiers = $this->getIdentifierList();
+        $identifiers  = $this->getIdentifierList();
         $sharedEvents = new SharedEventManager();
         $sharedEvents->attach($identifiers[0], 'dispatch', $this->generateCallback());
         $this->events = new EventManager($sharedEvents, [$identifiers[0]]);

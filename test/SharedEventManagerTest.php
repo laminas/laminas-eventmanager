@@ -1,13 +1,8 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
+use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception;
 use Laminas\EventManager\SharedEventManager;
 use PHPUnit\Framework\TestCase;
@@ -18,16 +13,24 @@ use function var_export;
 
 class SharedEventManagerTest extends TestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->callback = function ($e) {
         };
-        $this->manager = new SharedEventManager();
+        $this->manager  = new SharedEventManager();
     }
 
-    public function getListeners(SharedEventManager $manager, array $identifiers, $event, $priority = 1)
-    {
-        $priority = (int) $priority;
+    /**
+     * @param string|EventInterface $event
+     * @return callable[]
+     */
+    public function getListeners(
+        SharedEventManager $manager,
+        array $identifiers,
+        $event,
+        int $priority = 1
+    ): array {
+        $priority  = (int) $priority;
         $listeners = $manager->getListeners($identifiers, $event);
         if (! isset($listeners[$priority])) {
             return [];
@@ -35,7 +38,8 @@ class SharedEventManagerTest extends TestCase
         return $listeners[$priority];
     }
 
-    public function invalidIdentifiers()
+    /** @psalm-return array<string, array{0: mixed}> */
+    public function invalidIdentifiers(): array
     {
         return [
             'null'                   => [null],
@@ -53,6 +57,7 @@ class SharedEventManagerTest extends TestCase
 
     /**
      * @dataProvider invalidIdentifiers
+     * @param mixed $identifier
      */
     public function testAttachRaisesExceptionForInvalidIdentifer($identifier)
     {
@@ -61,7 +66,8 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach($identifier, 'foo', $this->callback);
     }
 
-    public function invalidEventNames()
+    /** @psalm-return array<string, array{0: mixed}> */
+    public function invalidEventNames(): array
     {
         return [
             'null'                   => [null],
@@ -79,6 +85,7 @@ class SharedEventManagerTest extends TestCase
 
     /**
      * @dataProvider invalidEventNames
+     * @param mixed $event
      */
     public function testAttachRaisesExceptionForInvalidEvent($event)
     {
@@ -95,7 +102,8 @@ class SharedEventManagerTest extends TestCase
         self::assertSame([$this->callback], $listeners);
     }
 
-    public function detachIdentifierAndEvent()
+    /** @psalm-return array<string, array{0: null|string, 1: null|string}> */
+    public function detachIdentifierAndEvent(): array
     {
         return [
             'null-identifier-and-null-event' => [null, null],
@@ -108,7 +116,7 @@ class SharedEventManagerTest extends TestCase
     /**
      * @dataProvider detachIdentifierAndEvent
      */
-    public function testCanDetachFromSharedManagerUsingIdentifierAndEvent($identifier, $event)
+    public function testCanDetachFromSharedManagerUsingIdentifierAndEvent(?string $identifier, ?string $event)
     {
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
         $this->manager->detach($this->callback, $identifier, $event);
@@ -135,7 +143,7 @@ class SharedEventManagerTest extends TestCase
 
     public function testWhenEventIsProvidedAndNoListenersFoundForIdentiferGetListenersWillReturnEmptyList()
     {
-        $test = $this->manager->getListeners([ 'IDENTIFIER' ], 'EVENT');
+        $test = $this->manager->getListeners(['IDENTIFIER'], 'EVENT');
         self::assertIsArray($test);
         self::assertCount(0, $test);
     }
@@ -152,7 +160,7 @@ class SharedEventManagerTest extends TestCase
         $this->manager->attach('*', 'EVENT', $callback3);
         $this->manager->attach('IDENTIFIER', 'EVENT', $callback4);
 
-        $test = $this->getListeners($this->manager, [ 'IDENTIFIER' ], 'EVENT');
+        $test = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
         self::assertEquals([
             $callback1,
             $callback4,
@@ -171,7 +179,7 @@ class SharedEventManagerTest extends TestCase
 
         $this->manager->clearListeners('IDENTIFIER');
 
-        $listeners = $this->getListeners($this->manager, [ 'IDENTIFIER' ], 'EVENT');
+        $listeners = $this->getListeners($this->manager, ['IDENTIFIER'], 'EVENT');
         self::assertSame(
             [$wildcardIdentifier],
             $listeners,
@@ -214,7 +222,7 @@ class SharedEventManagerTest extends TestCase
 
     public function testClearListenersDoesNotRemoveWildcardListenersWhenEventIsProvided()
     {
-        $wildcardEventListener = clone $this->callback;
+        $wildcardEventListener      = clone $this->callback;
         $wildcardIdentifierListener = clone $this->callback;
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
         $this->manager->attach('IDENTIFIER', '*', $wildcardEventListener);
@@ -250,12 +258,15 @@ class SharedEventManagerTest extends TestCase
         $this->manager->clearListeners('IDENTIFIER', 'EVENT');
 
         // getListeners() always pulls in wildcard listeners
-        self::assertEquals([1 => [
-            $this->callback,
-        ]], $this->manager->getListeners([ 'IDENTIFIER' ], 'EVENT'));
+        self::assertEquals([
+            1 => [
+                $this->callback,
+            ],
+        ], $this->manager->getListeners(['IDENTIFIER'], 'EVENT'));
     }
 
-    public function invalidIdentifiersAndEvents()
+    /** @psalm-return array<string, array{0: mixed} */
+    public function invalidIdentifiersAndEvents(): array
     {
         $types = $this->invalidIdentifiers();
         unset($types['null']);
@@ -264,6 +275,7 @@ class SharedEventManagerTest extends TestCase
 
     /**
      * @dataProvider invalidIdentifiersAndEvents
+     * @param mixed $identifier
      */
     public function testDetachingWithInvalidIdentifierTypeRaisesException($identifier)
     {
@@ -274,6 +286,7 @@ class SharedEventManagerTest extends TestCase
 
     /**
      * @dataProvider invalidIdentifiersAndEvents
+     * @param mixed $eventName
      */
     public function testDetachingWithInvalidEventTypeRaisesException($eventName)
     {
@@ -283,15 +296,17 @@ class SharedEventManagerTest extends TestCase
         $this->manager->detach($this->callback, 'IDENTIFIER', $eventName);
     }
 
-    public function invalidListenersAndEventNamesForFetchingListeners()
+    /** @psalm-return array<string, array{0: mixed} */
+    public function invalidListenersAndEventNamesForFetchingListeners(): array
     {
-        $events = $this->invalidIdentifiers();
+        $events             = $this->invalidIdentifiers();
         $events['wildcard'] = ['*'];
         return $events;
     }
 
     /**
      * @dataProvider invalidListenersAndEventNamesForFetchingListeners
+     * @param mixed $eventName
      */
     public function testGetListenersRaisesExceptionForInvalidEventName($eventName)
     {
@@ -302,6 +317,7 @@ class SharedEventManagerTest extends TestCase
 
     /**
      * @dataProvider invalidListenersAndEventNamesForFetchingListeners
+     * @param mixed $identifier
      */
     public function testGetListenersRaisesExceptionForInvalidIdentifier($identifier)
     {
