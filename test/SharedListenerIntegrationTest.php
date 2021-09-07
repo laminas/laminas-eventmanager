@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManager;
@@ -18,16 +12,16 @@ use function sprintf;
 
 class SharedListenerIntegrationTest extends TestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->identifiers = ['Foo', 'Bar', 'Baz'];
+        $this->identifiers  = ['Foo', 'Bar', 'Baz'];
         $this->sharedEvents = new SharedEventManager();
-        $this->events = new EventManager($this->sharedEvents, $this->identifiers);
+        $this->events       = new EventManager($this->sharedEvents, $this->identifiers);
     }
 
     public function testCanTriggerTheSameSharedListenerMultipleTimes()
     {
-        $listener = new TestAsset\CountingListener;
+        $listener = new TestAsset\CountingListener();
         $this->sharedEvents->attach('Foo', 'foo', $listener);
 
         $iterations = array_rand(range(5, 100));
@@ -60,13 +54,13 @@ class SharedListenerIntegrationTest extends TestCase
 
     public function testTriggeringSameEventMultipleTimesDoesNotTriggersDetachedSharedListeners()
     {
-        $listeners = [];
-        $identifiers = ['Foo', 'Bar', 'Baz'];
+        $listeners    = [];
+        $identifiers  = ['Foo', 'Bar', 'Baz'];
         $sharedEvents = new SharedEventManager();
-        $events = new EventManager($sharedEvents, $identifiers);
+        $events       = new EventManager($sharedEvents, $identifiers);
 
         for ($i = 0; $i < 5; $i += 1) {
-            $listeners[$i] = $listener = new TestAsset\CountingListener();
+            $listeners[$i]   = $listener = new TestAsset\CountingListener();
             $listener->index = $i;
             $sharedEvents->attach('Foo', 'foo', $listener);
         }

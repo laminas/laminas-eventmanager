@@ -1,28 +1,22 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Event;
 use Laminas\EventManager\Exception;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * @group      Laminas_Stdlib
  */
 class EventTest extends TestCase
 {
-
     public function testConstructorWithArguments()
     {
-        $name = 'foo';
+        $name   = 'foo';
         $target = 'bar';
-        $params = ['test','param'];
+        $params = ['test', 'param'];
 
         $event = new Event($name, $target, $params);
 
@@ -40,7 +34,7 @@ class EventTest extends TestCase
 
     public function testGetParamReturnsDefault()
     {
-        $event = new Event('foo', 'bar', []);
+        $event   = new Event('foo', 'bar', []);
         $default = 1;
 
         self::assertEquals($default, $event->getParam('foo', $default));
@@ -48,8 +42,8 @@ class EventTest extends TestCase
 
     public function testGetParamReturnsDefaultForObject()
     {
-        $params = new \stdClass();
-        $event = new Event('foo', 'bar', $params);
+        $params  = new stdClass();
+        $event   = new Event('foo', 'bar', $params);
         $default = 1;
 
         self::assertEquals($default, $event->getParam('foo', $default));
@@ -57,12 +51,12 @@ class EventTest extends TestCase
 
     public function testGetParamReturnsForObject()
     {
-        $key = 'test';
-        $value = 'value';
-        $params = new \stdClass();
+        $key          = 'test';
+        $value        = 'value';
+        $params       = new stdClass();
         $params->$key = $value;
 
-        $event = new Event('foo', 'bar', $params);
+        $event   = new Event('foo', 'bar', $params);
         $default = 1;
 
         self::assertEquals($value, $event->getParam($key));

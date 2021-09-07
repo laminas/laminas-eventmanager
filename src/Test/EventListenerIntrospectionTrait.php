@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager\Test;
 
 use Laminas\EventManager\EventManager;
 use PHPUnit\Framework\Assert;
 use ReflectionProperty;
+use Traversable;
 
 use function array_keys;
 use function array_merge;
@@ -40,7 +35,6 @@ trait EventListenerIntrospectionTrait
     /**
      * Retrieve a list of event names from an event manager.
      *
-     * @param EventManager $events
      * @return string[]
      */
     private function getEventsFromEventManager(EventManager $events)
@@ -65,9 +59,8 @@ trait EventListenerIntrospectionTrait
      * will collapse to the last added.
      *
      * @param string $event
-     * @param EventManager $events
      * @param bool $withPriority
-     * @return \Traversable
+     * @return Traversable
      */
     private function getListenersForEvent($event, EventManager $events, $withPriority = false)
     {
@@ -76,7 +69,7 @@ trait EventListenerIntrospectionTrait
         $internal = $r->getValue($events);
 
         $listeners = [];
-        foreach (isset($internal[$event]) ? $internal[$event] : [] as $p => $listOfListeners) {
+        foreach ($internal[$event] ?? [] as $p => $listOfListeners) {
             foreach ($listOfListeners as $l) {
                 $listeners[$p] = isset($listeners[$p]) ? array_merge($listeners[$p], $l) : $l;
             }
@@ -88,10 +81,8 @@ trait EventListenerIntrospectionTrait
     /**
      * Assert that a given listener exists at the specified priority.
      *
-     * @param callable $expectedListener
      * @param int $expectedPriority
      * @param string $event
-     * @param EventManager $events
      * @param string $message Failure message to use, if any.
      */
     private function assertListenerAtPriority(
@@ -101,7 +92,7 @@ trait EventListenerIntrospectionTrait
         EventManager $events,
         $message = ''
     ) {
-        $message = $message ?: sprintf(
+        $message   = $message ?: sprintf(
             'Listener not found for event "%s" and priority %d',
             $event,
             $expectedPriority
@@ -109,7 +100,8 @@ trait EventListenerIntrospectionTrait
         $listeners = $this->getListenersForEvent($event, $events, true);
         $found     = false;
         foreach ($listeners as $priority => $listener) {
-            if ($listener === $expectedListener
+            if (
+                $listener === $expectedListener
                 && $priority === $expectedPriority
             ) {
                 $found = true;
@@ -127,7 +119,6 @@ trait EventListenerIntrospectionTrait
      * specific listeners are present, or for a count of listeners.
      *
      * @param string $event
-     * @param EventManager $events
      * @return callable[]
      */
     private function getArrayOfListenersForEvent($event, EventManager $events)
@@ -138,8 +129,9 @@ trait EventListenerIntrospectionTrait
     /**
      * Generator for traversing listeners in priority order.
      *
-     * @param array $listeners
+     * @param array $queue
      * @param bool $withPriority When true, yields priority as key.
+     * @return iterable
      */
     public function traverseListeners(array $queue, $withPriority = false)
     {

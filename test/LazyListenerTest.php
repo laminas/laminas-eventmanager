@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\EventManager;
 
 use Interop\Container\ContainerInterface;
@@ -22,13 +16,14 @@ class LazyListenerTest extends TestCase
     use DeprecatedAssertions;
     use ProphecyTrait;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->listenerClass = LazyListener::class;
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container     = $this->prophesize(ContainerInterface::class);
     }
 
-    public function invalidTypes()
+    /** @psalm-return array<string, array{0: mixed}> */
+    public function invalidTypes(): array
     {
         return [
             'null'       => [null],
@@ -58,6 +53,7 @@ class LazyListenerTest extends TestCase
 
     /**
      * @dataProvider invalidTypes
+     * @param mixed $listener
      */
     public function testConstructorRaisesExceptionForInvalidListenerType($listener)
     {
@@ -86,6 +82,7 @@ class LazyListenerTest extends TestCase
 
     /**
      * @dataProvider invalidTypes
+     * @param mixed $method
      */
     public function testConstructorRaisesExceptionForInvalidMethodType($method)
     {
@@ -100,7 +97,7 @@ class LazyListenerTest extends TestCase
         new $class($struct, $this->container->reveal());
     }
 
-    public function testCanInstantiateLazyListenerWithValidDefinition()
+    public function testCanInstantiateLazyListenerWithValidDefinition(): LazyListener
     {
         $class  = $this->listenerClass;
         $struct = [
@@ -116,7 +113,7 @@ class LazyListenerTest extends TestCase
     /**
      * @depends testCanInstantiateLazyListenerWithValidDefinition
      */
-    public function testInstatiationSetsListenerMethod($listener)
+    public function testInstatiationSetsListenerMethod(LazyListener $listener)
     {
         self::assertAttributeEquals('method', 'method', $listener);
     }
@@ -154,7 +151,7 @@ class LazyListenerTest extends TestCase
 
         $event = $this->prophesize(EventInterface::class);
 
-        $instance = new stdClass;
+        $instance = new stdClass();
         $env      = [
             'foo' => 'bar',
         ];

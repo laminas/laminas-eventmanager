@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 use function array_keys;
@@ -27,6 +21,7 @@ class SharedEventManager implements SharedEventManagerInterface
 {
     /**
      * Identifiers with event connections
+     *
      * @var array
      */
     protected $identifiers = [];
@@ -61,22 +56,22 @@ class SharedEventManager implements SharedEventManagerInterface
      * @param  callable $listener Listener that will handle the event.
      * @param  int $priority Priority at which listener should execute
      * @return void
-     * @throws Exception\InvalidArgumentException for invalid identifier arguments.
-     * @throws Exception\InvalidArgumentException for invalid event arguments.
+     * @throws Exception\InvalidArgumentException For invalid identifier arguments.
+     * @throws Exception\InvalidArgumentException For invalid event arguments.
      */
     public function attach($identifier, $event, callable $listener, $priority = 1)
     {
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string; received "%s"',
-                (is_object($identifier) ? get_class($identifier) : gettype($identifier))
+                is_object($identifier) ? get_class($identifier) : gettype($identifier)
             ));
         }
 
         if (! is_string($event) || empty($event)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event provided; must be a non-empty string; received "%s"',
-                (is_object($event) ? get_class($event) : gettype($event))
+                is_object($event) ? get_class($event) : gettype($event)
             ));
         }
 
@@ -99,7 +94,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string, received %s',
-                (is_object($identifier) ? get_class($identifier) : gettype($identifier))
+                is_object($identifier) ? get_class($identifier) : gettype($identifier)
             ));
         }
 
@@ -118,7 +113,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($eventName) || empty($eventName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event name provided; must be a string, received %s',
-                (is_object($eventName) ? get_class($eventName) : gettype($eventName))
+                is_object($eventName) ? get_class($eventName) : gettype($eventName)
             ));
         }
 

@@ -27,7 +27,7 @@ class MultipleEventIndividualSharedListenerBench
 
     public function __construct()
     {
-        $identifiers = $this->getIdentifierList();
+        $identifiers  = $this->getIdentifierList();
         $sharedEvents = new SharedEventManager();
         foreach ($this->getEventList() as $event) {
             $sharedEvents->attach($identifiers[0], $event, $this->generateCallback());
@@ -35,7 +35,7 @@ class MultipleEventIndividualSharedListenerBench
         $this->events = new EventManager($sharedEvents, [$identifiers[0]]);
 
         $this->eventsToTrigger = array_filter($this->getEventList(), function ($value) {
-            return ($value !== '*');
+            return $value !== '*';
         });
     }
 

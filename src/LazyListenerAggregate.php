@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 use Interop\Container\ContainerInterface;
@@ -37,15 +31,15 @@ class LazyListenerAggregate implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;
 
-    /**
-     * @var ContainerInterface Container from which to pull lazy listeners.
-     */
+    // phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty
+
+    /** @var ContainerInterface Container from which to pull lazy listeners. */
     private $container;
 
-    /**
-     * @var array Additional environment/option variables to use when creating listener.
-     */
+    /** @var array Additional environment/option variables to use when creating listener. */
     private $env;
+
+    // phpcs:enable
 
     /**
      * Generated LazyEventListener instances.
@@ -66,11 +60,10 @@ class LazyListenerAggregate implements ListenerAggregateInterface
      * constructor in order to create a new instance; in the latter case, the
      * $container and $env will be passed at instantiation as well.
      *
-     * @var array $listeners LazyEventListener instances or array definitions
+     * @param array $listeners LazyEventListener instances or array definitions
      *     to pass to the LazyEventListener constructor.
-     * @var ContainerInterface $container
-     * @var array $env
-     * @throws Exception\InvalidArgumentException for invalid listener items.
+     * @param array $env
+     * @throws Exception\InvalidArgumentException For invalid listener items.
      */
     public function __construct(array $listeners, ContainerInterface $container, array $env = [])
     {
@@ -86,7 +79,7 @@ class LazyListenerAggregate implements ListenerAggregateInterface
             if (! $listener instanceof LazyEventListener) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'All listeners must be LazyEventListener instances or definitions; received %s',
-                    (is_object($listener) ? get_class($listener) : gettype($listener))
+                    is_object($listener) ? get_class($listener) : gettype($listener)
                 ));
             }
 
@@ -100,8 +93,8 @@ class LazyListenerAggregate implements ListenerAggregateInterface
      * Loops through all composed lazy listeners, and attaches them to the
      * event manager.
      *
-     * @var EventManagerInterface $events
-     * @var int $priority
+     * @param int $priority
+     * @return void
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {

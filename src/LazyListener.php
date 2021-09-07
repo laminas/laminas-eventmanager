@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 use Interop\Container\ContainerInterface;
@@ -33,50 +27,41 @@ use function method_exists;
  */
 class LazyListener
 {
-    /**
-     * @var ContainerInterface Container from which to pull listener.
-     */
+    /** @var ContainerInterface Container from which to pull listener. */
     private $container;
 
-    /**
-     * @var array Variables/options to use during service creation, if any.
-     */
+    /** @var array Variables/options to use during service creation, if any. */
     private $env;
 
-    /**
-     * @var callable Marshaled listener callback.
-     */
+    /** @var callable Marshaled listener callback. */
     private $listener;
 
-    /**
-     * @var string Method name to invoke on listener.
-     */
+    /** @var string Method name to invoke on listener. */
     private $method;
 
-    /**
-     * @var string Service name of listener.
-     */
+    /** @var string Service name of listener. */
     private $service;
 
     /**
      * @param array $definition
-     * @param ContainerInterface $container
      * @param array $env
      */
     public function __construct(array $definition, ContainerInterface $container, array $env = [])
     {
-        if ((! isset($definition['listener'])
+        if (
+            ! isset($definition['listener'])
             || ! is_string($definition['listener'])
-            || empty($definition['listener']))
+            || empty($definition['listener'])
         ) {
             throw new Exception\InvalidArgumentException(
                 'Lazy listener definition is missing a valid "listener" member; cannot create LazyListener'
             );
         }
 
-        if ((! isset($definition['method'])
+        if (
+            ! isset($definition['method'])
             || ! is_string($definition['method'])
-            || empty($definition['method']))
+            || empty($definition['method'])
         ) {
             throw new Exception\InvalidArgumentException(
                 'Lazy listener definition is missing a valid "method" member; cannot create LazyListener'
@@ -92,7 +77,6 @@ class LazyListener
     /**
      * Use the listener as an invokable, allowing direct attachment to an event manager.
      *
-     * @param EventInterface $event
      * @return callable
      */
     public function __invoke(EventInterface $event)

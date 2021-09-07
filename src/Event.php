@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager;
 
 use ArrayAccess;
@@ -23,24 +17,16 @@ use function sprintf;
  */
 class Event implements EventInterface
 {
-    /**
-     * @var string Event name
-     */
+    /** @var string Event name */
     protected $name;
 
-    /**
-     * @var string|object The event target
-     */
+    /** @var string|object The event target */
     protected $target;
 
-    /**
-     * @var array|ArrayAccess|object The event parameters
-     */
+    /** @var array|ArrayAccess|object The event parameters */
     protected $params = [];
 
-    /**
-     * @var bool Whether or not to stop propagation
-     */
+    /** @var bool Whether or not to stop propagation */
     protected $stopPropagation = false;
 
     /**

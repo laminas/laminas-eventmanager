@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-eventmanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-eventmanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-eventmanager/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\EventManager\Filter;
 
 use Laminas\EventManager\ResponseCollection;
@@ -26,15 +20,12 @@ interface FilterInterface
 
     /**
      * Attach an intercepting filter
-     *
-     * @param  callable $callback
      */
     public function attach(callable $callback);
 
     /**
      * Detach an intercepting filter
      *
-     * @param  callable $filter
      * @return bool
      */
     public function detach(callable $filter);

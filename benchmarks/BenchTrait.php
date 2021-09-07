@@ -2,17 +2,21 @@
 
 namespace LaminasBench\EventManager;
 
+use Laminas\Stdlib\DispatchableInterface;
+
 trait BenchTrait
 {
+    /** @var int */
     private $numListeners = 50;
 
-    private function generateCallback()
+    private function generateCallback(): callable
     {
         return function ($e) {
         };
     }
 
-    private function getEventList()
+    /** @return non-empty-string[] */
+    private function getEventList(): array
     {
         return [
             'dispatch',
@@ -21,10 +25,11 @@ trait BenchTrait
         ];
     }
 
-    private function getIdentifierList()
+    /** @return class-string[] */
+    private function getIdentifierList(): array
     {
         return [
-            'Laminas\Stdlib\DispatchableInterface',
+            DispatchableInterface::class,
             'Laminas\Mvc\Controller\AbstractController',
             'Laminas\Mvc\Controller\AbstractActionController',
             'Laminas\Mvc\Controller\AbstractRestfulController',
