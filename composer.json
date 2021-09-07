@@ -29,7 +29,7 @@
         "container-interop/container-interop": "^1.1",
         "laminas/laminas-coding-standard": "~2.2.1",
         "laminas/laminas-stdlib": "^3.6",
-        "phpbench/phpbench": "^0.17.1",
+        "phpbench/phpbench": "^1.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5.5"
     },
