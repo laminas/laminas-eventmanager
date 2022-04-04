@@ -2,7 +2,7 @@
 
 namespace LaminasTest\EventManager\TestAsset;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Mimic the ServiceManager v3 ServiceLocatorInterface in order to test

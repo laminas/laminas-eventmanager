@@ -2,7 +2,7 @@
 
 namespace Laminas\EventManager;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 use function is_string;
 use function method_exists;
