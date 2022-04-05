@@ -69,6 +69,7 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "conflict": {
+        "container-interop/container-interop": "<1.2",
         "zendframework/zend-eventmanager": "*"
     }
 }
