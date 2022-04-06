@@ -2,27 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.5.0 - TBD
+## 3.5.0 - 2022-04-06
 
-### Added
 
-- Nothing.
+-----
+
+### Release Notes for [3.5.0](https://github.com/laminas/laminas-eventmanager/milestone/7)
 
 ### Changed
 
-- Nothing.
+The `LazyListener`, `LazyEventListener`, and `LazyListenerAggregate` have type-widened their `$container` argument to the official [PSR-11](https://www.php-fig.org/psr/psr-11/) `ContainerInterface` type. Since they previously hinted against the container-interop version 1.2 or greater, and that version extended the PSR-11 interface, the change is backwards compatible.
 
-### Deprecated
+If you were extending these classes, we recommend updating your definitions to reference PSR-11's types instead.
 
-- Nothing.
+### 3.5.0
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
 
-- Nothing.
+#### Enhancement
 
-### Fixed
-
-- Nothing.
+ - [25: Update to PSR-11 for lazy listener support](https://github.com/laminas/laminas-eventmanager/pull/25) thanks to @weierophinney
+ - [24: Prepare for Renovate with reusable workflows](https://github.com/laminas/laminas-eventmanager/pull/24) thanks to @ghostwriter
 
 ## 3.4.0 - 2021-09-07
 
