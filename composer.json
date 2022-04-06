@@ -20,16 +20,19 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.3.99"
+            "php": "7.4.99"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "extra": {
     },
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0"
+        "php": "^7.4 || ~8.0.0 || ~8.1.0"
     },
     "require-dev": {
-        "container-interop/container-interop": "^1.1",
+        "psr/container": "^1.1.2 || ^2.0.2",
         "laminas/laminas-coding-standard": "~2.2.1",
         "laminas/laminas-stdlib": "^3.6",
         "phpbench/phpbench": "^1.1",
@@ -37,7 +40,7 @@
         "phpunit/phpunit": "^9.5.5"
     },
     "suggest": {
-        "container-interop/container-interop": "^1.1, to use the lazy listeners feature",
+        "psr/container": "^1.1.2 || ^2.0.2, to use the lazy listeners feature",
         "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
     },
     "autoload": {
@@ -66,6 +69,7 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "conflict": {
+        "container-interop/container-interop": "<1.2",
         "zendframework/zend-eventmanager": "*"
     }
 }

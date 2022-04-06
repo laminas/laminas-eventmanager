@@ -2,7 +2,6 @@
 
 namespace LaminasTest\EventManager;
 
-use Interop\Container\ContainerInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
@@ -11,6 +10,7 @@ use Laminas\EventManager\LazyListenerAggregate;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
 use function array_shift;

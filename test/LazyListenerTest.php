@@ -2,13 +2,13 @@
 
 namespace LaminasTest\EventManager;
 
-use Interop\Container\ContainerInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyListener;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\Container\ContainerInterface;
 use stdClass;
 
 class LazyListenerTest extends TestCase
