@@ -8,8 +8,8 @@ listener from a container and invoking it.
 To create a `LazyListener` instance, you must pass to its constructor:
 
 - a *definition* of the listener; this is an array defining:
-    - a `listener` key, with the name of the listener service to pull from the container.
-    - a `method` key, with the name of the method to invoke on the listener instance.
+  - a `listener` key, with the name of the listener service to pull from the container.
+  - a `method` key, with the name of the method to invoke on the listener instance.
 - a *container*; this is a [container-interop](https://github.com/container-interop/container-interop),
   such as provided by
   [laminas-servicemanager](https://github.com/laminas/laminas-servicemanager),
