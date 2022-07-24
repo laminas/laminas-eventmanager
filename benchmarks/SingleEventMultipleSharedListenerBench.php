@@ -1,12 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasBench\EventManager;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
-use PhpBench\Benchmark\Metadata\Annotations\Iterations;
-use PhpBench\Benchmark\Metadata\Annotations\Revs;
-use PhpBench\Benchmark\Metadata\Annotations\Warmup;
 
 /**
  * @Revs(1000)

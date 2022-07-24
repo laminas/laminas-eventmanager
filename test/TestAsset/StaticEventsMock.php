@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager\TestAsset;
 
 use Laminas\EventManager\SharedEventManagerInterface;
@@ -38,7 +40,6 @@ class StaticEventsMock implements SharedEventManagerInterface
      *
      * @param  string|int  $identifier
      * @param  null|string $eventName
-     *
      * @return bool
      */
     public function clearListeners($identifier, $eventName = null)

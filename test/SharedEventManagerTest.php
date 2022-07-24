@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager;
 
 use Closure;
@@ -19,7 +21,8 @@ class SharedEventManagerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->callback = static function (): void {};
+        $this->callback = static function (): void {
+        };
         $this->manager  = new SharedEventManager();
     }
 

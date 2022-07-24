@@ -32,7 +32,7 @@
         "php": "^7.4 || ~8.0.0 || ~8.1.0"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~2.2.1",
+        "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-stdlib": "^3.6",
         "phpbench/phpbench": "^1.1",
         "phpspec/prophecy-phpunit": "^2.0",

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager\Test;
 
 use Laminas\EventManager\EventManager;
