@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager;
 
 use ArrayAccess;
@@ -18,8 +20,7 @@ use function trim;
  */
 class FilterChainTest extends TestCase
 {
-    /** @var FilterChain */
-    protected $filterchain;
+    private FilterChain $filterchain;
 
     protected function setUp(): void
     {
@@ -29,13 +30,13 @@ class FilterChainTest extends TestCase
         $this->filterchain = new FilterChain();
     }
 
-    public function testSubscribeShouldReturnCallbackHandler()
+    public function testSubscribeShouldReturnCallbackHandler(): void
     {
         $handle = $this->filterchain->attach([$this, __METHOD__]);
         self::assertSame([$this, __METHOD__], $handle);
     }
 
-    public function testSubscribeShouldAddCallbackHandlerToFilters()
+    public function testSubscribeShouldAddCallbackHandlerToFilters(): void
     {
         $handler  = $this->filterchain->attach([$this, __METHOD__]);
         $handlers = $this->filterchain->getFilters();
@@ -43,7 +44,7 @@ class FilterChainTest extends TestCase
         self::assertTrue($handlers->contains($handler));
     }
 
-    public function testDetachShouldRemoveCallbackHandlerFromFilters()
+    public function testDetachShouldRemoveCallbackHandlerFromFilters(): void
     {
         $handle  = $this->filterchain->attach([$this, __METHOD__]);
         $handles = $this->filterchain->getFilters();
@@ -53,7 +54,7 @@ class FilterChainTest extends TestCase
         self::assertFalse($handles->contains($handle));
     }
 
-    public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
+    public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist(): void
     {
         $handle1 = $this->filterchain->attach([$this, __METHOD__]);
         $this->filterchain->clearFilters();
@@ -61,13 +62,13 @@ class FilterChainTest extends TestCase
         self::assertFalse($this->filterchain->detach($handle1));
     }
 
-    public function testRetrievingAttachedFiltersShouldReturnEmptyArrayWhenNoFiltersExist()
+    public function testRetrievingAttachedFiltersShouldReturnEmptyArrayWhenNoFiltersExist(): void
     {
         $handles = $this->filterchain->getFilters();
         self::assertEquals(0, count($handles));
     }
 
-    public function testFilterChainShouldReturnLastResponse()
+    public function testFilterChainShouldReturnLastResponse(): void
     {
         $this->filterchain->attach(function ($context, $params, $chain) {
             if (isset($params['string'])) {
@@ -83,7 +84,7 @@ class FilterChainTest extends TestCase
         self::assertEquals(str_rot13(trim(' foo ')), $value);
     }
 
-    public function testFilterIsPassedContextAndArguments()
+    public function testFilterIsPassedContextAndArguments(): void
     {
         $this->filterchain->attach([$this, 'filterTestCallback1']);
         $obj   = (object) ['foo' => 'bar', 'bar' => 'baz'];
@@ -93,13 +94,13 @@ class FilterChainTest extends TestCase
         self::assertEquals('foobarbaz', $obj->foo);
     }
 
-    public function testInterceptingFilterShouldReceiveChain()
+    public function testInterceptingFilterShouldReceiveChain(): void
     {
         $this->filterchain->attach([$this, 'filterReceivalCallback']);
         $this->filterchain->run($this);
     }
 
-    public function testFilteringStopsAsSoonAsAFilterFailsToCallNext()
+    public function testFilteringStopsAsSoonAsAFilterFailsToCallNext(): void
     {
         $this->filterchain->attach(function ($context, $params, $chain) {
             if (isset($params['string'])) {
@@ -147,13 +148,13 @@ class FilterChainTest extends TestCase
         self::assertInstanceOf(FilterIterator::class, $chain);
     }
 
-    public function testRunReturnsNullWhenChainIsEmpty()
+    public function testRunReturnsNullWhenChainIsEmpty(): void
     {
         $filterChain = new FilterChain();
         self::assertNull($filterChain->run(null));
     }
 
-    public function testGetResponses()
+    public function testGetResponses(): void
     {
         $filterChain = new FilterChain();
         self::assertNull($filterChain->getResponses());

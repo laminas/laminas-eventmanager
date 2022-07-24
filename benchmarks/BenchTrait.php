@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasBench\EventManager;
 
 use Laminas\Stdlib\DispatchableInterface;

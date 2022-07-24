@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventInterface;
@@ -10,6 +12,7 @@ use Laminas\EventManager\LazyListenerAggregate;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
@@ -18,6 +21,9 @@ use function array_shift;
 class LazyListenerAggregateTest extends TestCase
 {
     use ProphecyTrait;
+
+    /** @var ObjectProphecy */
+    private $container;
 
     protected function setUp(): void
     {
@@ -142,7 +148,7 @@ class LazyListenerAggregateTest extends TestCase
         $aggregate->attach($events->reveal(), 7);
     }
 
-    public function testListenersArePulledFromContainerAndInvokedWhenTriggered()
+    public function testListenersArePulledFromContainerAndInvokedWhenTriggered(): void
     {
         $listener = $this->prophesize(TestAsset\BuilderInterface::class);
         $listener->build(Argument::type(EventInterface::class))->shouldBeCalled();

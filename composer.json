@@ -32,12 +32,14 @@
         "php": "^7.4 || ~8.0.0 || ~8.1.0"
     },
     "require-dev": {
-        "psr/container": "^1.1.2 || ^2.0.2",
-        "laminas/laminas-coding-standard": "~2.2.1",
+        "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-stdlib": "^3.6",
         "phpbench/phpbench": "^1.1",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5.5"
+        "phpunit/phpunit": "^9.5.5",
+        "psalm/plugin-phpunit": "^0.17.0",
+        "psr/container": "^1.1.2 || ^2.0.2",
+        "vimeo/psalm": "^4.24"
     },
     "suggest": {
         "psr/container": "^1.1.2 || ^2.0.2, to use the lazy listeners feature",
@@ -52,10 +54,7 @@
         "psr-4": {
             "LaminasTest\\EventManager\\": "test/",
             "LaminasBench\\EventManager\\": "benchmarks/"
-        },
-        "files": [
-            "test/_autoload.php"
-        ]
+        }
     },
     "scripts": {
         "benchmark": "phpbench run --revs=2 --iterations=2 --report=aggregate",
@@ -66,7 +65,8 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "static-analysis": "psalm --shepherd --stats"
     },
     "conflict": {
         "container-interop/container-interop": "<1.2",

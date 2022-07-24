@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-    bootstrap="./test/bootstrap.php"
+    bootstrap="vendor/autoload.php"
     colors="true">
     <coverage includeUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
     </coverage>
-
     <testsuites>
         <testsuite name="laminas-eventmanager Test Suite">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>
-
-    <groups>
-        <exclude>
-            <group>disable</group>
-        </exclude>
-    </groups>
-
     <php>
         <ini name="date.timezone" value="UTC"/>
-        <!-- OB_ENABLED should be enabled for some tests to check if all
-            functionality works as expected. Such tests include those for
-            Laminas\Soap and Laminas\Session, which require that headers not be sent
-            in order to work. -->
-        <env name="TESTS_LAMINAS_OB_ENABLED" value="false"/>
     </php>
 </phpunit>

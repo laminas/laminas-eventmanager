@@ -10,7 +10,7 @@
     <arg name="parallel" value="80"/>
 
     <!-- Show progress -->
-    <arg value="p"/>
+    <arg value="ps"/>
 
     <!-- Paths to check -->
     <file>benchmarks</file>
@@ -19,4 +19,8 @@
 
     <!-- Include all rules from Laminas Coding Standard -->
     <rule ref="LaminasCodingStandard"/>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <exclude-pattern>src/</exclude-pattern>
+    </rule>
 </ruleset>

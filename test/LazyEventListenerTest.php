@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Exception\InvalidArgumentException;
@@ -16,7 +18,7 @@ class LazyEventListenerTest extends LazyListenerTest
         $this->listenerClass = LazyEventListener::class;
     }
 
-    public function testConstructorRaisesExceptionForMissingEvent()
+    public function testConstructorRaisesExceptionForMissingEvent(): void
     {
         $class  = $this->listenerClass;
         $struct = [
@@ -76,7 +78,7 @@ class LazyEventListenerTest extends LazyListenerTest
         self::assertEquals(5, $listener->getPriority());
     }
 
-    public function testGetPriorityWillReturnProvidedPriorityIfNoneGivenAtInstantiation()
+    public function testGetPriorityWillReturnProvidedPriorityIfNoneGivenAtInstantiation(): void
     {
         $class  = $this->listenerClass;
         $struct = [

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventInterface;
@@ -8,6 +10,7 @@ use Laminas\EventManager\LazyListener;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -15,6 +18,12 @@ class LazyListenerTest extends TestCase
 {
     use DeprecatedAssertions;
     use ProphecyTrait;
+
+    /** @var class-string */
+    protected string $listenerClass;
+
+    /** @var ObjectProphecy&ContainerInterface */
+    protected $container;
 
     protected function setUp(): void
     {
@@ -39,7 +48,7 @@ class LazyListenerTest extends TestCase
         ];
     }
 
-    public function testConstructorRaisesExceptionForMissingListener()
+    public function testConstructorRaisesExceptionForMissingListener(): void
     {
         $class  = $this->listenerClass;
         $struct = [
@@ -68,7 +77,7 @@ class LazyListenerTest extends TestCase
         new $class($struct, $this->container->reveal());
     }
 
-    public function testConstructorRaisesExceptionForMissingMethod()
+    public function testConstructorRaisesExceptionForMissingMethod(): void
     {
         $class  = $this->listenerClass;
         $struct = [
@@ -118,7 +127,7 @@ class LazyListenerTest extends TestCase
         self::assertAttributeEquals('method', 'method', $listener);
     }
 
-    public function testLazyListenerActsAsInvokableAroundListenerCreation()
+    public function testLazyListenerActsAsInvokableAroundListenerCreation(): void
     {
         $class    = $this->listenerClass;
         $listener = $this->prophesize(TestAsset\BuilderInterface::class);
@@ -143,7 +152,7 @@ class LazyListenerTest extends TestCase
         self::assertEquals('RECEIVED', $lazyListener($event->reveal()));
     }
 
-    public function testInvocationWillDelegateToContainerBuildMethodWhenPresentAndEnvIsNonEmpty()
+    public function testInvocationWillDelegateToContainerBuildMethodWhenPresentAndEnvIsNonEmpty(): void
     {
         $class    = $this->listenerClass;
         $listener = $this->prophesize(TestAsset\BuilderInterface::class);
