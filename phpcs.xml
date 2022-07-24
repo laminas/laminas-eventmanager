@@ -10,7 +10,7 @@
     <arg name="parallel" value="80"/>
 
     <!-- Show progress -->
-    <arg value="p"/>
+    <arg value="ps"/>
 
     <!-- Paths to check -->
     <file>benchmarks</file>
