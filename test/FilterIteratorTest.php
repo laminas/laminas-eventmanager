@@ -11,25 +11,25 @@ use PHPUnit\Framework\TestCase;
  */
 class FilterIteratorTest extends TestCase
 {
-    public function testNextReturnsNullOnEmptyChain()
+    public function testNextReturnsNullOnEmptyChain(): void
     {
         $filterIterator = new FilterIterator();
         self::assertNull($filterIterator->next([]));
     }
 
-    public function testNextReturnsNullWithEmptyHeap()
+    public function testNextReturnsNullWithEmptyHeap(): void
     {
         $filterIterator = new FilterIterator();
         self::assertNull($filterIterator->next([0, 1, 2]));
     }
 
-    public function testContainsReturnsFalseForInvalidElement()
+    public function testContainsReturnsFalseForInvalidElement(): void
     {
         $filterIterator = new FilterIterator();
         self::assertFalse($filterIterator->contains('foo'));
     }
 
-    public function testContainsReturnsTrueForValidElement()
+    public function testContainsReturnsTrueForValidElement(): void
     {
         $callback       = function () {
         };
@@ -38,14 +38,14 @@ class FilterIteratorTest extends TestCase
         self::assertTrue($filterIterator->contains($callback));
     }
 
-    public function testRemoveFromEmptyQueueReturnsFalse()
+    public function testRemoveFromEmptyQueueReturnsFalse(): void
     {
         $filterIterator = new FilterIterator();
 
         self::assertFalse($filterIterator->remove('foo'));
     }
 
-    public function testRemoveUnrecognizedItemFromQueueReturnsFalse()
+    public function testRemoveUnrecognizedItemFromQueueReturnsFalse(): void
     {
         $callback       = function () {
         };
@@ -55,7 +55,7 @@ class FilterIteratorTest extends TestCase
         self::assertFalse($filterIterator->remove(clone $callback));
     }
 
-    public function testRemoveValidItemFromQueueReturnsTrue()
+    public function testRemoveValidItemFromQueueReturnsTrue(): void
     {
         $callback       = function () {
         };
@@ -65,7 +65,7 @@ class FilterIteratorTest extends TestCase
         self::assertTrue($filterIterator->remove($callback));
     }
 
-    public function testNextReturnsNullWhenFilterChainIsEmpty()
+    public function testNextReturnsNullWhenFilterChainIsEmpty(): void
     {
         $filterIterator = new FilterIterator();
 

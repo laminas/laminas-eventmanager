@@ -12,6 +12,11 @@ use function sprintf;
 
 class SharedListenerIntegrationTest extends TestCase
 {
+    /** @var string[] */
+    private array $identifiers;
+    private SharedEventManager $sharedEvents;
+    private EventManager $events;
+
     protected function setUp(): void
     {
         $this->identifiers  = ['Foo', 'Bar', 'Baz'];
@@ -19,7 +24,7 @@ class SharedListenerIntegrationTest extends TestCase
         $this->events       = new EventManager($this->sharedEvents, $this->identifiers);
     }
 
-    public function testCanTriggerTheSameSharedListenerMultipleTimes()
+    public function testCanTriggerTheSameSharedListenerMultipleTimes(): void
     {
         $listener = new TestAsset\CountingListener();
         $this->sharedEvents->attach('Foo', 'foo', $listener);
@@ -31,7 +36,7 @@ class SharedListenerIntegrationTest extends TestCase
         self::assertSame($iterations, $listener->count);
     }
 
-    public function testTriggeringSameEventMultipleTimesTriggersNewSharedListeners()
+    public function testTriggeringSameEventMultipleTimesTriggersNewSharedListeners(): void
     {
         $listeners = [];
 
@@ -52,7 +57,7 @@ class SharedListenerIntegrationTest extends TestCase
         }
     }
 
-    public function testTriggeringSameEventMultipleTimesDoesNotTriggersDetachedSharedListeners()
+    public function testTriggeringSameEventMultipleTimesDoesNotTriggersDetachedSharedListeners(): void
     {
         $listeners    = [];
         $identifiers  = ['Foo', 'Bar', 'Baz'];

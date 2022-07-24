@@ -13,7 +13,7 @@ class ListenerAggregateTraitTest extends TestCase
     /** @var class-string */
     public $aggregateClass = TestAsset\MockListenerAggregateTrait::class;
 
-    public function testDetachRemovesAttachedListeners()
+    public function testDetachRemovesAttachedListeners(): void
     {
         $class     = $this->aggregateClass;
         $aggregate = new $class();

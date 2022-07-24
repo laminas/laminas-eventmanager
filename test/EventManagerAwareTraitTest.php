@@ -12,7 +12,7 @@ class EventManagerAwareTraitTest extends TestCase
 {
     use DeprecatedAssertions;
 
-    public function testSetEventManager()
+    public function testSetEventManager(): void
     {
         $object = $this->getObjectForTrait(EventManagerAwareTrait::class);
 
@@ -25,7 +25,7 @@ class EventManagerAwareTraitTest extends TestCase
         self::assertAttributeEquals($eventManager, 'events', $object);
     }
 
-    public function testGetEventManager()
+    public function testGetEventManager(): void
     {
         $object = $this->getObjectForTrait(EventManagerAwareTrait::class);
 
@@ -38,7 +38,7 @@ class EventManagerAwareTraitTest extends TestCase
         self::assertSame($eventManager, $object->getEventManager());
     }
 
-    public function testSetEventManagerWithEventIdentifier()
+    public function testSetEventManagerWithEventIdentifier(): void
     {
         $object       = new MockEventManagerAwareTrait();
         $eventManager = new EventManager();

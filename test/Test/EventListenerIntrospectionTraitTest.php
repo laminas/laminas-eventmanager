@@ -15,12 +15,14 @@ class EventListenerIntrospectionTraitTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
 
+    private EventManager $events;
+
     protected function setUp(): void
     {
         $this->events = new EventManager();
     }
 
-    public function testGetEventsFromEventManagerReturnsEventList()
+    public function testGetEventsFromEventManagerReturnsEventList(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo', function ($e) {});
@@ -31,7 +33,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         self::assertEquals(['foo', 'bar', 'baz'], $this->getEventsFromEventManager($this->events));
     }
 
-    public function testGetListenersForEventReturnsIteratorOfListenersForEventInPriorityOrder()
+    public function testGetListenersForEventReturnsIteratorOfListenersForEventInPriorityOrder(): void
     {
         // @codingStandardsIgnoreStart
         $callback1 = function ($e) {};
@@ -60,7 +62,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         ], $listeners);
     }
 
-    public function testGetListenersForEventReturnsIteratorOfListenersInAttachmentOrderWhenSamePriority()
+    public function testGetListenersForEventReturnsIteratorOfListenersInAttachmentOrderWhenSamePriority(): void
     {
         // @codingStandardsIgnoreStart
         $callback1 = function ($e) {};
@@ -89,7 +91,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         ], $listeners);
     }
 
-    public function testGetListenersForEventCanReturnPriorityKeysWhenRequested()
+    public function testGetListenersForEventCanReturnPriorityKeysWhenRequested(): void
     {
         // @codingStandardsIgnoreStart
         $callback1 = function ($e) {};
@@ -118,7 +120,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         ], $listeners);
     }
 
-    public function testGetArrayOfListenersForEventReturnsArrayOfListenersInPriorityOrder()
+    public function testGetArrayOfListenersForEventReturnsArrayOfListenersInPriorityOrder(): void
     {
         // @codingStandardsIgnoreStart
         $callback1 = function ($e) {};
@@ -146,7 +148,7 @@ class EventListenerIntrospectionTraitTest extends TestCase
         ], $listeners);
     }
 
-    public function testAssertListenerAtPriorityPassesWhenListenerIsFound()
+    public function testAssertListenerAtPriorityPassesWhenListenerIsFound(): void
     {
         // @codingStandardsIgnoreStart
         $callback = function ($e) {};
@@ -157,15 +159,15 @@ class EventListenerIntrospectionTraitTest extends TestCase
         self::assertListenerAtPriority($callback, 7, 'foo', $this->events);
     }
 
-    public function testAssertListenerAtPriorityFailsWhenListenerIsNotFound()
+    public function testAssertListenerAtPriorityFailsWhenListenerIsNotFound(): void
     {
         // @codingStandardsIgnoreStart
         $event = 'foo';
-        $listener = function ($e) {};
+        $listener = static function (): void {};
         $priority = 7;
         $this->events->attach($event, $listener, $priority);
 
-        $alternate = function ($e) {};
+        $alternate = static function (): void {};
 
         $permutations = [
             'different-listener' => ['listener' => $alternate, 'priority' => $priority,     'event' => $event],

@@ -12,7 +12,7 @@ use stdClass;
  */
 class EventTest extends TestCase
 {
-    public function testConstructorWithArguments()
+    public function testConstructorWithArguments(): void
     {
         $name   = 'foo';
         $target = 'bar';
@@ -25,14 +25,14 @@ class EventTest extends TestCase
         self::assertEquals($params, $event->getParams());
     }
 
-    public function testSetParamsWithInvalidParameter()
+    public function testSetParamsWithInvalidParameter(): void
     {
         $event = new Event('foo');
         $this->expectException(Exception\InvalidArgumentException::class);
         $event->setParams('test');
     }
 
-    public function testGetParamReturnsDefault()
+    public function testGetParamReturnsDefault(): void
     {
         $event   = new Event('foo', 'bar', []);
         $default = 1;
@@ -40,7 +40,7 @@ class EventTest extends TestCase
         self::assertEquals($default, $event->getParam('foo', $default));
     }
 
-    public function testGetParamReturnsDefaultForObject()
+    public function testGetParamReturnsDefaultForObject(): void
     {
         $params  = new stdClass();
         $event   = new Event('foo', 'bar', $params);
@@ -49,7 +49,7 @@ class EventTest extends TestCase
         self::assertEquals($default, $event->getParam('foo', $default));
     }
 
-    public function testGetParamReturnsForObject()
+    public function testGetParamReturnsForObject(): void
     {
         $key          = 'test';
         $value        = 'value';

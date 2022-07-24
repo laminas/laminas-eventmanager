@@ -31,6 +31,8 @@ class EventManagerTest extends TestCase
     use DeprecatedAssertions;
     use ProphecyTrait;
 
+    private EventManager $events;
+
     protected function setUp(): void
     {
         if (isset($this->message)) {
@@ -106,7 +108,7 @@ class EventManagerTest extends TestCase
         self::assertSame($listener, $this->events->attach($event, $listener));
     }
 
-    public function testAttachShouldAddEventIfItDoesNotExist()
+    public function testAttachShouldAddEventIfItDoesNotExist(): void
     {
         self::assertAttributeEmpty('events', $this->events);
         $listener = $this->events->attach('test', [$this, __METHOD__]);
@@ -115,14 +117,14 @@ class EventManagerTest extends TestCase
         self::assertContains('test', $events);
     }
 
-    public function testTriggerShouldTriggerAttachedListeners()
+    public function testTriggerShouldTriggerAttachedListeners(): void
     {
         $listener = $this->events->attach('test', [$this, 'handleTestEvent']);
         $this->events->trigger('test', $this, ['message' => 'test message']);
         self::assertEquals('test message', $this->message);
     }
 
-    public function testTriggerShouldReturnAllListenerReturnValues()
+    public function testTriggerShouldReturnAllListenerReturnValues(): void
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '__NOT_FOUND__');
@@ -139,7 +141,7 @@ class EventManagerTest extends TestCase
         self::assertEquals(str_rot13(' foo '), $responses->last());
     }
 
-    public function testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue()
+    public function testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue(): void
     {
         $this->events->attach('foo.bar', function ($e) {
             $string = $e->getParam('string', '');
@@ -161,7 +163,7 @@ class EventManagerTest extends TestCase
         self::assertSame(0, $responses->last());
     }
 
-    public function testTriggerResponseCollectionContains()
+    public function testTriggerResponseCollectionContains(): void
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '');
@@ -189,7 +191,7 @@ class EventManagerTest extends TestCase
         return ! $value;
     }
 
-    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet()
+    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo.bar', function () { return 'bogus'; }, 4);
@@ -208,7 +210,7 @@ class EventManagerTest extends TestCase
         self::assertFalse($responses->contains('zero'));
     }
 
-    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener()
+    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo.bar', function () { return 'bogus'; });
@@ -225,7 +227,7 @@ class EventManagerTest extends TestCase
         self::assertEquals('found', $responses->last());
     }
 
-    public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByTriggerUntil()
+    public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByTriggerUntil(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo.bar', function () { return 'bogus'; }, 4);
@@ -242,7 +244,7 @@ class EventManagerTest extends TestCase
         self::assertEquals('zero', $responses->last());
     }
 
-    public function testCallingEventsStopPropagationMethodHaltsEventEmission()
+    public function testCallingEventsStopPropagationMethodHaltsEventEmission(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo.bar', function ($e) { return 'bogus'; }, 4);
@@ -260,7 +262,7 @@ class EventManagerTest extends TestCase
         self::assertFalse($responses->contains('zero'));
     }
 
-    public function testCanAlterParametersWithinAEvent()
+    public function testCanAlterParametersWithinAEvent(): void
     {
         // @codingStandardsIgnoreStart
         $this->events->attach('foo.bar', function ($e) { $e->setParam('foo', 'bar'); });
@@ -276,7 +278,7 @@ class EventManagerTest extends TestCase
         self::assertEquals('bar:baz', $responses->last());
     }
 
-    public function testParametersArePassedToEventByReference()
+    public function testParametersArePassedToEventByReference(): void
     {
         $params = ['foo' => 'bar', 'bar' => 'baz'];
         $args   = $this->events->prepareArgs($params);
@@ -291,7 +293,7 @@ class EventManagerTest extends TestCase
         self::assertEquals('BAR', $args['bar']);
     }
 
-    public function testCanPassObjectForEventParameters()
+    public function testCanPassObjectForEventParameters(): void
     {
         $params = (object) ['foo' => 'bar', 'bar' => 'baz'];
         // @codingStandardsIgnoreStart
@@ -304,7 +306,7 @@ class EventManagerTest extends TestCase
         self::assertEquals('BAR', $params->bar);
     }
 
-    public function testCanPassEventObjectAsSoleArgumentToTriggerEvent()
+    public function testCanPassEventObjectAsSoleArgumentToTriggerEvent(): void
     {
         $event = new Event();
         $event->setName(__FUNCTION__);
@@ -317,7 +319,7 @@ class EventManagerTest extends TestCase
         self::assertSame($event, $responses->last());
     }
 
-    public function testCanPassEventObjectAndCallbackToTriggerEventUntil()
+    public function testCanPassEventObjectAndCallbackToTriggerEventUntil(): void
     {
         $event = new Event();
         $event->setName(__FUNCTION__);
@@ -333,7 +335,7 @@ class EventManagerTest extends TestCase
         self::assertSame($event, $responses->last());
     }
 
-    public function testIdentifiersAreNotInjectedWhenNoSharedManagerProvided()
+    public function testIdentifiersAreNotInjectedWhenNoSharedManagerProvided(): void
     {
         $events      = new EventManager(null, [self::class, static::class]);
         $identifiers = $events->getIdentifiers();
@@ -341,7 +343,7 @@ class EventManagerTest extends TestCase
         self::assertEmpty($identifiers);
     }
 
-    public function testDuplicateIdentifiersAreNotRegistered()
+    public function testDuplicateIdentifiersAreNotRegistered(): void
     {
         $sharedEvents = $this->prophesize(SharedEventManagerInterface::class)->reveal();
         $events       = new EventManager($sharedEvents, [self::class, static::class]);
@@ -353,7 +355,7 @@ class EventManagerTest extends TestCase
         self::assertSame($identifiers[0], self::class);
     }
 
-    public function testIdentifierGetterSetters()
+    public function testIdentifierGetterSetters(): void
     {
         $identifiers = ['foo', 'bar'];
         $this->events->setIdentifiers($identifiers);
@@ -368,7 +370,7 @@ class EventManagerTest extends TestCase
         self::assertSame($expectedIdentifiers, $identifiers);
     }
 
-    public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()
+    public function testListenersAttachedWithWildcardAreTriggeredForAllEvents(): void
     {
         $test         = new stdClass();
         $test->events = [];
@@ -384,7 +386,7 @@ class EventManagerTest extends TestCase
         }
     }
 
-    public function testTriggerSetsStopPropagationFlagToFalse()
+    public function testTriggerSetsStopPropagationFlagToFalse(): void
     {
         $marker = (object) ['propagationIsStopped' => true];
         $this->events->attach('foo', function ($e) use ($marker) {
@@ -400,7 +402,7 @@ class EventManagerTest extends TestCase
         self::assertFalse($event->propagationIsStopped());
     }
 
-    public function testTriggerEventUntilSetsStopPropagationFlagToFalse()
+    public function testTriggerEventUntilSetsStopPropagationFlagToFalse(): void
     {
         $marker = (object) ['propagationIsStopped' => true];
         $this->events->attach('foo', function ($e) use ($marker) {
@@ -419,12 +421,12 @@ class EventManagerTest extends TestCase
         self::assertFalse($event->propagationIsStopped());
     }
 
-    public function testCreatesAnEventPrototypeAtInstantiation()
+    public function testCreatesAnEventPrototypeAtInstantiation(): void
     {
         self::assertAttributeInstanceOf(EventInterface::class, 'eventPrototype', $this->events);
     }
 
-    public function testSetEventPrototype()
+    public function testSetEventPrototype(): void
     {
         $event = $this->prophesize(EventInterface::class)->reveal();
         $this->events->setEventPrototype($event);
@@ -432,19 +434,19 @@ class EventManagerTest extends TestCase
         self::assertAttributeSame($event, 'eventPrototype', $this->events);
     }
 
-    public function testSharedManagerClearListenersReturnsFalse()
+    public function testSharedManagerClearListenersReturnsFalse(): void
     {
         $shared = new SharedEventManager();
         self::assertFalse($shared->clearListeners('foo'));
     }
 
-    public function testResponseCollectionLastReturnsNull()
+    public function testResponseCollectionLastReturnsNull(): void
     {
         $responses = $this->events->trigger('string.transform', $this, ['string' => ' foo ']);
         self::assertNull($responses->last());
     }
 
-    public function testCanAddWildcardListenersAfterFirstTrigger()
+    public function testCanAddWildcardListenersAfterFirstTrigger(): void
     {
         $this->events->attach('foo', function ($e) {
             self::assertEquals('foo', $e->getName());
@@ -460,7 +462,7 @@ class EventManagerTest extends TestCase
         self::assertTrue($triggered, 'Wildcard listener was not triggered');
     }
 
-    public function testCanInjectSharedManagerDuringConstruction()
+    public function testCanInjectSharedManagerDuringConstruction(): void
     {
         $shared = $this->prophesize(SharedEventManagerInterface::class)->reveal();
         $events = new EventManager($shared);
@@ -496,7 +498,7 @@ class EventManagerTest extends TestCase
         $this->events->attach($event, $callback);
     }
 
-    public function testCanClearAllListenersForAnEvent()
+    public function testCanClearAllListenersForAnEvent(): void
     {
         $events   = ['foo', 'bar', 'baz'];
         $listener = function ($e) {
@@ -525,7 +527,7 @@ class EventManagerTest extends TestCase
         }
     }
 
-    public function testWillTriggerSharedListeners()
+    public function testWillTriggerSharedListeners(): void
     {
         $name      = __FUNCTION__;
         $triggered = false;
@@ -542,7 +544,7 @@ class EventManagerTest extends TestCase
         self::assertTrue($triggered, 'Shared listener was not triggered');
     }
 
-    public function testWillTriggerSharedWildcardListeners()
+    public function testWillTriggerSharedWildcardListeners(): void
     {
         $name      = __FUNCTION__;
         $triggered = false;
@@ -576,7 +578,7 @@ class EventManagerTest extends TestCase
         self::assertNotContains($listener, $listeners);
     }
 
-    public function testDetachDoesNothingIfEventIsNotPresentInManager()
+    public function testDetachDoesNothingIfEventIsNotPresentInManager(): void
     {
         $callback = function ($e) {
         };
@@ -641,7 +643,7 @@ class EventManagerTest extends TestCase
         }
     }
 
-    public function testNotPassingEventNameToDetachDetachesListenerFromAllEvents()
+    public function testNotPassingEventNameToDetachDetachesListenerFromAllEvents(): void
     {
         $eventNames = ['foo', 'bar'];
         $events     = $this->events;
@@ -662,7 +664,7 @@ class EventManagerTest extends TestCase
         }
     }
 
-    public function testCanDetachASingleListenerFromAnEventWithMultipleListeners()
+    public function testCanDetachASingleListenerFromAnEventWithMultipleListeners(): void
     {
         $listener          = function ($e) {
         };
@@ -680,7 +682,7 @@ class EventManagerTest extends TestCase
             sprintf(
                 'Listener count after attaching alternate listener for event %s was unexpected: %s',
                 'foo',
-                var_export($listeners, 1)
+                var_export($listeners, true)
             )
         );
         self::assertContains($listener, $listeners);
@@ -697,7 +699,7 @@ class EventManagerTest extends TestCase
             sprintf(
                 "Listener count after detaching listener for event %s was unexpected;\nListeners: %s",
                 'foo',
-                var_export($listeners, 1)
+                var_export($listeners, true)
             )
         );
         self::assertNotContains($listener, $listeners);
@@ -726,7 +728,7 @@ class EventManagerTest extends TestCase
         $this->events->detach($listener, $event);
     }
 
-    public function testDetachRemovesAllOccurrencesOfListenerForEvent()
+    public function testDetachRemovesAllOccurrencesOfListenerForEvent(): void
     {
         $listener = function ($e) {
         };
@@ -782,7 +784,7 @@ class EventManagerTest extends TestCase
         }
     }
 
-    public function testTriggerEventAcceptsEventInstanceAndTriggersListeners()
+    public function testTriggerEventAcceptsEventInstanceAndTriggersListeners(): void
     {
         $event = $this->prophesize(EventInterface::class);
         $event->getName()->willReturn('test');
@@ -799,7 +801,7 @@ class EventManagerTest extends TestCase
         self::assertTrue($triggered, 'Listener for event was not triggered');
     }
 
-    public function testTriggerEventUntilAcceptsEventInstanceAndTriggersListenersUntilCallbackEvaluatesTrue()
+    public function testTriggerEventUntilAcceptsEventInstanceAndTriggersListenersUntilCallbackEvaluatesTrue(): void
     {
         $event = $this->prophesize(EventInterface::class);
         $event->getName()->willReturn('test');

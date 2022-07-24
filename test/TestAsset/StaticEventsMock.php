@@ -2,39 +2,22 @@
 
 namespace LaminasTest\EventManager\TestAsset;
 
-use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\SharedEventManagerInterface;
 
 class StaticEventsMock implements SharedEventManagerInterface
 {
-    /**
-     * @param non-empty-string $id,
-     * @param null|string|EventInterface $event
-     * @return callable[]
-     */
-    public function getListeners($id, $event = null)
+    /** @inheritDoc */
+    public function getListeners($identifiers, $eventName = null)
     {
         return [];
     }
 
-    /**
-     * Attach a listener to an event
-     *
-     * @param  string|array $identifier Identifier(s) for event emitting component(s)
-     * @param  string $event
-     * @param  callable $callback PHP Callback
-     * @param  int $priority Priority at which listener should execute
-     * @return void
-     */
-    public function attach($identifier, $event, callable $listener, $priority = 1)
+    /** @inheritDoc */
+    public function attach($identifier, $eventName, callable $listener, $priority = 1)
     {
     }
 
-    /**
-     * @param null|non-empty-string $identifier
-     * @param null|string $eventName
-     * @return void
-     */
+    /** @inheritDoc */
     public function detach(callable $listener, $identifier = null, $eventName = null)
     {
     }
@@ -53,11 +36,12 @@ class StaticEventsMock implements SharedEventManagerInterface
     /**
      * Clear all listeners for a given identifier, optionally for a specific event
      *
-     * @param  string|int $id
-     * @param  null|string $event
+     * @param  string|int  $identifier
+     * @param  null|string $eventName
+     *
      * @return bool
      */
-    public function clearListeners($id, $event = null)
+    public function clearListeners($identifier, $eventName = null)
     {
         return true;
     }

@@ -16,6 +16,11 @@ use function var_export;
 
 class EventManagerPriorityTest extends TestCase
 {
+    /** @var string[] */
+    private array $identifiers;
+    private SharedEventManager $sharedEvents;
+    private EventManager $events;
+
     protected function setUp(): void
     {
         $this->identifiers  = [self::class];
@@ -41,7 +46,7 @@ class EventManagerPriorityTest extends TestCase
         };
     }
 
-    public function testTriggersListenersOfDifferentPrioritiesInPriorityOrder()
+    public function testTriggersListenersOfDifferentPrioritiesInPriorityOrder(): void
     {
         for ($i = -1; $i < 5; $i += 1) {
             $this->events->attach('test', $this->createListener($i), $i);
@@ -53,11 +58,11 @@ class EventManagerPriorityTest extends TestCase
         self::assertEquals(
             [4, 3, 2, 1, 0, -1],
             $values,
-            sprintf("Did not receive values in priority order: %s\n", var_export($values, 1))
+            sprintf("Did not receive values in priority order: %s\n", var_export($values, true))
         );
     }
 
-    public function testTriggersListenersOfSamePriorityInAttachmentOrder()
+    public function testTriggersListenersOfSamePriorityInAttachmentOrder(): void
     {
         for ($i = -1; $i < 5; $i += 1) {
             $this->events->attach('test', $this->createListener($i));
@@ -69,11 +74,11 @@ class EventManagerPriorityTest extends TestCase
         self::assertEquals(
             [-1, 0, 1, 2, 3, 4],
             $values,
-            sprintf("Did not receive values in attachment order: %s\n", var_export($values, 1))
+            sprintf("Did not receive values in attachment order: %s\n", var_export($values, true))
         );
     }
 
-    public function testTriggersWildcardListenersAfterExplicitListenersOfSamePriority()
+    public function testTriggersWildcardListenersAfterExplicitListenersOfSamePriority(): void
     {
         $this->events->attach('*', $this->createListener(2), 5);
         $this->events->attach('test', $this->createListener(1), 5);
@@ -85,11 +90,11 @@ class EventManagerPriorityTest extends TestCase
         self::assertEquals(
             [1, 2, 3],
             $values,
-            sprintf("Did not receive wildcard values after explicit listeners: %s\n", var_export($values, 1))
+            sprintf("Did not receive wildcard values after explicit listeners: %s\n", var_export($values, true))
         );
     }
 
-    public function testTriggersSharedListenersAfterWildcardListenersOfSamePriority()
+    public function testTriggersSharedListenersAfterWildcardListenersOfSamePriority(): void
     {
         $this->sharedEvents->attach(self::class, 'test', $this->createListener(2), 5);
         $this->events->attach('*', $this->createListener(1), 5);
@@ -101,11 +106,11 @@ class EventManagerPriorityTest extends TestCase
         self::assertEquals(
             [1, 2, 3],
             $values,
-            sprintf("Did not receive shared listener values after wildcard listeners: %s\n", var_export($values, 1))
+            sprintf("Did not receive shared listener values after wildcard listeners: %s\n", var_export($values, true))
         );
     }
 
-    public function testTriggersSharedWildcardListenersAfterSharedListenersOfSamePriority()
+    public function testTriggersSharedWildcardListenersAfterSharedListenersOfSamePriority(): void
     {
         $this->sharedEvents->attach(self::class, '*', $this->createListener(2), 5);
         $this->sharedEvents->attach(self::class, 'test', $this->createListener(1), 5);
@@ -119,12 +124,12 @@ class EventManagerPriorityTest extends TestCase
             $values,
             sprintf(
                 "Did not receive shared wildcard listener values after shared listeners: %s\n",
-                var_export($values, 1)
+                var_export($values, true)
             )
         );
     }
 
-    public function testTriggersSharedWildcardIdentifierListenersAfterWildcardSharedListenersOfSamePriority()
+    public function testTriggersSharedWildcardIdentifierListenersAfterWildcardSharedListenersOfSamePriority(): void
     {
         $this->sharedEvents->attach('*', 'test', $this->createListener(2), 5);
         $this->sharedEvents->attach(self::class, '*', $this->createListener(1), 5);
@@ -138,12 +143,12 @@ class EventManagerPriorityTest extends TestCase
             $values,
             sprintf(
                 "Did not receive wildcard identifier listener values after shared wildcard listeners: %s\n",
-                var_export($values, 1)
+                var_export($values, true)
             )
         );
     }
 
-    public function testTriggersFullyWildcardSharedListenersAfterWildcardIdentifierListenersOfSamePriority()
+    public function testTriggersFullyWildcardSharedListenersAfterWildcardIdentifierListenersOfSamePriority(): void
     {
         $this->sharedEvents->attach('*', '*', $this->createListener(2), 5);
         $this->sharedEvents->attach('*', 'test', $this->createListener(1), 5);
@@ -157,12 +162,12 @@ class EventManagerPriorityTest extends TestCase
             $values,
             sprintf(
                 "Did not receive fully wildcard shared listener values after shared wildcard listeners: %s\n",
-                var_export($values, 1)
+                var_export($values, true)
             )
         );
     }
 
-    public function testTriggeringMixOfLocalAndSharedAndWildcardListenersWorksAsExpected()
+    public function testTriggeringMixOfLocalAndSharedAndWildcardListenersWorksAsExpected(): void
     {
         $this->sharedEvents->attach('*', '*', $this->createListener(1024), 1024);
         $this->sharedEvents->attach('*', '*', $this->createListener(1023), 1024);
@@ -208,7 +213,7 @@ class EventManagerPriorityTest extends TestCase
             self::assertLessThan(
                 $original,
                 $compare,
-                sprintf("Did not receive values in expected order: %s\n", var_export($report, 1))
+                sprintf("Did not receive values in expected order: %s\n", var_export($report, true))
             );
             $original = $compare;
         } while (count($values));
