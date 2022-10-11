@@ -4,7 +4,6 @@ namespace Laminas\EventManager;
 
 use function array_keys;
 use function array_merge;
-use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;
@@ -64,14 +63,14 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string; received "%s"',
-                is_object($identifier) ? get_class($identifier) : gettype($identifier)
+                is_object($identifier) ? $identifier::class : gettype($identifier)
             ));
         }
 
         if (! is_string($event) || empty($event)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event provided; must be a non-empty string; received "%s"',
-                is_object($event) ? get_class($event) : gettype($event)
+                is_object($event) ? $event::class : gettype($event)
             ));
         }
 
@@ -94,7 +93,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string, received %s',
-                is_object($identifier) ? get_class($identifier) : gettype($identifier)
+                is_object($identifier) ? $identifier::class : gettype($identifier)
             ));
         }
 
@@ -113,7 +112,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($eventName) || empty($eventName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event name provided; must be a string, received %s',
-                is_object($eventName) ? get_class($eventName) : gettype($eventName)
+                is_object($eventName) ? $eventName::class : gettype($eventName)
             ));
         }
 

@@ -9,10 +9,8 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
 use Laminas\EventManager\LazyListenerAggregate;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
@@ -20,14 +18,12 @@ use function array_shift;
 
 class LazyListenerAggregateTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ObjectProphecy */
-    private $container;
+    /** @var ContainerInterface&MockObject */
+    private ContainerInterface $container;
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
@@ -79,7 +75,7 @@ class LazyListenerAggregateTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('must be LazyEventListener instances');
-        new LazyListenerAggregate([$listener], $this->container->reveal());
+        new LazyListenerAggregate([$listener], $this->container);
     }
 
     /**
@@ -90,7 +86,7 @@ class LazyListenerAggregateTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid');
-        new LazyListenerAggregate([$listener], $this->container->reveal());
+        new LazyListenerAggregate([$listener], $this->container);
     }
 
     /**
@@ -114,10 +110,10 @@ class LazyListenerAggregateTest extends TestCase
                 'event'    => 'event2',
                 'listener' => 'listener2',
                 'method'   => 'method2',
-            ], $this->container->reveal()),
+            ], $this->container),
         ];
 
-        $aggregate = new LazyListenerAggregate($listeners, $this->container->reveal());
+        $aggregate = new LazyListenerAggregate($listeners, $this->container);
 
         $r = new ReflectionProperty($aggregate, 'lazyListeners');
         $r->setAccessible(true);
@@ -125,7 +121,11 @@ class LazyListenerAggregateTest extends TestCase
 
         self::assertInstanceOf(LazyEventListener::class, $test[0]);
         self::assertEquals('event', $test[0]->getEvent());
-        self::assertSame($listeners[1], $test[1], 'LazyEventListener instance changed during instantiation');
+        self::assertSame(
+            $listeners[1],
+            $test[1],
+            'LazyEventListener instance changed during instantiation'
+        );
         return $listeners;
     }
 
@@ -140,29 +140,43 @@ class LazyListenerAggregateTest extends TestCase
      */
     public function testAttachAttachesLazyListenersViaClosures(array $listeners)
     {
-        $aggregate = new LazyListenerAggregate($listeners, $this->container->reveal());
-        $events    = $this->prophesize(EventManagerInterface::class);
-        $events->attach('event', Argument::type('callable'), 5)->shouldBeCalled();
-        $events->attach('event2', Argument::type('callable'), 7)->shouldBeCalled();
+        $isCallable = self::callback(function (mixed $arg): bool {
+            self::assertIsCallable($arg);
 
-        $aggregate->attach($events->reveal(), 7);
+            return true;
+        });
+
+        $aggregate = new LazyListenerAggregate($listeners, $this->container);
+        $events    = $this->createMock(EventManagerInterface::class);
+        $events->expects(self::exactly(2))
+            ->method('attach')
+            ->withConsecutive(
+                ['event', $isCallable, 5],
+                ['event2', $isCallable, 7],
+            );
+
+        $aggregate->attach($events, 7);
     }
 
     public function testListenersArePulledFromContainerAndInvokedWhenTriggered(): void
     {
-        $listener = $this->prophesize(TestAsset\BuilderInterface::class);
-        $listener->build(Argument::type(EventInterface::class))->shouldBeCalled();
+        $listener = $this->createMock(TestAsset\BuilderInterface::class);
+        $listener->expects(self::once())
+            ->method('build')
+            ->with(self::isInstanceOf(EventInterface::class));
 
-        $event = $this->prophesize(EventInterface::class);
+        $event = $this->createMock(EventInterface::class);
 
-        $this->container->get('listener')->will(function () use ($listener) {
-            return $listener->reveal();
-        });
+        $this->container->expects(self::once())
+            ->method('get')
+            ->with('listener')
+            ->willReturn($listener);
 
-        $events = $this->prophesize(EventManagerInterface::class);
-        $events->attach('event', Argument::type('callable'), 1)->will(function ($args) {
-            return $args[1];
-        });
+        $events = $this->createMock(EventManagerInterface::class);
+        $events->expects(self::once())
+            ->method('attach')
+            ->with('event', self::isType('callable'), 1)
+            ->willReturnArgument(1);
 
         $listeners = [
             [
@@ -172,8 +186,8 @@ class LazyListenerAggregateTest extends TestCase
             ],
         ];
 
-        $aggregate = new LazyListenerAggregate($listeners, $this->container->reveal());
-        $aggregate->attach($events->reveal());
+        $aggregate = new LazyListenerAggregate($listeners, $this->container);
+        $aggregate->attach($events);
 
         $r = new ReflectionProperty($aggregate, 'listeners');
         $r->setAccessible(true);
@@ -183,6 +197,6 @@ class LazyListenerAggregateTest extends TestCase
         self::assertCount(1, $listeners);
         $listener = array_shift($listeners);
         self::assertInstanceOf(LazyEventListener::class, $listener);
-        $listener($event->reveal());
+        $listener($event);
     }
 }

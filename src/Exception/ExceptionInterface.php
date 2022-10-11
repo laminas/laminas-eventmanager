@@ -2,9 +2,11 @@
 
 namespace Laminas\EventManager\Exception;
 
+use Throwable;
+
 /**
  * Base exception interface
  */
-interface ExceptionInterface
+interface ExceptionInterface extends Throwable
 {
 }

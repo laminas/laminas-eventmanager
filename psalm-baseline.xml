@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="4.28.0@52e96bea381e6cb07a672aefec791a5817694a26">
   <file src="src/Event.php">
     <DocblockTypeContradiction occurrences="1">
       <code>! is_array($params) &amp;&amp; ! is_object($params)</code>
@@ -95,10 +95,9 @@
     <LessSpecificImplementedReturnType occurrences="1">
       <code>mixed</code>
     </LessSpecificImplementedReturnType>
-    <MixedArgument occurrences="3">
+    <MixedArgument occurrences="2">
       <code>$item['data']</code>
-      <code>$priority</code>
-      <code>$value</code>
+      <code>$item['priority']</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="3">
       <code>$item['data']</code>
@@ -199,11 +198,7 @@
     <MissingReturnType occurrences="1">
       <code>clearListeners</code>
     </MissingReturnType>
-    <MixedArgument occurrences="6">
-      <code>$event</code>
-      <code>$eventName</code>
-      <code>$identifier</code>
-      <code>$identifier</code>
+    <MixedArgument occurrences="2">
       <code>$listOfListeners</code>
       <code>$this-&gt;identifiers[$identifier]</code>
     </MixedArgument>
@@ -357,10 +352,8 @@
     </MixedMethodCall>
   </file>
   <file src="test/EventManagerTest.php">
-    <InvalidArgument occurrences="15">
+    <InvalidArgument occurrences="12">
       <code>$events</code>
-      <code>$listener</code>
-      <code>$listener</code>
       <code>$listeners</code>
       <code>$listeners</code>
       <code>$listeners</code>
@@ -372,7 +365,6 @@
       <code>$listeners</code>
       <code>$listeners</code>
       <code>$listeners</code>
-      <code>[$this, __METHOD__]</code>
     </InvalidArgument>
     <InvalidMethodCall occurrences="2">
       <code>detach</code>
@@ -382,8 +374,7 @@
     <InvalidReturnType occurrences="1">
       <code>array{event: 'test', events: EventInterface[], listener: callable}</code>
     </InvalidReturnType>
-    <MissingClosureParamType occurrences="46">
-      <code>$e</code>
+    <MissingClosureParamType occurrences="44">
       <code>$e</code>
       <code>$e</code>
       <code>$e</code>
@@ -424,13 +415,12 @@
       <code>$event</code>
       <code>$r</code>
       <code>$r</code>
-      <code>$result</code>
       <code>$result</code>
       <code>$result</code>
       <code>$result</code>
       <code>$result</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="15">
+    <MissingClosureReturnType occurrences="14">
       <code>function ($e) use ($test) {</code>
       <code>function ($e) {</code>
       <code>function ($e) {</code>
@@ -443,7 +433,6 @@
       <code>function ($e) {</code>
       <code>function ($e) {</code>
       <code>function ($r) {</code>
-      <code>function ($result) {</code>
       <code>function ($result) {</code>
       <code>function () {</code>
     </MissingClosureReturnType>
@@ -473,7 +462,7 @@
       <code>$events[$event]</code>
       <code>$listeners[0]</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="19">
+    <MixedAssignment occurrences="18">
       <code>$bar</code>
       <code>$event</code>
       <code>$events</code>
@@ -481,7 +470,6 @@
       <code>$listeners</code>
       <code>$listeners</code>
       <code>$listenersByPriority</code>
-      <code>$message</code>
       <code>$priority</code>
       <code>$result</code>
       <code>$results</code>
@@ -542,14 +530,7 @@
       <code>assertFalse</code>
       <code>assertFalse</code>
     </TypeDoesNotContainType>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;message</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="1">
-      <code>$this-&gt;message</code>
-    </UndefinedThisPropertyFetch>
-    <UnusedClosureParam occurrences="14">
-      <code>$e</code>
+    <UnusedClosureParam occurrences="12">
       <code>$e</code>
       <code>$e</code>
       <code>$e</code>
@@ -562,11 +543,8 @@
       <code>$e</code>
       <code>$e</code>
       <code>$r</code>
-      <code>$result</code>
     </UnusedClosureParam>
-    <UnusedVariable occurrences="5">
-      <code>$listener</code>
-      <code>$listener</code>
+    <UnusedVariable occurrences="3">
       <code>$priority</code>
       <code>$responses</code>
       <code>$responses</code>
@@ -586,24 +564,18 @@
     <DocblockTypeContradiction occurrences="1">
       <code>assertSame</code>
     </DocblockTypeContradiction>
-    <InvalidArgument occurrences="6">
+    <InvalidArgument occurrences="2">
       <code>$handle</code>
       <code>$handle1</code>
-      <code>[$this, __METHOD__]</code>
-      <code>[$this, __METHOD__]</code>
-      <code>[$this, __METHOD__]</code>
-      <code>[$this, __METHOD__]</code>
     </InvalidArgument>
-    <MissingClosureParamType occurrences="11">
+    <MissingClosureParamType occurrences="9">
       <code>$chain</code>
       <code>$chain</code>
-      <code>$chain</code>
       <code>$context</code>
       <code>$context</code>
       <code>$context</code>
       <code>$context</code>
       <code>$context</code>
-      <code>$params</code>
       <code>$params</code>
       <code>$params</code>
     </MissingClosureParamType>
@@ -611,10 +583,6 @@
       <code>function ($context, $params, $chain) {</code>
       <code>function ($context, $params, $chain) {</code>
     </MissingClosureReturnType>
-    <MissingReturnType occurrences="2">
-      <code>filterReceivalCallback</code>
-      <code>handleTestTopic</code>
-    </MissingReturnType>
     <MixedArgument occurrences="5">
       <code>$params['string']</code>
       <code>$params['string']</code>
@@ -622,8 +590,7 @@
       <code>$string</code>
       <code>$string</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="3">
-      <code>$params['string']</code>
+    <MixedArrayAccess occurrences="2">
       <code>$params['string']</code>
       <code>$params['string']</code>
     </MixedArrayAccess>
@@ -643,27 +610,9 @@
       <code>next</code>
       <code>next</code>
     </MixedMethodCall>
-    <NoInterfaceProperties occurrences="1">
-      <code>$context-&gt;message</code>
-    </NoInterfaceProperties>
-    <PossiblyInvalidPropertyAssignment occurrences="1">
-      <code>$context</code>
-    </PossiblyInvalidPropertyAssignment>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;message</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="1">
-      <code>$this-&gt;message</code>
-    </UndefinedThisPropertyFetch>
-    <UnusedClosureParam occurrences="4">
-      <code>$chain</code>
-      <code>$context</code>
-      <code>$context</code>
+    <UnusedClosureParam occurrences="1">
       <code>$context</code>
     </UnusedClosureParam>
-    <UnusedVariable occurrences="1">
-      <code>$handle2</code>
-    </UnusedVariable>
   </file>
   <file src="test/FilterIteratorTest.php">
     <MissingClosureReturnType occurrences="3">
@@ -689,37 +638,22 @@
     </MissingReturnType>
     <MixedMethodCall occurrences="5">
       <code>getPriority</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
     </MixedMethodCall>
     <MoreSpecificReturnType occurrences="1">
       <code>LazyListener</code>
     </MoreSpecificReturnType>
   </file>
   <file src="test/LazyListenerAggregateTest.php">
-    <MissingClosureParamType occurrences="1">
-      <code>$args</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ($args) {</code>
-    </MissingClosureReturnType>
     <MissingReturnType occurrences="3">
       <code>testAttachAttachesLazyListenersViaClosures</code>
       <code>testPassingInvalidListenerTypesAtInstantiationRaisesException</code>
       <code>testPassingInvalidListenersAtInstantiationRaisesException</code>
     </MissingReturnType>
-    <MixedArgument occurrences="6">
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="3">
-      <code>$args[1]</code>
+    <MixedArrayAccess occurrences="2">
       <code>$test[0]</code>
       <code>$test[1]</code>
     </MixedArrayAccess>
@@ -731,64 +665,35 @@
   </file>
   <file src="test/LazyListenerTest.php">
     <InvalidFunctionCall occurrences="2">
-      <code>$lazyListener($event-&gt;reveal())</code>
-      <code>$lazyListener($event-&gt;reveal())</code>
+      <code>$lazyListener($event)</code>
+      <code>$lazyListener($event)</code>
     </InvalidFunctionCall>
-    <InvalidPropertyAssignmentValue occurrences="1">
-      <code>$this-&gt;prophesize(ContainerInterface::class)</code>
-    </InvalidPropertyAssignmentValue>
     <LessSpecificReturnStatement occurrences="1">
       <code>$listener</code>
     </LessSpecificReturnStatement>
-    <MissingClosureParamType occurrences="2">
-      <code>$args</code>
-      <code>$args</code>
-    </MissingClosureParamType>
     <MissingReturnType occurrences="3">
       <code>testConstructorRaisesExceptionForInvalidListenerType</code>
       <code>testConstructorRaisesExceptionForInvalidMethodType</code>
       <code>testInstatiationSetsListenerMethod</code>
     </MissingReturnType>
     <MixedMethodCall occurrences="7">
-      <code>new $class($struct, $container-&gt;reveal(), $env)</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
-      <code>new $class($struct, $this-&gt;container-&gt;reveal())</code>
+      <code>new $class($struct, $container, $env)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
+      <code>new $class($struct, $this-&gt;container)</code>
     </MixedMethodCall>
     <MoreSpecificReturnType occurrences="1">
       <code>LazyListener</code>
     </MoreSpecificReturnType>
-    <UnusedClosureParam occurrences="2">
-      <code>$args</code>
-      <code>$args</code>
-    </UnusedClosureParam>
-    <UnusedVariable occurrences="1">
-      <code>$instance</code>
-    </UnusedVariable>
   </file>
   <file src="test/ListenerAggregateTraitTest.php">
-    <MissingClosureParamType occurrences="2">
-      <code>$args</code>
-      <code>$args</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
-      <code>function ($args) {</code>
-      <code>function ($args) {</code>
-    </MissingClosureReturnType>
-    <MixedArrayAccess occurrences="2">
-      <code>$args[1]</code>
-      <code>$args[1]</code>
-    </MixedArrayAccess>
-    <MixedMethodCall occurrences="5">
-      <code>attach</code>
-      <code>detach</code>
+    <UndefinedInterfaceMethod occurrences="2">
       <code>getCallbacks</code>
       <code>getCallbacks</code>
-      <code>new $class()</code>
-    </MixedMethodCall>
+    </UndefinedInterfaceMethod>
   </file>
   <file src="test/SharedEventManagerTest.php">
     <InvalidDocblock occurrences="2">
@@ -842,11 +747,6 @@
     <UnusedVariable occurrences="1">
       <code>$callback</code>
     </UnusedVariable>
-  </file>
-  <file src="test/SharedListenerIntegrationTest.php">
-    <UndefinedPropertyAssignment occurrences="1">
-      <code>$listener-&gt;index</code>
-    </UndefinedPropertyAssignment>
   </file>
   <file src="test/Test/EventListenerIntrospectionTraitTest.php">
     <MissingClosureParamType occurrences="24">

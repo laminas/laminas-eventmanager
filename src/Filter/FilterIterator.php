@@ -5,7 +5,6 @@ namespace Laminas\EventManager\Filter;
 use Laminas\EventManager\Exception;
 use Laminas\Stdlib\FastPriorityQueue;
 
-use function get_class;
 use function gettype;
 use function is_callable;
 use function is_object;
@@ -41,7 +40,7 @@ class FilterIterator extends FastPriorityQueue
      * Requires a callable.
      *
      * @param callable $value
-     * @param mixed $priority
+     * @param int $priority
      * @return void
      * @throws Exception\InvalidArgumentException For non-callable $value.
      */
@@ -51,7 +50,7 @@ class FilterIterator extends FastPriorityQueue
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s can only aggregate callables; received %s',
                 self::class,
-                is_object($value) ? get_class($value) : gettype($value)
+                is_object($value) ? $value::class : gettype($value)
             ));
         }
         parent::insert($value, $priority);

@@ -12,7 +12,6 @@ use Laminas\EventManager\ResponseCollection;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\EventManager\SharedEventManagerInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionProperty;
 use stdClass;
 
@@ -31,9 +30,9 @@ use function var_export;
 class EventManagerTest extends TestCase
 {
     use DeprecatedAssertions;
-    use ProphecyTrait;
 
     private EventManager $events;
+    private string|null $message;
 
     protected function setUp(): void
     {
@@ -48,7 +47,7 @@ class EventManagerTest extends TestCase
      *
      * @return string[]
      */
-    public function getEventListFromManager(EventManager $manager): array
+    private function getEventListFromManager(EventManager $manager): array
     {
         $r = new ReflectionProperty($manager, 'events');
         $r->setAccessible(true);
@@ -58,10 +57,9 @@ class EventManagerTest extends TestCase
     /**
      * Return listeners for a given event.
      *
-     * @param string $event
      * @return callable[]
      */
-    public function getListenersForEvent($event, EventManager $manager): array
+    private function getListenersForEvent(string $event, EventManager $manager): array
     {
         $r = new ReflectionProperty($manager, 'events');
         $r->setAccessible(true);
@@ -78,7 +76,7 @@ class EventManagerTest extends TestCase
     /** @psalm-return array{event: 'test', events: EventInterface[], listener: callable} */
     public function testAttachShouldAddListenerToEvent(): array
     {
-        $listener = [$this, __METHOD__];
+        $listener  = static fn(): int => 0;
         $this->events->attach('test', $listener);
         $listeners = $this->getListenersForEvent('test', $this->events);
         // Get first (and only) priority queue of listeners for event
@@ -106,22 +104,27 @@ class EventManagerTest extends TestCase
      */
     public function testAttachShouldAddReturnTheListener(string $event)
     {
-        $listener = [$this, __METHOD__];
+        $listener = static fn(): int => 0;
         self::assertSame($listener, $this->events->attach($event, $listener));
     }
 
     public function testAttachShouldAddEventIfItDoesNotExist(): void
     {
         self::assertAttributeEmpty('events', $this->events);
-        $listener = $this->events->attach('test', [$this, __METHOD__]);
-        $events   = $this->getEventListFromManager($this->events);
+        $this->events->attach('test', static fn () => null);
+        $events = $this->getEventListFromManager($this->events);
         self::assertNotEmpty($events);
         self::assertContains('test', $events);
     }
 
     public function testTriggerShouldTriggerAttachedListeners(): void
     {
-        $listener = $this->events->attach('test', [$this, 'handleTestEvent']);
+        $handler = function (EventInterface $e): void {
+            $message = $e->getParam('message', '__NOT_FOUND__');
+            self::assertIsString($message);
+            $this->message = $message;
+        };
+        $this->events->attach('test', $handler);
         $this->events->trigger('test', $this, ['message' => 'test message']);
         self::assertEquals('test message', $this->message);
     }
@@ -179,12 +182,6 @@ class EventManagerTest extends TestCase
         self::assertTrue($responses->contains('foo'));
         self::assertTrue($responses->contains(str_rot13(' foo ')));
         self::assertFalse($responses->contains(' foo '));
-    }
-
-    public function handleTestEvent(EventInterface $e): void
-    {
-        $message       = $e->getParam('message', '__NOT_FOUND__');
-        $this->message = $message;
     }
 
     /** @param mixed $value */
@@ -347,7 +344,7 @@ class EventManagerTest extends TestCase
 
     public function testDuplicateIdentifiersAreNotRegistered(): void
     {
-        $sharedEvents = $this->prophesize(SharedEventManagerInterface::class)->reveal();
+        $sharedEvents = $this->createMock(SharedEventManagerInterface::class);
         $events       = new EventManager($sharedEvents, [self::class, static::class]);
         $identifiers  = $events->getIdentifiers();
         self::assertSame(count($identifiers), 1);
@@ -430,7 +427,7 @@ class EventManagerTest extends TestCase
 
     public function testSetEventPrototype(): void
     {
-        $event = $this->prophesize(EventInterface::class)->reveal();
+        $event = $this->createMock(EventInterface::class);
         $this->events->setEventPrototype($event);
 
         self::assertAttributeSame($event, 'eventPrototype', $this->events);
@@ -466,7 +463,7 @@ class EventManagerTest extends TestCase
 
     public function testCanInjectSharedManagerDuringConstruction(): void
     {
-        $shared = $this->prophesize(SharedEventManagerInterface::class)->reveal();
+        $shared = $this->createMock(SharedEventManagerInterface::class);
         $events = new EventManager($shared);
         self::assertSame($shared, $events->getSharedManager());
     }
@@ -752,18 +749,20 @@ class EventManagerTest extends TestCase
     /** @psalm-return array<string, array{0: string|EventInterface, 1: string, 2: null|callable}> */
     public function eventsMissingNames(): array
     {
-        $event = $this->prophesize(EventInterface::class);
-        $event->getName()->willReturn('');
-        $callback = function ($result) {
+        $event = $this->createMock(EventInterface::class);
+        $event->expects(self::atLeast(1))
+            ->method('getName')
+            ->willReturn('');
+        $callback = static function (): void {
         };
 
         // @codingStandardsIgnoreStart
         //                                      [ event,             method to trigger, callback ]
         return [
-            'trigger-empty-string'           => ['',               'trigger',           null],
-            'trigger-until-empty-string'     => ['',               'triggerUntil',      $callback],
-            'trigger-event-empty-name'       => [$event->reveal(), 'triggerEvent',      null],
-            'trigger-event-until-empty-name' => [$event->reveal(), 'triggerEventUntil', $callback],
+            'trigger-empty-string'           => ['',     'trigger',           null],
+            'trigger-until-empty-string'     => ['',     'triggerUntil',      $callback],
+            'trigger-event-empty-name'       => [$event, 'triggerEvent',      null],
+            'trigger-event-until-empty-name' => [$event, 'triggerEventUntil', $callback],
         ];
         // @codingStandardsIgnoreEnd
     }
@@ -788,27 +787,43 @@ class EventManagerTest extends TestCase
 
     public function testTriggerEventAcceptsEventInstanceAndTriggersListeners(): void
     {
-        $event = $this->prophesize(EventInterface::class);
-        $event->getName()->willReturn('test');
-        $event->stopPropagation(false)->shouldBeCalled();
-        $event->propagationIsStopped()->willReturn(false);
+        $event = $this->createMock(EventInterface::class);
+        $event->expects(self::atLeast(1))
+            ->method('getName')
+            ->willReturn('test');
+
+        $event->expects(self::once())
+            ->method('stopPropagation')
+            ->with(false);
+
+        $event->expects(self::atLeast(1))
+            ->method('propagationIsStopped')
+            ->willReturn(false);
 
         $triggered = false;
         $this->events->attach('test', function ($e) use ($event, &$triggered) {
-            self::assertSame($event->reveal(), $e);
+            self::assertSame($event, $e);
             $triggered = true;
         });
 
-        $this->events->triggerEvent($event->reveal());
+        $this->events->triggerEvent($event);
         self::assertTrue($triggered, 'Listener for event was not triggered');
     }
 
     public function testTriggerEventUntilAcceptsEventInstanceAndTriggersListenersUntilCallbackEvaluatesTrue(): void
     {
-        $event = $this->prophesize(EventInterface::class);
-        $event->getName()->willReturn('test');
-        $event->stopPropagation(false)->shouldBeCalled();
-        $event->propagationIsStopped()->willReturn(false);
+        $event = $this->createMock(EventInterface::class);
+        $event->expects(self::atLeast(1))
+            ->method('getName')
+            ->willReturn('test');
+
+        $event->expects(self::once())
+            ->method('stopPropagation')
+            ->with(false);
+
+        $event->expects(self::atLeast(1))
+            ->method('propagationIsStopped')
+            ->willReturn(false);
 
         $callback = function ($result) {
             return $result === true;
@@ -816,22 +831,22 @@ class EventManagerTest extends TestCase
 
         $triggeredOne = false;
         $this->events->attach('test', function ($e) use ($event, &$triggeredOne) {
-            self::assertSame($event->reveal(), $e);
+            self::assertSame($event, $e);
             $triggeredOne = true;
         });
 
         $triggeredTwo = false;
         $this->events->attach('test', function ($e) use ($event, &$triggeredTwo) {
-            self::assertSame($event->reveal(), $e);
+            self::assertSame($event, $e);
             $triggeredTwo = true;
             return true;
         });
 
-        $this->events->attach('test', function ($e) {
-            $this->fail('Third listener was triggered and should not have been');
+        $this->events->attach('test', function () {
+            self::fail('Third listener was triggered and should not have been');
         });
 
-        $this->events->triggerEventUntil($callback, $event->reveal());
+        $this->events->triggerEventUntil($callback, $event);
         self::assertTrue($triggeredOne, 'First Listener for event was not triggered');
         self::assertTrue($triggeredTwo, 'First Listener for event was not triggered');
     }

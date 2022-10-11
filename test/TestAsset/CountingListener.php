@@ -8,8 +8,9 @@ use Laminas\EventManager\EventInterface;
 
 class CountingListener
 {
-    /** @var int */
-    public $count = 0;
+    public int $count = 0;
+
+    public int $index = 0;
 
     /** @param string|EventInterface $e */
     public function __invoke($e): void
