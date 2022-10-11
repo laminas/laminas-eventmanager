@@ -2,27 +2,33 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.6.0 - TBD
+## 3.6.0 - 2022-10-11
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.6.0](https://github.com/laminas/laminas-eventmanager/milestone/9)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 3.6.0
 
-- Nothing.
+- Total issues resolved: **1**
+- Total pull requests resolved: **4**
+- Total contributors: **3**
 
-### Removed
+#### Enhancement
 
-- Nothing.
+ - [31: Add support for PHP 8.2, Remove support for PHP 7.4](https://github.com/laminas/laminas-eventmanager/pull/31) thanks to @gsteel
+ - [29: Setup Psalm](https://github.com/laminas/laminas-eventmanager/pull/29) thanks to @gsteel and @boesing
 
-### Fixed
+#### Awaiting Maintainer Response,renovate
 
-- Nothing.
+ - [28: chore(deps): update dependency laminas/laminas-coding-standard to ~2.3.0 - autoclosed](https://github.com/laminas/laminas-eventmanager/pull/28) thanks to @renovate[bot]
+
+#### renovate
+
+ - [26: Configure Renovate](https://github.com/laminas/laminas-eventmanager/pull/26) thanks to @renovate[bot]
 
 ## 3.5.0 - 2022-04-06
 
