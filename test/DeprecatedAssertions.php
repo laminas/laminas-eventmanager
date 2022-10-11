@@ -8,7 +8,6 @@ use PHPUnit\Framework\Assert;
 use ReflectionClass;
 use stdClass;
 
-use function get_class;
 use function property_exists;
 use function sprintf;
 
@@ -27,7 +26,7 @@ trait DeprecatedAssertions
             Assert::fail(sprintf(
                 'Failed to assert attribute %s is empty; attribute does not exist in instance of %s',
                 $attributeName,
-                get_class($instance)
+                $instance::class
             ));
         }
 
@@ -47,7 +46,7 @@ trait DeprecatedAssertions
             Assert::fail(sprintf(
                 'Failed to assert equality against attribute %s; attribute does not exist in instance of %s',
                 $attributeName,
-                get_class($instance)
+                $instance::class
             ));
         }
 
@@ -67,7 +66,7 @@ trait DeprecatedAssertions
             Assert::fail(sprintf(
                 'Failed to assert type of attribute %s; attribute does not exist in instance of %s',
                 $attributeName,
-                get_class($instance)
+                $instance::class
             ));
         }
 
@@ -87,7 +86,7 @@ trait DeprecatedAssertions
             Assert::fail(sprintf(
                 'Failed to assert equality against attribute %s; attribute does not exist in instance of %s',
                 $attributeName,
-                get_class($instance)
+                $instance::class
             ));
         }
 

@@ -34,6 +34,7 @@ class EventManagerTest extends TestCase
     use ProphecyTrait;
 
     private EventManager $events;
+    private string|null $message;
 
     protected function setUp(): void
     {
@@ -48,7 +49,7 @@ class EventManagerTest extends TestCase
      *
      * @return string[]
      */
-    public function getEventListFromManager(EventManager $manager): array
+    private function getEventListFromManager(EventManager $manager): array
     {
         $r = new ReflectionProperty($manager, 'events');
         $r->setAccessible(true);
@@ -58,10 +59,9 @@ class EventManagerTest extends TestCase
     /**
      * Return listeners for a given event.
      *
-     * @param string $event
      * @return callable[]
      */
-    public function getListenersForEvent($event, EventManager $manager): array
+    private function getListenersForEvent(string $event, EventManager $manager): array
     {
         $r = new ReflectionProperty($manager, 'events');
         $r->setAccessible(true);
@@ -78,7 +78,7 @@ class EventManagerTest extends TestCase
     /** @psalm-return array{event: 'test', events: EventInterface[], listener: callable} */
     public function testAttachShouldAddListenerToEvent(): array
     {
-        $listener = [$this, __METHOD__];
+        $listener  = static fn(): int => 0;
         $this->events->attach('test', $listener);
         $listeners = $this->getListenersForEvent('test', $this->events);
         // Get first (and only) priority queue of listeners for event
@@ -106,22 +106,27 @@ class EventManagerTest extends TestCase
      */
     public function testAttachShouldAddReturnTheListener(string $event)
     {
-        $listener = [$this, __METHOD__];
+        $listener = static fn(): int => 0;
         self::assertSame($listener, $this->events->attach($event, $listener));
     }
 
     public function testAttachShouldAddEventIfItDoesNotExist(): void
     {
         self::assertAttributeEmpty('events', $this->events);
-        $listener = $this->events->attach('test', [$this, __METHOD__]);
-        $events   = $this->getEventListFromManager($this->events);
+        $this->events->attach('test', static fn () => null);
+        $events = $this->getEventListFromManager($this->events);
         self::assertNotEmpty($events);
         self::assertContains('test', $events);
     }
 
     public function testTriggerShouldTriggerAttachedListeners(): void
     {
-        $listener = $this->events->attach('test', [$this, 'handleTestEvent']);
+        $handler = function (EventInterface $e): void {
+            $message = $e->getParam('message', '__NOT_FOUND__');
+            self::assertIsString($message);
+            $this->message = $message;
+        };
+        $this->events->attach('test', $handler);
         $this->events->trigger('test', $this, ['message' => 'test message']);
         self::assertEquals('test message', $this->message);
     }
@@ -179,12 +184,6 @@ class EventManagerTest extends TestCase
         self::assertTrue($responses->contains('foo'));
         self::assertTrue($responses->contains(str_rot13(' foo ')));
         self::assertFalse($responses->contains(' foo '));
-    }
-
-    public function handleTestEvent(EventInterface $e): void
-    {
-        $message       = $e->getParam('message', '__NOT_FOUND__');
-        $this->message = $message;
     }
 
     /** @param mixed $value */
