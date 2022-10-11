@@ -27,7 +27,7 @@ class LazyEventListenerTest extends LazyListenerTest
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "event"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     /**
@@ -44,7 +44,7 @@ class LazyEventListenerTest extends LazyListenerTest
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "event"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     public function testCanInstantiateLazyListenerWithValidDefinition(): LazyListener
@@ -57,7 +57,7 @@ class LazyEventListenerTest extends LazyListenerTest
             'priority' => 5,
         ];
 
-        $listener = new $class($struct, $this->container->reveal());
+        $listener = new $class($struct, $this->container);
         self::assertInstanceOf($class, $listener);
         return $listener;
     }
@@ -87,7 +87,7 @@ class LazyEventListenerTest extends LazyListenerTest
             'method'   => 'method',
         ];
 
-        $listener = new $class($struct, $this->container->reveal());
+        $listener = new $class($struct, $this->container);
         self::assertInstanceOf($class, $listener);
         self::assertEquals(5, $listener->getPriority(5));
     }

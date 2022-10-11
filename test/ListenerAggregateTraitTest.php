@@ -5,30 +5,31 @@ declare(strict_types=1);
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use LaminasTest\EventManager\TestAsset\MockListenerAggregateTrait;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 class ListenerAggregateTraitTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var class-string */
-    public $aggregateClass = TestAsset\MockListenerAggregateTrait::class;
+    /** @var class-string<ListenerAggregateInterface> */
+    public $aggregateClass = MockListenerAggregateTrait::class;
 
     public function testDetachRemovesAttachedListeners(): void
     {
         $class     = $this->aggregateClass;
         $aggregate = new $class();
 
-        $prophecy = $this->prophesize(EventManagerInterface::class);
-        $prophecy->attach('foo.bar', [$aggregate, 'doFoo'])->will(function ($args) {
-            return $args[1];
-        });
-        $prophecy->attach('foo.baz', [$aggregate, 'doFoo'])->will(function ($args) {
-            return $args[1];
-        });
-        $prophecy->detach([$aggregate, 'doFoo'])->shouldBeCalledTimes(2);
-        $events = $prophecy->reveal();
+        $events = $this->createMock(EventManagerInterface::class);
+        $events->expects(self::atLeast(2))
+            ->method('attach')
+            ->withConsecutive(
+                ['foo.bar', [$aggregate, 'doFoo']],
+                ['foo.baz', [$aggregate, 'doFoo']],
+            )->willReturnArgument(1);
+
+        $events->expects(self::exactly(2))
+            ->method('detach')
+            ->with([$aggregate, 'doFoo']);
 
         $aggregate->attach($events);
 

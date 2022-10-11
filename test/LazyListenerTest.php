@@ -7,28 +7,24 @@ namespace LaminasTest\EventManager;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use stdClass;
 
 class LazyListenerTest extends TestCase
 {
     use DeprecatedAssertions;
-    use ProphecyTrait;
 
     /** @var class-string */
     protected string $listenerClass;
 
-    /** @var ObjectProphecy&ContainerInterface */
-    protected $container;
+    /** @var ContainerInterface&MockObject */
+    protected ContainerInterface $container;
 
     protected function setUp(): void
     {
         $this->listenerClass = LazyListener::class;
-        $this->container     = $this->prophesize(ContainerInterface::class);
+        $this->container     = $this->createMock(ContainerInterface::class);
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
@@ -57,7 +53,7 @@ class LazyListenerTest extends TestCase
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "listener"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     /**
@@ -74,7 +70,7 @@ class LazyListenerTest extends TestCase
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "listener"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     public function testConstructorRaisesExceptionForMissingMethod(): void
@@ -86,7 +82,7 @@ class LazyListenerTest extends TestCase
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "method"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     /**
@@ -103,7 +99,7 @@ class LazyListenerTest extends TestCase
         ];
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('missing a valid "method"');
-        new $class($struct, $this->container->reveal());
+        new $class($struct, $this->container);
     }
 
     public function testCanInstantiateLazyListenerWithValidDefinition(): LazyListener
@@ -114,7 +110,7 @@ class LazyListenerTest extends TestCase
             'method'   => 'method',
         ];
 
-        $listener = new $class($struct, $this->container->reveal());
+        $listener = new $class($struct, $this->container);
         self::assertInstanceOf($class, $listener);
         return $listener;
     }
@@ -130,14 +126,18 @@ class LazyListenerTest extends TestCase
     public function testLazyListenerActsAsInvokableAroundListenerCreation(): void
     {
         $class    = $this->listenerClass;
-        $listener = $this->prophesize(TestAsset\BuilderInterface::class);
-        $listener->build(Argument::type(EventInterface::class))->willReturn('RECEIVED');
+        $listener = $this->createMock(TestAsset\BuilderInterface::class);
+        $listener->expects(self::once())
+            ->method('build')
+            ->with(self::isInstanceOf(EventInterface::class))
+            ->willReturn('RECEIVED');
 
-        $event = $this->prophesize(EventInterface::class);
+        $event = $this->createMock(EventInterface::class);
 
-        $this->container->get('listener')->will(function ($args) use ($listener) {
-            return $listener->reveal();
-        });
+        $this->container->expects(self::once())
+            ->method('get')
+            ->with('listener')
+            ->willReturn($listener);
 
         $struct = [
             'event'    => 'event',
@@ -146,29 +146,32 @@ class LazyListenerTest extends TestCase
             'priority' => 5,
         ];
 
-        $lazyListener = new $class($struct, $this->container->reveal());
+        $lazyListener = new $class($struct, $this->container);
         self::assertInstanceOf($class, $lazyListener);
 
-        self::assertEquals('RECEIVED', $lazyListener($event->reveal()));
+        self::assertEquals('RECEIVED', $lazyListener($event));
     }
 
     public function testInvocationWillDelegateToContainerBuildMethodWhenPresentAndEnvIsNonEmpty(): void
     {
         $class    = $this->listenerClass;
-        $listener = $this->prophesize(TestAsset\BuilderInterface::class);
-        $listener->build(Argument::type(EventInterface::class))->willReturn('RECEIVED');
+        $listener = $this->createMock(TestAsset\BuilderInterface::class);
+        $listener->expects(self::once())
+            ->method('build')
+            ->with(self::isInstanceOf(EventInterface::class))
+            ->willReturn('RECEIVED');
 
-        $event = $this->prophesize(EventInterface::class);
+        $event = $this->createMock(EventInterface::class);
 
-        $instance = new stdClass();
-        $env      = [
+        $env = [
             'foo' => 'bar',
         ];
 
-        $container = $this->prophesize(TestAsset\BuilderInterface::class);
-        $container->build('listener', $env)->will(function ($args) use ($listener) {
-            return $listener->reveal();
-        });
+        $container = $this->createMock(TestAsset\BuilderInterface::class);
+        $container->expects(self::once())
+            ->method('build')
+            ->with('listener', $env)
+            ->willReturn($listener);
 
         $struct = [
             'event'    => 'event',
@@ -177,9 +180,9 @@ class LazyListenerTest extends TestCase
             'priority' => 5,
         ];
 
-        $lazyListener = new $class($struct, $container->reveal(), $env);
+        $lazyListener = new $class($struct, $container, $env);
         self::assertInstanceOf($class, $lazyListener);
 
-        self::assertEquals('RECEIVED', $lazyListener($event->reveal()));
+        self::assertEquals('RECEIVED', $lazyListener($event));
     }
 }
