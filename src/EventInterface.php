@@ -7,8 +7,8 @@ use ArrayAccess;
 /**
  * Representation of an event
  * 
- * @phpstan-template TTarget of object|string|null
- * @phpstan-template TParams of \ArrayAccess|array
+ * @template TTarget of object|string|null
+ * @template TParams of \ArrayAccess|array
  */
 interface EventInterface
 {
@@ -23,7 +23,7 @@ interface EventInterface
      * Get target/context from which event was triggered
      *
      * @return null|string|object
-     * @phpstan-return TTarget
+     * @psalm-return TTarget
      */
     public function getTarget();
 
@@ -31,7 +31,7 @@ interface EventInterface
      * Get parameters passed to the event
      *
      * @return array|ArrayAccess
-     * @phpstan-return TParams
+     * @psalm-return TParams
      */
     public function getParams();
 
@@ -41,7 +41,6 @@ interface EventInterface
      * @param  string $name
      * @param  mixed $default Default value to return if parameter does not exist
      * @return mixed
-     * @phpstan-return value-of<TParams>
      */
     public function getParam($name, $default = null);
 
@@ -57,7 +56,9 @@ interface EventInterface
      * Set the event target/context
      *
      * @param  null|string|object $target
-     * @phpstan-param TTarget $target
+     * @template NewTTarget
+     * @psalm-param NewTTarget $target
+     * @psalm-this-out self<TTarget|NewTTarget>
      * @return void
      */
     public function setTarget($target);
@@ -66,7 +67,9 @@ interface EventInterface
      * Set event parameters
      *
      * @param  array|ArrayAccess $params
-     * @phpstan-param TParams $params
+     * @template NewTParams
+     * @psalm-param NewTParams $params
+     * @psalm-this-out self<TParams|NewTParams>
      * @return void
      */
     public function setParams($params);

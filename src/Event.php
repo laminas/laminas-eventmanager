@@ -14,22 +14,33 @@ use function sprintf;
  *
  * Encapsulates the target context and parameters passed, and provides some
  * behavior for interacting with the event manager.
+ *
+ * @template TTarget of object|string|null
+ * @template TParams of \ArrayAccess|array
+ * @implements EventInterface<TTarget, TParams>
  */
 class Event implements EventInterface
 {
     /** @var string Event name */
     protected $name;
 
-    /** @var string|object The event target */
+    /**
+     * @var string|object|null The event target
+     * @psalm-var TTarget
+     */
     protected $target;
 
-    /** @var array|ArrayAccess|object The event parameters */
+    /**
+     * @var array|ArrayAccess|object The event parameters
+     * @psalm-var TParams
+     */
     protected $params = [];
 
     /** @var bool Whether or not to stop propagation */
     protected $stopPropagation = false;
 
     /**
+     *
      * Constructor
      *
      * Accept a target and its parameters.
@@ -37,6 +48,13 @@ class Event implements EventInterface
      * @param  string $name Event name
      * @param  string|object $target
      * @param  array|ArrayAccess $params
+     *
+     * @template NewTTarget of object|string|null
+     * @template NewTParams of \ArrayAccess|array
+     * @psalm-param NewTTarget|null $target
+     * @psalm-param NewTParams|null $params
+     * @psalm-this-out self<TTarget|NewTTarget>
+     * @psalm-this-out self<TParams|NewTParams>
      */
     public function __construct($name = null, $target = null, $params = null)
     {
@@ -68,7 +86,8 @@ class Event implements EventInterface
      *
      * This may be either an object, or the name of a static method.
      *
-     * @return string|object
+     * @return string|object|null
+     * @psalm-return TTarget
      */
     public function getTarget()
     {
@@ -81,6 +100,9 @@ class Event implements EventInterface
      * Overwrites parameters
      *
      * @param  array|ArrayAccess|object $params
+     * @template NewTParams
+     * @psalm-param NewTParams $params
+     * @psalm-this-out self<TParams|NewTParams>
      * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
@@ -98,6 +120,7 @@ class Event implements EventInterface
      * Get all parameters
      *
      * @return array|object|ArrayAccess
+     * @psalm-return TParams
      */
     public function getParams()
     {
@@ -145,6 +168,9 @@ class Event implements EventInterface
      * Set the event target/context
      *
      * @param  null|string|object $target
+     * @template NewTTarget
+     * @psalm-param NewTTarget $target
+     * @psalm-this-out self<TTarget|NewTTarget>
      */
     public function setTarget($target)
     {
