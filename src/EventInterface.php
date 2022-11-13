@@ -56,9 +56,9 @@ interface EventInterface
      * Set the event target/context
      *
      * @param  null|string|object $target
-     * @template NewTTarget
+     * @template NewTTarget of object|string|null
      * @psalm-param NewTTarget $target
-     * @psalm-this-out self<TTarget|NewTTarget>
+     * @psalm-this-out self<NewTTarget, TParams>
      * @return void
      */
     public function setTarget($target);
@@ -67,9 +67,9 @@ interface EventInterface
      * Set event parameters
      *
      * @param  array|ArrayAccess $params
-     * @template NewTParams
+     * @template NewTParams of \ArrayAccess|array
      * @psalm-param NewTParams $params
-     * @psalm-this-out self<TParams|NewTParams>
+     * @psalm-this-out self<TTarget, NewTParams>
      * @return void
      */
     public function setParams($params);

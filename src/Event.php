@@ -49,12 +49,11 @@ class Event implements EventInterface
      * @param  string|object $target
      * @param  array|ArrayAccess $params
      *
-     * @template NewTTarget of object|string|null
+     * @template NewTTarget of object|string
      * @template NewTParams of \ArrayAccess|array
      * @psalm-param NewTTarget|null $target
      * @psalm-param NewTParams|null $params
-     * @psalm-this-out self<TTarget|NewTTarget>
-     * @psalm-this-out self<TParams|NewTParams>
+     * @psalm-this-out self<NewTTarget, NewTParams>
      */
     public function __construct($name = null, $target = null, $params = null)
     {
@@ -100,9 +99,9 @@ class Event implements EventInterface
      * Overwrites parameters
      *
      * @param  array|ArrayAccess|object $params
-     * @template NewTParams
+     * @template NewTParams of \ArrayAccess|array
      * @psalm-param NewTParams $params
-     * @psalm-this-out self<TParams|NewTParams>
+     * @psalm-this-out self<TTarget, NewTParams>
      * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
@@ -168,9 +167,9 @@ class Event implements EventInterface
      * Set the event target/context
      *
      * @param  null|string|object $target
-     * @template NewTTarget
+     * @template NewTTarget of object|string|null
      * @psalm-param NewTTarget $target
-     * @psalm-this-out self<TTarget|NewTTarget>
+     * @psalm-this-out self<NewTTarget, TParams>
      */
     public function setTarget($target)
     {
