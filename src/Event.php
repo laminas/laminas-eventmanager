@@ -134,6 +134,7 @@ class Event implements EventInterface
      * If the parameter does not exist, the $default value will be returned.
      *
      * @param  string|int $name
+     * @psalm-param key-of<TParams> $name
      * @param  mixed $default
      * @return mixed
      */
