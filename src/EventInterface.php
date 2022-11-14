@@ -6,9 +6,9 @@ use ArrayAccess;
 
 /**
  * Representation of an event
- * 
- * @template TTarget of object|string|null
- * @template TParams of \ArrayAccess|array
+ *
+ * @template-covariant TTarget of object|string|null
+ * @template-covariant TParams of array|ArrayAccess|object
  */
 interface EventInterface
 {
@@ -22,7 +22,7 @@ interface EventInterface
     /**
      * Get target/context from which event was triggered
      *
-     * @return null|string|object
+     * @return object|string|null
      * @psalm-return TTarget
      */
     public function getTarget();
@@ -30,7 +30,7 @@ interface EventInterface
     /**
      * Get parameters passed to the event
      *
-     * @return array|ArrayAccess
+     * @return array|ArrayAccess|object
      * @psalm-return TParams
      */
     public function getParams();
@@ -55,7 +55,7 @@ interface EventInterface
     /**
      * Set the event target/context
      *
-     * @param  null|string|object $target
+     * @param object|string|null $target
      * @template NewTTarget of object|string|null
      * @psalm-param NewTTarget $target
      * @psalm-this-out self<NewTTarget, TParams>
@@ -66,8 +66,8 @@ interface EventInterface
     /**
      * Set event parameters
      *
-     * @param  array|ArrayAccess $params
-     * @template NewTParams of \ArrayAccess|array
+     * @param array|ArrayAccess|object $params
+     * @template NewTParams of array|ArrayAccess|object
      * @psalm-param NewTParams $params
      * @psalm-this-out self<TTarget, NewTParams>
      * @return void

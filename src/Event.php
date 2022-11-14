@@ -15,17 +15,20 @@ use function sprintf;
  * Encapsulates the target context and parameters passed, and provides some
  * behavior for interacting with the event manager.
  *
- * @template TTarget of object|string|null
- * @template TParams of \ArrayAccess|array
+ * @template-covariant TTarget of object|string|null
+ * @template-covariant TParams of array|ArrayAccess|object
  * @implements EventInterface<TTarget, TParams>
  */
 class Event implements EventInterface
 {
-    /** @var string Event name */
+    /**
+     * @var string Event name
+     * @psalm-suppress PropertyNotSetInConstructor It _is_ if it's non-null...
+     */
     protected $name;
 
     /**
-     * @var string|object|null The event target
+     * @var object|string|null The event target
      * @psalm-var TTarget
      */
     protected $target;
@@ -33,6 +36,8 @@ class Event implements EventInterface
     /**
      * @var array|ArrayAccess|object The event parameters
      * @psalm-var TParams
+     * @psalm-suppress InvalidPropertyAssignmentValue There is no "template type default" functionality in Psalm (
+     * https://github.com/vimeo/psalm/issues/3048).
      */
     protected $params = [];
 
@@ -40,20 +45,16 @@ class Event implements EventInterface
     protected $stopPropagation = false;
 
     /**
-     *
      * Constructor
      *
      * Accept a target and its parameters.
      *
-     * @param  string $name Event name
-     * @param  string|object $target
-     * @param  array|ArrayAccess $params
+     * TODO: Adding @psalm-this-out annotations here seems to only confuse Psalm into typing <mixed, mixed>, meaning
+     *       setTarget() and setParams() will have to always be called for Psalm to understand the typing situation.
      *
-     * @template NewTTarget of object|string
-     * @template NewTParams of \ArrayAccess|array
-     * @psalm-param NewTTarget|null $target
-     * @psalm-param NewTParams|null $params
-     * @psalm-this-out self<NewTTarget, NewTParams>
+     * @param string|null $name Event name
+     * @param string|object|null $target
+     * @param array|ArrayAccess|object|null $params
      */
     public function __construct($name = null, $target = null, $params = null)
     {
@@ -98,20 +99,22 @@ class Event implements EventInterface
      *
      * Overwrites parameters
      *
-     * @param  array|ArrayAccess|object $params
-     * @template NewTParams of \ArrayAccess|array
+     * @param array|ArrayAccess|object $params
+     * @template NewTParams of array|ArrayAccess|object
      * @psalm-param NewTParams $params
      * @psalm-this-out self<TTarget, NewTParams>
      * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
     {
+        /** @psalm-suppress DocblockTypeContradiction Sanity check to actually enforce docblock. */
         if (! is_array($params) && ! is_object($params)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Event parameters must be an array or object; received "%s"', gettype($params))
             );
         }
 
+        /** @psalm-suppress InvalidPropertyAssignmentValue Pretty sure this is correct after this-out. */
         $this->params = $params;
     }
 
@@ -147,9 +150,11 @@ class Event implements EventInterface
         }
 
         // Check in normal objects
+        /** @psalm-suppress MixedPropertyFetch Only object is left over from union. */
         if (! isset($this->params->{$name})) {
             return $default;
         }
+        /** @psalm-suppress MixedPropertyFetch Only object is left over from union. */
         return $this->params->{$name};
     }
 
@@ -160,19 +165,21 @@ class Event implements EventInterface
      */
     public function setName($name)
     {
+        /** @psalm-suppress RedundantCastGivenDocblockType Cast is safety measure in case caller passes junk. */
         $this->name = (string) $name;
     }
 
     /**
      * Set the event target/context
      *
-     * @param  null|string|object $target
      * @template NewTTarget of object|string|null
+     * @param object|string|null $target
      * @psalm-param NewTTarget $target
      * @psalm-this-out self<NewTTarget, TParams>
      */
     public function setTarget($target)
     {
+        /** @psalm-suppress InvalidPropertyAssignmentValue Pretty sure this is correct after this-out. */
         $this->target = $target;
     }
 
@@ -186,6 +193,7 @@ class Event implements EventInterface
     {
         if (is_array($this->params) || $this->params instanceof ArrayAccess) {
             // Arrays or objects implementing array access
+            /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue No way to extend existing array template. */
             $this->params[$name] = $value;
             return;
         }
@@ -201,6 +209,7 @@ class Event implements EventInterface
      */
     public function stopPropagation($flag = true)
     {
+        /** @psalm-suppress RedundantCastGivenDocblockType Cast is safety measure in case caller passes junk. */
         $this->stopPropagation = (bool) $flag;
     }
 
