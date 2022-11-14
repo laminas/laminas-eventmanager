@@ -49,14 +49,13 @@ class Event implements EventInterface
      *
      * Accept a target and its parameters.
      *
-     * TODO: Adding @psalm-this-out annotations here seems to only confuse Psalm into typing <mixed, mixed>, meaning
-     *       setTarget() and setParams() will have to always be called for Psalm to understand the typing situation.
-     *
      * @param string|null $name Event name
      * @param string|object|null $target
+     * @psalm-param TTarget $target
      * @param array|ArrayAccess|object|null $params
+     * @psalm-param TParams|null $params
      */
-    public function __construct($name = null, $target = null, $params = null)
+    public function __construct($name = null, $target = null, $params = [])
     {
         if (null !== $name) {
             $this->setName($name);
@@ -66,7 +65,7 @@ class Event implements EventInterface
             $this->setTarget($target);
         }
 
-        if (null !== $params) {
+        if (! empty($params)) {
             $this->setParams($params);
         }
     }
