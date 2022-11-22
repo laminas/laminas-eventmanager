@@ -53,7 +53,8 @@
     "autoload-dev": {
         "psr-4": {
             "LaminasTest\\EventManager\\": "test/",
-            "LaminasBench\\EventManager\\": "benchmarks/"
+            "LaminasBench\\EventManager\\": "benchmarks/",
+            "LaminasPsalm\\EventManager\\": "psalm/"
         }
     },
     "scripts": {
