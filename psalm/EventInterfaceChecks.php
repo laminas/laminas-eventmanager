@@ -8,7 +8,12 @@ class EventInterfaceChecks
 {
     /**
      * @param EventInterface<CheckObject, array{foo: int, bar: CheckObject}> $e
-     * @return array{CheckObject, array{foo: int, bar: CheckObject}, int, CheckObject}
+     * @return array{
+     *     CheckObject,
+     *     array{foo: int, bar: CheckObject},
+     *     int,
+     *     CheckObject
+     * }
      */
     public function checkTargetAndParamsMatchTemplate(EventInterface $e): array
     {
@@ -25,7 +30,10 @@ class EventInterfaceChecks
      * the template type.
      *
      * @param EventInterface<null, array{foo: int, bar: CheckObject}> $e
-     * @return array{mixed, mixed}
+     * @return array{
+     *     mixed,
+     *     mixed
+     * }
      */
     public function checkIndividualParamsNotInferred(EventInterface $e): array
     {
