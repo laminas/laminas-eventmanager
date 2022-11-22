@@ -21,9 +21,7 @@ use function sprintf;
  */
 class Event implements EventInterface
 {
-    /**
-     * @var string|null Event name
-     */
+    /** @var string|null Event name */
     protected $name;
 
     /**
