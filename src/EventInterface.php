@@ -15,7 +15,7 @@ interface EventInterface
     /**
      * Get event name
      *
-     * @return string
+     * @return string|null
      */
     public function getName();
 

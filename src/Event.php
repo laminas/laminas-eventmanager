@@ -22,8 +22,7 @@ use function sprintf;
 class Event implements EventInterface
 {
     /**
-     * @var string Event name
-     * @psalm-suppress PropertyNotSetInConstructor It _is_ if it's non-null...
+     * @var string|null Event name
      */
     protected $name;
 
@@ -36,8 +35,8 @@ class Event implements EventInterface
     /**
      * @var array|ArrayAccess|object The event parameters
      * @psalm-var TParams
-     * @psalm-suppress InvalidPropertyAssignmentValue There is no "template type default" functionality in Psalm (
-     * https://github.com/vimeo/psalm/issues/3048).
+     * @psalm-suppress InvalidPropertyAssignmentValue Empty array _can_ be assigned, but there is no "template type
+     * default" functionality in Psalm (https://github.com/vimeo/psalm/issues/3048).
      */
     protected $params = [];
 
@@ -53,7 +52,7 @@ class Event implements EventInterface
      * @param string|object|null $target
      * @psalm-param TTarget $target
      * @param array|ArrayAccess|object|null $params
-     * @psalm-param TParams|null $params
+     * @psalm-param TParams|array<empty,empty>|null $params
      */
     public function __construct($name = null, $target = null, $params = [])
     {
@@ -65,7 +64,7 @@ class Event implements EventInterface
             $this->setTarget($target);
         }
 
-        if (! empty($params)) {
+        if ($params !== null && $params !== []) {
             $this->setParams($params);
         }
     }
@@ -73,7 +72,7 @@ class Event implements EventInterface
     /**
      * Get event name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {

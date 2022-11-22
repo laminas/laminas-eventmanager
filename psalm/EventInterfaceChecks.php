@@ -8,27 +8,41 @@ class EventInterfaceChecks
 {
     /**
      * @param EventInterface<CheckObject, array{foo: int, bar: CheckObject}> $e
-     * @return array{CheckObject, array{foo: int, bar: CheckObject}}
+     * @return array{CheckObject, array{foo: int, bar: CheckObject}, int, CheckObject}
      */
-    function checkTargetAndParamsMatchTemplate(EventInterface $e): array
+    public function checkTargetAndParamsMatchTemplate(EventInterface $e): array
     {
         return [
             $e->getTarget(),
             $e->getParams(),
-        ];
-    }
-
-    /**
-     * @param EventInterface<null, array{foo: int, bar: CheckObject}> $e
-     * @return array{int, CheckObject}
-     */
-    function checkIndividualParamsMatchTemplate(EventInterface $e): array
-    {
-        return [
             $e->getParams()['foo'],
             $e->getParams()['bar'],
         ];
     }
+
+    /**
+     * Individual params obtained via `getParam()` can't be inferred because their keys/values can't be selected from
+     * the template type.
+     *
+     * @param EventInterface<null, array{foo: int, bar: CheckObject}> $e
+     * @return array{mixed, mixed}
+     */
+    public function checkIndividualParamsNotInferred(EventInterface $e): array
+    {
+        return [
+            $e->getParam('foo'),
+            $e->getParam('bar'),
+        ];
+    }
+
+//    /**
+//     * @param EventInterface $e
+//     * @return array
+//     */
+//    public function checkSetParamDoesNotAlterTemplate(EventInterface $e): array
+//    {
+//
+//    }
 
     // TODO: Check ctor inferrence, setParams setTarget out changes, ignore setParam() or getParam()
 }
