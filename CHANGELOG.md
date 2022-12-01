@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.7.0 - TBD
+## 3.7.0 - 2022-12-01
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.7.0](https://github.com/laminas/laminas-eventmanager/milestone/11)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 3.7.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Documentation,Enhancement,renovate
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [33: Update dependency vimeo/psalm to v5](https://github.com/laminas/laminas-eventmanager/pull/33) thanks to @renovate[bot]
 
 ## 3.6.0 - 2022-10-11
 
