@@ -40,7 +40,7 @@ class EventManager implements EventManagerInterface
      * instead of first iterating over it and generating a new one
      * -> In result it improves performance by up to 25% even if it looks a bit strange
      *
-     * @var array[]
+     * @var array<string, array<int, array{0: list<callable>}>>
      */
     protected $events = [];
 

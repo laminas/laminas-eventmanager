@@ -38,7 +38,7 @@
         "phpunit/phpunit": "^9.5.26",
         "psalm/plugin-phpunit": "^0.18.0",
         "psr/container": "^1.1.2 || ^2.0.2",
-        "vimeo/psalm": "^4.29.0"
+        "vimeo/psalm": "^5.0.0"
     },
     "suggest": {
         "psr/container": "^1.1.2 || ^2.0.2, to use the lazy listeners feature",
