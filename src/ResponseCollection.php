@@ -8,6 +8,9 @@ use function count;
 
 /**
  * Collection of signal handler return values
+ *
+ * @template TValue
+ * @template-extends SplStack<TValue>
  */
 class ResponseCollection extends SplStack
 {

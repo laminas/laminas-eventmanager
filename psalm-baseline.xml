@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.28.0@52e96bea381e6cb07a672aefec791a5817694a26">
+<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
   <file src="src/Event.php">
     <DocblockTypeContradiction occurrences="1">
       <code>! is_array($params) &amp;&amp; ! is_object($params)</code>
@@ -31,32 +31,12 @@
     <MissingParamType occurrences="1">
       <code>$force</code>
     </MissingParamType>
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>$eventName</code>
+    <MixedArgumentTypeCoercion occurrences="1">
       <code>$identifiers</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="3">
-      <code>$listOfListeners[0]</code>
-      <code>$listeners[0]</code>
-      <code>$this-&gt;events[$eventName][$priority][0]</code>
-    </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="3">
-      <code>$listOfListenersByPriority[$priority][]</code>
-      <code>$listOfListenersByPriority[$priority][]</code>
-      <code>$this-&gt;events[$eventName][(int) $priority][0]</code>
-    </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="1">
-      <code>$this-&gt;events[$eventName][$priority][0][$index]</code>
-    </MixedArrayOffset>
-    <MixedAssignment occurrences="11">
-      <code>$evaluatedListener</code>
-      <code>$index</code>
-      <code>$listOfListeners</code>
-      <code>$listOfListeners</code>
-      <code>$listOfListenersByPriority[$priority][]</code>
+    <MixedAssignment occurrences="5">
       <code>$listOfListenersByPriority[$priority][]</code>
       <code>$listener</code>
-      <code>$listeners</code>
       <code>$listeners</code>
       <code>$listeners</code>
       <code>$response</code>
@@ -170,9 +150,6 @@
     <MissingReturnType occurrences="1">
       <code>setStopped</code>
     </MissingReturnType>
-    <MixedAssignment occurrences="1">
-      <code>$response</code>
-    </MixedAssignment>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(bool) $flag</code>
     </RedundantCastGivenDocblockType>
@@ -206,7 +183,7 @@
       <code>$eventName</code>
       <code>$identifier</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="9">
+    <MixedArrayAccess occurrences="12">
       <code>$listenersByIdentifier[$eventName]</code>
       <code>$listenersByIdentifier['*']</code>
       <code>$this-&gt;identifiers[$identifier][$eventName]</code>
@@ -214,13 +191,17 @@
       <code>$this-&gt;identifiers[$identifier][$eventName]</code>
       <code>$this-&gt;identifiers[$identifier][$eventName]</code>
       <code>$this-&gt;identifiers[$identifier][$eventName]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority][$index]</code>
       <code>$wildcardIdentifier[$eventName]</code>
       <code>$wildcardIdentifier['*']</code>
     </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="1">
+    <MixedArrayAssignment occurrences="2">
       <code>$this-&gt;identifiers[$identifier][$event]</code>
+      <code>$this-&gt;identifiers[$identifier][$event][(int) $priority]</code>
     </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="7">
+    <MixedArrayOffset occurrences="8">
       <code>$returnListeners[$priority]</code>
       <code>$returnListeners[$priority]</code>
       <code>$returnListeners[$priority]</code>
@@ -228,6 +209,7 @@
       <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
       <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
       <code>$this-&gt;identifiers[$identifier][$eventName][$priority]</code>
+      <code>$this-&gt;identifiers[$identifier][$eventName][$priority][$index]</code>
     </MixedArrayOffset>
     <MixedAssignment occurrences="18">
       <code>$evaluatedListener</code>
@@ -316,10 +298,10 @@
     </ArgumentTypeCoercion>
   </file>
   <file src="test/EventManagerAwareTraitTest.php">
-    <InvalidScalarArgument occurrences="2">
+    <InvalidArgument occurrences="2">
       <code>EventManagerAwareTrait::class</code>
       <code>EventManagerAwareTrait::class</code>
-    </InvalidScalarArgument>
+    </InvalidArgument>
     <MixedMethodCall occurrences="4">
       <code>getEventManager</code>
       <code>getEventManager</code>
@@ -352,203 +334,16 @@
     </MixedMethodCall>
   </file>
   <file src="test/EventManagerTest.php">
-    <InvalidArgument occurrences="12">
-      <code>$events</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-    </InvalidArgument>
-    <InvalidMethodCall occurrences="2">
-      <code>detach</code>
-      <code>trigger</code>
-    </InvalidMethodCall>
-    <InvalidReturnStatement occurrences="1"/>
-    <InvalidReturnType occurrences="1">
-      <code>array{event: 'test', events: EventInterface[], listener: callable}</code>
-    </InvalidReturnType>
-    <MissingClosureParamType occurrences="44">
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$r</code>
-      <code>$r</code>
+    <MissingClosureParamType occurrences="2">
       <code>$result</code>
       <code>$result</code>
       <code>$result</code>
       <code>$result</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="14">
-      <code>function ($e) use ($test) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($e) {</code>
-      <code>function ($r) {</code>
-      <code>function ($result) {</code>
-      <code>function () {</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="6">
-      <code>testAttachRaisesExceptionForInvalidEventType</code>
-      <code>testAttachShouldAddReturnTheListener</code>
-      <code>testCanDetachListenerFromNamedEvent</code>
-      <code>testDetachedWildcardListenerWillNotBeTriggered</code>
-      <code>testPassingInvalidEventTypeToDetachRaisesException</code>
-      <code>testTriggeringAnEventWithAnEmptyNameRaisesAnException</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="12">
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$event</code>
-      <code>$r-&gt;getValue($manager)</code>
-      <code>$search</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="2">
-      <code>$events[$event]</code>
-      <code>$listeners[0]</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="18">
-      <code>$bar</code>
-      <code>$event</code>
-      <code>$events</code>
-      <code>$foo</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listenersByPriority</code>
-      <code>$priority</code>
-      <code>$result</code>
-      <code>$results</code>
-      <code>$search</code>
-      <code>$search</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>callable[]</code>
-    </MixedInferredReturnType>
-    <MixedMethodCall occurrences="25">
-      <code>contains</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>getParam</code>
-      <code>propagationIsStopped</code>
-      <code>propagationIsStopped</code>
-      <code>setParam</code>
-      <code>setParam</code>
-      <code>setParam</code>
-      <code>setParam</code>
-      <code>setParam</code>
-      <code>setParam</code>
-      <code>stopPropagation</code>
-    </MixedMethodCall>
-    <MixedOperand occurrences="2">
-      <code>$bar</code>
-      <code>$foo</code>
-    </MixedOperand>
-    <MixedReturnStatement occurrences="1">
-      <code>$listenersByPriority</code>
-    </MixedReturnStatement>
-    <MixedReturnTypeCoercion occurrences="2">
-      <code>array_keys($r-&gt;getValue($manager))</code>
-      <code>string[]</code>
-    </MixedReturnTypeCoercion>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
     <TypeDoesNotContainType occurrences="2">
       <code>assertFalse</code>
       <code>assertFalse</code>
     </TypeDoesNotContainType>
-    <UnusedClosureParam occurrences="12">
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$r</code>
-    </UnusedClosureParam>
-    <UnusedVariable occurrences="3">
-      <code>$priority</code>
-      <code>$responses</code>
-      <code>$responses</code>
-    </UnusedVariable>
   </file>
   <file src="test/EventTest.php">
     <InvalidArgument occurrences="3">
