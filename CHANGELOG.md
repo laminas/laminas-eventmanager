@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.8.0 - TBD
+## 3.8.0 - 2022-12-03
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.8.0](https://github.com/laminas/laminas-eventmanager/milestone/13)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 3.8.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### renovate
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [34: Update dependencies, document `FilterIterator` generic types](https://github.com/laminas/laminas-eventmanager/pull/34) thanks to @renovate[bot]
 
 ## 3.7.0 - 2022-12-01
 
