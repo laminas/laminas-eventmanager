@@ -69,9 +69,6 @@
     </MissingReturnType>
   </file>
   <file src="src/Filter/FilterIterator.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>is_object($value)</code>
-    </DocblockTypeContradiction>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>mixed</code>
     </LessSpecificImplementedReturnType>
@@ -84,22 +81,20 @@
       <code>$item['data']</code>
       <code>$item['priority']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="5">
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$items[]</code>
-      <code>$next</code>
-    </MixedAssignment>
     <MixedFunctionCall occurrences="1">
       <code>$next($context, $params, $chain)</code>
     </MixedFunctionCall>
     <MoreSpecificImplementedParamType occurrences="1">
       <code>$value</code>
     </MoreSpecificImplementedParamType>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>gettype($value)</code>
-    </RedundantConditionGivenDocblockType>
+    <PossiblyInvalidArrayAccess occurrences="3">
+      <code>$item['data']</code>
+      <code>$item['data']</code>
+      <code>$item['priority']</code>
+    </PossiblyInvalidArrayAccess>
+    <PossiblyInvalidFunctionCall occurrences="1">
+      <code>$next($context, $params, $chain)</code>
+    </PossiblyInvalidFunctionCall>
   </file>
   <file src="src/FilterChain.php">
     <ImplementedReturnTypeMismatch occurrences="2">
@@ -112,15 +107,15 @@
     <InvalidReturnType occurrences="1">
       <code>CallbackHandler</code>
     </InvalidReturnType>
-    <MixedAssignment occurrences="1">
-      <code>$next</code>
-    </MixedAssignment>
     <MixedFunctionCall occurrences="1">
       <code>$next($context, $argv, $chain)</code>
     </MixedFunctionCall>
     <ParamNameMismatch occurrences="1">
       <code>$argv</code>
     </ParamNameMismatch>
+    <PossiblyInvalidFunctionCall occurrences="1">
+      <code>$next($context, $argv, $chain)</code>
+    </PossiblyInvalidFunctionCall>
     <UndefinedDocblockClass occurrences="1">
       <code>CallbackHandler</code>
     </UndefinedDocblockClass>
@@ -335,8 +330,6 @@
   </file>
   <file src="test/EventManagerTest.php">
     <MissingClosureParamType occurrences="2">
-      <code>$result</code>
-      <code>$result</code>
       <code>$result</code>
       <code>$result</code>
     </MissingClosureParamType>
