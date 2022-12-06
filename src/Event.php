@@ -142,6 +142,7 @@ class Event implements EventInterface
                 return $default;
             }
 
+            /** @psalm-suppress MixedArrayAccess We've just verified `$this->params` is array-like... */
             return $this->params[$name];
         }
 
@@ -189,7 +190,7 @@ class Event implements EventInterface
     {
         if (is_array($this->params) || $this->params instanceof ArrayAccess) {
             // Arrays or objects implementing array access
-            /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue No way to extend existing array template. */
+            /** @psalm-suppress MixedArrayAssignment No way to extend existing array template. */
             $this->params[$name] = $value;
             return;
         }
