@@ -27,4 +27,24 @@ class EventChecks
             $event,
         ];
     }
+
+    /**
+     * @return array{
+     *     Event<'target-string', array{foo: 'bar', baz: true}>,
+     *     'target-string',
+     *     array{foo: 'bar', baz: true},
+     * }
+     */
+    public function checkCtorInference(): array
+    {
+        $event = new Event(null, 'target-string', [
+            'foo' => 'bar',
+            'baz' => true,
+        ]);
+        return [
+            $event,
+            $event->getTarget(),
+            $event->getParams(),
+        ];
+    }
 }

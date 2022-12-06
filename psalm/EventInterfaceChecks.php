@@ -28,6 +28,37 @@ class EventInterfaceChecks
     }
 
     /**
+     * @param EventInterface<null, array<empty, empty>> $e
+     * @return array{
+     *     EventInterface<CheckObject, array<empty, empty>>,
+     * }
+     */
+    public function checkSetTargetChangesTemplate(EventInterface $e): array
+    {
+        $e->setTarget(new CheckObject());
+        return [
+            $e,
+        ];
+    }
+
+    /**
+     * @param EventInterface<null, array{foo: int}> $e
+     * @return array{
+     *     EventInterface<null, array{foo: CheckObject, bar: 'baz'}>,
+     * }
+     */
+    public function checkSetParamsChangesTemplate(EventInterface $e): array
+    {
+        $e->setParams([
+            'foo' => new CheckObject(),
+            'bar' => 'baz',
+        ]);
+        return [
+            $e,
+        ];
+    }
+
+    /**
      * Individual params obtained via `getParam()` can't be inferred because their keys/values can't be selected from
      * the template type.
      *
@@ -45,14 +76,21 @@ class EventInterfaceChecks
         ];
     }
 
-//    /**
-//     * @param EventInterface $e
-//     * @return array
-//     */
-//    public function checkSetParamDoesNotAlterTemplate(EventInterface $e): array
-//    {
-//
-//    }
-
-    // TODO: Check ctor inferrence, setParams setTarget out changes, ignore setParam() or getParam()
+    /**
+     * Changing the template and statically checking individual values is not possible with Psalm because
+     * key-of and value-of do not work on objects.
+     *
+     * @param EventInterface<null, array{foo: int}> $e
+     * @return array{
+     *     EventInterface<null, array{foo: int}>,
+     * }
+     */
+    public function checkIndividualParamDoesNotChangeTemplate(EventInterface $e): array
+    {
+        $e->setParam('foo', 'notAnInt');
+        $e->setParam('bar', 'keyDidNotExist');
+        return [
+            $e,
+        ];
+    }
 }
