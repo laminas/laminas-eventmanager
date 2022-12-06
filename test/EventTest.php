@@ -39,7 +39,6 @@ class EventTest extends TestCase
         $event   = new Event('foo', 'bar', []);
         $default = 1;
 
-        /** @psalm-suppress InvalidScalarArgument That's what we're testing. */
         self::assertEquals($default, $event->getParam('foo', $default));
     }
 
