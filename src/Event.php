@@ -68,9 +68,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Get event name
-     *
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -78,12 +76,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Get the event target
-     *
-     * This may be either an object, or the name of a static method.
-     *
-     * @return string|object|null
-     * @psalm-return TTarget
+     * {@inheritDoc}
      */
     public function getTarget()
     {
@@ -91,14 +84,8 @@ class Event implements EventInterface
     }
 
     /**
-     * Set parameters
+     * {@inheritDoc}
      *
-     * Overwrites parameters
-     *
-     * @param array|ArrayAccess|object $params
-     * @template NewTParams of array|ArrayAccess|object
-     * @psalm-param NewTParams $params
-     * @psalm-this-out self<TTarget, NewTParams>
      * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
@@ -115,10 +102,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Get all parameters
-     *
-     * @return array|object|ArrayAccess
-     * @psalm-return TParams
+     * {@inheritDoc}
      */
     public function getParams()
     {
@@ -126,13 +110,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Get an individual parameter
-     *
-     * If the parameter does not exist, the $default value will be returned.
-     *
-     * @param  string|int $name
-     * @param  mixed $default
-     * @return mixed
+     * {@inheritDoc}
      */
     public function getParam($name, $default = null)
     {
@@ -156,9 +134,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Set the event name
-     *
-     * @param  string $name
+     * {@inheritDoc}
      */
     public function setName($name)
     {
@@ -167,12 +143,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Set the event target/context
-     *
-     * @template NewTTarget of object|string|null
-     * @param object|string|null $target
-     * @psalm-param NewTTarget $target
-     * @psalm-this-out self<NewTTarget, TParams>
+     * {@inheritDoc}
      */
     public function setTarget($target)
     {
@@ -181,10 +152,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Set an individual parameter to a value
-     *
-     * @param  string|int $name
-     * @param  mixed $value
+     * {@inheritDoc}
      */
     public function setParam($name, $value)
     {
@@ -200,9 +168,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Stop further event propagation
-     *
-     * @param  bool $flag
+     * {@inheritDoc}
      */
     public function stopPropagation($flag = true)
     {
@@ -211,9 +177,7 @@ class Event implements EventInterface
     }
 
     /**
-     * Is propagation stopped?
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function propagationIsStopped()
     {
