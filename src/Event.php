@@ -86,6 +86,9 @@ class Event implements EventInterface
     /**
      * {@inheritDoc}
      *
+     * @template NewTParams of array|ArrayAccess|object
+     * @psalm-param NewTParams $params
+     * @psalm-this-out self<TTarget, NewTParams>
      * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
@@ -144,6 +147,10 @@ class Event implements EventInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @template NewTTarget of object|string|null
+     * @psalm-param NewTTarget $target
+     * @psalm-this-out self<NewTTarget, TParams>
      */
     public function setTarget($target)
     {

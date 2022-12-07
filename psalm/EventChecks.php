@@ -6,6 +6,8 @@ namespace LaminasPsalm\EventManager;
 
 use Laminas\EventManager\Event;
 use Laminas\EventManager\EventInterface;
+use LaminasPsalm\EventManager\Model\CheckEvent;
+use LaminasPsalm\EventManager\Model\CheckObject;
 
 class EventChecks
 {
@@ -46,5 +48,31 @@ class EventChecks
             $event->getTarget(),
             $event->getParams(),
         ];
+    }
+
+    /**
+     * Verifies that the psalm-this-out annotations are applied correctly to {@see Event}.
+     *
+     * @return Event<CheckObject, array{foo: 'bar'}>
+     */
+    public function checkThisOut(): Event
+    {
+        $event = new Event();
+        $event->setTarget(new CheckObject());
+        $event->setParams(['foo' => 'bar']);
+        return $event;
+    }
+
+    /**
+     * Verifies that the inherited psalm-this-out annotations do not change the class back to one of the inherited
+     * classes.
+     *
+     * @return CheckEvent<CheckObject>
+     */
+    public function checkThisOutInheritance(): CheckEvent
+    {
+        $event = new CheckEvent('event-name', new CheckObject());
+        $event->setParams(['foo' => 'bar']);
+        return $event;
     }
 }

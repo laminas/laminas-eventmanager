@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasPsalm\EventManager;
 
 use Laminas\EventManager\EventInterface;
+use LaminasPsalm\EventManager\Model\CheckObject;
 
 class EventInterfaceChecks
 {
@@ -29,33 +30,25 @@ class EventInterfaceChecks
 
     /**
      * @param EventInterface<null, array<empty, empty>> $e
-     * @return array{
-     *     EventInterface<CheckObject, array<empty, empty>>,
-     * }
+     * @return EventInterface<CheckObject, array<empty, empty>>
      */
-    public function checkSetTargetChangesTemplate(EventInterface $e): array
+    public function checkSetTargetChangesTemplate(EventInterface $e): EventInterface
     {
         $e->setTarget(new CheckObject());
-        return [
-            $e,
-        ];
+        return $e;
     }
 
     /**
      * @param EventInterface<null, array{foo: int}> $e
-     * @return array{
-     *     EventInterface<null, array{foo: CheckObject, bar: 'baz'}>,
-     * }
+     * @return EventInterface<null, array{foo: CheckObject, bar: 'baz'}>
      */
-    public function checkSetParamsChangesTemplate(EventInterface $e): array
+    public function checkSetParamsChangesTemplate(EventInterface $e): EventInterface
     {
         $e->setParams([
             'foo' => new CheckObject(),
             'bar' => 'baz',
         ]);
-        return [
-            $e,
-        ];
+        return $e;
     }
 
     /**
@@ -81,16 +74,12 @@ class EventInterfaceChecks
      * key-of and value-of do not work on objects.
      *
      * @param EventInterface<null, array{foo: int}> $e
-     * @return array{
-     *     EventInterface<null, array{foo: int}>,
-     * }
+     * @return EventInterface<null, array{foo: int}>
      */
-    public function checkIndividualParamDoesNotChangeTemplate(EventInterface $e): array
+    public function checkIndividualParamDoesNotChangeTemplate(EventInterface $e): EventInterface
     {
         $e->setParam('foo', 'notAnInt');
         $e->setParam('bar', 'keyDidNotExist');
-        return [
-            $e,
-        ];
+        return $e;
     }
 }

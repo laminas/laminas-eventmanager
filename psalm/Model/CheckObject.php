@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasPsalm\EventManager;
+namespace LaminasPsalm\EventManager\Model;
 
 class CheckObject
 {
