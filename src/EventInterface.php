@@ -58,7 +58,7 @@ interface EventInterface
      * @param object|string|null $target
      * @template NewTTarget of object|string|null
      * @psalm-param NewTTarget $target
-     * @psalm-this-out self<NewTTarget, TParams>
+     * @psalm-this-out static&self<NewTTarget, TParams>
      * @return void
      */
     public function setTarget($target);
@@ -69,7 +69,7 @@ interface EventInterface
      * @param array|ArrayAccess|object $params
      * @template NewTParams of array|ArrayAccess|object
      * @psalm-param NewTParams $params
-     * @psalm-this-out self<TTarget, NewTParams>
+     * @psalm-this-out static&self<TTarget, NewTParams>
      * @return void
      */
     public function setParams($params);

@@ -7,8 +7,7 @@ namespace LaminasPsalm\EventManager\Model;
 use Laminas\EventManager\Event;
 
 /**
- * @template TTarget of CheckObject|null
- * @extends Event<TTarget, array{foo: string}>
+ * @extends Event<CheckObject|null, array{foo: string}>
  */
 class CheckEvent extends Event
 {
