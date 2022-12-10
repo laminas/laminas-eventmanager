@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.9.0 - TBD
+## 3.9.0 - 2022-12-10
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.9.0](https://github.com/laminas/laminas-eventmanager/milestone/15)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 3.9.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Enhancement
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [32: Add generic annotations to `EventInterface`](https://github.com/laminas/laminas-eventmanager/pull/32) thanks to @villermen
 
 ## 3.8.0 - 2022-12-03
 
