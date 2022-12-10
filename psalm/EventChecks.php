@@ -67,19 +67,18 @@ class EventChecks
      * Verifies that the inherited psalm-this-out annotations do not change the class back to one of the inherited
      * classes. Note: This assumes child classes have no template variables.
      *
-     * @return array {
-     *      CheckEvent,
-     *      Event<CheckObject, array{foo: 'bar'}>,
-     *      EventInterface<CheckObject, array{foo: 'bar'}>,
-     *      Event<'incorrect', array{foo: 'incorrect'}>,
+     * @return array{
+     *     CheckEvent&Event<CheckObject, array{foo: 'bar'}>,
+     *     CheckEvent&EventInterface<CheckObject, array{foo: 'bar'}>,
+     *     Event<CheckObject, array{foo: 'bar'}>,
      * }
      */
     public function checkThisOutInheritance(): array
     {
-        $event = new CheckEvent('event-name', new CheckObject());
+        $event = new CheckEvent();
+        $event->setTarget(new CheckObject());
         $event->setParams(['foo' => 'bar']);
         return [
-            $event,
             $event,
             $event,
             $event,
