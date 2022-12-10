@@ -14,6 +14,7 @@
 
     <!-- Paths to check -->
     <file>benchmarks</file>
+    <file>psalm</file>
     <file>src</file>
     <file>test</file>
 

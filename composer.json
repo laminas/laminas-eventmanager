@@ -23,7 +23,8 @@
             "php": "8.0.99"
         },
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "extra": {
@@ -52,7 +53,8 @@
     "autoload-dev": {
         "psr-4": {
             "LaminasTest\\EventManager\\": "test/",
-            "LaminasBench\\EventManager\\": "benchmarks/"
+            "LaminasBench\\EventManager\\": "benchmarks/",
+            "LaminasPsalm\\EventManager\\": "psalm/"
         }
     },
     "scripts": {
