@@ -71,6 +71,8 @@ class EventChecks
      *     CheckEvent&Event<CheckObject, array{foo: 'bar'}>,
      *     CheckEvent&EventInterface<CheckObject, array{foo: 'bar'}>,
      *     Event<CheckObject, array{foo: 'bar'}>,
+     *     CheckObject,
+     *     array{foo: 'bar'},
      * }
      */
     public function checkThisOutInheritance(): array
@@ -82,6 +84,8 @@ class EventChecks
             $event,
             $event,
             $event,
+            $event->getTarget(),
+            $event->getParams(),
         ];
     }
 }
