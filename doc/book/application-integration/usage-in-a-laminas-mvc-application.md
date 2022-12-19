@@ -10,7 +10,7 @@ laminas-eventmanager is already present in laminas-mvc based applications as it 
 
 ## Create Listener
 
-Create a listener as class using [a listener aggregate](../aggregates.md) and add the logger via constructor injection to create a valid object with all required dependencies, e.g. `module/Application/src/Listener/ErrorListener.php`:
+Create [a listener aggregate](../aggregates.md) that defines and registers a listener, using a logger injected via its constructor; as an example, consider the following definition in the file `module/Application/src/Listener/ErrorListener.php`:
 
 ```php
 namespace Application\Listener;
@@ -48,16 +48,16 @@ final class ErrorListener extends AbstractListenerAggregate
 }
 ```
 
-The listener aggregate was chosen because [it can listen to even more events](../aggregates.md#recommendations) due to the possible extension.
+The listener aggregate was chosen because [to allow it to listen to additional events](../aggregates.md#recommendations) if we want to later.
 
 NOTE: **More Events**
-All events that can be triggered are listed and explained in the [documentation of laminas-mvc](https://docs.laminas.dev/laminas-mvc/mvc-event/).
+All laminas-mvc events that can be triggered are listed and explained in the [laminas-mvc documentation](https://docs.laminas.dev/laminas-mvc/mvc-event/).
 
 ## Register Listener
 
-To register a listener in a laminas-mvc based application use the application or module configuration, such as `config/autload/global.php` or `module/Application/config/module.config.php`, and the configuration key `listeners`.
+To register a listener in a laminas-mvc based application, use either application or module configuration (such as `config/autload/global.php` or `module/Application/config/module.config.php`, respectively), and define the configuration key `listeners`.
 
-The current example uses the module configuration, e.g. `module/Application/config/module.config.php`:
+This example uses module configuration, e.g. `module/Application/config/module.config.php`:
 
 <pre class="language-php" data-line="4-6"><code>
 namespace Application;
@@ -71,7 +71,7 @@ return [
 </code></pre>
 
 All listeners registered in this way are fetched from the application service container.
-This means the listeners must be registered for the application service container.
+This means the listeners must be registered for the application service container to discover and create them.
 
 To register the listener for the application service container, extend the configuration of the module.
 Add the following lines to the module configuration file, e.g. `module/Application/config/module.config.php`:
