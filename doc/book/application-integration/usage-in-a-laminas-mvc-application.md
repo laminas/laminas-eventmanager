@@ -10,7 +10,7 @@ laminas-eventmanager is already present in laminas-mvc based applications as it 
 
 ## Create Listener
 
-Create [a listener aggregate](../aggregates.md) that defines and registers a listener, using a logger injected via its constructor; as an example, consider the following definition in the file `module/Application/src/Listener/ErrorListener.php`:
+Create [a listener aggregate](../aggregates.md) that defines and registers a listener, using a logger injected via its constructor to create a valid object with all required dependencies; as an example, consider the following definition in the file `module/Application/src/Listener/ErrorListener.php`:
 
 ```php
 namespace Application\Listener;
