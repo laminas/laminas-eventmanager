@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.9.1 - TBD
+## 3.9.1 - 2022-12-20
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.9.1](https://github.com/laminas/laminas-eventmanager/milestone/16)
 
-- Nothing.
+3.9.x bugfix release (patch)
 
-### Deprecated
+### 3.9.1
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Bug,Documentation
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [36: Adds missing description for usage in a laminas-mvc based application](https://github.com/laminas/laminas-eventmanager/pull/36) thanks to @froschdesign
 
 ## 3.9.0 - 2022-12-10
 
