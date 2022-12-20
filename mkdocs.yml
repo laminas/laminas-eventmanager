@@ -16,6 +16,8 @@ nav:
             - LazyListenerAggregate: lazy-listeners/lazy-listener-aggregate.md
         - "EventManager API": api.md
         - "Intercepting Filters": intercepting-filters.md
+        - "Application Integration":
+            - "Usage in a laminas-mvc Application": application-integration/usage-in-a-laminas-mvc-application.md
         - "Migration Guide":
             - Intro: migration/intro.md
             - "Removed Functionality": migration/removed.md
@@ -25,3 +27,4 @@ site_description: 'Implement events, signal slots, aspects, and observers!'
 repo_url: 'https://github.com/laminas/laminas-eventmanager'
 extra:
     project: Components
+    show_special_homepage: true
