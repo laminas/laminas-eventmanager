@@ -6,21 +6,22 @@ nav:
     - "Quick Start": quick-start.md
     - Tutorial: tutorial.md
     - Examples: examples.md
-    - "Wildcard Listeners": wildcard-listeners.md
-    - "Listener Aggregates": aggregates.md
-    - "Lazy Listeners":
-        - Introduction: lazy-listeners/intro.md
-        - LazyListener: lazy-listeners/lazy-listener.md
-        - LazyEventListener: lazy-listeners/lazy-event-listener.md
-        - LazyListenerAggregate: lazy-listeners/lazy-listener-aggregate.md
-    - "EventManager API": api.md
-    - "Intercepting Filters": intercepting-filters.md
-    - "Application Integration":
-        - "Usage in a laminas-mvc Application": application-integration/usage-in-a-laminas-mvc-application.md
-    - "Migration Guide":
-        - Introduction: migration/intro.md
-        - "Removed Functionality": migration/removed.md
-        - "Changed Functionality": migration/changed.md
+    - Reference:
+        - "Wildcard Listeners": wildcard-listeners.md
+        - "Listener Aggregates": aggregates.md
+        - "Lazy Listeners":
+            - Intro: lazy-listeners/intro.md
+            - LazyListener: lazy-listeners/lazy-listener.md
+            - LazyEventListener: lazy-listeners/lazy-event-listener.md
+            - LazyListenerAggregate: lazy-listeners/lazy-listener-aggregate.md
+        - "EventManager API": api.md
+        - "Intercepting Filters": intercepting-filters.md
+        - "Application Integration":
+            - "Usage in a laminas-mvc Application": application-integration/usage-in-a-laminas-mvc-application.md
+        - "Migration Guide":
+            - Intro: migration/intro.md
+            - "Removed Functionality": migration/removed.md
+            - "Changed Functionality": migration/changed.md
 site_name: laminas-eventmanager
 site_description: 'Implement events, signal slots, aspects, and observers!'
 repo_url: 'https://github.com/laminas/laminas-eventmanager'
