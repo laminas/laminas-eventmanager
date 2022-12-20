@@ -48,14 +48,14 @@ final class ErrorListener extends AbstractListenerAggregate
 }
 ```
 
-The listener aggregate was chosen because [to allow it to listen to additional events](../aggregates.md#recommendations) if we want to later.
+The listener aggregate was chosen because it is capable of [listening to multiple events](../aggregates.md#recommendations), which could prove useful in the future.
 
 NOTE: **More Events**
 All laminas-mvc events that can be triggered are listed and explained in the [laminas-mvc documentation](https://docs.laminas.dev/laminas-mvc/mvc-event/).
 
 ## Register Listener
 
-To register a listener in a laminas-mvc based application, use either application or module configuration (such as `config/autload/global.php` or `module/Application/config/module.config.php`, respectively), and define the configuration key `listeners`.
+To register a listener in a laminas-mvc based application, use either application or module configuration (such as `config/autoload/global.php` or `module/Application/config/module.config.php`, respectively), and define the configuration key `listeners`.
 
 This example uses module configuration, e.g. `module/Application/config/module.config.php`:
 
@@ -97,7 +97,7 @@ If the listener has no dependencies, use the [factory `Laminas\ServiceManager\Fa
 
 ## Logging Message
 
-To log a message, produce a [dispatch error](https://docs.laminas.dev/laminas-mvc/mvc-event/#mvceventevent_dispatch_error-dispatcherror) by navigate to `http://localhost:8080/1234`, and the 404 page should be displayed.
+To log a message, produce a [dispatch error](https://docs.laminas.dev/laminas-mvc/mvc-event/#mvceventevent_dispatch_error-dispatcherror) by navigating to `http://localhost:8080/1234`, where a 404 page should be displayed.
 The attached listener will log a message and write it to the registered storage backend(s).
 
 ## Learn More
