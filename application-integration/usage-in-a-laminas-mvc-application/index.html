@@ -13,10 +13,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-eventmanager">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-eventmanager/intercepting-filters/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-eventmanager/application-integration/usage-in-a-laminas-mvc-application/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Intercepting Filters - laminas-eventmanager - Laminas Docs</title>
+    <title>Usage in a laminas-mvc Application - laminas-eventmanager - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -122,7 +122,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-eventmanager</a>
+            <a href="../..">laminas-eventmanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -137,7 +137,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                                <a href="../../intro/" class="subnavigation__link">Intro</a>
                             </li>
                         
                     
@@ -151,7 +151,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -165,7 +165,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../tutorial/" class="subnavigation__link">Tutorial</a>
+                                <a href="../../tutorial/" class="subnavigation__link">Tutorial</a>
                             </li>
                         
                     
@@ -179,7 +179,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                                <a href="../../examples/" class="subnavigation__link">Examples</a>
                             </li>
                         
                     
@@ -198,13 +198,13 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
     </li>
 
                                     
@@ -215,25 +215,25 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+        <a href="../../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+        <a href="../../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+        <a href="../../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+        <a href="../../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
     </li>
 
             
@@ -243,13 +243,13 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../api/" class="subnavigation__link">EventManager API</a>
+        <a href="../../api/" class="subnavigation__link">EventManager API</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Intercepting Filters</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
     </li>
 
                                     
@@ -259,8 +259,8 @@
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../application-integration/usage-in-a-laminas-mvc-application/" class="subnavigation__link">Usage in a laminas-mvc Application</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Usage in a laminas-mvc Application</a>
     </li>
 
             
@@ -275,19 +275,19 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+        <a href="../../migration/intro/" class="subnavigation__link">Intro</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+        <a href="../../migration/removed/" class="subnavigation__link">Removed Functionality</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+        <a href="../../migration/changed/" class="subnavigation__link">Changed Functionality</a>
     </li>
 
             
@@ -371,27 +371,19 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#preparation" class="toc__link nav-link">Preparation</a>
+                        <a href="#create-listener" class="toc__link nav-link">Create Listener</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#filterchaininterface" class="toc__link nav-link">FilterChainInterface</a>
+                        <a href="#register-listener" class="toc__link nav-link">Register Listener</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#filteriterator" class="toc__link nav-link">FilterIterator</a>
+                        <a href="#logging-message" class="toc__link nav-link">Logging Message</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#filters" class="toc__link nav-link">Filters</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#execution" class="toc__link nav-link">Execution</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#notes" class="toc__link nav-link">Notes</a>
+                        <a href="#learn-more" class="toc__link nav-link">Learn More</a>
                     </li>
                 
             </ul>
@@ -408,7 +400,7 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item"><a href="..">laminas-eventmanager</a></li>
+                <li class="breadcrumb-item"><a href="../..">laminas-eventmanager</a></li>
 
                 
                     
@@ -418,8 +410,15 @@
                         
                     
                 
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Application Integration</li>
+                        
+                    
+                
 
-                <li class="breadcrumb-item active" aria-current="page">Intercepting Filters</li>
+                <li class="breadcrumb-item active" aria-current="page">Usage in a laminas-mvc Application</li>
             
         
     </ol>
@@ -432,186 +431,99 @@
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
+        <h2 class="chapter__headline">Application Integration</h2>
     
 
-    <h1 id="intercepting-filters">Intercepting Filters</h1>
-<p><a href="https://en.wikipedia.org/wiki/Interceptor_pattern">Intercepting filters</a> are a
-design pattern used for providing mechanisms to alter the workflow of an
-application. Implementing them provides a way to have a standard public
-interface, with the ability to attach arbitrary numbers of filters that will
-take the incoming arguments in order to alter the workflow.</p>
-<p>laminas-eventmanager provides an intercepting filter implementation via
-<code>Laminas\EventManager\FilterChain</code>.</p>
-<h2 id="preparation">Preparation</h2>
-<p>To use the <code>FilterChain</code> implementation, you will need to install laminas-stdlib,
-if you have not already:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-stdlib</code></pre>
-<h2 id="filterchaininterface">FilterChainInterface</h2>
-<p><code>Laminas\EventManager\FilterChain</code> is a concrete implementation of
-<code>Laminas\EventManager\Filter\FilterInterface</code>, which defines a workflow for
-intercepting filters. This includes the following methods:</p>
-<pre class="highlight"><code class="language-php">interface FilterInterface
+    <h1 id="usage-in-a-laminas-mvc-application">Usage in a laminas-mvc Application</h1>
+<p>The following example shows <em>one</em> potential use case of laminas-eventmanager within
+a laminas-mvc based application.
+The example creates a listener for logging errors of an application with <a href="https://docs.laminas.dev/laminas-log/">laminas-log</a>.</p>
+<p>Before starting, make sure laminas-log is <a href="https://docs.laminas.dev/laminas-log/installation/">installed and configured</a>.</p>
+<p>laminas-eventmanager is already present in laminas-mvc based applications as it is an event-driven MVC layer based on the event manager.</p>
+<h2 id="create-listener">Create Listener</h2>
+<p>Create <a href="../../aggregates/">a listener aggregate</a> that defines and registers a listener, using a logger injected via its constructor to create a valid object with all required dependencies; as an example, consider the following definition in the file <code>module/Application/src/Listener/ErrorListener.php</code>:</p>
+<pre class="highlight"><code class="language-php">namespace Application\Listener;
+
+use Exception;
+use Laminas\EventManager\AbstractListenerAggregate;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Log\Logger;
+use Laminas\Mvc\MvcEvent;
+
+final class ErrorListener extends AbstractListenerAggregate
 {
-    public function run($context, array $params = []);
+    public function __construct(
+        private readonly Logger $logger
+    ) {}
 
-    public function attach(callable $callback);
-    public function detach(callable $callback);
-
-    public function getFilters();
-    public function clearFilters();
-    public function getResponses();
-}</code></pre>
-<p>In many ways, it's very similar to the <code>EventManagerInterface</code>, but with a few
-key differences:</p>
-<ul>
-<li>A filter essentially defines a single event, which obviates the need for
-  attaching to multiple events. As such, you pass the target and parameters only
-  when "triggering" (<code>run()</code>) a filter.</li>
-<li>Instead of passing an <code>EventInterface</code> to each attached filter, a
-  <code>FilterInterface</code> implementation will pass:</li>
-<li>The <code>$context</code></li>
-<li>The <code>$params</code></li>
-<li>A <code>FilterIterator</code>, to allow the listener to call on the next filter.</li>
-</ul>
-<h2 id="filteriterator">FilterIterator</h2>
-<p>When executing <code>run()</code>, a <code>FilterInterface</code> implementation is expected to
-provide the stack of attached filters to each listener. This stack will
-typically be a <code>Laminas\EventManager\Filter\FilterIterator</code> instance.</p>
-<p><code>FilterIterator</code> extends <code>Laminas\Stdlib\FastPriorityQueue</code>, and, as such, is
-iterable, and provides the method <code>next()</code> for advancing the queue. </p>
-<p>As such, a listener should decide if more processing is necessary, and, if so,
-call on <code>$chain-&gt;next()</code>, passing the same set of arguments.</p>
-<h2 id="filters">Filters</h2>
-<p>A filter attached to a <code>FilterChain</code> instance can be any callable. However,
-these callables should expect the following arguments:</p>
-<pre class="highlight"><code class="language-php">function ($context, array $argv, FilterIterator $chain)</code></pre>
-<p>A filter can therefore act on the provided <code>$context</code>, using the provided
-arguments.</p>
-<p>Part of that execution can also be deciding that other filters should be called.
-To do so, it will call <code>$chain-&gt;next()</code>, providing it the same arguments:</p>
-<pre class="highlight"><code class="language-php">function ($context, array $argv, FilterIterator $chain)
-{
-    $message = isset($argv['message']) ? $argv['message'] : '';
-
-    $message = str_rot13($message);
-
-    $filtered = $chain-&gt;next($context, ['message' =&gt; $message], $chain);
-
-    return str_rot13($filtered);
-}</code></pre>
-<p>You can choose to call <code>$chain-&gt;next()</code> at any point in the filter, allowing you
-to:</p>
-<ul>
-<li>pre-process arguments and/or alter the state of the <code>$context</code>.</li>
-<li>post-process results and/or alter the state of the <code>$context</code> based on the
-  results.</li>
-<li>skip processing entirely if criteria is not met (e.g., missing arguments,
-  invalid <code>$context</code> state).</li>
-<li>short-circuit the chain if no processing is necessary (e.g., a cache hit is
-  detected).</li>
-</ul>
-<h2 id="execution">Execution</h2>
-<p>When executing a filter chain, you will provide the <code>$context</code>, which is usually
-the object under observation, and arguments, which are typically the arguments
-passed to the method triggering the filter chain.</p>
-<p>As an example, consider the following filter-enabled class:</p>
-<pre class="highlight"><code class="language-php">use Laminas\EventManager\FilterChain;
-
-class ObservedTarget
-{
-    private $filters = [];
-
-    public function attachFilter($method, callable $listener)
+    public function attach(EventManagerInterface $events, $priority = 1): void
     {
-        if (! method_exists($this, $method)) {
-            throw new \InvalidArgumentException('Invalid method');
+        $this-&gt;listeners[] = $events-&gt;attach(
+            MvcEvent::EVENT_DISPATCH_ERROR,
+            [$this, 'onDispatchError']
+        );
+    }
+
+    public function onDispatchError(MvcEvent $event): void
+    {
+        /** @var Exception|null $exception */
+        $exception = $event-&gt;getParam('exception');
+        if ($exception) {
+            $this-&gt;logger-&gt;crit('Error: ' . $exception-&gt;getMessage());
+        } else {
+            $this-&gt;logger-&gt;crit('Error: ' . $event-&gt;getError());
         }
-        $this-&gt;getFilters($method)-&gt;attach($listener);
-    }
-
-    public function execute($message)
-    {
-        return $this-&gt;getFilters(__FUNCTION__)
-            -&gt;run($this, compact('message'));
-    }
-
-    private function getFilters($method)
-    {
-        if (! isset($this-&gt;filters[$method])) {
-            $this-&gt;filters[$method] = new FilterChain();
-        }
-        return $this-&gt;filters[$method];
     }
 }</code></pre>
-<p>Now, let's create an instance of the class, and attach some filters to it.</p>
-<pre class="highlight"><code class="language-php">$observed = new ObservedTarget();
+<p>The listener aggregate was chosen because it is capable of <a href="../../aggregates/#recommendations">listening to multiple events</a>, which could prove useful in the future.</p>
+<div class="admonition note">
+<p class="admonition-title">More Events</p>
+<p>
+All laminas-mvc events that can be triggered are listed and explained in the <a href="https://docs.laminas.dev/laminas-mvc/mvc-event/">laminas-mvc documentation</a>.</p>
+</div>
+<h2 id="register-listener">Register Listener</h2>
+<p>To register a listener in a laminas-mvc based application, use either application or module configuration (such as <code>config/autoload/global.php</code> or <code>module/Application/config/module.config.php</code>, respectively), and define the configuration key <code>listeners</code>.</p>
+<p>This example uses module configuration, e.g. <code>module/Application/config/module.config.php</code>:</p>
+<pre class="language-php" data-line="4-6"><code>
+namespace Application;
 
-$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
-    $args['message'] = isset($args['message'])
-        ? strtoupper($args['message'])
-        : '';
+return [
+    'listeners' => [
+        Listener\ErrorListener::class,
+    ],
+    // …
+];
+</code></pre>
 
-    return $chain-&gt;next($context, $args, $chain);
-});
+<p>All listeners registered in this way are fetched from the application service container.
+This means the listeners must be registered for the application service container to discover and create them.</p>
+<p>To register the listener for the application service container, extend the configuration of the module.
+Add the following lines to the module configuration file, e.g. <code>module/Application/config/module.config.php</code>:</p>
+<pre class="language-php" data-line="3,8"><code>
+namespace Application;
 
-$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
-    return (isset($args['message'])
-        ? str_rot13($args['message'])
-        : '');
-});
+use Laminas\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
 
-$observed-&gt;attach(function ($context, array $args, FilterIterator $chain) {
-    return (isset($args['message'])
-        ? strtolower($args['message'])
-        : '');
-});</code></pre>
-<p>Finally, we'll call the method, and see what results we get:</p>
-<pre class="highlight"><code class="language-php">$observed-&gt;execute('Hello, world!');</code></pre>
-<p>Since filters are run in the order in which they are attached, the following
-will occur:</p>
+return [
+    'service_manager' => [
+        'factories' => [
+            Listener\ErrorListener::class => ReflectionBasedAbstractFactory::class,
+        ],
+    ],
+    // …
+];
+</code></pre>
+
+<p>The example uses the <a href="https://docs.laminas.dev/laminas-servicemanager/reflection-abstract-factory/">reflection factory from laminas-servicemanager</a> to resolve the constructor dependencies for the listener class.</p>
+<p>If the listener has no dependencies, use the <a href="https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/#factories">factory <code>Laminas\ServiceManager\Factory\InvokableFactory</code></a>.</p>
+<h2 id="logging-message">Logging Message</h2>
+<p>To log a message, produce a <a href="https://docs.laminas.dev/laminas-mvc/mvc-event/#mvceventevent_dispatch_error-dispatcherror">dispatch error</a> by navigating to <code>http://localhost:8080/1234</code>, where a 404 page should be displayed.
+The attached listener will log a message and write it to the registered storage backend(s).</p>
+<h2 id="learn-more">Learn More</h2>
 <ul>
-<li>The first filter will transform our message into <code>HELLO, WORLD!</code>, and then
-  call on the next filter.</li>
-<li>The second filter will apply a ROT13 transformation on the string and <em>return</em>
-  it: <code>!DLROW ,OLLEH</code>.</li>
+<li><a href="../../aggregates/">Listener Aggregates</a></li>
+<li><a href="https://docs.laminas.dev/laminas-mvc/mvc-event/">The MvcEvent</a></li>
 </ul>
-<p>Because the second filter does not call <code>$chain-&gt;next()</code>, the third filter never
-executes.</p>
-<h2 id="notes">Notes</h2>
-<p>We recommend using the construct <code>run($this, compact(method argument names)</code>
-when invoking a <code>FilterChain</code>. This makes the argument keys predictable inside
-filters.</p>
-<p>We also recommend putting the default logic for the method invoking the filter
-chain in a filter itself, and attaching it at invocation. This allows
-intercepting filters to replace the main logic, while still providing a default
-path. This might look like:</p>
-<pre class="highlight"><code class="language-php">// Assume that the class contains the `attachFilter()` implementation from above.
-class ObservedTarget
-{
-    private $attached = [];
-
-    public function execute($message)
-    {
-        if (! isset($this-&gt;attached[__FUNCTION__])) {
-            $this-&gt;attachFilter(__FUNCTION__, $this-&gt;getExecuteFilter();
-        }
-
-        return $this-&gt;getFilters(__FUNCTION__)
-            -&gt;run($this, compact('message'));
-    }
-
-    private function getExecuteFilter()
-    {
-        $this-&gt;attached['execute'] = true;
-        return function ($context, array $args, FilterIterator $chain) {
-            return $args['message'];
-        };
-    }
-}</code></pre>
-<p>Intercepting filters are a powerful way to introduce aspect-oriented programming
-paradigms into your code, as well as general-purpose mechanisms for introducing
-plugins.</p>
 
 
 
@@ -622,10 +534,10 @@ plugins.</p>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../api/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../intercepting-filters/">
                     <small class="page-nav__label">Previous</small>
                     <i class="fa fa-chevron-left"></i>
-                    EventManager API
+                    Intercepting Filters
                 </a>
             
         </li>
@@ -633,9 +545,9 @@ plugins.</p>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../application-integration/usage-in-a-laminas-mvc-application/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../migration/intro/">
                     <small class="page-nav__label">Next</small>
-                    Usage in a laminas-mvc Application
+                    Intro
                     <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -668,7 +580,7 @@ plugins.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-eventmanager</a>
+            <a href="../..">laminas-eventmanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -683,7 +595,7 @@ plugins.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../intro/" class="subnavigation__link">Intro</a>
+                                <a href="../../intro/" class="subnavigation__link">Intro</a>
                             </li>
                         
                     
@@ -697,7 +609,7 @@ plugins.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -711,7 +623,7 @@ plugins.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../tutorial/" class="subnavigation__link">Tutorial</a>
+                                <a href="../../tutorial/" class="subnavigation__link">Tutorial</a>
                             </li>
                         
                     
@@ -725,7 +637,7 @@ plugins.</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../examples/" class="subnavigation__link">Examples</a>
+                                <a href="../../examples/" class="subnavigation__link">Examples</a>
                             </li>
                         
                     
@@ -744,13 +656,13 @@ plugins.</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
     </li>
 
                                     
@@ -761,25 +673,25 @@ plugins.</p>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
+        <a href="../../lazy-listeners/intro/" class="subnavigation__link">Intro</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
+        <a href="../../lazy-listeners/lazy-listener/" class="subnavigation__link">LazyListener</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
+        <a href="../../lazy-listeners/lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
+        <a href="../../lazy-listeners/lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
     </li>
 
             
@@ -789,13 +701,13 @@ plugins.</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../api/" class="subnavigation__link">EventManager API</a>
+        <a href="../../api/" class="subnavigation__link">EventManager API</a>
     </li>
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Intercepting Filters</a>
+    <li class="subnavigation__list-item ">
+        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
     </li>
 
                                     
@@ -805,8 +717,8 @@ plugins.</p>
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../application-integration/usage-in-a-laminas-mvc-application/" class="subnavigation__link">Usage in a laminas-mvc Application</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Usage in a laminas-mvc Application</a>
     </li>
 
             
@@ -821,19 +733,19 @@ plugins.</p>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/intro/" class="subnavigation__link">Intro</a>
+        <a href="../../migration/intro/" class="subnavigation__link">Intro</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/removed/" class="subnavigation__link">Removed Functionality</a>
+        <a href="../../migration/removed/" class="subnavigation__link">Removed Functionality</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/changed/" class="subnavigation__link">Changed Functionality</a>
+        <a href="../../migration/changed/" class="subnavigation__link">Changed Functionality</a>
     </li>
 
             
@@ -933,13 +845,13 @@ plugins.</p>
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-eventmanager';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
