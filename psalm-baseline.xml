@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
-  <file src="src/Event.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_array($params) &amp;&amp; ! is_object($params)</code>
-    </DocblockTypeContradiction>
-    <LessSpecificImplementedReturnType occurrences="1">
-      <code>array|object|ArrayAccess</code>
-    </LessSpecificImplementedReturnType>
-    <PossiblyNullPropertyAssignmentValue occurrences="1">
-      <code>$target</code>
-    </PossiblyNullPropertyAssignmentValue>
-    <PropertyNotSetInConstructor occurrences="2">
-      <code>$name</code>
-      <code>$target</code>
-    </PropertyNotSetInConstructor>
-    <RedundantCastGivenDocblockType occurrences="2">
-      <code>(bool) $flag</code>
-      <code>(string) $name</code>
-    </RedundantCastGivenDocblockType>
-  </file>
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
   <file src="src/EventManager.php">
-    <ArgumentTypeCoercion occurrences="2">
-      <code>$argv</code>
-      <code>$argv</code>
-    </ArgumentTypeCoercion>
     <DocblockTypeContradiction occurrences="2">
       <code>is_string($eventName)</code>
       <code>is_string($eventName)</code>
@@ -69,6 +46,9 @@
     </MissingReturnType>
   </file>
   <file src="src/Filter/FilterIterator.php">
+    <InvalidArgument occurrences="1">
+      <code>$value</code>
+    </InvalidArgument>
     <LessSpecificImplementedReturnType occurrences="1">
       <code>mixed</code>
     </LessSpecificImplementedReturnType>
@@ -333,15 +313,9 @@
       <code>$result</code>
       <code>$result</code>
     </MissingClosureParamType>
-    <TypeDoesNotContainType occurrences="2">
-      <code>assertFalse</code>
-      <code>assertFalse</code>
-    </TypeDoesNotContainType>
   </file>
   <file src="test/EventTest.php">
-    <InvalidArgument occurrences="3">
-      <code>$params</code>
-      <code>$params</code>
+    <InvalidArgument occurrences="1">
       <code>'test'</code>
     </InvalidArgument>
     <UnusedVariable occurrences="1">

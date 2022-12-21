@@ -16,6 +16,7 @@ trait DeprecatedAssertions
 {
     /**
      * @param mixed $value
+     * @param non-empty-string $attributeName
      */
     public static function assertAttributeEmpty(
         string $attributeName,
@@ -35,6 +36,7 @@ trait DeprecatedAssertions
 
     /**
      * @param mixed $value
+     * @param non-empty-string $attributeName
      */
     public static function assertAttributeEquals(
         $value,
@@ -55,6 +57,7 @@ trait DeprecatedAssertions
 
     /**
      * @param mixed $value
+     * @param non-empty-string $attributeName
      */
     public static function assertAttributeInstanceOf(
         string $type,
@@ -75,6 +78,7 @@ trait DeprecatedAssertions
 
     /**
      * @param mixed $value
+     * @param non-empty-string $attributeName
      */
     public static function assertAttributeSame(
         $value,
@@ -94,6 +98,7 @@ trait DeprecatedAssertions
     }
 
     /**
+     * @param non-empty-string $property
      * @return mixed
      */
     private static function getPropertyValue(object $instance, string $property)
@@ -115,6 +120,7 @@ trait DeprecatedAssertions
         return null;
     }
 
+    /** @param non-empty-string $property */
     private static function propertyExists(object $instance, string $property): bool
     {
         if (property_exists($instance, $property)) {
