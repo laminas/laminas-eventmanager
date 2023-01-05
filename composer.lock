@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b29136d94f13b312e77697ebdfafc009",
+    "content-hash": "4b2c7653de08cbe201265079b4cfb821",
     "packages": [],
     "packages-dev": [
         {
@@ -1007,20 +1007,20 @@
         },
         {
             "name": "laminas/laminas-coding-standard",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-coding-standard.git",
-                "reference": "eb076dd86aa93dd424856b150c9b6f76c1fdfabc"
+                "reference": "c1aaa18a7c860c6932677a3e4ec13161f9fc7d61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-coding-standard/zipball/eb076dd86aa93dd424856b150c9b6f76c1fdfabc",
-                "reference": "eb076dd86aa93dd424856b150c9b6f76c1fdfabc",
+                "url": "https://api.github.com/repos/laminas/laminas-coding-standard/zipball/c1aaa18a7c860c6932677a3e4ec13161f9fc7d61",
+                "reference": "c1aaa18a7c860c6932677a3e4ec13161f9fc7d61",
                 "shasum": ""
             },
             "require": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.0",
                 "php": "^7.4 || ^8.0",
                 "slevomat/coding-standard": "^7.0",
                 "squizlabs/php_codesniffer": "^3.6",
@@ -1059,7 +1059,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-08-24T17:45:47+00:00"
+            "time": "2023-01-05T15:53:40+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
