@@ -261,8 +261,10 @@ class EventManager implements EventManagerInterface
      * listener. It returns an ArrayObject of the arguments, which may then be
      * passed to trigger().
      *
-     * @param  array $args
-     * @return ArrayObject
+     * @template Tk of array-key
+     * @template Tv
+     * @param  array<Tk, Tv> $args
+     * @return ArrayObject<Tk, Tv>
      */
     public function prepareArgs(array $args)
     {
