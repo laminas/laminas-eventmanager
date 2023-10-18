@@ -9,6 +9,8 @@ use Laminas\EventManager\ListenerAggregateInterface;
 use LaminasTest\EventManager\TestAsset\MockListenerAggregateTrait;
 use PHPUnit\Framework\TestCase;
 
+use function in_array;
+
 class ListenerAggregateTraitTest extends TestCase
 {
     /** @var class-string<ListenerAggregateInterface> */
@@ -22,9 +24,18 @@ class ListenerAggregateTraitTest extends TestCase
         $events = $this->createMock(EventManagerInterface::class);
         $events->expects(self::atLeast(2))
             ->method('attach')
-            ->withConsecutive(
-                ['foo.bar', [$aggregate, 'doFoo']],
-                ['foo.baz', [$aggregate, 'doFoo']],
+            ->with(
+                self::callback(static function (string $value): bool {
+                    self::assertTrue(in_array($value, ['foo.bar', 'foo.baz'], true));
+
+                    return true;
+                }),
+                self::callback(static function (array $value) use ($aggregate): bool {
+                    self::assertSame($aggregate, $value[0] ?? null);
+                    self::assertSame('doFoo', $value[1] ?? null);
+
+                    return true;
+                }),
             )->willReturnArgument(1);
 
         $events->expects(self::exactly(2))
