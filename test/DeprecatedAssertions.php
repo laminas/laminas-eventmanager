@@ -112,7 +112,6 @@ trait DeprecatedAssertions
         do {
             if ($r->hasProperty($property)) {
                 $propertyReflection = $r->getProperty($property);
-                $propertyReflection->setAccessible(true);
                 return $propertyReflection->getValue($instance);
             }
         } while ($r = $r->getParentClass());

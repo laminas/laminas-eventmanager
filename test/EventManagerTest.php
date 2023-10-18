@@ -51,8 +51,7 @@ class EventManagerTest extends TestCase
      */
     private function getEventListFromManager(EventManager $manager): array
     {
-        $r = new ReflectionProperty($manager, 'events');
-        $r->setAccessible(true);
+        $r     = new ReflectionProperty($manager, 'events');
         $value = $r->getValue($manager);
         self::assertIsArray($value);
         $keys = array_keys($value);
@@ -69,8 +68,7 @@ class EventManagerTest extends TestCase
      */
     private function getListenersForEvent(string $event, EventManager $manager): array
     {
-        $r = new ReflectionProperty($manager, 'events');
-        $r->setAccessible(true);
+        $r      = new ReflectionProperty($manager, 'events');
         $events = $r->getValue($manager);
         self::assertIsArray($events);
 
