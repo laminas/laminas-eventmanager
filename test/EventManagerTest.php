@@ -51,8 +51,7 @@ class EventManagerTest extends TestCase
      */
     private function getEventListFromManager(EventManager $manager): array
     {
-        $r = new ReflectionProperty($manager, 'events');
-        $r->setAccessible(true);
+        $r     = new ReflectionProperty($manager, 'events');
         $value = $r->getValue($manager);
         self::assertIsArray($value);
         $keys = array_keys($value);
@@ -69,8 +68,7 @@ class EventManagerTest extends TestCase
      */
     private function getListenersForEvent(string $event, EventManager $manager): array
     {
-        $r = new ReflectionProperty($manager, 'events');
-        $r->setAccessible(true);
+        $r      = new ReflectionProperty($manager, 'events');
         $events = $r->getValue($manager);
         self::assertIsArray($events);
 
@@ -109,7 +107,7 @@ class EventManagerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: string}> */
-    public function eventArguments(): array
+    public static function eventArguments(): array
     {
         return [
             'single-named-event' => ['test'],
@@ -502,7 +500,7 @@ class EventManagerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidEventsForAttach(): array
+    public static function invalidEventsForAttach(): array
     {
         return [
             'null'                   => [null],
@@ -741,9 +739,9 @@ class EventManagerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidEventsForDetach(): array
+    public static function invalidEventsForDetach(): array
     {
-        $events = $this->invalidEventsForAttach();
+        $events = self::invalidEventsForAttach();
         unset($events['null']);
         return $events;
     }
@@ -781,13 +779,9 @@ class EventManagerTest extends TestCase
         self::assertNotContains($listener, $listeners);
     }
 
-    /** @psalm-return array<string, array{0: string|EventInterface, 1: string, 2: null|callable}> */
-    public function eventsMissingNames(): array
+    /** @psalm-return array<string, array{0: string|null, 1: string, 2: null|callable}> */
+    public static function eventsMissingNames(): array
     {
-        $event = $this->createMock(EventInterface::class);
-        $event->expects(self::atLeast(1))
-            ->method('getName')
-            ->willReturn('');
         $callback = static function (): void {
         };
 
@@ -796,21 +790,27 @@ class EventManagerTest extends TestCase
         return [
             'trigger-empty-string'           => ['',     'trigger',           null],
             'trigger-until-empty-string'     => ['',     'triggerUntil',      $callback],
-            'trigger-event-empty-name'       => [$event, 'triggerEvent',      null],
-            'trigger-event-until-empty-name' => [$event, 'triggerEventUntil', $callback],
+            'trigger-event-empty-name'       => [null,   'triggerEvent',      null],
+            'trigger-event-until-empty-name' => [null,   'triggerEventUntil', $callback],
         ];
         // @codingStandardsIgnoreEnd
     }
 
     /**
      * @dataProvider eventsMissingNames
-     * @param string|EventInterface $event
      */
     public function testTriggeringAnEventWithAnEmptyNameRaisesAnException(
-        $event,
+        string|null $event,
         string $method,
         ?callable $callback
     ): void {
+        if ($event === null) {
+            $event = $this->createMock(EventInterface::class);
+            $event->expects(self::atLeast(1))
+                ->method('getName')
+                ->willReturn('');
+        }
+
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('missing a name');
         if ($callback) {

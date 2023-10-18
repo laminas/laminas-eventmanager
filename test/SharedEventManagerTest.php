@@ -44,8 +44,8 @@ class SharedEventManagerTest extends TestCase
         return $listeners[$priority];
     }
 
-    /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidIdentifiers(): array
+    /** @return array<string, array{0: mixed}> */
+    public static function invalidIdentifiers(): array
     {
         return [
             'null'                   => [null],
@@ -73,7 +73,7 @@ class SharedEventManagerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidEventNames(): array
+    public static function invalidEventNames(): array
     {
         return [
             'null'                   => [null],
@@ -109,7 +109,7 @@ class SharedEventManagerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: null|string, 1: null|string}> */
-    public function detachIdentifierAndEvent(): array
+    public static function detachIdentifierAndEvent(): array
     {
         return [
             'null-identifier-and-null-event' => [null, null],
@@ -271,10 +271,10 @@ class SharedEventManagerTest extends TestCase
         ], $this->manager->getListeners(['IDENTIFIER'], 'EVENT'));
     }
 
-    /** @psalm-return array<string, array{0: mixed} */
-    public function invalidIdentifiersAndEvents(): array
+    /** @psalm-return array<string, array{0: mixed}> */
+    public static function invalidIdentifiersAndEvents(): array
     {
-        $types = $this->invalidIdentifiers();
+        $types = self::invalidIdentifiers();
         unset($types['null']);
         return $types;
     }
@@ -302,10 +302,10 @@ class SharedEventManagerTest extends TestCase
         $this->manager->detach($this->callback, 'IDENTIFIER', $eventName);
     }
 
-    /** @psalm-return array<string, array{0: mixed} */
-    public function invalidListenersAndEventNamesForFetchingListeners(): array
+    /** @psalm-return array<string, array{0: mixed}> */
+    public static function invalidListenersAndEventNamesForFetchingListeners(): array
     {
-        $events             = $this->invalidIdentifiers();
+        $events             = self::invalidIdentifiers();
         $events['wildcard'] = ['*'];
         return $events;
     }

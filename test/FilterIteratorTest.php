@@ -77,7 +77,7 @@ class FilterIteratorTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidFilters(): array
+    public static function invalidFilters(): array
     {
         return [
             'null'                 => [null],

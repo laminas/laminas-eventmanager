@@ -15,6 +15,7 @@ use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
 use function array_shift;
+use function in_array;
 
 class LazyListenerAggregateTest extends TestCase
 {
@@ -27,7 +28,7 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidListenerTypes(): array
+    public static function invalidListenerTypes(): array
     {
         return [
             'null'       => [null],
@@ -43,7 +44,7 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: array<string, string>}> */
-    public function invalidListeners(): array
+    public static function invalidListeners(): array
     {
         return [
             'missing-event'    => [
@@ -115,8 +116,7 @@ class LazyListenerAggregateTest extends TestCase
 
         $aggregate = new LazyListenerAggregate($listeners, $this->container);
 
-        $r = new ReflectionProperty($aggregate, 'lazyListeners');
-        $r->setAccessible(true);
+        $r    = new ReflectionProperty($aggregate, 'lazyListeners');
         $test = $r->getValue($aggregate);
 
         self::assertInstanceOf(LazyEventListener::class, $test[0]);
@@ -140,19 +140,24 @@ class LazyListenerAggregateTest extends TestCase
      */
     public function testAttachAttachesLazyListenersViaClosures(array $listeners)
     {
-        $isCallable = self::callback(function (mixed $arg): bool {
-            self::assertIsCallable($arg);
-
-            return true;
-        });
-
         $aggregate = new LazyListenerAggregate($listeners, $this->container);
         $events    = $this->createMock(EventManagerInterface::class);
         $events->expects(self::exactly(2))
             ->method('attach')
-            ->withConsecutive(
-                ['event', $isCallable, 5],
-                ['event2', $isCallable, 7],
+            ->with(
+                self::callback(static function (string $event): bool {
+                    self::assertTrue(in_array($event, ['event', 'event2']));
+                    return true;
+                }),
+                self::callback(static function ($value): bool {
+                    self::assertIsCallable($value);
+                    return true;
+                }),
+                self::callback(static function (int $priority): bool {
+                    self::assertTrue($priority === 5 || $priority === 7);
+
+                    return true;
+                }),
             );
 
         $aggregate->attach($events, 7);
@@ -189,8 +194,7 @@ class LazyListenerAggregateTest extends TestCase
         $aggregate = new LazyListenerAggregate($listeners, $this->container);
         $aggregate->attach($events);
 
-        $r = new ReflectionProperty($aggregate, 'listeners');
-        $r->setAccessible(true);
+        $r         = new ReflectionProperty($aggregate, 'listeners');
         $listeners = $r->getValue($aggregate);
 
         self::assertIsArray($listeners);

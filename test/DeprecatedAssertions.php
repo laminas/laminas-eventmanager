@@ -15,7 +15,6 @@ use function sprintf;
 trait DeprecatedAssertions
 {
     /**
-     * @param mixed $value
      * @param non-empty-string $attributeName
      */
     public static function assertAttributeEmpty(
@@ -56,7 +55,6 @@ trait DeprecatedAssertions
     }
 
     /**
-     * @param mixed $value
      * @param non-empty-string $attributeName
      */
     public static function assertAttributeInstanceOf(
@@ -112,7 +110,6 @@ trait DeprecatedAssertions
         do {
             if ($r->hasProperty($property)) {
                 $propertyReflection = $r->getProperty($property);
-                $propertyReflection->setAccessible(true);
                 return $propertyReflection->getValue($instance);
             }
         } while ($r = $r->getParentClass());
