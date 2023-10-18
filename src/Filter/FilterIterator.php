@@ -4,7 +4,9 @@ namespace Laminas\EventManager\Filter;
 
 use Laminas\EventManager\Exception;
 use Laminas\Stdlib\FastPriorityQueue;
+use ReturnTypeWillChange;
 
+use function assert;
 use function get_debug_type;
 use function is_callable;
 use function sprintf;
@@ -103,6 +105,7 @@ class FilterIterator extends FastPriorityQueue
      * @param  FilterIterator $chain
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function next($context = null, array $params = [], $chain = null)
     {
         if (empty($context) || ($chain instanceof FilterIterator && $chain->isEmpty())) {
@@ -115,6 +118,7 @@ class FilterIterator extends FastPriorityQueue
         }
 
         $next = $this->extract();
+        assert(is_callable($next));
         return $next($context, $params, $chain);
     }
 }
