@@ -1,7 +1,5 @@
 /.phpcs-cache
-/.phpunit.result.cache
-/clover.xml
-/coveralls-upload.json
+/.phpunit
 /doc/html/
 /laminas-mkdoc-theme.tgz
 /laminas-mkdoc-theme/

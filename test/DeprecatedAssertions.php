@@ -15,7 +15,6 @@ use function sprintf;
 trait DeprecatedAssertions
 {
     /**
-     * @param mixed $value
      * @param non-empty-string $attributeName
      */
     public static function assertAttributeEmpty(
@@ -56,7 +55,6 @@ trait DeprecatedAssertions
     }
 
     /**
-     * @param mixed $value
      * @param non-empty-string $attributeName
      */
     public static function assertAttributeInstanceOf(

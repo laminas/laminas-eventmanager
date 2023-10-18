@@ -28,7 +28,7 @@ class LazyListenerTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidTypes(): array
+    public static function invalidTypes(): array
     {
         return [
             'null'       => [null],

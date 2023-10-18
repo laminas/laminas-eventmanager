@@ -28,7 +28,7 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: mixed}> */
-    public function invalidListenerTypes(): array
+    public static function invalidListenerTypes(): array
     {
         return [
             'null'       => [null],
@@ -44,7 +44,7 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /** @psalm-return array<string, array{0: array<string, string>}> */
-    public function invalidListeners(): array
+    public static function invalidListeners(): array
     {
         return [
             'missing-event'    => [
