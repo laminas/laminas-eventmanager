@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManagerInterface;
-use Laminas\EventManager\ListenerAggregateInterface;
 use LaminasTest\EventManager\TestAsset\MockListenerAggregateTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -13,13 +12,9 @@ use function in_array;
 
 class ListenerAggregateTraitTest extends TestCase
 {
-    /** @var class-string<ListenerAggregateInterface> */
-    public $aggregateClass = MockListenerAggregateTrait::class;
-
     public function testDetachRemovesAttachedListeners(): void
     {
-        $class     = $this->aggregateClass;
-        $aggregate = new $class();
+        $aggregate = new MockListenerAggregateTrait();
 
         $events = $this->createMock(EventManagerInterface::class);
         $events->expects(self::atLeast(2))
@@ -45,7 +40,6 @@ class ListenerAggregateTraitTest extends TestCase
         $aggregate->attach($events);
 
         $listeners = $aggregate->getCallbacks();
-        self::assertIsArray($listeners);
         self::assertCount(2, $listeners);
 
         foreach ($listeners as $listener) {

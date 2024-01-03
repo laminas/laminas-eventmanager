@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
   <file src="src/EventManager.php">
     <DocblockTypeContradiction>
       <code>is_string($eventName)</code>
@@ -25,6 +25,11 @@
       <code>(int) $priority</code>
     </RedundantCastGivenDocblockType>
   </file>
+  <file src="src/EventManagerAwareInterface.php">
+    <UnusedClass>
+      <code>EventManagerAwareInterface</code>
+    </UnusedClass>
+  </file>
   <file src="src/EventManagerAwareTrait.php">
     <MissingConstructor>
       <code>$events</code>
@@ -32,15 +37,33 @@
     <MissingReturnType>
       <code>setEventManager</code>
     </MissingReturnType>
-    <MixedArgumentTypeCoercion>
-      <code>$identifiers</code>
-    </MixedArgumentTypeCoercion>
-    <RedundantConditionGivenDocblockType>
+    <PossiblyUnusedMethod>
+      <code>getEventManager</code>
+    </PossiblyUnusedMethod>
+    <RedundantCondition>
       <code><![CDATA[(is_string($this->eventIdentifier))
                 || (is_array($this->eventIdentifier))]]></code>
       <code><![CDATA[is_string($this->eventIdentifier)]]></code>
       <code><![CDATA[isset($this->eventIdentifier)]]></code>
-    </RedundantConditionGivenDocblockType>
+    </RedundantCondition>
+    <TypeDoesNotContainType>
+      <code><![CDATA[$this->eventIdentifier instanceof Traversable]]></code>
+      <code><![CDATA[(is_string($this->eventIdentifier))
+                || (is_array($this->eventIdentifier))]]></code>
+      <code><![CDATA[(is_string($this->eventIdentifier))
+                || (is_array($this->eventIdentifier))
+                || $this->eventIdentifier instanceof Traversable]]></code>
+      <code><![CDATA[(is_string($this->eventIdentifier))
+                || (is_array($this->eventIdentifier))
+                || $this->eventIdentifier instanceof Traversable]]></code>
+      <code><![CDATA[is_array($this->eventIdentifier)]]></code>
+      <code><![CDATA[is_object($this->eventIdentifier)]]></code>
+    </TypeDoesNotContainType>
+  </file>
+  <file src="src/EventsCapableInterface.php">
+    <PossiblyUnusedMethod>
+      <code>getEventManager</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Filter/FilterInterface.php">
     <MissingReturnType>
@@ -113,9 +136,18 @@
       <code><![CDATA[$this->listener]]></code>
       <code><![CDATA[$this->listener]]></code>
     </MixedReturnStatement>
+    <PossiblyUnusedReturnValue>
+      <code>callable</code>
+    </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
       <code>$listener</code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/LazyListenerAggregate.php">
+    <UnusedProperty>
+      <code>$container</code>
+      <code>$env</code>
+    </UnusedProperty>
   </file>
   <file src="src/ResponseCollection.php">
     <MissingReturnType>
@@ -209,9 +241,6 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/SharedEventManagerInterface.php">
-    <InvalidParamDefault>
-      <code>string</code>
-    </InvalidParamDefault>
     <MissingReturnType>
       <code>attach</code>
       <code>clearListeners</code>
@@ -438,12 +467,6 @@
       <code>LazyListener</code>
     </MoreSpecificReturnType>
   </file>
-  <file src="test/ListenerAggregateTraitTest.php">
-    <UndefinedInterfaceMethod>
-      <code>getCallbacks</code>
-      <code>getCallbacks</code>
-    </UndefinedInterfaceMethod>
-  </file>
   <file src="test/SharedEventManagerTest.php">
     <MissingReturnType>
       <code>testAttachRaisesExceptionForInvalidEvent</code>
@@ -488,6 +511,11 @@
     <UnusedVariable>
       <code>$callback</code>
     </UnusedVariable>
+  </file>
+  <file src="test/SharedListenerIntegrationTest.php">
+    <InvalidPropertyFetch>
+      <code><![CDATA[$listener->count]]></code>
+    </InvalidPropertyFetch>
   </file>
   <file src="test/Test/EventListenerIntrospectionTraitTest.php">
     <MissingClosureParamType>
@@ -573,34 +601,23 @@
     <MissingReturnType>
       <code>build</code>
     </MissingReturnType>
+    <PossiblyUnusedMethod>
+      <code>build</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/TestAsset/CountingListener.php">
+    <PossiblyUnusedProperty>
+      <code>$index</code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="test/TestAsset/MockAbstractListenerAggregate.php">
     <MissingReturnType>
       <code>doFoo</code>
     </MissingReturnType>
   </file>
-  <file src="test/TestAsset/MockAggregate.php">
-    <ImplementedReturnTypeMismatch>
-      <code>string</code>
-    </ImplementedReturnTypeMismatch>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->listeners]]></code>
-    </InvalidPropertyAssignmentValue>
-    <MixedArgument>
-      <code>$listener</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$listener</code>
-    </MixedAssignment>
-  </file>
   <file src="test/TestAsset/MockListenerAggregateTrait.php">
     <MissingReturnType>
       <code>doFoo</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/TestAsset/StaticEventsMock.php">
-    <MissingReturnType>
-      <code>attach</code>
     </MissingReturnType>
   </file>
 </files>

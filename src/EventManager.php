@@ -7,8 +7,7 @@ use ArrayObject;
 use function array_keys;
 use function array_merge;
 use function array_unique;
-use function gettype;
-use function is_object;
+use function get_debug_type;
 use function is_string;
 use function krsort;
 use function sprintf;
@@ -187,7 +186,7 @@ class EventManager implements EventManagerInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string for the event; received %s',
                 __METHOD__,
-                is_object($eventName) ? $eventName::class : gettype($eventName)
+                get_debug_type($eventName),
             ));
         }
 
@@ -213,7 +212,7 @@ class EventManager implements EventManagerInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string for the event; received %s',
                 __METHOD__,
-                is_object($eventName) ? $eventName::class : gettype($eventName)
+                get_debug_type($eventName),
             ));
         }
 

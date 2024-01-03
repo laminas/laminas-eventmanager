@@ -4,8 +4,7 @@ namespace Laminas\EventManager;
 
 use function array_keys;
 use function array_merge;
-use function gettype;
-use function is_object;
+use function get_debug_type;
 use function is_string;
 use function sprintf;
 
@@ -63,14 +62,14 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string; received "%s"',
-                is_object($identifier) ? $identifier::class : gettype($identifier)
+                get_debug_type($identifier),
             ));
         }
 
         if (! is_string($event) || empty($event)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event provided; must be a non-empty string; received "%s"',
-                is_object($event) ? $event::class : gettype($event)
+                get_debug_type($event),
             ));
         }
 
@@ -93,7 +92,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($identifier) || empty($identifier)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid identifier provided; must be a string, received %s',
-                is_object($identifier) ? $identifier::class : gettype($identifier)
+                get_debug_type($identifier),
             ));
         }
 
@@ -112,7 +111,7 @@ class SharedEventManager implements SharedEventManagerInterface
         if (! is_string($eventName) || empty($eventName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid event name provided; must be a string, received %s',
-                is_object($eventName) ? $eventName::class : gettype($eventName)
+                get_debug_type($eventName),
             ));
         }
 

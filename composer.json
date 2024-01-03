@@ -34,12 +34,12 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.5.0",
-        "laminas/laminas-stdlib": "^3.17",
-        "phpbench/phpbench": "^1.2.10",
-        "phpunit/phpunit": "^10.4.1",
+        "laminas/laminas-stdlib": "^3.18",
+        "phpbench/phpbench": "^1.2.15",
+        "phpunit/phpunit": "^10.5.5",
         "psalm/plugin-phpunit": "^0.18.4",
         "psr/container": "^1.1.2 || ^2.0.2",
-        "vimeo/psalm": "^5.11"
+        "vimeo/psalm": "^5.18"
     },
     "suggest": {
         "psr/container": "^1.1.2 || ^2.0.2, to use the lazy listeners feature",

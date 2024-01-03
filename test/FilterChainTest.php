@@ -98,14 +98,12 @@ class FilterChainTest extends TestCase
 
     public function testInterceptingFilterShouldReceiveChain(): void
     {
-        /** @psalm-suppress UnusedClosureParam */
         $this->filterchain->attach(function (self $context, array $params, mixed $chain) {
             self::assertInstanceOf(FilterIterator::class, $chain);
         });
         $this->filterchain->run($this);
     }
 
-    /** @psalm-suppress UnusedClosureParam */
     public function testFilteringStopsAsSoonAsAFilterFailsToCallNext(): void
     {
         $this->filterchain->attach(function ($context, $params, $chain) {
