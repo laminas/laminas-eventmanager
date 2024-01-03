@@ -93,7 +93,7 @@ class Event implements EventInterface
      */
     public function setParams($params)
     {
-        /** @psalm-suppress DocblockTypeContradiction Sanity check to actually enforce docblock. */
+        /** @psalm-suppress DocblockTypeContradiction, RedundantCondition Sanity check to actually enforce docblock. */
         if (! is_array($params) && ! is_object($params)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Event parameters must be an array or object; received "%s"', gettype($params))
@@ -128,7 +128,6 @@ class Event implements EventInterface
         }
 
         // Check in normal objects
-        /** @psalm-suppress MixedPropertyFetch Only object is left over from union. */
         if (! isset($this->params->{$name})) {
             return $default;
         }

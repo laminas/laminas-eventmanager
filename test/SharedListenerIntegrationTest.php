@@ -6,6 +6,7 @@ namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
+use LaminasTest\EventManager\TestAsset\CountingListener;
 use PHPUnit\Framework\TestCase;
 
 use function array_rand;
@@ -28,7 +29,7 @@ class SharedListenerIntegrationTest extends TestCase
 
     public function testCanTriggerTheSameSharedListenerMultipleTimes(): void
     {
-        $listener = new TestAsset\CountingListener();
+        $listener = new CountingListener();
         $this->sharedEvents->attach('Foo', 'foo', $listener);
 
         $iterations = array_rand(range(5, 100));
@@ -43,7 +44,7 @@ class SharedListenerIntegrationTest extends TestCase
         $listeners = [];
 
         for ($i = 0; $i < 5; $i += 1) {
-            $listeners[$i] = $listener = new TestAsset\CountingListener();
+            $listeners[$i] = $listener = new CountingListener();
             $this->sharedEvents->attach('Foo', 'foo', $listener);
             $this->events->trigger('foo');
         }
@@ -61,13 +62,14 @@ class SharedListenerIntegrationTest extends TestCase
 
     public function testTriggeringSameEventMultipleTimesDoesNotTriggersDetachedSharedListeners(): void
     {
+        /** @var array<int, CountingListener> $listeners */
         $listeners    = [];
         $identifiers  = ['Foo', 'Bar', 'Baz'];
         $sharedEvents = new SharedEventManager();
         $events       = new EventManager($sharedEvents, $identifiers);
 
         for ($i = 0; $i < 5; $i += 1) {
-            $listeners[$i]   = $listener = new TestAsset\CountingListener();
+            $listeners[$i]   = $listener = new CountingListener();
             $listener->index = $i;
             $sharedEvents->attach('Foo', 'foo', $listener);
         }

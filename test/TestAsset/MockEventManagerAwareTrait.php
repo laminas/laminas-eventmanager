@@ -6,23 +6,12 @@ namespace LaminasTest\EventManager\TestAsset;
 
 use Laminas\EventManager\EventManagerAwareTrait;
 
-/**
- * @group      Laminas_EventManager
- */
-class MockEventManagerAwareTrait
+final class MockEventManagerAwareTrait
 {
     use EventManagerAwareTrait;
 
-    /** @var string */
-    protected $eventIdentifier = 'foo.bar';
-
-    /** @var bool */
-    protected $defaultEventListenersCalled = false;
-
-    public function getEventIdentifier(): string
-    {
-        return $this->eventIdentifier;
-    }
+    private string $eventIdentifier           = 'foo.bar';
+    private bool $defaultEventListenersCalled = false;
 
     public function setEventIdentifier(string $eventIdentifier): self
     {

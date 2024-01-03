@@ -5,6 +5,9 @@
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     errorBaseline="psalm-baseline.xml"
+    findUnusedCode="true"
+    findUnusedBaselineEntry="true"
+    findUnusedPsalmSuppress="true"
 >
     <projectFiles>
         <directory name="src"/>
@@ -16,19 +19,11 @@
     </projectFiles>
 
     <issueHandlers>
-        <InternalMethod>
+        <UnusedClass>
             <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
+                <directory name="psalm" />
             </errorLevel>
-
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-            </errorLevel>
-
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-            </errorLevel>
-        </InternalMethod>
+        </UnusedClass>
     </issueHandlers>
 
     <plugins>

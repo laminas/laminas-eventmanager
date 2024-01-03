@@ -4,9 +4,8 @@ namespace Laminas\EventManager;
 
 use Psr\Container\ContainerInterface;
 
-use function gettype;
+use function get_debug_type;
 use function is_array;
-use function is_object;
 use function sprintf;
 
 /**
@@ -78,7 +77,7 @@ class LazyListenerAggregate implements ListenerAggregateInterface
             if (! $listener instanceof LazyEventListener) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'All listeners must be LazyEventListener instances or definitions; received %s',
-                    is_object($listener) ? $listener::class : gettype($listener)
+                    get_debug_type($listener),
                 ));
             }
 
