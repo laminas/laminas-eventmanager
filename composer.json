@@ -36,7 +36,7 @@
         "laminas/laminas-coding-standard": "~2.5.0",
         "laminas/laminas-stdlib": "^3.18",
         "phpbench/phpbench": "^1.2.15",
-        "phpunit/phpunit": "^10.5.5",
+        "phpunit/phpunit": "^11.0.0",
         "psalm/plugin-phpunit": "^0.18.4",
         "psr/container": "^1.1.2 || ^2.0.2",
         "vimeo/psalm": "^5.18"
