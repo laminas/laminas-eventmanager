@@ -37,7 +37,7 @@
         "laminas/laminas-stdlib": "^3.18",
         "phpbench/phpbench": "^1.2.15",
         "phpunit/phpunit": "^10.5.5",
-        "psalm/plugin-phpunit": "^0.18.4",
+        "psalm/plugin-phpunit": "^0.19.0",
         "psr/container": "^1.1.2 || ^2.0.2",
         "vimeo/psalm": "^5.18"
     },
