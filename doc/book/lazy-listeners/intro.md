@@ -18,8 +18,8 @@ The feature consists of three classes:
 ## Preparation
 
 In order to use the lazy listeners feature, you will need to install
-container-interop, if you haven't already:
+PSR-11 Container, if you haven't already:
 
 ```bash
-$ composer require container-interop/container-interop
+$ composer require psr/container
 ```
