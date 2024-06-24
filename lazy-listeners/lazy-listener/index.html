@@ -192,106 +192,145 @@
                     
                     
                         
+                            <li class="subnavigation__list-item ">
+                                <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
                             <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
+                                <span class="subnavigation__headline">Lazy Listeners</span>
                                 <ul class="subnavigation__list">
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Lazy Listeners</span>
-        <ul class="subnavigation__list">
-            
-                
-    <li class="subnavigation__list-item ">
         <a href="../intro/" class="subnavigation__link">Intro</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">LazyListener</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
     </li>
 
-            
-        </ul>
-    </li>
-
                                     
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../api/" class="subnavigation__link">EventManager API</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Application Integration</span>
-        <ul class="subnavigation__list">
-            
+                                </ul>
+                            </li>
+                        
+                    
                 
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../api/" class="subnavigation__link">EventManager API</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Application Integration</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../application-integration/usage-in-a-laminas-mvc-application/" class="subnavigation__link">Usage in a laminas-mvc Application</a>
     </li>
 
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
             
-        </ul>
-    </li>
 
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Migration Guide</span>
+                                <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Migration Guide</span>
-        <ul class="subnavigation__list">
-            
-                
     <li class="subnavigation__list-item ">
         <a href="../../migration/intro/" class="subnavigation__link">Intro</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../migration/removed/" class="subnavigation__link">Removed Functionality</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../migration/changed/" class="subnavigation__link">Changed Functionality</a>
-    </li>
-
-            
-        </ul>
     </li>
 
                                     
@@ -347,7 +386,7 @@
                         <i class="fa fa-search"></i> Search
                     </a>
                     <a href="https://github.com/laminas/laminas-eventmanager" class="header__link header__link--github" title="Go to repository of laminas-eventmanager">
-                        <i class="fa fa-github"></i> GitHub
+                        <i class="fab fa-github"></i> GitHub
                     </a>
                 
             </div>
@@ -394,13 +433,6 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-                    
-                        
-                        
                             <li class="breadcrumb-item">Lazy Listeners</li>
                         
                     
@@ -431,7 +463,7 @@ listener from a container and invoking it.</p>
 <li>a <em>definition</em> of the listener; this is an array defining:</li>
 <li>a <code>listener</code> key, with the name of the listener service to pull from the container.</li>
 <li>a <code>method</code> key, with the name of the method to invoke on the listener instance.</li>
-<li>a <em>container</em>; this is a <a href="https://github.com/container-interop/container-interop">container-interop</a>,
+<li>a <em>container</em>; this is a <a href="https://www.php-fig.org/psr/psr-11/">PSR-11</a> container,
   such as provided by
   <a href="https://github.com/laminas/laminas-servicemanager">laminas-servicemanager</a>,
   <a href="https://github.com/auraphp/Aura.Di">Aura.Di</a>, etc.</li>
@@ -445,10 +477,10 @@ listener from a container and invoking it.</p>
 <li>We have a listener registered in our container with the service name
   <code>My\Application\Listener</code>.</li>
 <li>The specific listener method is <code>onDispatch</code>.</li>
-<li>I have a container-interop instance in the variable <code>$container</code> and an event
+<li>You have a PSR-11 container instance in the variable <code>$container</code> and an event
   manager in the variable <code>$events</code>.</li>
 </ul>
-<p>I might then create and attach my lazy listener as follows:</p>
+<p>You might then create and attach your lazy listener as follows:</p>
 <pre class="highlight"><code class="language-php">use My\Application\Listener;
 use Laminas\EventManager\LazyListener;
 
@@ -588,106 +620,145 @@ return $listener-&gt;{$method}($event);</code></pre>
                     
                     
                         
+                            <li class="subnavigation__list-item ">
+                                <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
                             <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
+                                <span class="subnavigation__headline">Lazy Listeners</span>
                                 <ul class="subnavigation__list">
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../wildcard-listeners/" class="subnavigation__link">Wildcard Listeners</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../aggregates/" class="subnavigation__link">Listener Aggregates</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Lazy Listeners</span>
-        <ul class="subnavigation__list">
-            
-                
-    <li class="subnavigation__list-item ">
         <a href="../intro/" class="subnavigation__link">Intro</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item subnavigation__list-item--active">
         <a href="./" class="subnavigation__link">LazyListener</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../lazy-event-listener/" class="subnavigation__link">LazyEventListener</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../lazy-listener-aggregate/" class="subnavigation__link">LazyListenerAggregate</a>
     </li>
 
-            
-        </ul>
-    </li>
-
                                     
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../api/" class="subnavigation__link">EventManager API</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Application Integration</span>
-        <ul class="subnavigation__list">
-            
+                                </ul>
+                            </li>
+                        
+                    
                 
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../api/" class="subnavigation__link">EventManager API</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intercepting-filters/" class="subnavigation__link">Intercepting Filters</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Application Integration</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../application-integration/usage-in-a-laminas-mvc-application/" class="subnavigation__link">Usage in a laminas-mvc Application</a>
     </li>
 
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
             
-        </ul>
-    </li>
 
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Migration Guide</span>
+                                <ul class="subnavigation__list">
                                     
                                         
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Migration Guide</span>
-        <ul class="subnavigation__list">
-            
-                
     <li class="subnavigation__list-item ">
         <a href="../../migration/intro/" class="subnavigation__link">Intro</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../migration/removed/" class="subnavigation__link">Removed Functionality</a>
     </li>
 
-            
-                
+                                    
+                                        
     <li class="subnavigation__list-item ">
         <a href="../../migration/changed/" class="subnavigation__link">Changed Functionality</a>
-    </li>
-
-            
-        </ul>
     </li>
 
                                     
@@ -741,13 +812,13 @@ return $listener-&gt;{$method}($event);</code></pre>
                                 <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fab fa-slack"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fab fa-github"></i></a>
                             </li>
                             <li class="support__list-item">
-                                <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://phpc.social/@getlaminas" class="support__link" title="Mastodon"><i class="fab fa-mastodon"></i></a>
                             </li>
                             <li class="support__list-item">
                                 <a href="https://getlaminas.org/blog/rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
