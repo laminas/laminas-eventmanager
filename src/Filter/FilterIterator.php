@@ -101,7 +101,6 @@ class FilterIterator extends FastPriorityQueue
      * Iterates and calls the next filter in the chain.
      *
      * @param  mixed $context
-     * @param  array $params
      * @param  FilterIterator $chain
      * @return mixed
      */

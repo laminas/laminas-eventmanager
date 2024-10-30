@@ -60,7 +60,6 @@ class LazyListenerAggregate implements ListenerAggregateInterface
      *
      * @param array $listeners LazyEventListener instances or array definitions
      *     to pass to the LazyEventListener constructor.
-     * @param array $env
      * @throws Exception\InvalidArgumentException For invalid listener items.
      */
     public function __construct(array $listeners, ContainerInterface $container, array $env = [])

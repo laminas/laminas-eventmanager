@@ -42,10 +42,6 @@ class LazyListener
     /** @var string Service name of listener. */
     private $service;
 
-    /**
-     * @param array $definition
-     * @param array $env
-     */
     public function __construct(array $definition, ContainerInterface $container, array $env = [])
     {
         if (
