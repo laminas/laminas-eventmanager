@@ -8,6 +8,7 @@ use function array_keys;
 use function array_merge;
 use function array_unique;
 use function get_debug_type;
+use function is_callable;
 use function is_string;
 use function krsort;
 use function sprintf;
@@ -135,7 +136,7 @@ class EventManager implements EventManagerInterface
             $event->setTarget($target);
         }
 
-        if ($argv) {
+        if ($argv !== []) {
             $event->setParams($argv);
         }
 
@@ -154,7 +155,7 @@ class EventManager implements EventManagerInterface
             $event->setTarget($target);
         }
 
-        if ($argv) {
+        if ($argv !== []) {
             $event->setParams($argv);
         }
 
@@ -281,7 +282,7 @@ class EventManager implements EventManagerInterface
     {
         $name = $event->getName();
 
-        if (empty($name)) {
+        if ($name === null || $name === '' || $name === '0') {
             throw new Exception\RuntimeException('Event is missing a name; cannot trigger!');
         }
 
@@ -327,7 +328,7 @@ class EventManager implements EventManagerInterface
 
                     // If the result causes our validation callback to return true,
                     // stop propagation
-                    if ($callback && $callback($response)) {
+                    if (is_callable($callback) && $callback($response)) {
                         $responses->setStopped(true);
                         return $responses;
                     }

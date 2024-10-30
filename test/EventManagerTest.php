@@ -813,7 +813,7 @@ class EventManagerTest extends TestCase
 
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('missing a name');
-        if ($callback) {
+        if ($callback !== null) {
             $this->events->$method($callback, $event);
         } else {
             $this->events->$method($event);
