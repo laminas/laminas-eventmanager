@@ -13,7 +13,6 @@ interface FilterInterface
      * Execute the filter chain
      *
      * @param  string|object $context
-     * @param  array $params
      * @return mixed
      */
     public function run($context, array $params = []);

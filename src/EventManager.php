@@ -66,8 +66,6 @@ class EventManager implements EventManagerInterface
      *
      * Allows optionally specifying identifier(s) to use to pull signals from a
      * SharedEventManagerInterface.
-     *
-     * @param array $identifiers
      */
     public function __construct(?SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
     {

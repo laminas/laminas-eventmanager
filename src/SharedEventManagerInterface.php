@@ -37,7 +37,6 @@ interface SharedEventManagerInterface
     /**
      * Retrieve all listeners for given identifiers
      *
-     * @param  array $identifiers
      * @param  string $eventName
      * @return array
      */
