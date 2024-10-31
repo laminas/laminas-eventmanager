@@ -59,7 +59,9 @@ To register a listener in a laminas-mvc based application, use either applicatio
 
 This example uses module configuration, e.g. `module/Application/config/module.config.php`:
 
-```php
+<!-- markdownlint-disable no-inline-html -->
+
+<pre class="language-php" data-line="4-6"><code>
 namespace Application;
 
 return [
@@ -68,7 +70,7 @@ return [
     ],
     // …
 ];
-```
+</code></pre>
 
 All listeners registered in this way are fetched from the application service container.
 This means the listeners must be registered for the application service container to discover and create them.
@@ -76,7 +78,7 @@ This means the listeners must be registered for the application service containe
 To register the listener for the application service container, extend the configuration of the module.
 Add the following lines to the module configuration file, e.g. `module/Application/config/module.config.php`:
 
-```php
+<pre class="language-php" data-line="3,8"><code>
 namespace Application;
 
 use Laminas\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
@@ -89,7 +91,9 @@ return [
     ],
     // …
 ];
-```
+</code></pre>
+
+<!-- markdownlint-enable no-inline-html -->
 
 The example uses the [reflection factory from laminas-servicemanager](https://docs.laminas.dev/laminas-servicemanager/reflection-abstract-factory/) to resolve the constructor dependencies for the listener class.
 
