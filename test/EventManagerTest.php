@@ -34,7 +34,8 @@ class EventManagerTest extends TestCase
     use DeprecatedAssertions;
 
     private EventManager $events;
-    private string|null $message;
+
+    private string|null $message = null;
 
     protected function setUp(): void
     {
@@ -181,7 +182,7 @@ class EventManagerTest extends TestCase
             return strstr($string, $search);
         });
         $responses = $this->events->triggerUntil(
-            [$this, 'evaluateStringCallback'],
+            $this->evaluateStringCallback(...),
             'foo.bar',
             $this,
             ['string' => 'foo', 'search' => 'f'],
@@ -216,15 +217,13 @@ class EventManagerTest extends TestCase
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', function () { return 'bogus'; }, 4);
-        $this->events->attach('foo.bar', function () { return 'nada'; }, 3);
-        $this->events->attach('foo.bar', function () { return 'found'; }, 2);
-        $this->events->attach('foo.bar', function () { return 'zero'; }, 1);
+        $this->events->attach('foo.bar', fn() => 'bogus', 4);
+        $this->events->attach('foo.bar', fn() => 'nada', 3);
+        $this->events->attach('foo.bar', fn() => 'found', 2);
+        $this->events->attach('foo.bar', fn() => 'zero', 1);
         // @codingStandardsIgnoreEnd
 
-        $responses = $this->events->triggerUntil(function ($result) {
-            return $result === 'found';
-        }, 'foo.bar', $this);
+        $responses = $this->events->triggerUntil(fn($result) => $result === 'found', 'foo.bar', $this);
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertTrue($responses->stopped());
         $result = $responses->last();
@@ -236,15 +235,13 @@ class EventManagerTest extends TestCase
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', function () { return 'bogus'; });
-        $this->events->attach('foo.bar', function () { return 'nada'; });
-        $this->events->attach('foo.bar', function () { return 'zero'; });
-        $this->events->attach('foo.bar', function () { return 'found'; });
+        $this->events->attach('foo.bar', fn() => 'bogus');
+        $this->events->attach('foo.bar', fn() => 'nada');
+        $this->events->attach('foo.bar', fn() => 'zero');
+        $this->events->attach('foo.bar', fn() => 'found');
         // @codingStandardsIgnoreEnd
 
-        $responses = $this->events->triggerUntil(function ($result): bool {
-            return $result === 'found';
-        }, 'foo.bar', $this);
+        $responses = $this->events->triggerUntil(fn($result): bool => $result === 'found', 'foo.bar', $this);
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertTrue($responses->stopped());
         self::assertEquals('found', $responses->last());
@@ -253,15 +250,18 @@ class EventManagerTest extends TestCase
     public function testResponseCollectionIsNotStoppedWhenNoCallbackMatchedByTriggerUntil(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', static function () { return 'bogus'; }, 4);
-        $this->events->attach('foo.bar', static function () { return 'nada'; }, 3);
-        $this->events->attach('foo.bar', static function () { return 'found'; }, 2);
-        $this->events->attach('foo.bar', static function () { return 'zero'; }, 1);
+        $this->events->attach('foo.bar', static fn() => 'bogus', 4);
+        $this->events->attach('foo.bar', static fn() => 'nada', 3);
+        $this->events->attach('foo.bar', static fn() => 'found', 2);
+        $this->events->attach('foo.bar', static fn() => 'zero', 1);
         // @codingStandardsIgnoreEnd
 
-        $responses = $this->events->triggerUntil(static function (mixed $result): bool {
-            return $result === 'never found';
-        }, 'foo.bar', $this);
+        $responses = $this->events->triggerUntil(
+            static fn(mixed $result): bool =>
+            $result === 'never found',
+            'foo.bar',
+            $this
+        );
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertFalse($responses->stopped());
         self::assertEquals('zero', $responses->last());
@@ -270,10 +270,10 @@ class EventManagerTest extends TestCase
     public function testCallingEventsStopPropagationMethodHaltsEventEmission(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', static function (): string { return 'bogus'; }, 4);
+        $this->events->attach('foo.bar', static fn(): string => 'bogus', 4);
         $this->events->attach('foo.bar', static function (EventInterface $e): string { $e->stopPropagation(true); return 'nada'; }, 3);
-        $this->events->attach('foo.bar', static function (): string { return 'found'; }, 2);
-        $this->events->attach('foo.bar', static function (): string { return 'zero'; }, 1);
+        $this->events->attach('foo.bar', static fn(): string => 'found', 2);
+        $this->events->attach('foo.bar', static fn(): string => 'zero', 1);
         // @codingStandardsIgnoreEnd
 
         $responses = $this->events->trigger('foo.bar');
@@ -343,9 +343,7 @@ class EventManagerTest extends TestCase
         $event->setName(__FUNCTION__);
         $event->setTarget($this);
         $event->setParams(['foo' => 'bar']);
-        $this->events->attach(__FUNCTION__, static function (EventInterface $e): EventInterface {
-            return $e;
-        });
+        $this->events->attach(__FUNCTION__, static fn(EventInterface $e): EventInterface => $e);
         $responses = $this->events->triggerEvent($event);
         self::assertSame($event, $responses->last());
     }
@@ -356,12 +354,15 @@ class EventManagerTest extends TestCase
         $event->setName(__FUNCTION__);
         $event->setTarget($this);
         $event->setParams(['foo' => 'bar']);
-        $this->events->attach(__FUNCTION__, static function (EventInterface $e): EventInterface {
-            return $e;
-        });
-        $responses = $this->events->triggerEventUntil(static function (mixed $r): bool {
-            return $r instanceof EventInterface;
-        }, $event);
+        $this->events->attach(
+            __FUNCTION__,
+            static fn(EventInterface $e): EventInterface => $e
+        );
+        $responses = $this->events->triggerEventUntil(
+            static fn(mixed $r): bool =>
+            $r instanceof EventInterface,
+            $event
+        );
         self::assertTrue($responses->stopped());
         self::assertSame($event, $responses->last());
     }
@@ -439,9 +440,7 @@ class EventManagerTest extends TestCase
             $marker->propagationIsStopped = $e->propagationIsStopped();
         });
 
-        $criteria = static function (): bool {
-            return false;
-        };
+        $criteria = static fn(): bool => false;
         $event    = new Event();
         $event->setName('foo');
         $event->stopPropagation(true);
@@ -624,12 +623,8 @@ class EventManagerTest extends TestCase
     public function testCanDetachWildcardListeners(): array
     {
         $events           = ['foo', 'bar'];
-        $listener         = static function (): string {
-            return 'non-wildcard';
-        };
-        $wildcardListener = static function (): string {
-            return 'wildcard';
-        };
+        $listener         = static fn(): string => 'non-wildcard';
+        $wildcardListener = static fn(): string => 'wildcard';
 
         array_walk($events, function (string $event) use ($listener): void {
             $this->events->attach($event, $listener);
@@ -679,9 +674,7 @@ class EventManagerTest extends TestCase
     {
         $eventNames = ['foo', 'bar'];
         $events     = $this->events;
-        $listener   = static function (): string {
-            return 'listener';
-        };
+        $listener   = static fn(): string => 'listener';
 
         foreach ($eventNames as $event) {
             $events->attach($event, $listener);
@@ -860,9 +853,7 @@ class EventManagerTest extends TestCase
             ->method('propagationIsStopped')
             ->willReturn(false);
 
-        $callback = static function (mixed $result): bool {
-            return $result === true;
-        };
+        $callback = static fn(mixed $result): bool => $result === true;
 
         $triggeredOne = false;
         $this->events->attach('test', static function (EventInterface $e) use ($event, &$triggeredOne): void {
