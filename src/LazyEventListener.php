@@ -58,6 +58,6 @@ class LazyEventListener extends LazyListener
      */
     public function getPriority($default = 1)
     {
-        return null !== $this->priority ? $this->priority : $default;
+        return $this->priority ?? $default;
     }
 }
