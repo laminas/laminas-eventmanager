@@ -7,6 +7,8 @@ namespace LaminasTest\EventManager;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
 use Laminas\EventManager\LazyListener;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 
 class LazyEventListenerTest extends LazyListenerTest
 {
@@ -31,9 +33,9 @@ class LazyEventListenerTest extends LazyListenerTest
     }
 
     /**
-     * @dataProvider invalidTypes
      * @param mixed $event
      */
+    #[DataProvider('invalidTypes')]
     public function testConstructorRaisesExceptionForInvalidEventType($event)
     {
         $class  = $this->listenerClass;
@@ -62,17 +64,13 @@ class LazyEventListenerTest extends LazyListenerTest
         return $listener;
     }
 
-    /**
-     * @depends testCanInstantiateLazyListenerWithValidDefinition
-     */
+    #[Depends('testCanInstantiateLazyListenerWithValidDefinition')]
     public function testCanRetrieveEventFromListener(LazyEventListener $listener)
     {
         self::assertEquals('event', $listener->getEvent());
     }
 
-    /**
-     * @depends testCanInstantiateLazyListenerWithValidDefinition
-     */
+    #[Depends('testCanInstantiateLazyListenerWithValidDefinition')]
     public function testCanRetrievePriorityFromListener(LazyEventListener $listener)
     {
         self::assertEquals(5, $listener->getPriority());

@@ -12,6 +12,8 @@ use Laminas\EventManager\Exception;
 use Laminas\EventManager\ResponseCollection;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\EventManager\SharedEventManagerInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
@@ -116,9 +118,7 @@ class EventManagerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider eventArguments
-     */
+    #[DataProvider('eventArguments')]
     public function testAttachShouldAddReturnTheListener(string $event): void
     {
         $listener = static fn(): int => 0;
@@ -514,9 +514,7 @@ class EventManagerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidEventsForAttach
-     */
+    #[DataProvider('invalidEventsForAttach')]
     public function testAttachRaisesExceptionForInvalidEventType(mixed $event): void
     {
         $callback = static function (): void {
@@ -591,9 +589,9 @@ class EventManagerTest extends TestCase
     }
 
     /**
-     * @depends testAttachShouldAddListenerToEvent
      * @psalm-param array{event: 'test', events: EventManager, listener: callable} $dependencies
      */
+    #[Depends('testAttachShouldAddListenerToEvent')]
     public function testCanDetachListenerFromNamedEvent(array $dependencies): void
     {
         $event    = $dependencies['event'];
@@ -655,9 +653,9 @@ class EventManagerTest extends TestCase
     }
 
     /**
-     * @depends testCanDetachWildcardListeners
      * @psalm-param array{event_names: list<string>, events: EventManager, not_contains: string} $dependencies
      */
+    #[Depends('testCanDetachWildcardListeners')]
     public function testDetachedWildcardListenerWillNotBeTriggered(array $dependencies): void
     {
         $eventNames  = $dependencies['event_names'];
@@ -739,9 +737,7 @@ class EventManagerTest extends TestCase
         return $events;
     }
 
-    /**
-     * @dataProvider invalidEventsForDetach
-     */
+    #[DataProvider('invalidEventsForDetach')]
     public function testPassingInvalidEventTypeToDetachRaisesException(mixed $event): void
     {
         $listener = static function (): void {
@@ -789,9 +785,7 @@ class EventManagerTest extends TestCase
         // @codingStandardsIgnoreEnd
     }
 
-    /**
-     * @dataProvider eventsMissingNames
-     */
+    #[DataProvider('eventsMissingNames')]
     public function testTriggeringAnEventWithAnEmptyNameRaisesAnException(
         string|null $event,
         string $method,

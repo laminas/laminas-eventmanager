@@ -7,6 +7,8 @@ namespace LaminasTest\EventManager;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyListener;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -57,9 +59,9 @@ class LazyListenerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidTypes
      * @param mixed $listener
      */
+    #[DataProvider('invalidTypes')]
     public function testConstructorRaisesExceptionForInvalidListenerType($listener)
     {
         $class  = $this->listenerClass;
@@ -86,9 +88,9 @@ class LazyListenerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidTypes
      * @param mixed $method
      */
+    #[DataProvider('invalidTypes')]
     public function testConstructorRaisesExceptionForInvalidMethodType($method)
     {
         $class  = $this->listenerClass;
@@ -115,9 +117,7 @@ class LazyListenerTest extends TestCase
         return $listener;
     }
 
-    /**
-     * @depends testCanInstantiateLazyListenerWithValidDefinition
-     */
+    #[Depends('testCanInstantiateLazyListenerWithValidDefinition')]
     public function testInstatiationSetsListenerMethod(LazyListener $listener)
     {
         self::assertAttributeEquals('method', 'method', $listener);

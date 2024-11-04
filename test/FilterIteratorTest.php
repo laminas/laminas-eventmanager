@@ -6,11 +6,11 @@ namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\Filter\FilterIterator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Stdlib
- */
+#[Group('Laminas_Stdlib')]
 class FilterIteratorTest extends TestCase
 {
     public function testNextReturnsNullOnEmptyChain(): void
@@ -94,9 +94,9 @@ class FilterIteratorTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidFilters
      * @param mixed $filter
      */
+    #[DataProvider('invalidFilters')]
     public function testInsertShouldRaiseExceptionOnNonCallableDatum($filter)
     {
         $iterator = new FilterIterator();
