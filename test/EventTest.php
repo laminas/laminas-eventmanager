@@ -6,11 +6,9 @@ namespace LaminasTest\EventManager;
 
 use Laminas\EventManager\Event;
 use Laminas\EventManager\Exception;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-#[Group('Laminas_Stdlib')]
 class EventTest extends TestCase
 {
     public function testConstructorWithArguments(): void
