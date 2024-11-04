@@ -9,6 +9,8 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\Exception\InvalidArgumentException;
 use Laminas\EventManager\LazyEventListener;
 use Laminas\EventManager\LazyListenerAggregate;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -69,9 +71,9 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidListenerTypes
      * @param mixed $listener
      */
+    #[DataProvider('invalidListenerTypes')]
     public function testPassingInvalidListenerTypesAtInstantiationRaisesException($listener)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -80,9 +82,9 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidListeners
      * @param mixed $listener
      */
+    #[DataProvider('invalidListeners')]
     public function testPassingInvalidListenersAtInstantiationRaisesException($listener)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -130,7 +132,6 @@ class LazyListenerAggregateTest extends TestCase
     }
 
     /**
-     * @depends testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation
      * @psalm-param array<array-key, callable|array{
      *     event: string,
      *     listener: string|object,
@@ -138,6 +139,7 @@ class LazyListenerAggregateTest extends TestCase
      *     priority: int
      * }> $listeners
      */
+    #[Depends('testCanPassMixOfValidLazyEventListenerInstancesAndDefinitionsAtInstantiation')]
     public function testAttachAttachesLazyListenersViaClosures(array $listeners)
     {
         $aggregate = new LazyListenerAggregate($listeners, $this->container);

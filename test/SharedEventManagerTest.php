@@ -8,6 +8,7 @@ use Closure;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\Exception;
 use Laminas\EventManager\SharedEventManager;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_shift;
@@ -62,9 +63,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidIdentifiers
      * @param mixed $identifier
      */
+    #[DataProvider('invalidIdentifiers')]
     public function testAttachRaisesExceptionForInvalidIdentifer($identifier)
     {
         $this->expectException(Exception\InvalidArgumentException::class);
@@ -90,9 +91,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidEventNames
      * @param mixed $event
      */
+    #[DataProvider('invalidEventNames')]
     public function testAttachRaisesExceptionForInvalidEvent($event)
     {
         $this->expectException(Exception\InvalidArgumentException::class);
@@ -119,9 +120,7 @@ class SharedEventManagerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider detachIdentifierAndEvent
-     */
+    #[DataProvider('detachIdentifierAndEvent')]
     public function testCanDetachFromSharedManagerUsingIdentifierAndEvent(?string $identifier, ?string $event)
     {
         $this->manager->attach('IDENTIFIER', 'EVENT', $this->callback);
@@ -280,9 +279,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidIdentifiersAndEvents
      * @param mixed $identifier
      */
+    #[DataProvider('invalidIdentifiersAndEvents')]
     public function testDetachingWithInvalidIdentifierTypeRaisesException($identifier)
     {
         $this->expectException(Exception\InvalidArgumentException::class);
@@ -291,9 +290,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidIdentifiersAndEvents
      * @param mixed $eventName
      */
+    #[DataProvider('invalidIdentifiersAndEvents')]
     public function testDetachingWithInvalidEventTypeRaisesException($eventName)
     {
         $this->manager->attach('IDENTIFIER', '*', $this->callback);
@@ -311,9 +310,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidListenersAndEventNamesForFetchingListeners
      * @param mixed $eventName
      */
+    #[DataProvider('invalidListenersAndEventNamesForFetchingListeners')]
     public function testGetListenersRaisesExceptionForInvalidEventName($eventName)
     {
         $this->expectException(Exception\InvalidArgumentException::class);
@@ -322,9 +321,9 @@ class SharedEventManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidListenersAndEventNamesForFetchingListeners
      * @param mixed $identifier
      */
+    #[DataProvider('invalidListenersAndEventNamesForFetchingListeners')]
     public function testGetListenersRaisesExceptionForInvalidIdentifier($identifier)
     {
         $this->expectException(Exception\InvalidArgumentException::class);

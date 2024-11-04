@@ -335,6 +335,11 @@
       <code><![CDATA[$result]]></code>
       <code><![CDATA[$result]]></code>
     </MissingClosureParamType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[eventArguments]]></code>
+      <code><![CDATA[eventsMissingNames]]></code>
+      <code><![CDATA[invalidEventsForDetach]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/EventTest.php">
     <InvalidArgument>
@@ -407,6 +412,9 @@
     <MixedArgument>
       <code><![CDATA[$filter]]></code>
     </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidFilters]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyEventListenerTest.php">
     <LessSpecificReturnStatement>
@@ -443,6 +451,10 @@
       <code><![CDATA[$listeners]]></code>
       <code><![CDATA[$test]]></code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidListenerTypes]]></code>
+      <code><![CDATA[invalidListeners]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyListenerTest.php">
     <InvalidFunctionCall>
@@ -469,6 +481,9 @@
     <MoreSpecificReturnType>
       <code><![CDATA[LazyListener]]></code>
     </MoreSpecificReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidTypes]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/SharedEventManagerTest.php">
     <MissingReturnType>
@@ -501,6 +516,12 @@
     <PossiblyInvalidCast>
       <code><![CDATA[$event]]></code>
     </PossiblyInvalidCast>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[detachIdentifierAndEvent]]></code>
+      <code><![CDATA[invalidEventNames]]></code>
+      <code><![CDATA[invalidIdentifiersAndEvents]]></code>
+      <code><![CDATA[invalidListenersAndEventNamesForFetchingListeners]]></code>
+    </PossiblyUnusedMethod>
     <RedundantCast>
       <code><![CDATA[(int) $priority]]></code>
     </RedundantCast>
