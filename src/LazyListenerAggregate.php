@@ -29,16 +29,6 @@ class LazyListenerAggregate implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;
 
-    // phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty
-
-    /** @var ContainerInterface Container from which to pull lazy listeners. */
-    private $container;
-
-    /** @var array Additional environment/option variables to use when creating listener. */
-    private $env;
-
-    // phpcs:enable
-
     /**
      * Generated LazyEventListener instances.
      *
@@ -60,14 +50,19 @@ class LazyListenerAggregate implements ListenerAggregateInterface
      *
      * @param array $listeners LazyEventListener instances or array definitions
      *     to pass to the LazyEventListener constructor.
-     * @param array $env
      * @throws Exception\InvalidArgumentException For invalid listener items.
      */
-    public function __construct(array $listeners, ContainerInterface $container, array $env = [])
-    {
-        $this->container = $container;
-        $this->env       = $env;
-
+    public function __construct(
+        array $listeners,
+        /**
+         * @var ContainerInterface Container from which to pull lazy listeners
+         */
+        private ContainerInterface $container,
+        /**
+         * @var array Additional environment/option variables to use when creating listener
+         */
+        private array $env = []
+    ) {
         // This would raise an exception for invalid structs
         foreach ($listeners as $listener) {
             if (is_array($listener)) {

@@ -127,7 +127,6 @@ trait EventListenerIntrospectionTrait
     /**
      * Generator for traversing listeners in priority order.
      *
-     * @param array $queue
      * @param bool $withPriority When true, yields priority as key.
      * @return iterable
      */

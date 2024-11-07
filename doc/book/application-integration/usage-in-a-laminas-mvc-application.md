@@ -59,6 +59,8 @@ To register a listener in a laminas-mvc based application, use either applicatio
 
 This example uses module configuration, e.g. `module/Application/config/module.config.php`:
 
+<!-- markdownlint-disable no-inline-html -->
+
 <pre class="language-php" data-line="4-6"><code>
 namespace Application;
 
@@ -90,6 +92,8 @@ return [
     // …
 ];
 </code></pre>
+
+<!-- markdownlint-enable no-inline-html -->
 
 The example uses the [reflection factory from laminas-servicemanager](https://docs.laminas.dev/laminas-servicemanager/reflection-abstract-factory/) to resolve the constructor dependencies for the listener class.
 

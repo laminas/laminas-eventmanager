@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/EventManager.php">
     <DocblockTypeContradiction>
-      <code>is_string($eventName)</code>
-      <code>is_string($eventName)</code>
+      <code><![CDATA[is_string($eventName)]]></code>
+      <code><![CDATA[is_string($eventName)]]></code>
     </DocblockTypeContradiction>
     <MissingParamType>
-      <code>$force</code>
+      <code><![CDATA[$force]]></code>
     </MissingParamType>
     <MixedArgumentTypeCoercion>
-      <code>$identifiers</code>
+      <code><![CDATA[$identifiers]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$listOfListenersByPriority[$priority][]</code>
-      <code>$listener</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$response</code>
+      <code><![CDATA[$listOfListenersByPriority[$priority][]]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$response]]></code>
     </MixedAssignment>
     <MixedFunctionCall>
-      <code>$listener($event)</code>
+      <code><![CDATA[$listener($event)]]></code>
     </MixedFunctionCall>
     <RedundantCastGivenDocblockType>
-      <code>(int) $priority</code>
+      <code><![CDATA[(int) $priority]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/EventManagerAwareInterface.php">
     <UnusedClass>
-      <code>EventManagerAwareInterface</code>
+      <code><![CDATA[EventManagerAwareInterface]]></code>
     </UnusedClass>
   </file>
   <file src="src/EventManagerAwareTrait.php">
     <MissingConstructor>
-      <code>$events</code>
+      <code><![CDATA[$events]]></code>
     </MissingConstructor>
     <MissingReturnType>
-      <code>setEventManager</code>
+      <code><![CDATA[setEventManager]]></code>
     </MissingReturnType>
     <PossiblyUnusedMethod>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyUnusedMethod>
     <RedundantCondition>
       <code><![CDATA[(is_string($this->eventIdentifier))
@@ -62,20 +62,20 @@
   </file>
   <file src="src/EventsCapableInterface.php">
     <PossiblyUnusedMethod>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Filter/FilterInterface.php">
     <MissingReturnType>
-      <code>attach</code>
+      <code><![CDATA[attach]]></code>
     </MissingReturnType>
   </file>
   <file src="src/Filter/FilterIterator.php">
     <InvalidArgument>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </InvalidArgument>
     <LessSpecificImplementedReturnType>
-      <code>mixed</code>
+      <code><![CDATA[mixed]]></code>
     </LessSpecificImplementedReturnType>
     <MixedArgument>
       <code><![CDATA[$item['data']]]></code>
@@ -87,49 +87,52 @@
       <code><![CDATA[$item['priority']]]></code>
     </MixedArrayAccess>
     <MoreSpecificImplementedParamType>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </MoreSpecificImplementedParamType>
     <PossiblyInvalidArrayAccess>
       <code><![CDATA[$item['data']]]></code>
       <code><![CDATA[$item['data']]]></code>
       <code><![CDATA[$item['priority']]]></code>
     </PossiblyInvalidArrayAccess>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[empty($context)]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/FilterChain.php">
     <ImplementedReturnTypeMismatch>
-      <code>Filter\FilterIterator</code>
-      <code>null|ResponseCollection</code>
+      <code><![CDATA[Filter\FilterIterator]]></code>
+      <code><![CDATA[null|ResponseCollection]]></code>
     </ImplementedReturnTypeMismatch>
     <InvalidReturnStatement>
-      <code>$callback</code>
+      <code><![CDATA[$callback]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
-      <code>CallbackHandler</code>
+      <code><![CDATA[CallbackHandler]]></code>
     </InvalidReturnType>
     <MixedFunctionCall>
-      <code>$next($context, $argv, $chain)</code>
+      <code><![CDATA[$next($context, $argv, $chain)]]></code>
     </MixedFunctionCall>
     <ParamNameMismatch>
-      <code>$argv</code>
+      <code><![CDATA[$argv]]></code>
     </ParamNameMismatch>
     <PossiblyInvalidFunctionCall>
-      <code>$next($context, $argv, $chain)</code>
+      <code><![CDATA[$next($context, $argv, $chain)]]></code>
     </PossiblyInvalidFunctionCall>
     <UndefinedDocblockClass>
-      <code>CallbackHandler</code>
+      <code><![CDATA[CallbackHandler]]></code>
     </UndefinedDocblockClass>
   </file>
   <file src="src/LazyListener.php">
     <InvalidMethodCall>
-      <code>$method</code>
+      <code><![CDATA[$method]]></code>
     </InvalidMethodCall>
     <MixedAssignment>
       <code><![CDATA[$this->listener]]></code>
       <code><![CDATA[$this->listener]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>callable</code>
-      <code>callable</code>
+      <code><![CDATA[callable]]></code>
+      <code><![CDATA[callable]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$listener->{$method}($event)]]></code>
@@ -137,53 +140,53 @@
       <code><![CDATA[$this->listener]]></code>
     </MixedReturnStatement>
     <PossiblyUnusedReturnValue>
-      <code>callable</code>
+      <code><![CDATA[callable]]></code>
     </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/LazyListenerAggregate.php">
     <UnusedProperty>
-      <code>$container</code>
-      <code>$env</code>
+      <code><![CDATA[$container]]></code>
+      <code><![CDATA[$env]]></code>
     </UnusedProperty>
   </file>
   <file src="src/ResponseCollection.php">
     <MissingReturnType>
-      <code>setStopped</code>
+      <code><![CDATA[setStopped]]></code>
     </MissingReturnType>
     <RedundantCastGivenDocblockType>
-      <code>(bool) $flag</code>
+      <code><![CDATA[(bool) $flag]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/SharedEventManager.php">
     <DocblockTypeContradiction>
-      <code>! is_string($event)</code>
-      <code>! is_string($eventName)</code>
-      <code>! is_string($eventName)</code>
-      <code>! is_string($identifier)</code>
-      <code>! is_string($identifier)</code>
-      <code>! is_string($identifier)</code>
+      <code><![CDATA[! is_string($event)]]></code>
+      <code><![CDATA[! is_string($eventName)]]></code>
+      <code><![CDATA[! is_string($eventName)]]></code>
+      <code><![CDATA[! is_string($identifier)]]></code>
+      <code><![CDATA[! is_string($identifier)]]></code>
+      <code><![CDATA[! is_string($identifier)]]></code>
       <code><![CDATA['*' === $eventName || ! is_string($eventName)]]></code>
       <code><![CDATA['*' === $identifier || ! is_string($identifier)]]></code>
     </DocblockTypeContradiction>
     <MissingParamType>
-      <code>$force</code>
+      <code><![CDATA[$force]]></code>
     </MissingParamType>
     <MissingReturnType>
-      <code>clearListeners</code>
+      <code><![CDATA[clearListeners]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$listOfListeners</code>
+      <code><![CDATA[$listOfListeners]]></code>
       <code><![CDATA[$this->identifiers[$identifier]]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$eventName</code>
-      <code>$identifier</code>
+      <code><![CDATA[$eventName]]></code>
+      <code><![CDATA[$identifier]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
-      <code>$listenersByIdentifier[$eventName]</code>
+      <code><![CDATA[$listenersByIdentifier[$eventName]]]></code>
       <code><![CDATA[$listenersByIdentifier['*']]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName]]]></code>
@@ -193,7 +196,7 @@
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority][$index]]]></code>
-      <code>$wildcardIdentifier[$eventName]</code>
+      <code><![CDATA[$wildcardIdentifier[$eventName]]]></code>
       <code><![CDATA[$wildcardIdentifier['*']]]></code>
     </MixedArrayAccess>
     <MixedArrayAssignment>
@@ -201,111 +204,111 @@
       <code><![CDATA[$this->identifiers[$identifier][$event][(int) $priority]]]></code>
     </MixedArrayAssignment>
     <MixedArrayOffset>
-      <code>$returnListeners[$priority]</code>
-      <code>$returnListeners[$priority]</code>
-      <code>$returnListeners[$priority]</code>
-      <code>$returnListeners[$priority]</code>
+      <code><![CDATA[$returnListeners[$priority]]]></code>
+      <code><![CDATA[$returnListeners[$priority]]]></code>
+      <code><![CDATA[$returnListeners[$priority]]]></code>
+      <code><![CDATA[$returnListeners[$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority]]]></code>
       <code><![CDATA[$this->identifiers[$identifier][$eventName][$priority][$index]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$evaluatedListener</code>
-      <code>$index</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listenersByIdentifier</code>
-      <code>$priority</code>
-      <code>$priority</code>
-      <code>$priority</code>
-      <code>$priority</code>
-      <code>$priority</code>
-      <code>$returnListeners[$priority][]</code>
-      <code>$returnListeners[$priority][]</code>
-      <code>$returnListeners[$priority][]</code>
-      <code>$returnListeners[$priority][]</code>
-      <code>$wildcardIdentifier</code>
+      <code><![CDATA[$evaluatedListener]]></code>
+      <code><![CDATA[$index]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listenersByIdentifier]]></code>
+      <code><![CDATA[$priority]]></code>
+      <code><![CDATA[$priority]]></code>
+      <code><![CDATA[$priority]]></code>
+      <code><![CDATA[$priority]]></code>
+      <code><![CDATA[$priority]]></code>
+      <code><![CDATA[$returnListeners[$priority][]]]></code>
+      <code><![CDATA[$returnListeners[$priority][]]]></code>
+      <code><![CDATA[$returnListeners[$priority][]]]></code>
+      <code><![CDATA[$returnListeners[$priority][]]]></code>
+      <code><![CDATA[$wildcardIdentifier]]></code>
     </MixedAssignment>
     <MoreSpecificImplementedParamType>
-      <code>$identifiers</code>
+      <code><![CDATA[$identifiers]]></code>
     </MoreSpecificImplementedParamType>
     <ParamNameMismatch>
-      <code>$event</code>
+      <code><![CDATA[$event]]></code>
     </ParamNameMismatch>
     <RedundantCastGivenDocblockType>
-      <code>(int) $priority</code>
+      <code><![CDATA[(int) $priority]]></code>
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/SharedEventManagerInterface.php">
     <MissingReturnType>
-      <code>attach</code>
-      <code>clearListeners</code>
+      <code><![CDATA[attach]]></code>
+      <code><![CDATA[clearListeners]]></code>
     </MissingReturnType>
   </file>
   <file src="src/Test/EventListenerIntrospectionTrait.php">
     <InvalidReturnType>
-      <code>Traversable</code>
+      <code><![CDATA[Traversable]]></code>
     </InvalidReturnType>
     <MissingReturnType>
-      <code>assertListenerAtPriority</code>
+      <code><![CDATA[assertListenerAtPriority]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$l</code>
-      <code>$listeners</code>
-      <code>$listeners[$p]</code>
+      <code><![CDATA[$l]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners[$p]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$internal[$event]</code>
+      <code><![CDATA[$internal[$event]]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$listeners[$p]</code>
-      <code>$listeners[$p]</code>
+      <code><![CDATA[$listeners[$p]]]></code>
+      <code><![CDATA[$listeners[$p]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$internal</code>
-      <code>$l</code>
-      <code>$listOfListeners</code>
-      <code>$listener</code>
-      <code>$listener</code>
-      <code>$listeners</code>
-      <code>$listeners</code>
-      <code>$listeners[$p]</code>
-      <code>$p</code>
-      <code>$priority</code>
+      <code><![CDATA[$internal]]></code>
+      <code><![CDATA[$l]]></code>
+      <code><![CDATA[$listOfListeners]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners[$p]]]></code>
+      <code><![CDATA[$p]]></code>
+      <code><![CDATA[$priority]]></code>
     </MixedAssignment>
     <MixedReturnTypeCoercion>
-      <code>callable[]</code>
-      <code>string[]</code>
+      <code><![CDATA[callable[]]]></code>
+      <code><![CDATA[string[]]]></code>
     </MixedReturnTypeCoercion>
   </file>
   <file src="test/DeprecatedAssertions.php">
     <ArgumentTypeCoercion>
-      <code>$type</code>
+      <code><![CDATA[$type]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="test/EventManagerAwareTraitTest.php">
     <DeprecatedMethod>
-      <code>getObjectForTrait</code>
-      <code>getObjectForTrait</code>
+      <code><![CDATA[getObjectForTrait]]></code>
+      <code><![CDATA[getObjectForTrait]]></code>
     </DeprecatedMethod>
     <InvalidArgument>
-      <code>EventManagerAwareTrait::class</code>
-      <code>EventManagerAwareTrait::class</code>
+      <code><![CDATA[EventManagerAwareTrait::class]]></code>
+      <code><![CDATA[EventManagerAwareTrait::class]]></code>
     </InvalidArgument>
     <MixedMethodCall>
-      <code>getEventManager</code>
-      <code>getEventManager</code>
-      <code>setEventManager</code>
-      <code>setEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
+      <code><![CDATA[getEventManager]]></code>
+      <code><![CDATA[setEventManager]]></code>
+      <code><![CDATA[setEventManager]]></code>
     </MixedMethodCall>
   </file>
   <file src="test/EventManagerPriorityTest.php">
     <MissingClosureParamType>
-      <code>$event</code>
+      <code><![CDATA[$event]]></code>
     </MissingClosureParamType>
     <MixedArgument>
       <code><![CDATA[$event->getParam('accumulator')]]></code>
@@ -318,58 +321,63 @@
       <code><![CDATA[$event->getParam('accumulator')]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$compare</code>
-      <code>$original</code>
-      <code>$original</code>
+      <code><![CDATA[$compare]]></code>
+      <code><![CDATA[$original]]></code>
+      <code><![CDATA[$original]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>enqueue</code>
-      <code>getParam</code>
+      <code><![CDATA[enqueue]]></code>
+      <code><![CDATA[getParam]]></code>
     </MixedMethodCall>
   </file>
   <file src="test/EventManagerTest.php">
     <MissingClosureParamType>
-      <code>$result</code>
-      <code>$result</code>
+      <code><![CDATA[$result]]></code>
+      <code><![CDATA[$result]]></code>
     </MissingClosureParamType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[eventArguments]]></code>
+      <code><![CDATA[eventsMissingNames]]></code>
+      <code><![CDATA[invalidEventsForDetach]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/EventTest.php">
     <InvalidArgument>
       <code><![CDATA['test']]></code>
     </InvalidArgument>
     <UnusedVariable>
-      <code>$default</code>
+      <code><![CDATA[$default]]></code>
     </UnusedVariable>
   </file>
   <file src="test/FilterChainTest.php">
     <DocblockTypeContradiction>
-      <code>assertSame</code>
+      <code><![CDATA[assertSame]]></code>
     </DocblockTypeContradiction>
     <InvalidArgument>
-      <code>$handle</code>
-      <code>$handle1</code>
+      <code><![CDATA[$handle]]></code>
+      <code><![CDATA[$handle1]]></code>
     </InvalidArgument>
     <MissingClosureParamType>
-      <code>$chain</code>
-      <code>$chain</code>
-      <code>$context</code>
-      <code>$context</code>
-      <code>$context</code>
-      <code>$context</code>
-      <code>$context</code>
-      <code>$params</code>
-      <code>$params</code>
+      <code><![CDATA[$chain]]></code>
+      <code><![CDATA[$chain]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$params]]></code>
+      <code><![CDATA[$params]]></code>
     </MissingClosureParamType>
     <MissingClosureReturnType>
-      <code>function ($context, $params, $chain) {</code>
-      <code>function ($context, $params, $chain) {</code>
+      <code><![CDATA[function ($context, $params, $chain) {]]></code>
+      <code><![CDATA[function ($context, $params, $chain) {]]></code>
     </MissingClosureReturnType>
     <MixedArgument>
       <code><![CDATA[$params['string']]]></code>
       <code><![CDATA[$params['string']]]></code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
+      <code><![CDATA[$string]]></code>
+      <code><![CDATA[$string]]></code>
+      <code><![CDATA[$string]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$params['string']]]></code>
@@ -380,82 +388,89 @@
       <code><![CDATA[$params['string']]]></code>
     </MixedArrayAssignment>
     <MixedAssignment>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$string</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$string]]></code>
+      <code><![CDATA[$string]]></code>
+      <code><![CDATA[$string]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>next</code>
-      <code>next</code>
+      <code><![CDATA[next]]></code>
+      <code><![CDATA[next]]></code>
     </MixedMethodCall>
   </file>
   <file src="test/FilterIteratorTest.php">
     <MissingClosureReturnType>
-      <code>function () {</code>
-      <code>function () {</code>
-      <code>function () {</code>
+      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[function () {]]></code>
     </MissingClosureReturnType>
     <MissingReturnType>
-      <code>testInsertShouldRaiseExceptionOnNonCallableDatum</code>
+      <code><![CDATA[testInsertShouldRaiseExceptionOnNonCallableDatum]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$filter</code>
+      <code><![CDATA[$filter]]></code>
     </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidFilters]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyEventListenerTest.php">
     <LessSpecificReturnStatement>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
     </LessSpecificReturnStatement>
     <MissingReturnType>
-      <code>testCanRetrieveEventFromListener</code>
-      <code>testCanRetrievePriorityFromListener</code>
-      <code>testConstructorRaisesExceptionForInvalidEventType</code>
+      <code><![CDATA[testCanRetrieveEventFromListener]]></code>
+      <code><![CDATA[testCanRetrievePriorityFromListener]]></code>
+      <code><![CDATA[testConstructorRaisesExceptionForInvalidEventType]]></code>
     </MissingReturnType>
     <MixedMethodCall>
-      <code>getPriority</code>
+      <code><![CDATA[getPriority]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
     </MixedMethodCall>
     <MoreSpecificReturnType>
-      <code>LazyListener</code>
+      <code><![CDATA[LazyListener]]></code>
     </MoreSpecificReturnType>
   </file>
   <file src="test/LazyListenerAggregateTest.php">
     <MissingReturnType>
-      <code>testAttachAttachesLazyListenersViaClosures</code>
-      <code>testPassingInvalidListenerTypesAtInstantiationRaisesException</code>
-      <code>testPassingInvalidListenersAtInstantiationRaisesException</code>
+      <code><![CDATA[testAttachAttachesLazyListenersViaClosures]]></code>
+      <code><![CDATA[testPassingInvalidListenerTypesAtInstantiationRaisesException]]></code>
+      <code><![CDATA[testPassingInvalidListenersAtInstantiationRaisesException]]></code>
     </MissingReturnType>
     <MixedArrayAccess>
-      <code>$test[0]</code>
-      <code>$test[1]</code>
+      <code><![CDATA[$test[0]]]></code>
+      <code><![CDATA[$test[1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$listener</code>
-      <code>$listeners</code>
-      <code>$test</code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$test]]></code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidListenerTypes]]></code>
+      <code><![CDATA[invalidListeners]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyListenerTest.php">
     <InvalidFunctionCall>
-      <code>$lazyListener($event)</code>
-      <code>$lazyListener($event)</code>
+      <code><![CDATA[$lazyListener($event)]]></code>
+      <code><![CDATA[$lazyListener($event)]]></code>
     </InvalidFunctionCall>
     <LessSpecificReturnStatement>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
     </LessSpecificReturnStatement>
     <MissingReturnType>
-      <code>testConstructorRaisesExceptionForInvalidListenerType</code>
-      <code>testConstructorRaisesExceptionForInvalidMethodType</code>
-      <code>testInstatiationSetsListenerMethod</code>
+      <code><![CDATA[testConstructorRaisesExceptionForInvalidListenerType]]></code>
+      <code><![CDATA[testConstructorRaisesExceptionForInvalidMethodType]]></code>
+      <code><![CDATA[testInstatiationSetsListenerMethod]]></code>
     </MissingReturnType>
     <MixedMethodCall>
-      <code>new $class($struct, $container, $env)</code>
+      <code><![CDATA[new $class($struct, $container, $env)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
       <code><![CDATA[new $class($struct, $this->container)]]></code>
@@ -464,52 +479,61 @@
       <code><![CDATA[new $class($struct, $this->container)]]></code>
     </MixedMethodCall>
     <MoreSpecificReturnType>
-      <code>LazyListener</code>
+      <code><![CDATA[LazyListener]]></code>
     </MoreSpecificReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[invalidTypes]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/SharedEventManagerTest.php">
     <MissingReturnType>
-      <code>testAttachRaisesExceptionForInvalidEvent</code>
-      <code>testAttachRaisesExceptionForInvalidIdentifer</code>
-      <code>testCanDetachFromSharedManagerUsingIdentifierAndEvent</code>
-      <code>testDetachingWithInvalidEventTypeRaisesException</code>
-      <code>testDetachingWithInvalidIdentifierTypeRaisesException</code>
-      <code>testGetListenersRaisesExceptionForInvalidEventName</code>
-      <code>testGetListenersRaisesExceptionForInvalidIdentifier</code>
+      <code><![CDATA[testAttachRaisesExceptionForInvalidEvent]]></code>
+      <code><![CDATA[testAttachRaisesExceptionForInvalidIdentifer]]></code>
+      <code><![CDATA[testCanDetachFromSharedManagerUsingIdentifierAndEvent]]></code>
+      <code><![CDATA[testDetachingWithInvalidEventTypeRaisesException]]></code>
+      <code><![CDATA[testDetachingWithInvalidIdentifierTypeRaisesException]]></code>
+      <code><![CDATA[testGetListenersRaisesExceptionForInvalidEventName]]></code>
+      <code><![CDATA[testGetListenersRaisesExceptionForInvalidIdentifier]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$event</code>
-      <code>$eventName</code>
-      <code>$eventName</code>
-      <code>$identifier</code>
-      <code>$identifier</code>
+      <code><![CDATA[$event]]></code>
+      <code><![CDATA[$eventName]]></code>
+      <code><![CDATA[$eventName]]></code>
+      <code><![CDATA[$identifier]]></code>
+      <code><![CDATA[$identifier]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$identifiers</code>
-      <code>[$identifier]</code>
+      <code><![CDATA[$identifiers]]></code>
+      <code><![CDATA[[$identifier]]]></code>
     </MixedArgumentTypeCoercion>
     <MixedReturnTypeCoercion>
-      <code>$listeners[$priority]</code>
-      <code>callable[]</code>
+      <code><![CDATA[$listeners[$priority]]]></code>
+      <code><![CDATA[callable[]]]></code>
     </MixedReturnTypeCoercion>
     <PossiblyInvalidArgument>
-      <code>$event</code>
+      <code><![CDATA[$event]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
-      <code>$event</code>
+      <code><![CDATA[$event]]></code>
     </PossiblyInvalidCast>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[detachIdentifierAndEvent]]></code>
+      <code><![CDATA[invalidEventNames]]></code>
+      <code><![CDATA[invalidIdentifiersAndEvents]]></code>
+      <code><![CDATA[invalidListenersAndEventNamesForFetchingListeners]]></code>
+    </PossiblyUnusedMethod>
     <RedundantCast>
-      <code>(int) $priority</code>
+      <code><![CDATA[(int) $priority]]></code>
     </RedundantCast>
     <RedundantCondition>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
+      <code><![CDATA[assertIsArray]]></code>
+      <code><![CDATA[assertIsArray]]></code>
     </RedundantCondition>
     <RedundantConditionGivenDocblockType>
-      <code>assertIsArray</code>
+      <code><![CDATA[assertIsArray]]></code>
     </RedundantConditionGivenDocblockType>
     <UnusedVariable>
-      <code>$callback</code>
+      <code><![CDATA[$callback]]></code>
     </UnusedVariable>
   </file>
   <file src="test/SharedListenerIntegrationTest.php">
@@ -519,105 +543,105 @@
   </file>
   <file src="test/Test/EventListenerIntrospectionTraitTest.php">
     <MissingClosureParamType>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
     </MissingClosureParamType>
     <MissingClosureReturnType>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
-      <code>function ($e) {}</code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[function ($e) {}]]></code>
     </MissingClosureReturnType>
     <RedundantConditionGivenDocblockType>
-      <code>assertIsArray</code>
+      <code><![CDATA[assertIsArray]]></code>
     </RedundantConditionGivenDocblockType>
     <UnusedClosureParam>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
-      <code>$e</code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
+      <code><![CDATA[$e]]></code>
     </UnusedClosureParam>
   </file>
   <file src="test/TestAsset/BuilderInterface.php">
     <MissingReturnType>
-      <code>build</code>
+      <code><![CDATA[build]]></code>
     </MissingReturnType>
     <PossiblyUnusedMethod>
-      <code>build</code>
+      <code><![CDATA[build]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/TestAsset/CountingListener.php">
     <PossiblyUnusedProperty>
-      <code>$index</code>
+      <code><![CDATA[$index]]></code>
     </PossiblyUnusedProperty>
   </file>
   <file src="test/TestAsset/MockAbstractListenerAggregate.php">
     <MissingReturnType>
-      <code>doFoo</code>
+      <code><![CDATA[doFoo]]></code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/MockListenerAggregateTrait.php">
     <MissingReturnType>
-      <code>doFoo</code>
+      <code><![CDATA[doFoo]]></code>
     </MissingReturnType>
   </file>
 </files>

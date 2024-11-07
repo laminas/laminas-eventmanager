@@ -16,7 +16,7 @@ class FilterChainTest extends TestCase
 {
     private FilterChain $filterchain;
 
-    private string|null $message;
+    private string|null $message = null;
 
     protected function setUp(): void
     {

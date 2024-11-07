@@ -46,9 +46,9 @@ key differences:
   when "triggering" (`run()`) a filter.
 - Instead of passing an `EventInterface` to each attached filter, a
   `FilterInterface` implementation will pass:
-  - The `$context`
-  - The `$params`
-  - A `FilterIterator`, to allow the listener to call on the next filter.
+    - The `$context`
+    - The `$params`
+    - A `FilterIterator`, to allow the listener to call on the next filter.
 
 ## FilterIterator
 
@@ -57,7 +57,7 @@ provide the stack of attached filters to each listener. This stack will
 typically be a `Laminas\EventManager\Filter\FilterIterator` instance.
 
 `FilterIterator` extends `Laminas\Stdlib\FastPriorityQueue`, and, as such, is
-iterable, and provides the method `next()` for advancing the queue. 
+iterable, and provides the method `next()` for advancing the queue.
 
 As such, a listener should decide if more processing is necessary, and, if so,
 call on `$chain->next()`, passing the same set of arguments.

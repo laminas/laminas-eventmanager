@@ -27,12 +27,6 @@ use function method_exists;
  */
 class LazyListener
 {
-    /** @var ContainerInterface Container from which to pull listener. */
-    private $container;
-
-    /** @var array Variables/options to use during service creation, if any. */
-    private $env;
-
     /** @var callable Marshaled listener callback. */
     private $listener;
 
@@ -42,12 +36,13 @@ class LazyListener
     /** @var string Service name of listener. */
     private $service;
 
-    /**
-     * @param array $definition
-     * @param array $env
-     */
-    public function __construct(array $definition, ContainerInterface $container, array $env = [])
-    {
+    public function __construct(
+        array $definition,
+        /** @var ContainerInterface Container from which to pull listener. */
+        private readonly ContainerInterface $container,
+        /** @var array Variables/options to use during service creation, if any. */
+        private readonly array $env = []
+    ) {
         if (
             ! isset($definition['listener'])
             || ! is_string($definition['listener'])
@@ -68,10 +63,8 @@ class LazyListener
             );
         }
 
-        $this->service   = $definition['listener'];
-        $this->method    = $definition['method'];
-        $this->container = $container;
-        $this->env       = $env;
+        $this->service = $definition['listener'];
+        $this->method  = $definition['method'];
     }
 
     /**

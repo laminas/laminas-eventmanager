@@ -26,10 +26,6 @@ class LazyEventListener extends LazyListener
     /** @var null|int Priority at which to attach. */
     private $priority;
 
-    /**
-     * @param array $definition
-     * @param array $env
-     */
     public function __construct(array $definition, ContainerInterface $container, array $env = [])
     {
         parent::__construct($definition, $container, $env);
@@ -62,6 +58,6 @@ class LazyEventListener extends LazyListener
      */
     public function getPriority($default = 1)
     {
-        return null !== $this->priority ? $this->priority : $default;
+        return $this->priority ?? $default;
     }
 }
