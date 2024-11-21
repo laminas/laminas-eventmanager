@@ -82,17 +82,6 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="https://api-tools.getlaminas.org/documentation" class="dropdown-item">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 col-sm-12">
-                                        <img src="https://docs.laminas.dev/img/laminas-api-tools-rgb.svg">
-                                    </div>
-                                    <div class="col-md-8 col-sm-12">
-                                        <strong>API Tools</strong><br>
-                                        Build RESTful APIs in Minutes
-                                    </div>
-                                </div>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
                                 <div class="row align-items-center">
@@ -460,9 +449,11 @@ listener from a container and invoking it.</p>
 <h2 id="usage">Usage</h2>
 <p>To create a <code>LazyListener</code> instance, you must pass to its constructor:</p>
 <ul>
-<li>a <em>definition</em> of the listener; this is an array defining:</li>
+<li>a <em>definition</em> of the listener; this is an array defining:<ul>
 <li>a <code>listener</code> key, with the name of the listener service to pull from the container.</li>
 <li>a <code>method</code> key, with the name of the method to invoke on the listener instance.</li>
+</ul>
+</li>
 <li>a <em>container</em>; this is a <a href="https://www.php-fig.org/psr/psr-11/">PSR-11</a> container,
   such as provided by
   <a href="https://github.com/laminas/laminas-servicemanager">laminas-servicemanager</a>,
@@ -795,7 +786,7 @@ return $listener-&gt;{$method}($event);</code></pre>
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
                     <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
                     <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
-                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
                 </ul>
             </div>
         </div>

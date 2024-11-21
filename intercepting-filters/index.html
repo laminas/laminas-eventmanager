@@ -82,17 +82,6 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="https://api-tools.getlaminas.org/documentation" class="dropdown-item">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 col-sm-12">
-                                        <img src="https://docs.laminas.dev/img/laminas-api-tools-rgb.svg">
-                                    </div>
-                                    <div class="col-md-8 col-sm-12">
-                                        <strong>API Tools</strong><br>
-                                        Build RESTful APIs in Minutes
-                                    </div>
-                                </div>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
                                 <div class="row align-items-center">
@@ -499,17 +488,19 @@ key differences:</p>
   attaching to multiple events. As such, you pass the target and parameters only
   when "triggering" (<code>run()</code>) a filter.</li>
 <li>Instead of passing an <code>EventInterface</code> to each attached filter, a
-  <code>FilterInterface</code> implementation will pass:</li>
+  <code>FilterInterface</code> implementation will pass:<ul>
 <li>The <code>$context</code></li>
 <li>The <code>$params</code></li>
 <li>A <code>FilterIterator</code>, to allow the listener to call on the next filter.</li>
+</ul>
+</li>
 </ul>
 <h2 id="filteriterator">FilterIterator</h2>
 <p>When executing <code>run()</code>, a <code>FilterInterface</code> implementation is expected to
 provide the stack of attached filters to each listener. This stack will
 typically be a <code>Laminas\EventManager\Filter\FilterIterator</code> instance.</p>
 <p><code>FilterIterator</code> extends <code>Laminas\Stdlib\FastPriorityQueue</code>, and, as such, is
-iterable, and provides the method <code>next()</code> for advancing the queue. </p>
+iterable, and provides the method <code>next()</code> for advancing the queue.</p>
 <p>As such, a listener should decide if more processing is necessary, and, if so,
 call on <code>$chain-&gt;next()</code>, passing the same set of arguments.</p>
 <h2 id="filters">Filters</h2>
@@ -943,7 +934,7 @@ plugins.</p>
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
                     <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
                     <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
-                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
                 </ul>
             </div>
         </div>
