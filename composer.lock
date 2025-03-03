@@ -2133,24 +2133,24 @@
         },
         {
             "name": "psalm/plugin-phpunit",
-            "version": "0.19.1",
+            "version": "0.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
-                "reference": "bc31ef11ce007a181a09dde201f73ac8d0b3b107"
+                "reference": "e344eaaa27871e79c6cb97b9efe52a735f9d1966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/bc31ef11ce007a181a09dde201f73ac8d0b3b107",
-                "reference": "bc31ef11ce007a181a09dde201f73ac8d0b3b107",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/e344eaaa27871e79c6cb97b9efe52a735f9d1966",
+                "reference": "e344eaaa27871e79c6cb97b9efe52a735f9d1966",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.10",
                 "composer/semver": "^1.4 || ^2.0 || ^3.0",
                 "ext-simplexml": "*",
-                "php": ">=7.4",
-                "vimeo/psalm": "dev-master || ^5@beta || ^5.0 || ^6.0"
+                "php": "^7.4 || ^8.0",
+                "vimeo/psalm": "dev-master || ^5@beta || ^5.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.5"
@@ -2187,9 +2187,9 @@
             "description": "Psalm plugin for PHPUnit",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-phpunit/issues",
-                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/0.19.1"
+                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/0.19.0"
             },
-            "time": "2025-01-26T09:41:04+00:00"
+            "time": "2024-03-15T10:43:15+00:00"
         },
         {
             "name": "psr/cache",
@@ -4218,16 +4218,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.4.15",
+            "version": "v6.4.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "3cb242f059c14ae08591c5c4087d1fe443564392"
+                "reference": "7a1c12e87b08ec9c97abdd188c9b3f5a40e37fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/3cb242f059c14ae08591c5c4087d1fe443564392",
-                "reference": "3cb242f059c14ae08591c5c4087d1fe443564392",
+                "url": "https://api.github.com/repos/symfony/process/zipball/7a1c12e87b08ec9c97abdd188c9b3f5a40e37fc3",
+                "reference": "7a1c12e87b08ec9c97abdd188c9b3f5a40e37fc3",
                 "shasum": ""
             },
             "require": {
@@ -4259,7 +4259,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.4.15"
+                "source": "https://github.com/symfony/process/tree/v6.4.19"
             },
             "funding": [
                 {
@@ -4275,7 +4275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-06T14:19:14+00:00"
+            "time": "2025-02-04T13:35:48+00:00"
         },
         {
             "name": "symfony/service-contracts",
