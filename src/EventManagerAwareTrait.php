@@ -33,7 +33,7 @@ trait EventManagerAwareTrait
      * identifiers, in addition to any string or array of strings set to the
      * $this->eventIdentifier property.
      */
-    public function setEventManager(EventManagerInterface $events)
+    public function setEventManager(EventManagerInterface $eventManager)
     {
         $identifiers = [self::class, static::class];
         if (isset($this->eventIdentifier)) {
@@ -48,8 +48,8 @@ trait EventManagerAwareTrait
             }
             // silently ignore invalid eventIdentifier types
         }
-        $events->setIdentifiers($identifiers);
-        $this->events = $events;
+        $eventManager->setIdentifiers($identifiers);
+        $this->events = $eventManager;
         if (method_exists($this, 'attachDefaultListeners')) {
             $this->attachDefaultListeners();
         }
