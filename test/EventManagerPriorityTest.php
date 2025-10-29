@@ -16,10 +16,7 @@ use function iterator_to_array;
 use function sprintf;
 use function var_export;
 
-/**
- * @final This class should not be extended
- */
-class EventManagerPriorityTest extends TestCase
+final class EventManagerPriorityTest extends TestCase
 {
     /** @var string[] */
     private array $identifiers;

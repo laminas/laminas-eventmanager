@@ -15,10 +15,7 @@ use function array_shift;
 use function sprintf;
 use function var_export;
 
-/**
- * @final This class should not be extended
- */
-class SharedEventManagerTest extends TestCase
+final class SharedEventManagerTest extends TestCase
 {
     private Closure $callback;
     private SharedEventManager $manager;
