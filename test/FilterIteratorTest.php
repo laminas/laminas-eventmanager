@@ -9,6 +9,9 @@ use Laminas\EventManager\Filter\FilterIterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @final This class should not be extended
+ */
 class FilterIteratorTest extends TestCase
 {
     public function testNextReturnsNullOnEmptyChain(): void

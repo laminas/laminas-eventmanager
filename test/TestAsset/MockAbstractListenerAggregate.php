@@ -7,6 +7,9 @@ namespace LaminasTest\EventManager\TestAsset;
 use Laminas\EventManager\AbstractListenerAggregate;
 use Laminas\EventManager\EventManagerInterface;
 
+/**
+ * @final This class should not be extended
+ */
 class MockAbstractListenerAggregate extends AbstractListenerAggregate
 {
     /** @param int $priority */

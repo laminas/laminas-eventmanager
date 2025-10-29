@@ -18,6 +18,8 @@ use function sprintf;
  *
  * Use the EventManager when you want to create a per-instance notification
  * system for your objects.
+ *
+ * @final This class should not be extended
  */
 class EventManager implements EventManagerInterface
 {

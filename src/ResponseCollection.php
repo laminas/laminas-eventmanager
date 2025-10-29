@@ -11,6 +11,7 @@ use function count;
  *
  * @template TValue
  * @template-extends SplStack<TValue>
+ * @final This class should not be extended
  */
 class ResponseCollection extends SplStack
 {

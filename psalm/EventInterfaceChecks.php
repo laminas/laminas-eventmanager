@@ -7,6 +7,13 @@ namespace LaminasPsalm\EventManager;
 use Laminas\EventManager\EventInterface;
 use LaminasPsalm\EventManager\Model\CheckObject;
 
+/**
+ * Psalm type checking helper
+ *
+ * @internal
+ *
+ * @final This class should not be extended
+ */
 class EventInterfaceChecks
 {
     /**

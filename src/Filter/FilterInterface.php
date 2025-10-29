@@ -19,6 +19,8 @@ interface FilterInterface
 
     /**
      * Attach an intercepting filter
+     *
+     * @return callable
      */
     public function attach(callable $callback);
 

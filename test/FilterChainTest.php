@@ -12,6 +12,9 @@ use function hash;
 use function str_rot13;
 use function trim;
 
+/**
+ * @final This class should not be extended
+ */
 class FilterChainTest extends TestCase
 {
     private FilterChain $filterchain;

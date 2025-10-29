@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 use function in_array;
 
+/**
+ * @final This class should not be extended
+ */
 class ListenerAggregateTraitTest extends TestCase
 {
     public function testDetachRemovesAttachedListeners(): void

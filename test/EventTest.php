@@ -9,6 +9,9 @@ use Laminas\EventManager\Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+/**
+ * @final This class should not be extended
+ */
 class EventTest extends TestCase
 {
     public function testConstructorWithArguments(): void

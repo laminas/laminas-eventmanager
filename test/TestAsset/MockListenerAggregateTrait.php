@@ -8,6 +8,9 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\ListenerAggregateInterface;
 use Laminas\EventManager\ListenerAggregateTrait;
 
+/**
+ * @final This class should not be extended
+ */
 class MockListenerAggregateTrait implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;

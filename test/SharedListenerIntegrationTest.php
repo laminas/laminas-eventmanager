@@ -13,6 +13,9 @@ use function array_rand;
 use function range;
 use function sprintf;
 
+/**
+ * @final This class should not be extended
+ */
 class SharedListenerIntegrationTest extends TestCase
 {
     /** @var string[] */

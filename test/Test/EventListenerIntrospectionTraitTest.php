@@ -13,6 +13,9 @@ use Traversable;
 use function iterator_to_array;
 use function sprintf;
 
+/**
+ * @final This class should not be extended
+ */
 class EventListenerIntrospectionTraitTest extends TestCase
 {
     use EventListenerIntrospectionTrait;

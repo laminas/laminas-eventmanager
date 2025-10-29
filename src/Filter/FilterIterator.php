@@ -19,6 +19,7 @@ use function sprintf;
  *
  * @template TValue of mixed
  * @template-extends FastPriorityQueue<TValue>
+ * @final This class should not be extended
  */
 class FilterIterator extends FastPriorityQueue
 {

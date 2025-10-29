@@ -14,6 +14,7 @@ interface SharedEventManagerInterface
      * @param  string $eventName
      * @param  callable $listener Listener that will handle the event.
      * @param  int $priority Priority at which listener should execute
+     * @return void
      */
     public function attach($identifier, $eventName, callable $listener, $priority = 1);
 
@@ -47,6 +48,7 @@ interface SharedEventManagerInterface
      *
      * @param  string $identifier
      * @param  null|string $eventName
+     * @return void|false
      */
     public function clearListeners($identifier, $eventName = null);
 }

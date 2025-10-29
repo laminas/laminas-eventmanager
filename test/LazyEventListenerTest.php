@@ -10,6 +10,9 @@ use Laminas\EventManager\LazyListener;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 
+/**
+ * @final This class should not be extended
+ */
 class LazyEventListenerTest extends LazyListenerTest
 {
     use DeprecatedAssertions;

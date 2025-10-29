@@ -14,6 +14,8 @@ use function sprintf;
  * Allows attaching to EMs composed by other classes without having an instance first.
  * The assumption is that the SharedEventManager will be injected into EventManager
  * instances, and then queried for additional listeners when triggering an event.
+ *
+ * @final This class should not be extended
  */
 class SharedEventManager implements SharedEventManagerInterface
 {

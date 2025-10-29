@@ -10,6 +10,9 @@ use Laminas\EventManager\EventManagerInterface;
 use LaminasTest\EventManager\TestAsset\MockEventManagerAwareTrait;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @final This class should not be extended
+ */
 class EventManagerAwareTraitTest extends TestCase
 {
     use DeprecatedAssertions;
