@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 use function in_array;
 
-class ListenerAggregateTraitTest extends TestCase
+final class ListenerAggregateTraitTest extends TestCase
 {
     public function testDetachRemovesAttachedListeners(): void
     {

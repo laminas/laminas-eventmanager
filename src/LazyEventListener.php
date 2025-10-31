@@ -17,6 +17,8 @@ use function is_string;
  *
  * - event: the event name to attach to.
  * - priority: the priority at which to attach the listener, if not the default.
+ *
+ * @final This class should not be extended
  */
 class LazyEventListener extends LazyListener
 {

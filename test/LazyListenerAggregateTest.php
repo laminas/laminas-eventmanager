@@ -19,7 +19,7 @@ use ReflectionProperty;
 use function array_shift;
 use function in_array;
 
-class LazyListenerAggregateTest extends TestCase
+final class LazyListenerAggregateTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
     private ContainerInterface $container;

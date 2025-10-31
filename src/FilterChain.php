@@ -4,6 +4,8 @@ namespace Laminas\EventManager;
 
 /**
  * FilterChain: intercepting filter manager
+ *
+ * @final This class should not be extended
  */
 class FilterChain implements Filter\FilterInterface
 {

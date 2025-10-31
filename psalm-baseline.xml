@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
+  <file src="src/AbstractListenerAggregate.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function detach(EventManagerInterface $events)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Event.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getName()]]></code>
+      <code><![CDATA[public function getParam($name, $default = null)]]></code>
+      <code><![CDATA[public function getParams()]]></code>
+      <code><![CDATA[public function getTarget()]]></code>
+      <code><![CDATA[public function propagationIsStopped()]]></code>
+      <code><![CDATA[public function setName($name)]]></code>
+      <code><![CDATA[public function setParam($name, $value)]]></code>
+      <code><![CDATA[public function setParams($params)]]></code>
+      <code><![CDATA[public function setTarget($target)]]></code>
+      <code><![CDATA[public function stopPropagation($flag = true)]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="src/EventManager.php">
     <DocblockTypeContradiction>
       <code><![CDATA[is_string($eventName)]]></code>
       <code><![CDATA[is_string($eventName)]]></code>
     </DocblockTypeContradiction>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function addIdentifiers(array $identifiers)]]></code>
+      <code><![CDATA[public function attach($eventName, callable $listener, $priority = 1)]]></code>
+      <code><![CDATA[public function clearListeners($eventName)]]></code>
+      <code><![CDATA[public function detach(callable $listener, $eventName = null, $force = false)]]></code>
+      <code><![CDATA[public function getIdentifiers()]]></code>
+      <code><![CDATA[public function getSharedManager()]]></code>
+      <code><![CDATA[public function setEventPrototype(EventInterface $prototype)]]></code>
+      <code><![CDATA[public function setIdentifiers(array $identifiers)]]></code>
+      <code><![CDATA[public function trigger($eventName, $target = null, $argv = [])]]></code>
+      <code><![CDATA[public function triggerEvent(EventInterface $event)]]></code>
+      <code><![CDATA[public function triggerEventUntil(callable $callback, EventInterface $event)]]></code>
+      <code><![CDATA[public function triggerUntil(callable $callback, $eventName, $target = null, $argv = [])]]></code>
+    </MissingOverrideAttribute>
     <MissingParamType>
       <code><![CDATA[$force]]></code>
     </MissingParamType>
@@ -65,11 +98,6 @@
       <code><![CDATA[getEventManager]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Filter/FilterInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[attach]]></code>
-    </MissingReturnType>
-  </file>
   <file src="src/Filter/FilterIterator.php">
     <InvalidArgument>
       <code><![CDATA[$value]]></code>
@@ -77,6 +105,12 @@
     <LessSpecificImplementedReturnType>
       <code><![CDATA[mixed]]></code>
     </LessSpecificImplementedReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[public function contains($datum)]]></code>
+      <code><![CDATA[public function insert($value, $priority)]]></code>
+      <code><![CDATA[public function remove($datum)]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$item['data']]]></code>
       <code><![CDATA[$item['priority']]]></code>
@@ -100,6 +134,7 @@
   </file>
   <file src="src/FilterChain.php">
     <ImplementedReturnTypeMismatch>
+      <code><![CDATA[CallbackHandler]]></code>
       <code><![CDATA[Filter\FilterIterator]]></code>
       <code><![CDATA[null|ResponseCollection]]></code>
     </ImplementedReturnTypeMismatch>
@@ -109,6 +144,14 @@
     <InvalidReturnType>
       <code><![CDATA[CallbackHandler]]></code>
     </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function attach(callable $callback, $priority = 1)]]></code>
+      <code><![CDATA[public function clearFilters()]]></code>
+      <code><![CDATA[public function detach(callable $filter)]]></code>
+      <code><![CDATA[public function getFilters()]]></code>
+      <code><![CDATA[public function getResponses()]]></code>
+      <code><![CDATA[public function run($context, array $argv = [])]]></code>
+    </MissingOverrideAttribute>
     <MixedFunctionCall>
       <code><![CDATA[$next($context, $argv, $chain)]]></code>
     </MixedFunctionCall>
@@ -130,10 +173,6 @@
       <code><![CDATA[$this->listener]]></code>
       <code><![CDATA[$this->listener]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[callable]]></code>
-      <code><![CDATA[callable]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$listener->{$method}($event)]]></code>
       <code><![CDATA[$this->listener]]></code>
@@ -147,6 +186,9 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/LazyListenerAggregate.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function attach(EventManagerInterface $events, $priority = 1)]]></code>
+    </MissingOverrideAttribute>
     <UnusedProperty>
       <code><![CDATA[$container]]></code>
       <code><![CDATA[$env]]></code>
@@ -171,12 +213,15 @@
       <code><![CDATA['*' === $eventName || ! is_string($eventName)]]></code>
       <code><![CDATA['*' === $identifier || ! is_string($identifier)]]></code>
     </DocblockTypeContradiction>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function attach($identifier, $event, callable $listener, $priority = 1)]]></code>
+      <code><![CDATA[public function clearListeners($identifier, $eventName = null)]]></code>
+      <code><![CDATA[public function detach(callable $listener, $identifier = null, $eventName = null, $force = false)]]></code>
+      <code><![CDATA[public function getListeners(array $identifiers, $eventName)]]></code>
+    </MissingOverrideAttribute>
     <MissingParamType>
       <code><![CDATA[$force]]></code>
     </MissingParamType>
-    <MissingReturnType>
-      <code><![CDATA[clearListeners]]></code>
-    </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$listOfListeners]]></code>
       <code><![CDATA[$this->identifiers[$identifier]]]></code>
@@ -243,16 +288,7 @@
       <code><![CDATA[(int) $priority]]></code>
     </RedundantCastGivenDocblockType>
   </file>
-  <file src="src/SharedEventManagerInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[attach]]></code>
-      <code><![CDATA[clearListeners]]></code>
-    </MissingReturnType>
-  </file>
   <file src="src/Test/EventListenerIntrospectionTrait.php">
-    <InvalidReturnType>
-      <code><![CDATA[Traversable]]></code>
-    </InvalidReturnType>
     <MissingReturnType>
       <code><![CDATA[assertListenerAtPriority]]></code>
     </MissingReturnType>
@@ -310,6 +346,9 @@
     <MissingClosureParamType>
       <code><![CDATA[$event]]></code>
     </MissingClosureParamType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$event->getParam('accumulator')]]></code>
       <code><![CDATA[$event->getParam('accumulator')]]></code>
@@ -335,11 +374,16 @@
       <code><![CDATA[$result]]></code>
       <code><![CDATA[$result]]></code>
     </MissingClosureParamType>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[eventArguments]]></code>
-      <code><![CDATA[eventsMissingNames]]></code>
-      <code><![CDATA[invalidEventsForDetach]]></code>
-    </PossiblyUnusedMethod>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyNullArgument>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+      <code><![CDATA[$listeners]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/EventTest.php">
     <InvalidArgument>
@@ -372,6 +416,9 @@
       <code><![CDATA[function ($context, $params, $chain) {]]></code>
       <code><![CDATA[function ($context, $params, $chain) {]]></code>
     </MissingClosureReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$params['string']]]></code>
       <code><![CDATA[$params['string']]]></code>
@@ -412,14 +459,15 @@
     <MixedArgument>
       <code><![CDATA[$filter]]></code>
     </MixedArgument>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[invalidFilters]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyEventListenerTest.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$listener]]></code>
     </LessSpecificReturnStatement>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+      <code><![CDATA[public function testCanInstantiateLazyListenerWithValidDefinition(): LazyListener]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testCanRetrieveEventFromListener]]></code>
       <code><![CDATA[testCanRetrievePriorityFromListener]]></code>
@@ -437,6 +485,9 @@
     </MoreSpecificReturnType>
   </file>
   <file src="test/LazyListenerAggregateTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testAttachAttachesLazyListenersViaClosures]]></code>
       <code><![CDATA[testPassingInvalidListenerTypesAtInstantiationRaisesException]]></code>
@@ -451,10 +502,6 @@
       <code><![CDATA[$listeners]]></code>
       <code><![CDATA[$test]]></code>
     </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[invalidListenerTypes]]></code>
-      <code><![CDATA[invalidListeners]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/LazyListenerTest.php">
     <InvalidFunctionCall>
@@ -464,6 +511,9 @@
     <LessSpecificReturnStatement>
       <code><![CDATA[$listener]]></code>
     </LessSpecificReturnStatement>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testConstructorRaisesExceptionForInvalidListenerType]]></code>
       <code><![CDATA[testConstructorRaisesExceptionForInvalidMethodType]]></code>
@@ -481,11 +531,11 @@
     <MoreSpecificReturnType>
       <code><![CDATA[LazyListener]]></code>
     </MoreSpecificReturnType>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[invalidTypes]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/SharedEventManagerTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testAttachRaisesExceptionForInvalidEvent]]></code>
       <code><![CDATA[testAttachRaisesExceptionForInvalidIdentifer]]></code>
@@ -516,12 +566,6 @@
     <PossiblyInvalidCast>
       <code><![CDATA[$event]]></code>
     </PossiblyInvalidCast>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[detachIdentifierAndEvent]]></code>
-      <code><![CDATA[invalidEventNames]]></code>
-      <code><![CDATA[invalidIdentifiersAndEvents]]></code>
-      <code><![CDATA[invalidListenersAndEventNamesForFetchingListeners]]></code>
-    </PossiblyUnusedMethod>
     <RedundantCast>
       <code><![CDATA[(int) $priority]]></code>
     </RedundantCast>
@@ -540,6 +584,9 @@
     <InvalidPropertyFetch>
       <code><![CDATA[$listener->count]]></code>
     </InvalidPropertyFetch>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/Test/EventListenerIntrospectionTraitTest.php">
     <MissingClosureParamType>
@@ -591,6 +638,9 @@
       <code><![CDATA[function ($e) {}]]></code>
       <code><![CDATA[function ($e) {}]]></code>
     </MissingClosureReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[assertIsArray]]></code>
     </RedundantConditionGivenDocblockType>
@@ -622,9 +672,6 @@
     </UnusedClosureParam>
   </file>
   <file src="test/TestAsset/BuilderInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[build]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[build]]></code>
     </PossiblyUnusedMethod>
@@ -635,11 +682,17 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="test/TestAsset/MockAbstractListenerAggregate.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function attach(EventManagerInterface $events, $priority = 1): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[doFoo]]></code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/MockListenerAggregateTrait.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function attach(EventManagerInterface $events, $priority = 1)]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[doFoo]]></code>
     </MissingReturnType>

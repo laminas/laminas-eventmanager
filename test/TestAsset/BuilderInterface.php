@@ -12,6 +12,9 @@ use Psr\Container\ContainerInterface;
  */
 interface BuilderInterface extends ContainerInterface
 {
-    /** @param object $service */
+    /**
+     * @param object $service
+     * @return object
+     */
     public function build($service, array $opts = []);
 }

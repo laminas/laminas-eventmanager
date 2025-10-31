@@ -9,7 +9,7 @@ use Laminas\EventManager\Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class EventTest extends TestCase
+final class EventTest extends TestCase
 {
     public function testConstructorWithArguments(): void
     {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\EventManager\TestAsset;
 
+/**
+ * @final This class should not be extended
+ */
 class CountingListener
 {
     public int $count = 0;

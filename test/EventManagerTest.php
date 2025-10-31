@@ -31,7 +31,7 @@ use function strstr;
 use function trim;
 use function var_export;
 
-class EventManagerTest extends TestCase
+final class EventManagerTest extends TestCase
 {
     use DeprecatedAssertions;
 

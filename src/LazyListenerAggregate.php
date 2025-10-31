@@ -24,6 +24,8 @@ use function sprintf;
  * );
  * $aggregate->attach($events);
  * </code>
+ *
+ * @final This class should not be extended
  */
 class LazyListenerAggregate implements ListenerAggregateInterface
 {

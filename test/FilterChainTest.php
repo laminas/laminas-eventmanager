@@ -12,7 +12,7 @@ use function hash;
 use function str_rot13;
 use function trim;
 
-class FilterChainTest extends TestCase
+final class FilterChainTest extends TestCase
 {
     private FilterChain $filterchain;
 

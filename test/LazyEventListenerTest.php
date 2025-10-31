@@ -10,7 +10,7 @@ use Laminas\EventManager\LazyListener;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 
-class LazyEventListenerTest extends LazyListenerTest
+final class LazyEventListenerTest extends LazyListenerTest
 {
     use DeprecatedAssertions;
 

@@ -10,7 +10,7 @@ use Laminas\EventManager\EventManagerInterface;
 use LaminasTest\EventManager\TestAsset\MockEventManagerAwareTrait;
 use PHPUnit\Framework\TestCase;
 
-class EventManagerAwareTraitTest extends TestCase
+final class EventManagerAwareTraitTest extends TestCase
 {
     use DeprecatedAssertions;
 

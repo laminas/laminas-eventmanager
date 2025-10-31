@@ -13,7 +13,7 @@ use function array_rand;
 use function range;
 use function sprintf;
 
-class SharedListenerIntegrationTest extends TestCase
+final class SharedListenerIntegrationTest extends TestCase
 {
     /** @var string[] */
     private array $identifiers;
