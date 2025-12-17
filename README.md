@@ -1,6 +1,6 @@
 # laminas-eventmanager
 
-[![Build Status](https://travis-ci.com/laminas/laminas-eventmanager.svg?branch=master)](https://travis-ci.com/laminas/laminas-eventmanager)
+[![Build Status](https://github.com/laminas/laminas-eventmanager/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-eventmanager/actions?query=workflow%3A"Continuous+Integration")
 [![Coverage Status](https://coveralls.io/repos/laminas/laminas-eventmanager/badge.svg?branch=master)](https://coveralls.io/r/laminas/laminas-eventmanager?branch=master)
 
 > ## 🇷🇺 Русским гражданам
