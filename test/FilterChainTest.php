@@ -67,13 +67,13 @@ final class FilterChainTest extends TestCase
 
     public function testFilterChainShouldReturnLastResponse(): void
     {
-        $this->filterchain->attach(function ($context, $params, $chain) {
+        $this->filterchain->attach(static function ($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             return $chain->next($context, $params, $chain);
         });
-        $this->filterchain->attach(function ($context, array $params) {
+        $this->filterchain->attach(static function ($context, array $params) {
             $string = $params['string'] ?? '';
             return str_rot13($string);
         });
@@ -98,7 +98,7 @@ final class FilterChainTest extends TestCase
 
     public function testInterceptingFilterShouldReceiveChain(): void
     {
-        $this->filterchain->attach(function (self $context, array $params, mixed $chain) {
+        $this->filterchain->attach(static function (self $context, array $params, mixed $chain) {
             self::assertInstanceOf(FilterIterator::class, $chain);
         });
         $this->filterchain->run($this);
@@ -106,17 +106,17 @@ final class FilterChainTest extends TestCase
 
     public function testFilteringStopsAsSoonAsAFilterFailsToCallNext(): void
     {
-        $this->filterchain->attach(function ($context, $params, $chain) {
+        $this->filterchain->attach(static function ($context, $params, $chain) {
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
             return $chain->next($context, $params, $chain);
         }, 10000);
-        $this->filterchain->attach(function ($context, array $params) {
+        $this->filterchain->attach(static function ($context, array $params) {
             $string = $params['string'] ?? '';
             return str_rot13($string);
         }, 1000);
-        $this->filterchain->attach(function ($context, array $params) {
+        $this->filterchain->attach(static function ($context, array $params) {
             $string = $params['string'] ?? '';
             return hash('md5', $string);
         }, 100);

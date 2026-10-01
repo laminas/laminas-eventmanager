@@ -36,7 +36,7 @@ class MultipleEventIndividualSharedListenerBench
         }
         $this->events = new EventManager($sharedEvents, [$identifiers[0]]);
 
-        $this->eventsToTrigger = array_filter($this->getEventList(), function ($value) {
+        $this->eventsToTrigger = array_filter($this->getEventList(), static function ($value) {
             return $value !== '*';
         });
     }

@@ -43,7 +43,7 @@ final class EventManagerPriorityTest extends TestCase
     /** @param mixed $return */
     public function createListener($return): callable
     {
-        return function ($event) use ($return) {
+        return static function ($event) use ($return) {
             $event->getParam('accumulator')->enqueue($return);
         };
     }

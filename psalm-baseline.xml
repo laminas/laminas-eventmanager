@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
+<files psalm-version="6.19.1@e2ca44251c1f1aa2e35452d426895746b47de64e">
   <file src="src/AbstractListenerAggregate.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function detach(EventManagerInterface $events)]]></code>
@@ -413,8 +413,8 @@
       <code><![CDATA[$params]]></code>
     </MissingClosureParamType>
     <MissingClosureReturnType>
-      <code><![CDATA[function ($context, $params, $chain) {]]></code>
-      <code><![CDATA[function ($context, $params, $chain) {]]></code>
+      <code><![CDATA[static function ($context, $params, $chain) {]]></code>
+      <code><![CDATA[static function ($context, $params, $chain) {]]></code>
     </MissingClosureReturnType>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
@@ -449,9 +449,9 @@
   </file>
   <file src="test/FilterIteratorTest.php">
     <MissingClosureReturnType>
-      <code><![CDATA[function () {]]></code>
-      <code><![CDATA[function () {]]></code>
-      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[static function () {]]></code>
+      <code><![CDATA[static function () {]]></code>
+      <code><![CDATA[static function () {]]></code>
     </MissingClosureReturnType>
     <MissingReturnType>
       <code><![CDATA[testInsertShouldRaiseExceptionOnNonCallableDatum]]></code>
@@ -616,27 +616,27 @@
       <code><![CDATA[$e]]></code>
     </MissingClosureParamType>
     <MissingClosureReturnType>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
-      <code><![CDATA[function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
+      <code><![CDATA[static function ($e) {}]]></code>
     </MissingClosureReturnType>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
