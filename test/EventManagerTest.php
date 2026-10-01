@@ -148,12 +148,12 @@ final class EventManagerTest extends TestCase
 
     public function testTriggerShouldReturnAllListenerReturnValues(): void
     {
-        $this->events->attach('string.transform', function (EventInterface $e): string {
+        $this->events->attach('string.transform', static function (EventInterface $e): string {
             $string = $e->getParam('string', '__NOT_FOUND__');
             self::assertIsString($string);
             return trim($string);
         });
-        $this->events->attach('string.transform', function (EventInterface $e): string {
+        $this->events->attach('string.transform', static function (EventInterface $e): string {
             $string = $e->getParam('string', '__NOT_FOUND__');
             self::assertIsString($string);
             return str_rot13($string);
@@ -167,14 +167,14 @@ final class EventManagerTest extends TestCase
 
     public function testTriggerUntilShouldReturnAsSoonAsCallbackReturnsTrue(): void
     {
-        $this->events->attach('foo.bar', function (EventInterface $e) {
+        $this->events->attach('foo.bar', static function (EventInterface $e) {
             $string = $e->getParam('string', '');
             self::assertIsString($string);
             $search = $e->getParam('search', '?');
             self::assertIsString($search);
             return strpos($string, $search);
         });
-        $this->events->attach('foo.bar', function (EventInterface $e) {
+        $this->events->attach('foo.bar', static function (EventInterface $e) {
             $string = $e->getParam('string', '');
             self::assertIsString($string);
             $search = $e->getParam('search', '?');
@@ -193,12 +193,12 @@ final class EventManagerTest extends TestCase
 
     public function testTriggerResponseCollectionContains(): void
     {
-        $this->events->attach('string.transform', function (EventInterface $e): string {
+        $this->events->attach('string.transform', static function (EventInterface $e): string {
             $string = $e->getParam('string', '');
             self::assertIsString($string);
             return trim($string);
         });
-        $this->events->attach('string.transform', function (EventInterface $e): string {
+        $this->events->attach('string.transform', static function (EventInterface $e): string {
             $string = $e->getParam('string', '');
             self::assertIsString($string);
             return str_rot13($string);
@@ -217,13 +217,13 @@ final class EventManagerTest extends TestCase
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMet(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', fn() => 'bogus', 4);
-        $this->events->attach('foo.bar', fn() => 'nada', 3);
-        $this->events->attach('foo.bar', fn() => 'found', 2);
-        $this->events->attach('foo.bar', fn() => 'zero', 1);
+        $this->events->attach('foo.bar', static fn() => 'bogus', 4);
+        $this->events->attach('foo.bar', static fn() => 'nada', 3);
+        $this->events->attach('foo.bar', static fn() => 'found', 2);
+        $this->events->attach('foo.bar', static fn() => 'zero', 1);
         // @codingStandardsIgnoreEnd
 
-        $responses = $this->events->triggerUntil(fn($result) => $result === 'found', 'foo.bar', $this);
+        $responses = $this->events->triggerUntil(static fn($result) => $result === 'found', 'foo.bar', $this);
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertTrue($responses->stopped());
         $result = $responses->last();
@@ -235,13 +235,13 @@ final class EventManagerTest extends TestCase
     public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo.bar', fn() => 'bogus');
-        $this->events->attach('foo.bar', fn() => 'nada');
-        $this->events->attach('foo.bar', fn() => 'zero');
-        $this->events->attach('foo.bar', fn() => 'found');
+        $this->events->attach('foo.bar', static fn() => 'bogus');
+        $this->events->attach('foo.bar', static fn() => 'nada');
+        $this->events->attach('foo.bar', static fn() => 'zero');
+        $this->events->attach('foo.bar', static fn() => 'found');
         // @codingStandardsIgnoreEnd
 
-        $responses = $this->events->triggerUntil(fn($result): bool => $result === 'found', 'foo.bar', $this);
+        $responses = $this->events->triggerUntil(static fn($result): bool => $result === 'found', 'foo.bar', $this);
         self::assertInstanceOf(ResponseCollection::class, $responses);
         self::assertTrue($responses->stopped());
         self::assertEquals('found', $responses->last());
@@ -862,7 +862,7 @@ final class EventManagerTest extends TestCase
             return true;
         });
 
-        $this->events->attach('test', function () {
+        $this->events->attach('test', static function () {
             self::fail('Third listener was triggered and should not have been');
         });
 

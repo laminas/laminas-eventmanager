@@ -13,7 +13,7 @@ trait BenchTrait
 
     private function generateCallback(): callable
     {
-        return function ($e) {
+        return static function ($e) {
         };
     }
 

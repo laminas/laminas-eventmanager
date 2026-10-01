@@ -31,7 +31,7 @@ final class FilterIteratorTest extends TestCase
 
     public function testContainsReturnsTrueForValidElement(): void
     {
-        $callback       = function () {
+        $callback       = static function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
@@ -47,7 +47,7 @@ final class FilterIteratorTest extends TestCase
 
     public function testRemoveUnrecognizedItemFromQueueReturnsFalse(): void
     {
-        $callback       = function () {
+        $callback       = static function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);
@@ -57,7 +57,7 @@ final class FilterIteratorTest extends TestCase
 
     public function testRemoveValidItemFromQueueReturnsTrue(): void
     {
-        $callback       = function () {
+        $callback       = static function () {
         };
         $filterIterator = new FilterIterator();
         $filterIterator->insert($callback, 1);

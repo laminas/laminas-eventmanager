@@ -27,9 +27,9 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testGetEventsFromEventManagerReturnsEventList(): void
     {
         // @codingStandardsIgnoreStart
-        $this->events->attach('foo', function ($e) {});
-        $this->events->attach('bar', function ($e) {});
-        $this->events->attach('baz', function ($e) {});
+        $this->events->attach('foo', static function ($e) {});
+        $this->events->attach('bar', static function ($e) {});
+        $this->events->attach('baz', static function ($e) {});
         // @codingStandardsIgnoreEnd
 
         self::assertEquals(['foo', 'bar', 'baz'], $this->getEventsFromEventManager($this->events));
@@ -38,11 +38,11 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testGetListenersForEventReturnsIteratorOfListenersForEventInPriorityOrder(): void
     {
         // @codingStandardsIgnoreStart
-        $callback1 = function ($e) {};
-        $callback2 = function ($e) {};
-        $callback3 = function ($e) {};
-        $callback4 = function ($e) {};
-        $callback5 = function ($e) {};
+        $callback1 = static function ($e) {};
+        $callback2 = static function ($e) {};
+        $callback3 = static function ($e) {};
+        $callback4 = static function ($e) {};
+        $callback5 = static function ($e) {};
         // @codingStandardsIgnoreEnd
 
         $this->events->attach('foo', $callback5, 1);
@@ -67,11 +67,11 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testGetListenersForEventReturnsIteratorOfListenersInAttachmentOrderWhenSamePriority(): void
     {
         // @codingStandardsIgnoreStart
-        $callback1 = function ($e) {};
-        $callback2 = function ($e) {};
-        $callback3 = function ($e) {};
-        $callback4 = function ($e) {};
-        $callback5 = function ($e) {};
+        $callback1 = static function ($e) {};
+        $callback2 = static function ($e) {};
+        $callback3 = static function ($e) {};
+        $callback4 = static function ($e) {};
+        $callback5 = static function ($e) {};
         // @codingStandardsIgnoreEnd
 
         $this->events->attach('foo', $callback5);
@@ -96,11 +96,11 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testGetListenersForEventCanReturnPriorityKeysWhenRequested(): void
     {
         // @codingStandardsIgnoreStart
-        $callback1 = function ($e) {};
-        $callback2 = function ($e) {};
-        $callback3 = function ($e) {};
-        $callback4 = function ($e) {};
-        $callback5 = function ($e) {};
+        $callback1 = static function ($e) {};
+        $callback2 = static function ($e) {};
+        $callback3 = static function ($e) {};
+        $callback4 = static function ($e) {};
+        $callback5 = static function ($e) {};
         // @codingStandardsIgnoreEnd
 
         $this->events->attach('foo', $callback5, 1);
@@ -125,11 +125,11 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testGetArrayOfListenersForEventReturnsArrayOfListenersInPriorityOrder(): void
     {
         // @codingStandardsIgnoreStart
-        $callback1 = function ($e) {};
-        $callback2 = function ($e) {};
-        $callback3 = function ($e) {};
-        $callback4 = function ($e) {};
-        $callback5 = function ($e) {};
+        $callback1 = static function ($e) {};
+        $callback2 = static function ($e) {};
+        $callback3 = static function ($e) {};
+        $callback4 = static function ($e) {};
+        $callback5 = static function ($e) {};
         // @codingStandardsIgnoreEnd
 
         $this->events->attach('foo', $callback5, 1);
@@ -153,7 +153,7 @@ final class EventListenerIntrospectionTraitTest extends TestCase
     public function testAssertListenerAtPriorityPassesWhenListenerIsFound(): void
     {
         // @codingStandardsIgnoreStart
-        $callback = function ($e) {};
+        $callback = static function ($e) {};
         // @codingStandardsIgnoreEnd
 
         $this->events->attach('foo', $callback, 7);

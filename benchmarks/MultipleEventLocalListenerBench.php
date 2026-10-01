@@ -30,7 +30,7 @@ class MultipleEventLocalListenerBench
     {
         $this->events = new EventManager();
 
-        $this->eventsToTrigger = array_filter($this->getEventList(), function ($value) {
+        $this->eventsToTrigger = array_filter($this->getEventList(), static function ($value) {
             return $value !== '*';
         });
     }
