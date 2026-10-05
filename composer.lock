@@ -895,16 +895,16 @@
         },
         {
             "name": "boundwize/structarmed",
-            "version": "0.18.4",
+            "version": "0.18.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "1fa27ff4464d36676b02b7dfa29479fb8c37346c"
+                "reference": "21d20e29234b4b106718639a12dc3dd343d2e05b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/1fa27ff4464d36676b02b7dfa29479fb8c37346c",
-                "reference": "1fa27ff4464d36676b02b7dfa29479fb8c37346c",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/21d20e29234b4b106718639a12dc3dd343d2e05b",
+                "reference": "21d20e29234b4b106718639a12dc3dd343d2e05b",
                 "shasum": ""
             },
             "require": {
@@ -961,7 +961,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.18.4"
+                "source": "https://github.com/boundwize/structarmed/tree/0.18.11"
             },
             "funding": [
                 {
@@ -969,7 +969,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-01T00:50:23+00:00"
+            "time": "2026-10-04T10:04:54+00:00"
         },
         {
             "name": "composer/pcre",
@@ -1546,16 +1546,16 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c"
+                "reference": "71d305eaa6480d3d3460c7d053d1da7749fa9cca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/e96fe45e92a54233726014a7cc7340abf29bb14c",
-                "reference": "e96fe45e92a54233726014a7cc7340abf29bb14c",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/71d305eaa6480d3d3460c7d053d1da7749fa9cca",
+                "reference": "71d305eaa6480d3d3460c7d053d1da7749fa9cca",
                 "shasum": ""
             },
             "require": {
@@ -1601,7 +1601,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/lexer/issues",
-                "source": "https://github.com/doctrine/lexer/tree/3.0.2"
+                "source": "https://github.com/doctrine/lexer/tree/3.0.3"
             },
             "funding": [
                 {
@@ -1617,7 +1617,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-14T20:44:06+00:00"
+            "time": "2026-10-01T06:59:29+00:00"
         },
         {
             "name": "felixfbecker/language-server-protocol",
