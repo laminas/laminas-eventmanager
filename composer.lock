@@ -1827,6 +1827,87 @@
             "published-time": "2026-09-29T22:12:43+00:00"
         },
         {
+            "name": "horde/yaml",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/horde/Yaml.git",
+                "reference": "fdedb49f176bbf5b596841cd37cbd6c09db130c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/horde/Yaml/zipball/fdedb49f176bbf5b596841cd37cbd6c09db130c3",
+                "reference": "fdedb49f176bbf5b596841cd37cbd6c09db130c3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+                "horde/test": "^3 || dev-FRAMEWORK_6_0",
+                "horde/util": "^3 || dev-FRAMEWORK_6_0"
+            },
+            "suggest": {
+                "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+                "horde/util": "^3 || dev-FRAMEWORK_6_0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-FRAMEWORK_6_0": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Horde_Yaml": "lib/"
+                },
+                "psr-4": {
+                    "Horde\\Yaml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ralf Lang",
+                    "email": "ralf.lang@ralf-lang.de",
+                    "role": "lead"
+                },
+                {
+                    "name": "Jan Schneider",
+                    "email": "jan@horde.org",
+                    "role": "lead"
+                },
+                {
+                    "name": "Mike Naberezny",
+                    "email": "mike@maintainable.com",
+                    "role": "lead"
+                },
+                {
+                    "name": "Chuck Hagenbuch",
+                    "email": "chuck@horde.org",
+                    "role": "lead"
+                }
+            ],
+            "description": "Roundtrip-capable YAML parsing and writing library",
+            "homepage": "https://www.horde.org/libraries/Horde_Yaml",
+            "keywords": [
+                "compliant",
+                "lossless",
+                "roundtrip"
+            ],
+            "support": {
+                "issues": "https://github.com/horde/Yaml/issues",
+                "source": "https://github.com/horde/Yaml/tree/v3.0.3"
+            },
+            "time": "2026-10-29T00:00:00+00:00",
+            "published-time": "2026-10-29T13:46:18+00:00"
+        },
+        {
             "name": "kelunik/certificate",
             "version": "v1.1.3",
             "source": {
@@ -1887,24 +1968,24 @@
         },
         {
             "name": "laminas/internal-tooling",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/internal-tooling.git",
-                "reference": "e943aa8be477c5ad07da5536f213334e1162ff02"
+                "reference": "60e17d1b30a04a1751b3b61ec80d02c6bd2d5f70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/internal-tooling/zipball/e943aa8be477c5ad07da5536f213334e1162ff02",
-                "reference": "e943aa8be477c5ad07da5536f213334e1162ff02",
+                "url": "https://api.github.com/repos/laminas/internal-tooling/zipball/60e17d1b30a04a1751b3b61ec80d02c6bd2d5f70",
+                "reference": "60e17d1b30a04a1751b3b61ec80d02c6bd2d5f70",
                 "shasum": ""
             },
             "require": {
                 "carthage-software/mago": "^1.51.2",
                 "composer/semver": "^3.5",
+                "horde/yaml": "^3.0.3",
                 "php": "~8.2 || ~8.3 || ~8.4 || ~8.5 || ~8.6",
-                "php-collective/toml": "^0.1.5",
-                "symfony/yaml": "^7.4 || ^8.1"
+                "php-collective/toml": "^0.1.5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.5.57 || ^12.5.38 || ^13.4.1"
@@ -1938,8 +2019,8 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-11-11T13:51:36+00:00",
-            "published-time": "2026-11-11T13:52:07+00:00"
+            "time": "2026-11-12T10:51:14+00:00",
+            "published-time": "2026-11-12T10:57:11+00:00"
         },
         {
             "name": "laminas/laminas-coding-standard",
@@ -6087,83 +6168,6 @@
             ],
             "time": "2026-10-23T16:51:52+00:00",
             "published-time": "2026-10-28T18:21:18+00:00"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v7.4.23",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "1e601207ffe627a2e621faa9d661f1d32dcf1cec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/1e601207ffe627a2e621faa9d661f1d32dcf1cec",
-                "reference": "1e601207ffe627a2e621faa9d661f1d32dcf1cec",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "symfony/console": "<6.4"
-            },
-            "require-dev": {
-                "symfony/console": "^6.4|^7.0|^8.0"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.23"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-11-04T08:27:22+00:00",
-            "published-time": "2026-11-04T11:28:41+00:00"
         },
         {
             "name": "theseer/tokenizer",
