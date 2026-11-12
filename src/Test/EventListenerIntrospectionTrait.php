@@ -128,7 +128,7 @@ trait EventListenerIntrospectionTrait
      * Generator for traversing listeners in priority order.
      *
      * @param bool $withPriority When true, yields priority as key.
-     * @return iterable
+     * @return Traversable
      */
     public function traverseListeners(array $queue, $withPriority = false)
     {

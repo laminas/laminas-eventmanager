@@ -369,7 +369,7 @@ final class EventManagerTest extends TestCase
 
     public function testIdentifiersAreNotInjectedWhenNoSharedManagerProvided(): void
     {
-        $events      = new EventManager(null, [self::class, static::class]);
+        $events      = new EventManager(null, [self::class, self::class]);
         $identifiers = $events->getIdentifiers();
         self::assertEmpty($identifiers);
     }
@@ -377,7 +377,7 @@ final class EventManagerTest extends TestCase
     public function testDuplicateIdentifiersAreNotRegistered(): void
     {
         $sharedEvents = $this->createMock(SharedEventManagerInterface::class);
-        $events       = new EventManager($sharedEvents, [self::class, static::class]);
+        $events       = new EventManager($sharedEvents, [self::class, self::class]);
         $identifiers  = $events->getIdentifiers();
         self::assertSame(count($identifiers), 1);
         self::assertSame($identifiers[0], self::class);
