@@ -331,10 +331,6 @@
       <code><![CDATA[getObjectForTrait]]></code>
       <code><![CDATA[getObjectForTrait]]></code>
     </DeprecatedMethod>
-    <InvalidArgument>
-      <code><![CDATA[EventManagerAwareTrait::class]]></code>
-      <code><![CDATA[EventManagerAwareTrait::class]]></code>
-    </InvalidArgument>
     <MixedMethodCall>
       <code><![CDATA[getEventManager]]></code>
       <code><![CDATA[getEventManager]]></code>
