@@ -34,7 +34,7 @@
     "require-dev": {
         "amphp/dns": "^2.4.2",
         "amphp/socket": "^2.4.2",
-        "boundwize/structarmed": "^0.21.8",
+        "boundwize/structarmed": "^0.22.0",
         "laminas/internal-tooling": "^1.1.1",
         "laminas/laminas-coding-standard": "~3.1.0",
         "laminas/laminas-stdlib": "^3.22",
